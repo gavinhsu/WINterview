@@ -17,3 +17,4 @@ class Member(models.Model):
     def __str__(self):
         result = str(self.ID) + ' ' + str(self.Name)
         return result
+
