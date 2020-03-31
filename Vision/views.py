@@ -33,6 +33,7 @@ class visionView(templates):
                            'LIKELY', 'VERY_LIKELY')
         print('Faces:')
 
+
         # printing the possibilities of each emotion in for loop
         for face in faces:
             print('anger: {}'.format(likelihood_name[face.anger_likelihood]))
