@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'questions',
     'users',
-    'gcp',
+    'SpeechText',
+    'Vision',
     'templates',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
