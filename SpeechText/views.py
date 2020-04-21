@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
+
+def speech(request):
+    return render(request, 'speech.html')
 # Create your views here.
 
 class speechView(TemplateView):
