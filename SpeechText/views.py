@@ -1,6 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-
+from __future__ import division
+import re
+import sys
+from google.cloud import speech
+from google.cloud.speech import enums
+from google.cloud.speech import types
+import pyaudio
+from six.moves import queue
 
 def speech(request):
     return render(request, 'speech.html')
@@ -9,14 +16,7 @@ def speech(request):
 class speechView(TemplateView):
     template_name = 'speech_to_text.html'
 
-    from __future__ import division
-    import re
-    import sys
-    from google.cloud import speech
-    from google.cloud.speech import enums
-    from google.cloud.speech import types
-    import pyaudio
-    from six.moves import queue
+
 
     def get(self,request):
         ''' 金鑰 '''

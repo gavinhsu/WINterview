@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', users.views.homepage),
     path('users/', include("users.url")),
+    path('speech_to_text/', include("SpeechText.url"))
 ]

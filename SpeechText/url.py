@@ -1,7 +1,6 @@
 from django.urls import path
-import TextSpeech.views
+import SpeechText.views
 
 urlpatterns = [
-    path('speech_to_text/', SpeechText.HelloViews.View.as_view()),
-    
+    path('test/', SpeechText.views.speechView.as_view()),
 ]
