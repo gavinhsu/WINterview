@@ -1,6 +1,7 @@
+from __future__ import division
+import django
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from __future__ import division
 import re
 import sys
 from google.cloud import speech
@@ -18,7 +19,7 @@ class speechView(TemplateView):
 
 
 
-    def get(self,request):
+    def get(self, request):
         ''' 金鑰 '''
         import os
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\asus\Desktop\MIS Project\mis project-e675889a0b43.json"
@@ -172,8 +173,8 @@ class speechView(TemplateView):
                 listen_print_loop(responses)
 
                 # RENDER #
-                return render(response, 'speech_to_text.html', {
-                    'text': str(responses)
+                return render(request, 'speech_to_text.html', {
+                    'text': str(responses),
                 })
 
         if __name__ == '__main__':
