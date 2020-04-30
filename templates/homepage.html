@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% load static %}
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -10,20 +12,20 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{% static "img/favicon.png" %}" rel="icon">
+  <link href="{% static "img/apple-touch-icon.png" %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
+  <link href="{% static "https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" %}" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "vendor/animate.css/animate.min.css" %}" rel="stylesheet">
+  <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+  <link href="{% static "vendor/venobox/venobox.css" %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="{% static "css/style.css" %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Regna - v2.0.0
@@ -51,13 +53,25 @@
           <li><a href="#about">About Us</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#team">Team</a></li>
+          <li><a href="#">Search Engine</a></li>
+          <li><a href="#">Question Database</a></li>
           <li class="menu-has-children"><a href="">Site Map</a>
             <ul>
-              <li><a href="#">Sign In</a></li>
+              <!--{% if user.is_authenticated %}
+                Hello, {{ user.username }}.
+              {% else %}-->
+
+              <!--{% endif %}
+              {% block content %}{% endblock %}
+              <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>-->
+              <li><a onclick="location.href='/users/login/'">Sign In</a></li>
+
               <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
               <li><a href="#">Edit Member Data</a></li>
               <li><a href="#">Mock Interview</a></li>
               <li><a href="#">Mock Interview Record</a></li>
+              <li><a href="#">Search Engine</a></li>
+              <li><a href="#">Question Database</a></li>
             </ul>
           </li>
           <li><a href="#contact">Contact Us</a></li>

@@ -1,14 +1,206 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title></title>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+      .logo {
+      color: rgb(121, 147, 242);
+      font-size: 30px;
+      }
+      .sub_div {
+        padding-bottom: 60px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .sub_title {
+        padding-bottom: 30px;
+        padding-left: 20px;
+      }
+      .table-responsive {
+         padding-left: 30px;
+         padding-right: 30px;
+      }
+      .container-fluid {
+        padding-top: 100px;
+      }
+      .control-label {
+        font-size: 20px;
+        padding-bottom: 5px;
+      }
+      .header {
+        padding-bottom: 3%;
+      }
+      .oradio {
+        position: relative;
+        top: 12px;
+        transform:scale(1.4);
+      }
+      .oradio2 {
+        position: relative;
+        transform:scale(1.8);
+      }
+      .oradio3 {
+        position: relative;
+        transform:scale(1.8);
+      }
+      label {
+        font-size: 20px;
+      }
+      .slabel {
+        padding-top: 12px;
+        font-size: 18px;
+        padding-right: 10px;
+      }
+      .sradio {
+        position: relative;
+        transform:scale(1.6);
+      }
+      .llabel {
+        padding-top: 12px;
+        font-size: 18px;
+        padding-right: 10px;
+      }
+      .lradio {
+        position: relative;
+        transform:scale(1.6);
+      }
+      th {
+        font-size: 20px;
+      }
+      .radio-inline {
+        padding-bottom: 10px;
+      }
+      dl {
+        padding-left: 9px;
+      }
+      .way_label {
+        padding-top: 8px;
+        padding-left: 6px;
+      }
+      .other_label {
+        padding-top: 8px;
+        padding-left: 6px;
+      }
+      .typing {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+      .typing_c1 {
+        width: 120px;
+      }
+      .typing_c2 {
+        width: 80px;
+      }
+      .typing_e1 {
+        width: 80px;
+      }
+    </style>
   </head>
-  <body>
+  <!--<body>
     <form class="form" method="post">
       {{ form }}
       {{ res }}
     </<form>
 
   </body>
-</html>
+</html>-->
+<body>
+
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"></link>
+        <form class="form-horizontal" action="/users/regist/" data-toggle='validator' method="POST">
+          {% csrf_token %}
+            {{ form.as_p }}
+            <div class="container-fluid text-nowrap">
+      <div class="header">
+        <h1 class="text-center text-nowrap"><span class="glyphicon glyphicon-user logo"></span><b> Sign Up </b></h1>
+      </div>
+      <div class="sub_div text-nowrap">
+        <div class="row">
+            <div class="form-group col-sm-4">
+              <label class="col-md-5 control-label"> Name:</label>
+              <div class="col-md-7">
+                <input type="text" class="form-control input-lg" name="name" value="" placeholder="Chinese Name" required autofocus><br>
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label class="col-md-5 control-label"> ID: </label>
+              <div class="col-md-7">
+                <input type="text" class="form-control input-lg" name="id" value="" placeholder="ID" required><br>
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label class="col-md-5 control-label"> Birthday: </label>
+              <div class="col-md-7">
+                <input type="date" class="form-control input-lg" name="bday" value="" required><br>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-4">
+              <label class="col-md-5 control-label"> Phone: </label>
+              <div class="col-md-7">
+                <input type="tel" class="form-control input-lg" name="phone" value="" placeholder="Phone Number" required><br>
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label class="col-md-5 control-label"> Account: </label>
+              <div class="col-md-7">
+                <input type="text" class="form-control input-lg" name="account" value="" placeholder="Account" required><br>
+              </div>
+            </div>
+            <div class="form-group col-sm-4">
+              <label class="col-md-5 control-label"> Password: </label>
+              <div class="col-md-7">
+                <input type="password" class="form-control input-lg" name="password" value="" placeholder="Password" pattern="^[a-zA-Z0-9]{6,}$" data-error="Please input at least 6 character of number or English alphabet" required><br>
+              </div>
+            </div>
+            <div class="row">
+            <div class="form-group col-sm-12">
+              <label class="col-md-2 control-label"> Email: </label>
+              <div class="col-md-9">
+                <input type="email" class="form-control input-lg" name="email"value="" placeholder="E-mail" required><br>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+          </div>
+          <div class="row">
+             <div class="form-group col-sm-12">
+               <label class="col-md-2 control-label"> Address: </label>
+               <div class="col-md-9">
+                 <input type="text" class="form-control input-lg" name="address" id=""value="" placeholder="Address" required><br>
+               </div>
+               <div class="col-md-1"></div>
+             </div>
+           </div>
+           <div class="row">
+            <div class="form-group col-sm-12">
+              <label class="col-md-2 control-label"> Gender: </label>
+              <div class="col-md-9">
+                <label class="radio-inline">
+                  <input class="oradio" type="radio" name="Male" value="Male" checked> Male
+                </label>
+                <label class="radio-inline">
+                  <input class="oradio" type="radio" name="Female" value="Female"> Female
+                </label>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+          </div>
+        </div>
+
+          <div class="help-block with-errors"></div>
+        <div class="sub_div text-nowrap text-center">
+        <input type="submit" class="btn btn-primary btn-lg" value="SUBMIT">
+      </div>
+        </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+    </body>
+    </html>
