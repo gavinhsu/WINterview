@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'SpeechText',
     'Vision',
     'templates',
-    'rest_framework'
+    'rest_framework',
+    'nlp',
 ]
 
 MIDDLEWARE = [

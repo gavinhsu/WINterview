@@ -149,3 +149,300 @@ How did your education prepare you for this job?
 What do you do to maintain your technical certifications?
 How would you rate your key competencies for this job?
 What are your IT strengths and weaknesses?
+﻿Which programming languages do you prefer and why?
+What is a class and a super class?
+What’s the difference between Process and Thread?
+What is a constructor?
+What is a message?
+What is an array?
+What is a stream?
+Describe a singleton
+What is an abstract class?
+Provide some C source code
+Comparison between method and constructor
+What are the steps for creating the object?
+What is the difference between overloading and overriding?
+What is the difference between an interface and an abstract class?
+What javascript frameworks are you familiar with?
+What do you know about the software development cycle?
+What is the transport layer?
+What is the application layer?
+What is a file?
+What is a class?
+What is an object?
+What is the different OOPS principle?
+What is inheritance?
+What is polymorphism?
+What are instance and class variables?
+Compare method and constructor?
+What is a singleton class?
+What are the steps for creating the object?
+What is the different type of access modifiers?
+Which is the highest operator precedence in Java?
+What is the difference between equals() and method and == operator?
+Is string class final?
+What is a wrapper class?
+Difference between overloading and overriding?
+What are multiple inheritances in Java?
+What is a stream?
+What is a Character stream?
+What is a Byte stream?
+What is an Interface?
+Difference between class and interface?
+What is an abstract class?
+What is multiple inheritance? What are its advantages and disadvantages?
+Briefly describe the correct usage of the following HTML5 semantic elements
+What were some of the key goals and motivations for the HTML5 specification?
+What are some of the key new features in HTML5?
+What are some advantages of using Python over other programming languages?
+Explain the difference between compile-time and runtime, then discuss how Python uses them during code checking.
+What is a view and what are some advantages of it?
+Is it possible to find a loop in a Linked list?
+Two linked lists L1 and L2 intersects at a particular node N1 and from there all other nodes till the end are common. The length of the lists are not same. What are the possibilities to find N1?
+Given a Binary Search Tree (BST), print its values in ascending order.
+Is it possible to implement a queue using Linked List ? Enqueue & Dequeue should be O(1).
+Given a Tree, is it possible to find the greatest and least among leaves in linear time?
+Is it possible to find the greatest and least value among the nodes in a given BST without using any extra variables?
+Is it possible to implement 2 stack in an array?
+Given two keys K1 & K2, write an algorithm to print all the elements between them with K1<=K2 in a BST
+How many numbers of addresses are usable for addressing in a Class C network?
+How are the data units at Application layer is called?
+What protocol is used by DNS name servers? Justify.
+Which of the following is used to direct a packet inside an internal network?
+What is Acceptance Testing?
+What’s the Software Testing?
+What is Accessibility Testing?
+What is Application Programming Interface (API)?
+What is Ad Hoc Testing?
+What is Beta Testing?
+What is Backus-Naur Form?
+What is Application Binary Interface (ABI)?
+What is the difference between verification and validation?
+What is Binary Portability Testing?
+What is Bug?
+What is Defect?
+What is Branch Testing?
+What is Breadth Testing?
+What's the Alpha Testing?
+What’s the Test Case?
+What's the Beta Testing?
+What is Component Testing?
+What is End-to-End testing?
+What is CAST?
+What is CMM?
+What is Compatibility Testing?
+What is Debugging?
+What is Dependency Testing?
+What’s the Database testing?
+What is the difference between interoperability and compatibility testing with some examples?
+What’s the Traceability Matrix?
+A document that showing the relationship between Test Requirements and Test Cases.
+How many types of approaches are used in Integration Testing?
+There are two types of approaches used:Bottom-Up, Top-Down.
+What is Emulator?
+A device, computer program, or system that accepts the same inputs and produces the same outputs as a given system.
+What is Functional Decomposition?
+A technique used during planning, analysis, and design; creates a functional hierarchy for the software.
+What is Integration Testing?
+Testing of combined parts of an application to determine if they function together correctly. Usually performed after unit and functional testing. This type of testing is especially relevant to client/server and distributed systems.
+What is Metric?
+A standard of measurement. Software metrics are the statistics describing the structure or content of a program. A metric should be a real objective measurement of something such as a number of bugs per lines of code.
+What is Quality Assurance?
+All those planned or systematic actions necessary to provide adequate confidence that a product or service is of the type and quality needed and expected by the customer.
+What is Race Condition?
+A cause of concurrency problems. Multiple accesses to a shared resource, at least one of which is a write, with no mechanism used by either to moderate simultaneous access.
+What is Scalability Testing?
+Performance testing focused on ensuring the application under test gracefully handles increases in workload.
+What is Software Requirements Specification?
+A deliverable that describes all data, functional and behavioral requirements, all constraints, and all validation requirements for software.
+What is an operating system?
+An operating system is a program that acts as an intermediary between the user and the computer hardware. The purpose of an OS is to provide a convenient environment in which a user can execute programs in a convenient and efficient manner.
+What are the different operating systems?
+Batched operating systems
+Multi-programmed operating systems
+timesharing operating systems
+Distributed operating systems
+Real-time operating systems
+What are the basic functions of an operating system?
+Operating system controls and coordinates the use of the hardware among the various applications programs for various uses. Operating system acts as resource allocator and manager. Also operating system is control program which controls the user programs to prevent errors and improper use of the computer. It is especially concerned with the operation and control of I/O devices.
+What is a kernel?
+The kernel is the core and essential part of a computer operating system that provides basic services for all parts of OS.
+What is the difference between microkernel and macro kernel?
+The microkernel is a kernel which run services those are minimal for operating system performance. In this kernel, all other operations are performed by the processor. Macro Kernel is a combination of micro and monolithic kernel. In monolithic kernel, all operating system code is in the single executable image.
+Memory management in Python, for the most part, includes a private pile space, where every one of the information structures and articles is found. Python additionally has an inbuilt city worker that will reuse the unused memory and make it accessible to the load space.																		
+PYTHONPATH is an environment variable that has a string value, which is added in Python? system directory list as it has a set of directories. PYTHONPATH is generally used when we have not made any installable Python package, but we want to import some code that we have written in a program.																		
+The most applicable response to this python programming interview question would be that List and Tuple behave almost the same way, and any item stored in a List or Tuple can be accessed by its index. Still, two major differences between them are that List is mutable, but Tuple is immutable, which means, List can be modified, but Tuple cannot be modified. Besides, Lists are slower than Tuples.																		
+An interpreted language is a language that is read in its raw form, and the statements are executed without being first compiled. Python is an interpreted language as it runs directly from the source code. The source code written by the programmer is first converted into an intermediate language and then to a machine language that has to be executed.																		
+Pychecker and Pylint are the static analysis tools that help to find bugs in Python. Pychecker is an open-source device that gets bugs from the source code and shows cautioning about the style and unpredictability of the code.
+Pylint has a special purpose, and it controls warning and errors. It searches for programming blunder and keeps up the programming standard. It checks the length of each programming line and whether the names of the variable are like the undertaking style."																		
+PEP represents the Python Enhancement Proposal. It is a set of rules to allow maximum readability of Python code in terms of formatting. The document describes new features for Python, which includes design and style, suggested by the community.																		
+The remove() function deletes the matching element/object, whereas del removes the element at a specific index. This is one of the basic Python programming interview questions that interviewers never want to miss out on.																		
+The shuffle() method, for the most part, takes a succession (rundown, string, or tuple) from the program and rearranges the request for the things. Be that as it may, this technique changes just the first rundown/tuple/string, it doesn't restore another rundown/tuple/string.																		
+The join() work is a string method that profits a string linked with the components of an iterable. This technique gives an adaptable method to connect string. It links every component of an iterable, (for example, rundown, string, and tuple) to the string and afterward restores the connection string.																		
+The lstrip() is the strategy that profits a duplicate of the string with driving characters expelled (because of the string contention passed). It expels characters from the left, dependent on the contention (a string determining the arrangement of characters to be evacuated).																		
+Extensive Support Libraries
+Integration Feature
+Improved Programmer's productivity.
+Productivity of applications
+excellent support community																	
+Pickling is a process by which a Python object gets converted into a string via a pickle module. The process then puts it into a file by calling the dump() method.   Whereas unpickling does the reverse of the above-said process. It retrieves the stored string and turns it back into an object.																		
+Yes, we can preset Pythonpath as a Python installer.																		
+Tuples is a sequence data type in Python. The number of values in tuples are separated by commas.																		
+The length of the identifier in Python can be of any length. The longest identifier will violate from PEP ??8 and PEP ??20.																		
+A Pass statement in Python is used when we cannot decide what to do in our code, but we must type something for making syntactically correct.																		
+Break helps in controlling the Python loop by breaking the current loop from execution and transfer the control to the next block.																		
+A continue also helps in controlling the Python loop but by making jumps to the next iteration of the loop without exhausting it.																		
+No. Python does not support an intrinsic do-while loop.																		
+The assignment operators in Python can help in combining all the arithmetic operators with the assignment symbol.																		
+We need membership operators in Python with the purpose to confirm if the value is a member in another or not.																		
+Unlike membership operators, the identity operators compare the values to find out if they have the same value or not.																		
+A table is an organized collection of data stored in the form of rows and columns. Columns can be categorized as vertical and rows as horizontal. The columns in a table are called fields while the rows can be referred to as records.																		
+The PRIMARY KEY constraint uniquely identifies each row in a table. It must contain UNIQUE values and has an implicit NOT NULL constraint.
+A table in SQL is strictly restricted to have one and only one primary key, which is comprised of single or multiple fields (columns).																		
+A UNIQUE constraint ensures that all values in a column are different. This provides uniqueness for the column(s) and helps identify each row uniquely. Unlike primary key, there can be multiple unique constraints defined per table. The code syntax for UNIQUE is quite similar to that of PRIMARY KEY and can be used interchangeably.																		
+A FOREIGN KEY comprises of single or collection of fields in a table that essentially refer to the PRIMARY KEY in another table. Foreign key constraint ensures referential integrity in the relation between two tables.																		
+Clustered index modifies the way records are stored in a database based on the indexed column. Non-clustered index creates a separate entity within the table which references the original table.
+Clustered index is used for easy and speedy retrieval of data from the database, whereas, fetching records from the non-clustered index is relatively slower.
+In SQL, a table can have a single clustered index whereas it can have multiple non-clustered indexes."																		
+Data Integrity is the assurance of accuracy and consistency of data over its entire life-cycle, and is a critical aspect to the design, implementation and usage of any system which stores, processes, or retrieves data. It also defines integrity constraints to enforce business rules on the data when it is entered into an application or a database.																		
+A query is a request for data or information from a database table or combination of tables. A database query can be either a select query or an action query.																		
+The UNION operator combines and returns the result-set retrieved by two or more SELECT statements.																		
+The MINUS operator in SQL is used to remove duplicates from the result-set obtained by the second SELECT query from the result-set obtained by the first SELECT query and then return the filtered results from the first.																		
+The INTERSECT clause in SQL combines the result-set fetched by the two SELECT statements where records from one match the other and then returns this intersection of result-sets.																		
+A view in SQL is a virtual table based on the result-set of an SQL statement. A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.																		
+Normalization represents the way of organizing structured data in the database efficiently. It includes creation of tables, establishing relationships between them, and defining rules for those relationships. Inconsistency and redundancy can be kept in check based on these rules, hence, adding flexibility to the database.																		
+Denormalization is the inverse process of normalization, where the normalized schema is converted into a schema which has redundant information. The performance is improved by using redundancy and keeping the redundant data consistent. The reason for performing denormalization is the overheads produced in query processor by an over-normalized structure.																		
+If a table is dropped, all things associated with the tables are dropped as well. This includes - the relationships defined on the table with other tables, the integrity checks and constraints, access privileges and other grants that the table has. To create and use the table again in its original form, all these relations, checks, constraints, privileges and relationships need to be redefined. However, if a table is truncated, none of the above problems exist and the table retains its original structure.																		
+A file is a named location which stores data or information permanently. A file is always stored inside a storage device using file name (e.g. STUDENT.MARKS). A file name normally has primary and secondary name separated by a ????DOT).																		
+A class is a blueprint from which objects are created. A class contains methods and variables associated with an instance of a class.																		
+An object is an instance of a class.																		
+A constructor is methods which are used to create an Object of class. There are two types of constructor Default & Parameterized constructor.																		
+The basic OOPS principle are as follows: Encapsulation, Abstraction, Inheritance, Polymorphism																
+Inheritance is property in which the property of a parent class(Superclass) is passed on to child class(Subclass).																		
+Polymorphism is the ability of an object to take on multiple forms. Most commonly polymorphism is used in OOP when a parent class reference is used to refer to a child class object.																		
+Instance variable belongs to a particular instance of that class whereas Class variable. A class variable is also known as static variables.																		
+Constructor: Used to initialize the instance of a class.
+Method: Used to perform some function or operation.
+Constructor: Doesn't have a return type.
+Method: Has a return type.																	
+Singleton class limits the number of objects created for a class to one but gives the flexibility of creating more objects if the situation changes.																		
+There are four type of access modifiers as given below:
+Visible to the overall package. No modifier needed.
+Private: Visible to class only.
+Public: Visible to the world.
+Protected: Visible to package and subclass.																	
+The operator with the highest preference is Postfix operators																		
+The array is a container which holds the fixed number of similar data types.																		
+The equals() is a method and it matches the content of the strings whereas == is an operator and matches object or reference of the strings.																		
+Yes.																		
+Overloading is when two or more methods in the same class have the same method name but different parameters(i.e different method signatures).
+Overriding is when two methods having the same method name and parameters (i.e., method signature) but one of the methods is in the parent class and the other is in the child class.																	
+Java supports multiple inheritances i.e. the ability of a class to implement more than one interface. A class can implement multiple Interfaces but cannot extends multiple classes.																		
+A stream can be defined as the sequence of data. There is two type of streams.
+InputStream: Used to read a data from a source.
+OutPut Stream: Used to write a data into a destination.																		
+Java Character stream is basically used to perform input and output for 16 bit Unicode.
+The main classes users are FileReader and FileWriter which internally uses FileInputStream and FileOutputStream so the basic difference is that FileReader and FileWriter read and writes two bites at a time respectively.																		
+Java Byte stream is basically used to perform input and output for 8 bit Unicode. The main classes related to byte streams are FileInputStream and FileOutputStream.																	
+The interface is a reference type in Java, similar to the class but its collection of abstract methods. A class can implement multiple interfaces.																		
+The interface cannot be instantiated.
+An interface doesn't have any constructors.
+Interface only have abstract methods.
+A class implements an interface and extends a class.
+An interface can extend multiple interfaces.																		
+A class which contains the abstract keyword in a declaration is called abstract class. The properties of the abstract class are as follows:
+Abstract classes may or may not contain abstract methods but, if a class has at least one abstract method, then it must be declared abstract.
+The abstract class cannot be instantiated.
+To use an abstract class, we have to inherit it from another class.
+If we inherit an abstract class, then we have to provide implementations to all the abstract methods in it.																
+Multiple inheritance is the process where a subclass can be derived from more than one super-class. Its advantage is that a class can inherit the functionality of more than one base class, but its disadvantage is that it can lead to a lot of confusion when two base classes implement a method with the same name.																		
+The header element contains the introductory section of a page. It can also include the section heading, the author's name, table of contents, or any other important navigational content.The article element is used to house a piece of work that can be reused outside of the page without losing its intended meaning. News stories or blog posts are good examples of this. The section tag is a versatile container meant for holding information that shares a common theme or purpose. The footer element is designed to hold content that should appear at the bottom of a section or at the end of a page. This information might include the author's name, related links, or copyright notices.
+What were some of the key goals and motivations for the HTML5 specification? HTML5 was designed to be able to replace HTML4, XHTML and the HTML DOM Level. This new design provides better support for the web page structure through additional tags ensures more consistent behavior across browsers provides better cross-platform support and delivers rich content like movies and graphics without the need for additional plug-ins. All of this not only makes design easier for the programmer, but it makes the end design more functional for the user.											
+Improved support for embedding rich content like graphics, audio, and video
+The introduction of web workers
+New semantic tags including main, nav, article, section, header, footer, and aside
+Extensions to the JavaScript API
+Additional form controls like calendar, dates, time, email, url, and search																		
+Its syntax is both easy to learn and easy to understand, reading more like a human language.
+It has large, standard libraries containing all areas like operating system interfaces, web service tools, and string operations.
+It also has extensive support libraries that drastically decrease time spent on coding, which in turn increases productivity, utilizing other languages like Java, C, C++, and C#.
+It has clean, object-oriented design and features strong integration processing capabilities.																	
+Both compile-time and runtime are programming terms that refer to various stages of software program development. Compile-time is the instance where the entered code is converted to executable, while runtime is the instance where the executable is running. Python performs some amount of compile-time code checking, although most of the checks don't occur until code execution.																		
+A view is a virtual table that contains rows and columns similar to a real table, yet does not contain data of its own. Some advantages of views are that they take up no space, they can be used to restrict access to the database, and they offer a simple way to retrieve complicated query results that need to be executed frequently.																		
+A set of activities conducted with the intent of finding errors in software.																		
+Testing conducted to enable a user/customer to determine whether to accept a software product. Normally performed to validate the software meets a set of agreed acceptance criteria.																		
+Verifying a product is accessible to the people having disabilities (deaf, blind, mentally disabled etc.).																		
+A testing phase where the tester tries to 'break' the system by randomly trying the system's functionality.																		
+A formalized set of software calls and routines that can be referenced by an application program in order to access supporting system or network services.																		
+A metalanguage used to formally describe the syntax of a language.																		
+Testing of a release of a software product conducted by customers.																		
+A specification defining requirements for portability of applications in binary forms across different system platforms and environments.																		
+Testing an executable application for portability across system platforms and environments, usually for conformity to an ABI specification.																		
+Verification is a review without actually executing the process while validation is checking the product with actual execution. For instance, code review and syntax check is verification while actually running the product and checking the results is validation.																		
+A fault in a program which causes the program to perform in an unintended or unanticipated manner.																		
+If software misses some feature or function from what is there in requirement it is called a defect.																		
+Testing in which all branches in the program source code are tested at least once.																		
+A test suite that exercises the full functionality of a product but does not test features in detail.																		
+The Alpha Testing is conducted at the developer sites and in a controlled environment by the end user of the software																		
+Testing the application after the installation at the client place.																		
+Testing of individual software components (Unit Testing).																		
+Testing a complete application environment in a situation that mimics real-world use, such as interacting with a database, using network communications, or interacting with other hardware, applications, or systems if appropriate.																		
+Computer Aided Software Testing.																		
+The Capability Maturity Model for Software (CMM or SW-CMM) is a model for judging the maturity of the software processes of an organization and for identifying the key practices that are required to increase the maturity of these processes.																		
+Testing whether software is compatible with other elements of a system with which it should operate, e.g. browsers, Operating Systems, or hardware.																		
+The process of finding and removing the causes of software failures.																		
+Examines an application's requirements for pre-existing software, initial states and configuration in order to maintain proper functionality.																		
+In database testing, we can check the integrity of database field values.																		
+Interoperability: To check if the software can co-exist with other supporting software in the system
+Compatibility: To check if the software runs on different types of operating systems according to customer requirements.																		
+A set of test inputs, execution, and expected result developed for a particular objective.																		
+A document that showing the relationship between Test Requirements and Test Cases.																		
+There are two types of approaches used:
+Bottom-Up
+Top-Down																		
+Testing of combined parts of an application to determine if they function together correctly. Usually performed after unit and functional testing. This type of testing is especially relevant to client/server and distributed systems.																		
+Performance testing focused on ensuring the application under test gracefully handles increases in workload.																		
+A device, computer program, or system that accepts the same inputs and produces the same outputs as a given system.																		
+A technique used during planning, analysis, and design; creates a functional hierarchy for the software.																		
+A standard of measurement. Software metrics are the statistics describing the structure or content of a program. A metric should be a real objective measurement of something such as a number of bugs per lines of code.																		
+All those planned or systematic actions necessary to provide adequate confidence that a product or service is of the type and quality needed and expected by the customer.																		
+A cause of concurrency problems. Multiple accesses to a shared resource, at least one of which is a write, with no mechanism used by either to moderate simultaneous access.																		
+A deliverable that describes all data, functional and behavioral requirements, all constraints, and all validation requirements for software.																		
+An operating system is a program that acts as an intermediary between the user and the computer hardware. The purpose of an OS is to provide a convenient environment in which a user can execute programs in a convenient and efficient manner.																		
+Batched operating systems
+Multi-programmed operating systems
+timesharing operating systems
+Distributed operating systems
+Real-time operating systems"																	
+Operating system controls and coordinates the use of the hardware among the various applications programs for various uses. Operating system acts as resource allocator and manager. Also operating system is control program which controls the user programs to prevent errors and improper use of the computer. It is especially concerned with the operation and control of I/O devices.																		
+The kernel is the core and essential part of a computer operating system that provides basic services for all parts of OS.																		
+The microkernel is a kernel which run services those are minimal for operating system performance. In this kernel, all other operations are performed by the processor. Macro Kernel is a combination of micro and monolithic kernel. In monolithic kernel, all operating system code is in the single executable image.																		
+Deadlock is a situation or condition where the two processes are waiting for each other to complete so that they can start. This result both the processes to hang.																		
+A program in execution is called a process.
+Processes are of two types:
+1. Operating system processes
+2. User processes"																		
+Starvation is Resource management problem where a process does not get the resources it needs for a long time because the resources are being allocated to other processes. Aging is a technique to avoid starvation in a scheduling system.																		
+Semaphore is a variable, whose status reports common resource, Semaphore is of two types one is Binary semaphore and other is Counting semaphore.																		
+A thread is a program line under execution. Thread sometimes called a light-weight process, is a basic unit of CPU utilization; it comprises a thread id, a program counter, a register set, and a stack.																		
+Transferring control from one process to other process requires saving the state of the old process and loading the saved state for a new process. This task is known as context switching																		
+A situation, where several processes access and manipulate the same data concurrently and the outcome of the execution depends on the particular order in which the access takes place, is called a race condition. To guard against the race condition we need to ensure that only one process at a time can be manipulating the same data. The technique we use for this is called process synchronization.																		
+Virtual memory is a hardware technique where the system appears to have more memory than it actually does. This is done by time-sharing, the physical memory and storage parts of the memory one disk when they are not actively being used.																		
+It is a phenomenon in virtual memory schemes when the processor spends most of its time swapping pages, rather than executing instructions. This is due to an inordinate number of page faults.																		
+When many of free blocks are too small to satisfy any request then fragmentation occurs. External fragmentation and internal fragmentation are two types of fragmentation. External Fragmentation happens when a dynamic memory allocation algorithm allocates some memory and a small piece is left over that cannot be effectively used. Internal fragmentation is the space wasted inside of allocated memory blocks because of restriction on the allowed sizes of allocated blocks.																		
+Cache memory is random access memory (RAM) that a computer microprocessor can access more quickly than it can access regular RAM. As the microprocessor processes data, it looks first in the cache memory and if it finds the data there (from a previous reading of data), it does not have to do the more time-consuming reading of data from larger memory.																		
+number of processes that complete their execution per time unit																		
+amount of time to execute a particular process																		
+amount of time a process has been waiting in the ready queue																		
+"amount of time it takes from when a request was submitted until the first
+response is produced, not output (for time-sharing environment)"																																			
+In order to protect the operating systems and the system programs from the malfunctioning programs the two-mode operations were evolved: System mode, User mode.																		
+The exact path from a root directory																		
+Relative to the current path																		
+Time taken for switching from one process to other is pure overhead. Because the system does no useful work while switching. So one of the solutions is to go for threading whenever possible.																		
+can be assigned to a variety of functions by the programmer. They can be used with any machine instruction that performs operations on data.																		
+contain main memory addresses of data and instructions or they contain a portion of the address that is used in the calculation of the complete addresses.																		
+Dynamic Ram stores the data in the form of Capacitance, and Static RAM stores the data in Voltages																		
+Local replacement means that an incoming page is brought in only to the relevant process' address space. Global replacement policy allows any page frame from any process to be replaced. The latter is applicable to variable partitions model only.																		
+In a batched operating system the users give their jobs to the operator who sorts the programs according to their requirements and executes them. This is time-consuming but makes the CPU busy all the time.																		
+SCSI - Small computer systems interface is a type of interface used for computer components such as hard drives, optical drives, scanners, and tape drives. It is a competing technology to standard IDE (Integrated Drive Electronics). These were some of the probable questions for anyone who aims for a job in the CS sector.																		

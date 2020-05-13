@@ -1,21 +1,25 @@
+from __future__ import division
+import django
 from django.shortcuts import render
 from django.views.generic import TemplateView
+import re
+import sys
+from google.cloud import speech
+from google.cloud.speech import enums
+from google.cloud.speech import types
+import pyaudio
+from six.moves import queue
 
+def speech(request):
+    return render(request, 'speech.html')
 # Create your views here.
 
 class speechView(TemplateView):
     template_name = 'speech_to_text.html'
 
-    from __future__ import division
-    import re
-    import sys
-    from google.cloud import speech
-    from google.cloud.speech import enums
-    from google.cloud.speech import types
-    import pyaudio
-    from six.moves import queue
 
-    def get(self,request):
+
+    def get(self, request):
         ''' 金鑰 '''
         import os
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\asus\Desktop\MIS Project\mis project-e675889a0b43.json"
@@ -169,8 +173,8 @@ class speechView(TemplateView):
                 listen_print_loop(responses)
 
                 # RENDER #
-                return render(response, 'speech_to_text.html', {
-                    'text': str(responses)
+                return render(request, 'speech_to_text.html', {
+                    'text': str(responses),
                 })
 
         if __name__ == '__main__':
