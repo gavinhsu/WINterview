@@ -21,12 +21,7 @@ import users.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', users.views.homepage),
-<<<<<<< HEAD
-    path('users/', include('users.url')),
-    #path('',include('users.url',namespace = 'users')),
-    
-=======
     path('users/', include("users.url")),
     path('speech_to_text/', include("SpeechText.url"))
->>>>>>> f97d17a40838b8ce779c516e6c99447974b7fa2d
+
 ]

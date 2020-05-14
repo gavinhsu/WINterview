@@ -34,6 +34,11 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+<style>
+a{
+  cursor: pointer;
+}
+</style>
 
 <body>
 
@@ -53,8 +58,11 @@
           <li><a href="#about">About Us</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#team">Team</a></li>
-          <li><a href="#">Search Engine</a></li>
-          <li><a href="#">Question Database</a></li>
+          <!--<li><a href="#">Search Engine</a></li>-->
+          <li><a href="#">Question Bank</a></li>
+          <li><a href="#">Interview Skills</a></li>
+          <li><a href="#">Company Profile</a></li>
+          <li><a href="#">News</a></li>
           <li class="menu-has-children"><a href="">Site Map</a>
             <ul>
               <!--{% if user.is_authenticated %}
@@ -70,8 +78,12 @@
               <li><a href="#">Edit Member Data</a></li>
               <li><a href="#">Mock Interview</a></li>
               <li><a href="#">Mock Interview Record</a></li>
-              <li><a href="#">Search Engine</a></li>
-              <li><a href="#">Question Database</a></li>
+              <!--<li><a href="#">Search Engine</a></li>-->
+              <li><a href="#">Question Bank</a></li>
+              <li><a href="#">Interview Skills</a></li>
+              <li><a href="#">Company Profile</a></li>
+              <li><a href="#">News</a></li>
+
             </ul>
           </li>
           <li><a href="#contact">Contact Us</a></li>
@@ -85,7 +97,7 @@
     <div class="hero-container">
       <h1>Welcome to Mock Interview</h1>
       <h2>Help you acquire your dream job!</h2>
-      <a href="#about" class="btn-get-started">Get Started</a>
+      <a onclick="location.href='/users/jobselect/'" class="btn-get-started">Get Started</a>
     </div>
   </section><!-- End Hero Section -->
 
