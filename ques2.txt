@@ -1,5 +1,5 @@
 ﻿How important is it to work directly with your business users?
- What elements are necessary for a successful team and why?
+What elements are necessary for a successful team and why?
 What percentage of your time do you spend unit testing?
 What do you expect in the solution documents you are provided?
 How much reuse do you get out of the code that you develop, and how?
