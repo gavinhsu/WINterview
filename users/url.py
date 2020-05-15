@@ -10,5 +10,6 @@ urlpatterns = [
   path('signUp/', users.views.signUp),
   path('regist/', users.views.regist),
 
-  path('login/', users.views.login)
+  path('login/', users.views.login),
+  path('jobselect/',users.views.jobselect)
  ]

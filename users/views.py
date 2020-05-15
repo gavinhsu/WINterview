@@ -75,11 +75,21 @@ def login(request):
             pdb = models.Member.objects.filter(Password = password)
             if udb and pdb:
                 request.session['account'] = account
+                request.session['is_login'] = True
                 return HttpResponseRedirect('/')
             else:
-                #uf = Form.UserFrom({'account':'The account is wrong!'})
                 return render(request,'login.html',{"error": 'The account is wrong!'})
         else:
             uf = Form.UserForm()
             return render(request,'login.html',{"error": 'The account is wrong!'})
 
+<<<<<<< HEAD
+=======
+def jobselect(request):
+    #if request.method == "GET":
+        if request.session['is_login']==True:
+            user=request.session['account']
+            return render(request,'jobselection.html',{'current_user':user})
+        else:
+            return render(request,'login.html')
+>>>>>>> a0d9fee6f261abf41ab0d48d27236236db608614
