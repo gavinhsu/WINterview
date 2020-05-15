@@ -8,7 +8,6 @@ from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
 import pyaudio
-from six.moves import queue
 
 def speech(request):
     return render(request, 'speech.html')
@@ -16,8 +15,6 @@ def speech(request):
 
 class speechView(TemplateView):
     template_name = 'speech_to_text.html'
-
-
 
     def get(self, request):
         ''' 金鑰 '''
@@ -171,6 +168,7 @@ class speechView(TemplateView):
 
                 # Now, put the transcription responses to use.
                 listen_print_loop(responses)
+                print('start')
 
                 # RENDER #
                 return render(request, 'speech_to_text.html', {
