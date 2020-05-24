@@ -83,8 +83,6 @@ def login(request):
             uf = Form.UserForm()
             return render(request,'login.html',{"error": 'The account is wrong!'})
 
-<<<<<<< HEAD
-=======
 def jobselect(request):
     #if request.method == "GET":
         if request.session['is_login']==True:
@@ -92,4 +90,3 @@ def jobselect(request):
             return render(request,'jobselection.html',{'current_user':user})
         else:
             return render(request,'login.html')
->>>>>>> a0d9fee6f261abf41ab0d48d27236236db608614

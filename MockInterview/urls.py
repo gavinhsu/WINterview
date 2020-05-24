@@ -17,10 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 import users.views
+import GTTS.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', users.views.homepage),
     path('users/', include("users.url")),
-    path('speech_to_text/', include("SpeechText.url"))
+    path('speech_to_text/', GTTS.views.Speech.as_view())
+    #  # for unauthorized access dynamic translation 
+    # path('gtts/', include('gTTS.urls')),
+    # # for user authorized dynamic translation
+    # path('gtts_auth/', include('gTTS.urls_auth')),
 ]
