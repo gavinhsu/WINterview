@@ -1,27 +1,48 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
     <title>speech to text recording</title>
 
   </head>
   <body>
-    <h1>Please start talking after hitting the button.</h1>
-    <form action='button_click' method='get'>
-      <button type="button" value="Click" name="speech_button" onclick="cursor()">Start</button>
-    </form>
+    <div class="container">
 
-    <p id='demo'></p>
-    <script>
-      function cursor(){
-        var text =  buttonClicked
-        document.getElementById("demo").innerHTML = text
-      }
-    </script>
+      <h1>Interview start!</h1>
+      <p>Please tap start for the recognition</p>
+      <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+
+      <div class="app"> 
+          <h3>Add New Note</h3>
+          <div class="input-single">
+              <textarea id="note-textarea" placeholder="Create a new note by typing or using voice recognition." rows="6"></textarea>
+          </div>         
+          <button id="start-record-btn" title="Start Recording">Start Recognition</button>
+          <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
+          <button id="save-note-btn" title="Save Note">Save Note</button>   
+          <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+          
+          <h3>My Notes</h3>
+          <ul id="notes">
+              <li>
+                  <p class="no-notes">You don't have any notes.</p>
+              </li>
+          </ul>
+
+      </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="{% static "js/speech_to_text.js" %}"></script>
+
+    <style src="{% static "css/speech_to_text.css" %}"></style>
  
-
-    <p id="paragraph"></p>
-    <em>{{ s }}</em>
 
   </body>
 </html>

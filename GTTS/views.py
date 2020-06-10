@@ -12,7 +12,8 @@ class Speech(TemplateView):
     template_name = 'speech_to_text.html'
     
     def get(self, request):
-        s = self.convert_text()
+        # s = self.convert_text()
+        s = "hello"
         return render(request, self.template_name, {
             "s" : s,
         })
@@ -36,27 +37,27 @@ class Speech(TemplateView):
     #     return render(request, 'speech_to_text.html', {'buttonClicked':buttonClicked})
 
 
-    def convert_text(self):
-        # obtain audio from the microphone
-        r = sr.Recognizer()
-        with sr.Microphone() as source:
-            print("Please wait. Calibrating microphone...")
-            # listen for 0.5 seconds and create the ambient noise energy level
-            r.adjust_for_ambient_noise(source, duration=5)
-            print("Say something!")
-            audio = r.listen(source)
+    # def convert_text(self):
+    #     # obtain audio from the microphone
+    #     r = sr.Recognizer()
+    #     with sr.Microphone() as source:
+    #         print("Please wait. Calibrating microphone...")
+    #         # listen for 0.5 seconds and create the ambient noise energy level
+    #         r.adjust_for_ambient_noise(source, duration=5)
+    #         print("Say something!")
+    #         audio = r.listen(source)
 
-        # recognize speech using Google Speech Recognition
-        try:
-            print("Your speech is ===>")
-            s = r.recognize_google(audio, language="en-us")
-            print(s)
-        except sr.UnknownValueError:
-            print("Google Speech Recognition could not understand audio")
-        except sr.RequestError as e:
-            print("No response from Google Speech Recognition service: {0}".format(e))
-        return s
+    #     # recognize speech using Google Speech Recognition
+    #     try:
+    #         print("Your speech is ===>")
+    #         s = r.recognize_google(audio, language="en-us")
+    #         print(s)
+    #     except sr.UnknownValueError:
+    #         print("Google Speech Recognition could not understand audio")
+    #     except sr.RequestError as e:
+    #         print("No response from Google Speech Recognition service: {0}".format(e))
+    #     return s
 
-    if __name__ == '__convert_text__':
-        convert_text()
-        #speak(sentence=s, lang='en-us', loops=1)
+    # if __name__ == '__convert_text__':
+    #     convert_text()
+    #     #speak(sentence=s, lang='en-us', loops=1)
