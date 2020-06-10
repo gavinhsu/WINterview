@@ -4,8 +4,8 @@ try {
   }
   catch(e) {
     console.error(e);
-    $('.no-browser-support').show();
-    $('.app').hide();
+    // $('.no-browser-support').show();
+    $('.app').show();
   }
 
 
@@ -129,6 +129,12 @@ try {
   /*-----------------------------
         Speech Synthesis 
   ------------------------------*/
+  function start(){
+      document.getElementById("question").style.display ="inline"
+        var question =document.getElementById("question").innerHTML
+        readOutLoud(question) 
+    }
+
 
   function readOutLoud(message) {
     var speech = new SpeechSynthesisUtterance();
@@ -140,6 +146,8 @@ try {
     speech.pitch = 1;
     
     window.speechSynthesis.speak(speech);
+
+
   }
 
   /*-----------------------------
