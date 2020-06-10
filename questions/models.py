@@ -8,5 +8,5 @@ class Question(models.Model):
     Ans = models.TextField(max_length=500, null=True)
 
     def __str__(self):
-        result = str(self.QuesNum) + ' ' + str(self.Field) +str(self.Ques)
+        result = str(self.QuesNum) + ' ' + str(self.Field) + str(self.Ques)
         return result
