@@ -27,7 +27,7 @@ try {
   // When true, the silence period is longer (about 15 seconds),
   // allowing us to keep recording even when the user pauses. 
   recognition.continuous = true;
-  recognition.lang = "en-us";
+  recognition.lang = "en-UK";
 
   // This block is called every time the Speech APi captures a line. 
   recognition.onresult = function(event) {
@@ -129,12 +129,16 @@ try {
   /*-----------------------------
         Speech Synthesis 
   ------------------------------*/
-  function start(){
-      document.getElementById("question").style.display ="inline"
-        var question =document.getElementById("question").innerHTML
-        readOutLoud(question) 
+  function speak(){
+    document.getElementById("question").style.display ="inline";
+    var question = document.getElementById("question").innerHTML;
+    readOutLoud(question);
     }
 
+  // function() disappear(){
+  //   var speakButton = document.getElementById("speak");
+  //   speakButton.style.display="none";
+  // }
 
   function readOutLoud(message) {
     var speech = new SpeechSynthesisUtterance();
