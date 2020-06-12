@@ -148,6 +148,7 @@ try {
     speech.volume = 1;
     speech.rate = 1;
     speech.pitch = 1;
+    speech.lang = 'en-US';
     
     window.speechSynthesis.speak(speech);
 
