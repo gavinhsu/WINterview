@@ -10,3 +10,18 @@ class Question(models.Model):
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Field) + ':' + str(self.Ques)
         return result
+
+class Answer(models.Model):
+    user = models.CharField(max_length=10000)
+    q1 = models.CharField(max_length=500)
+    q2 = models.CharField(max_length=500)
+    q3 = models.CharField(max_length=500)
+    q4 = models.CharField(max_length=500)
+    q5 = models.CharField(max_length=500)
+    q6 = models.CharField(max_length=500)
+    q6 = models.CharField(max_length=500)
+    q7 = models.CharField(max_length=500)
+    q8 = models.CharField(max_length=500)
+    q9 = models.CharField(max_length=500)
+    q10 = models.CharField(max_length=500)
+
