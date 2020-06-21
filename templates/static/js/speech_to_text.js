@@ -201,6 +201,6 @@ try {
   }
 
 
-  function deleteNote(dateTime) {
-    localStorage.removeItem('note-' + dateTime); 
-  }
+  // function deleteNote(dateTime) {
+  //   localStorage.removeItem('note-' + dateTime); 
+  // }
