@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', users.views.homepage),
     path('users/', include("users.url")),
-    path('speech_to_text/', GTTS.views.showthis)
+    path('speech_to_text/', include('GTTS.url'))
     #  # for unauthorized access dynamic translation 
     # path('gtts/', include('gTTS.urls')),
     # # for user authorized dynamic translation

@@ -13,15 +13,20 @@ class Question(models.Model):
 
 class Answer(models.Model):
     user = models.CharField(max_length=10000)
-    q1 = models.CharField(max_length=500)
-    q2 = models.CharField(max_length=500)
-    q3 = models.CharField(max_length=500)
-    q4 = models.CharField(max_length=500)
-    q5 = models.CharField(max_length=500)
-    q6 = models.CharField(max_length=500)
-    q6 = models.CharField(max_length=500)
-    q7 = models.CharField(max_length=500)
-    q8 = models.CharField(max_length=500)
-    q9 = models.CharField(max_length=500)
-    q10 = models.CharField(max_length=500)
+    a1 = models.CharField(max_length=500)
+    a2 = models.CharField(max_length=500)
+    a3 = models.CharField(max_length=500)
+    a4 = models.CharField(max_length=500)
+    a5 = models.CharField(max_length=500)
+    a6 = models.CharField(max_length=500)
+    a6 = models.CharField(max_length=500)
+    a7 = models.CharField(max_length=500)
+    a8 = models.CharField(max_length=500)
+    a9 = models.CharField(max_length=500)
+    a10 = models.CharField(max_length=500)
 
+    def __str__(self):
+        result = str(self.user)+ ' ' + str(self.a1)
+        return result
+
+ 

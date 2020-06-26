@@ -135,7 +135,7 @@ try {
     readOutLoud(question);
     }
 
-  // function() disappear(){
+  // function disappear(){
   //   var speakButton = document.getElementById("speak");
   //   speakButton.style.display="none";
   // }
