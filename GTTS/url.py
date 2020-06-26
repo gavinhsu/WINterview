@@ -8,6 +8,7 @@ app_name = 'GTTS'
 
 urlpatterns = [
   path('', GTTS.views.QuesView.as_view()),
+  path('', GTTS.views.UploadAnswersView.as_view()),
   #path(button_click, views.),
   
  ]
