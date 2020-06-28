@@ -72,6 +72,14 @@ button:focus {
     margin-bottom: 40px;
 }
 
+.answerNote{
+    width:1000px;
+    height:150px;
+    display:block;
+    margin-left:auto; 
+    margin-right: auto;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 50px 25px;

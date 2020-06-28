@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 import random
+# from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
 
 from django.views.generic import TemplateView
@@ -18,21 +19,20 @@ class QuesView(TemplateView):
         random_question = Question.objects.get(id=random_id)
         return render(request, self.template_name, locals())
 
-
+# @csrf_protect
 class UploadAnswersView(TemplateView):  
   template_name = 'speech_to_text.html' 
 
   def get(self, request):    
-    form = UploadAnswersForm()    
-    return render(request, self.template_name, {'form':form})
+    return render(request, self.template_name)
 
-  def post(self, request):       
-    form = UploadAnswersForm(request.POST) 
-    
-    if form.is_valid():      
-        a1 = request.POST.get('a1','')  
-        ans_obj = Answer(a1 = a1)
-        ans_obj.save()
-        return redirect()
+  def post(self, request):     
+    if request.method == "POST":
+      a1 = request.POST['note-textarea']
+      unit = Answer.objects.create(a1=a1)
+      unit.save()
+      # return HttpResponseRedirect('')
+    else:
+      mess = "Please answer the question!"
 
-    return render(request, self.template_name, {'form':form})   
+    return render(request, self.template_name)   

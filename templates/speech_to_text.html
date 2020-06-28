@@ -26,15 +26,16 @@
           <button id="save-note-btn" title="Save Note">Save Note</button>   
           <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
           
-          <h3 style="text-align:center;">Your Answer</h3>
-
+          
           <form id='ans' method="post">    
             {% csrf_token %}    
+            <label for="note-textarea" style="text-align:center;">Your Answer</label>
             <div class="input-single">
-              <textarea id="note-textarea" placeholder="Your answer will be shown here." style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
-            </div>        
-            <input type="submit" style="margin-left:1000px;margin-bottom:10px;">Next</button> 
-            </form>
+              <textarea id="note-textarea" name = "note-textarea" placeholder="Your answer will be shown here." style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
+            </div>
+            <input type="submit" style="margin-left:1000px;margin-bottom:10px;" value = "Next question">
+            <span>{{mess}}</span>
+          </form>
 
           
           <!--<h3>My Notes</h3>
