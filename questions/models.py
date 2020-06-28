@@ -2,14 +2,14 @@ from django.db import models
 from users.models import Member
 
 # Create your models here.
-class Question(models.Model):
-    QuesNum = models.CharField(max_length=10000)
-    Field = models.CharField(max_length=100)
+class Software_Engineer(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=500, null=True)
 
     def __str__(self):
-        result = str(self.QuesNum) + ' ' + str(self.Field) + ':' + str(self.Ques)
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ':' + str(self.Ques)
         return result
 
 class Answer(models.Model):

@@ -1,15 +1,9 @@
-from django.shortcuts import render
-import re, string 
-import pandas as pd   
-from collections import defaultdict
-from collections import Counter, namedtuple
-import re
-import spacy
-from sklearn.manifold import TSNE #visualize high-dimensional data
-'''import nltk
-nltk.download('stopwords')  
-from nltk.corpus import stopwords
-STOPWORDS = set(stopwords.words('english'))'''
-from gensim.models import Word2Vec
+from django.shortcuts import render, redirect
+from django.contrib import auth
+import random
+# from django.views.decorators.csrf import csrf_protect
+# from django.core.context_processors import csrf
 
+from django.views.generic import TemplateView
+from questions.models import Answer
 # Create your views here.
