@@ -14,21 +14,35 @@ class QuesView(TemplateView):
     template_name = 'speech_to_text.html'
 
     def get(self, request):
-        max_id = Question.objects.order_by('-id')[0].id
-        random_id = random.randint(1 , max_id)
-        random_question = Question.objects.get(id=random_id)
+        # max_id = Question.objects.order_by('-id')[0].id
+        # random_id = random.randint(1 , max_id)
+        random_question = Question.objects.get(QuesNum=1)
         return render(request, self.template_name, locals())
+    
+    def post(self, request):     
+        if request.method == "POST":
+          a1 = request.POST['note-textarea']
+          unit = Answer.objects.create(a1=a1)
+          unit.save()
+          return redirect('speech_to_text/reply2/')
+
+        return render(request, self.template_name,locals())   
 
 
+class QuesView2(TemplateView):
+    template_name = 'reply2.html'
 
-def post(request):     
-  if request.method == "POST":
-    a1 = request.POST['note-textarea']
-    unit = Answer.objects.create(a1=a1)
-    unit.save()
-    return redirect('/speech_to_text/')
-  else:
-    mess = "Please answer the question!"
-  print(request)
+    def get(self, request):
+        # max_id = Question.objects.order_by('-id')[0].id
+        # random_id = random.randint(1 , max_id)
+        random_question = Question.objects.get(QuesNum=1)
+        return render(request, self.template_name, locals())
+    
+    def post(self, request):     
+        if request.method == "POST":
+          a2 = request.POST['note-textarea']
+          unit = Answer.objects.create(a2=a2)
+          unit.save()
+          return redirect('speech_to_text/reply3/')
 
-  return render(request, 'speech_to_text.html',locals())   
+        return render(request, self.template_name,locals())  
