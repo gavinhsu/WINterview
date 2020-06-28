@@ -13,7 +13,7 @@ class Question(models.Model):
         return result
 
 class Answer(models.Model):
-    id = models.ForeignKey(Member,on_delete=models.CASCADE,primary_key=True, null=False)
+    userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True)
     a1 = models.CharField(max_length=500,blank=True)
     a2 = models.CharField(max_length=500)
     a3 = models.CharField(max_length=500)

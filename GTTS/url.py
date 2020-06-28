@@ -7,8 +7,9 @@ import GTTS.views
 app_name = 'GTTS'
 
 urlpatterns = [
-  path('', GTTS.views.QuesView.as_view()),
-  path('', GTTS.views.UploadAnswersView.as_view()),
+  #path('', GTTS.views.QuesView.as_view()),
+  #path('submit/', GTTS.views.UploadAnswersView.as_view()),
+  path('',GTTS.views.post)
   #path(button_click, views.),
   
  ]

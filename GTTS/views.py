@@ -19,20 +19,16 @@ class QuesView(TemplateView):
         random_question = Question.objects.get(id=random_id)
         return render(request, self.template_name, locals())
 
-# @csrf_protect
-class UploadAnswersView(TemplateView):  
-  template_name = 'speech_to_text.html' 
 
-  def get(self, request):    
-    return render(request, self.template_name)
 
-  def post(self, request):     
-    if request.method == "POST":
-      a1 = request.POST['note-textarea']
-      unit = Answer.objects.create(a1=a1)
-      unit.save()
-      # return HttpResponseRedirect('')
-    else:
-      mess = "Please answer the question!"
+def post(request):     
+  if request.method == "POST":
+    a1 = request.POST['note-textarea']
+    unit = Answer.objects.create(a1=a1)
+    unit.save()
+    return redirect('/speech_to_text/')
+  else:
+    mess = "Please answer the question!"
+  print(request)
 
-    return render(request, self.template_name)   
+  return render(request, 'speech_to_text.html',locals())   
