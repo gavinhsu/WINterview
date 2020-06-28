@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import Member
 
 # Create your models here.
 class Question(models.Model):
@@ -12,8 +13,8 @@ class Question(models.Model):
         return result
 
 class Answer(models.Model):
-    user = models.CharField(max_length=10000)
-    a1 = models.CharField(max_length=500)
+    id = models.ForeignKey(Member,on_delete=models.CASCADE,primary_key=True, null=False)
+    a1 = models.CharField(max_length=500,blank=True)
     a2 = models.CharField(max_length=500)
     a3 = models.CharField(max_length=500)
     a4 = models.CharField(max_length=500)
@@ -26,6 +27,6 @@ class Answer(models.Model):
     a10 = models.CharField(max_length=500)
 
     def __str__(self):
-        result = str(self.user) + ':' + str(self.a1)
+        result = str(self.id) + ':' + str(self.a1)
         return result
 
