@@ -8,11 +8,12 @@ from django.views.generic import TemplateView
 from questions.models import *
 from GTTS.forms import UploadAnswersForm
 
+def equipCheck(request):
+    return render(request, 'equipCheck.html')
+
 
 class QuesView(TemplateView):
     template_name = 'speech_to_text.html'
-
-
 
     def get(self, request):
       max_id = Software_Engineer.objects.latest('id').id
