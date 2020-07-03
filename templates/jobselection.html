@@ -1,63 +1,65 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Job menu</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 </head>
 <style>
-.dropdown-menu{
-  width: 300px;
-  text-align:center;
-  float: none;
-  margin: 0 auto;
+body{
+  //background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.25));
+  //text-align: center;
+}
+.flex{
+  height: 400px;
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -200px;
+}
+form{
+  background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.25));
+  text-align: center;
 }
 </style>
 
 <body>
+<form name="myForm">
+<div class="container-fluid">
+<div class="flex">
+<h1 align=center>Select the Job.</h1>
+<!--<hr>-->
 
-  <div class="container-fluid">
-    <div class="btn-group float-center">
-      <button type="button" class="btn btn-light dropdown-toggle pull-right" data-toggle="dropdown">
-        Choose the occupation you need
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a class="dropdown-item" href="#">Software Engineer</a></li>
-        <li><a class="dropdown-item" href="#">MIS Engineer</a></li>
-        <li><a class="dropdown-item" href="#">Software Program Designer</a></li>
-        <li><a class="dropdown-item" href="#">Firmware Engineer</a></li>
-        <li><a class="dropdown-item" href="#">System Engineer</a></li>
-        <li><a class="dropdown-item" href="#">Hardware Engineer</a></li>
-        <li><a class="dropdown-item" href="#">Communications Engineer</a></li>
-        <li><a class="dropdown-item" href="#">Database Engineer</a></li>
-        <li><a class="dropdown-item" href="#">Technical Support Engineer</a></li>
-        <li><a class="dropdown-item" href="#">Information Security Engineer</a></li>
-        <li><a class="dropdown-item" href="#">Network Engineer</a></li>
-        <li><a class="dropdown-item" href="#">Website Programmer</a></li>
-        <li><a class="dropdown-item" href="#">Finance Sales Personnel</a></li>
-        <li><a class="dropdown-item" href="#">Financial Planning Personnel</a></li>
-        <li><a class="dropdown-item" href="#">Financial Analyst</a></li>
-        <li><a class="dropdown-item" href="#">Accountant</a></li>
-        <li><a class="dropdown-item" href="#">Cost Accounting Specialist</a></li>
-        <li><a class="dropdown-item" href="#">Audit Executive</a></li>
-        <li><a class="dropdown-item" href="#">Tax Executive</a></li>
-        <li><a class="dropdown-item" href="#">Stock Broker</a></li>
-        <li><a class="dropdown-item" href="#">Certified Investment Analyst</a></li>
-        <li><a class="dropdown-item" href="#">Actuary</a></li>
-        <li><a class="dropdown-item" href="#">Underwriting Personnel</a></li>
-        <li><a class="dropdown-item" href="#">Bank Teller</a></li>
+<script>
+job=new Array();
+job[0]=["Hardware Engineer", "Senior Software Engineer","Software Engineer", "ERP Application R&D", "System Engineer","System Integration Engineer","Database Engineer","Database Administrator",
+ "Multimedia Development Engineer","Game Development Engineer","E-commerce Software Engineer","Network Engineer","Information Security Engineer","Technical Support Engineer","Measure Engineer",
+ "Standardization Engineer","System Testing QA","Software Testing QA","Hardware Testing QA","Communication Engineer","Wired Transmission Enginner","Wireless Communication Engineer","Telecommunication Network Engineer",
+"Data Communication Engineer","Mobile Communication Engineer"];
+job[1]=["Finance Consultant", "Accountant", "Cashier", "Finance Assistant", "Accounting Assistant","Financial Analyst","Cost Accounting Specialist",
+"Audit Executive","Tax Executive","Statistician","Securities Broker","Securities Analyst","Financial Analyst","Investment Advisor","Financial Management Advisor",
+"Treasury Specialist","Loan Officer","Credit Officer","Foreign Exchange","Settlement Officer","Bank Teller"];
+function renew(index){
+	for(var i=0;i<job[index].length;i++)
+		document.myForm.member.options[i]=new Option(job[index][i], job[index][i]);	// 設定新選項
+	document.myForm.member.length=job[index].length;	// 刪除多餘的選項
+}
+</script>
 
 
-
-      </div>
-    </div>
-  </div>
-
+Occupational Group
+<select size=3 onChange="renew(this.selectedIndex);">
+	<option value="Information Technology/Engineering">Information Technology/Engineering
+	<option value="Finance/Accounting">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
+</select>
+Occupation
+<select name="member" size=8>
+	<option value="">Choose the group on left hand side first.
+</select>
+<button type="button">Next</button>
+</form>
+</div>
+</div>
+<!--<hr>-->
 </body>
-
 </html>

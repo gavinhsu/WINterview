@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 #from django.views.generic import TemplateViews
 from users.models import Member
@@ -5,6 +6,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 
 from django.views.decorators.csrf import csrf_exempt
 from . import Form,models
+from django.contrib import auth
 
 
 def homepage(request):
@@ -85,8 +87,11 @@ def login(request):
 
 def jobselect(request):
     #if request.method == "GET":
-        if request.session['is_login']==True:
+        if 'is_login' in request.session and request.session['is_login']==True:
             user=request.session['account']
             return render(request,'jobselection.html',{'current_user':user})
         else:
             return render(request,'login.html')
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/')

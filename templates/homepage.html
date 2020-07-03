@@ -20,7 +20,7 @@
 
   <!-- Vendor CSS Files -->
 
-  
+
   <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
   <link href="{% static "vendor/animate.css/animate.min.css" %}" rel="stylesheet">
   <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
@@ -65,18 +65,17 @@ a{
           <li><a href="#">Interview Skills</a></li>
           <li><a href="#">Company Profile</a></li>
           <li><a href="#">News</a></li>
+          <li><a onclick="location.href='/users/login/'">Sign In</a></li>
+          <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
+          <li><a href="/users/logout/">Log Out</a></li>
           <li class="menu-has-children"><a href="">Site Map</a>
             <ul>
               <!--{% if user.is_authenticated %}
                 Hello, {{ user.username }}.
               {% else %}-->
-
               <!--{% endif %}
               {% block content %}{% endblock %}
               <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>-->
-              <li><a onclick="location.href='/users/login/'">Sign In</a></li>
-
-              <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
               <li><a href="#">Edit Member Data</a></li>
               <li><a href="#">Mock Interview</a></li>
               <li><a href="#">Mock Interview Record</a></li>

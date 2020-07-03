@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.urls import path
 from django.contrib.auth.views import LoginView
 import users.views
+from users.views import logout
 
 app_name = 'users'
 
@@ -11,5 +12,7 @@ urlpatterns = [
   path('regist/', users.views.regist),
 
   path('login/', users.views.login),
-  path('jobselect/',users.views.jobselect)
+  path('jobselect/',users.views.jobselect),
+  #path('users/logout/', logout)
+  path('logout/',users.views.logout)
  ]
