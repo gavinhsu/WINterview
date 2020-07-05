@@ -39,3 +39,7 @@ class Answer(models.Model):
     def __str__(self):
         result = str(self.id) + ':' + str(self.a1)
         return result
+
+
+
+
