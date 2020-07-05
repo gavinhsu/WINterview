@@ -7,7 +7,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
@@ -17,18 +18,36 @@
 </head>
 
 <body>
+  <div class="app"> 
+    <button id="start-record-btn" title="Start Recording">Start Recognition</button>
+    <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
+    <button id="save-note-btn" title="Save Note">Save Note</button>   
+    <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+  
+    <div class="input-single">
+      <textarea id="note-textarea" name = "note-textarea" placeholder="Your answer will be shown here." style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
+    </div>
+
+    <!--<h3>My Notes</h3>
+    <ul id="notes">
+        <li>
+            <p class="no-notes">You don't have any notes.</p>
+        </li>
+    </ul>-->
+
+</div>
   <div class="container">
     <div class="card">
       <div class="card-body">
         <div class="row mb-4">
           <div class="col-12">
-            <h1 class="text-center mb-3">透過 JavaScript 打造一個視訊錄影機吧</h1>
-            <p>
+            <h1 class="text-center mb-3">Surrounding Equipment Inspection</h1>
+            <!-- <p>
               這個範例示範如何透過瀏覽器內建的 MediaStream API 來打造影音錄影的功能
               <small class="text-muted">
                 （開發環境使用 Chrome 瀏覽器）
               </small>
-            </p>
+            </p> -->
           </div>
         </div>
 
@@ -63,6 +82,7 @@
       </div>
     </div>
   </div>
+  <a href="/speech_to_text" class='button' type='button'>Start Interview!</a>
 
   <!-- Vendor -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
