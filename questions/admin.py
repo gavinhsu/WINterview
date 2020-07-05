@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Software_Engineer
+from .models import Investment_Banking
 from .models import Answer
 
 # Register your models here.
