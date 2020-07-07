@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NLP Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function predict_chances() {
+           url = "http://localhost:8000/classify?sentence=" + $("#sentence").val();
+
+           // Make AJAX request
+           $.get(url,
+                 null,
+                 function(result) {
+                    $("#results").text(result);
+                 }
+           );
+        }
+    </script>
+</head>
+<body>
+
+<h1>NLP TEST</h1>
+Please Enter Your Sentence: <br/>
+<input type="text" id="sentence"/>
+<p></p>
+
+<button onclick="predict_chances()">Classify!</button>
+
+<h2 id="results"></h2>
+{{ result }}
+</body>
+</html>
