@@ -12,6 +12,16 @@ class Software_Engineer(models.Model):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ':' + str(self.Ques)
         return result
 
+class Investment_Banking(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=500, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ':' + str(self.Ques)
+        return result
+
 class Answer(models.Model):
     userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True)
     a1 = models.CharField(max_length=500,blank=True)
