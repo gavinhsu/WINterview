@@ -7,3 +7,4 @@ from .models import Answer
 admin.site.register(Software_Engineer)
 admin.site.register(Investment_Banking)
 admin.site.register(Answer)
+

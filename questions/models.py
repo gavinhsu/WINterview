@@ -40,3 +40,6 @@ class Answer(models.Model):
         result = str(self.id) + ':' + str(self.a1)
         return result
 
+
+
+
