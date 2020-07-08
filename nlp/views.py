@@ -20,11 +20,11 @@ from nltk import FreqDist, classify, NaiveBayesClassifier # for model building
 # from django.core.context_processors import csrf
 
 from django.views.generic import TemplateView
-from questions.models import Answer
+from questions.models import *
 # Create your views here.
 a=12
 print(a)
-answer = Answer.objects.filter(userID='A123456789一二三').values('a1')
+answer = Answer.objects.get(id='27').a1
 print(answer)
 
 def predict(request):
@@ -68,7 +68,7 @@ def predict(request):
     #print('The result is: ', results)
 
 def nlp_test_view(request):
-    # answer = Answer.objects.filter(userID_id='26').values('a1')
+    answer = Answer.objects.get(id='27').a1
     return render(request, 'nlp_test.html',{'answer':answer})
 
 
