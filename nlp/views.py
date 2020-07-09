@@ -21,7 +21,8 @@ from questions.models import *
 # Create your views here.
 
 # retreive answer form user db
-answer = Answer.objects.get(id='27').a1
+answer = Answer.objects.get(id='25').a1
+#answer = Answer.objects.all()
 
 
 def predict(request):
@@ -62,7 +63,7 @@ def predict(request):
 
 
 def nlp_test_view(request):
-    answer = Answer.objects.get(id='27').a1
+    answer = Answer.objects.get(id='26').a1
     return render(request, 'nlp_test.html',{'answer':answer})
 
 
