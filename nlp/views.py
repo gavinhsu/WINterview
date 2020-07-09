@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.http import HttpResponse
+import os
+from MockInterview.settings import BASE_DIR
 import random
 import pandas as pd
 import re, string
@@ -53,7 +55,8 @@ def predict(request):
 
 
     # unpickle
-    model = pd.read_pickle(r'C:\\Users\\asus\\misproject\\MockInterview\\nlp\\model.pickle')
+    file_path = os.path.join(BASE_DIR,'model.pickle')
+    model = pd.read_pickle(file_path)
     #model = pd.read_pickle('model.pickle')
     custom_tokens = remove_noise(word_tokenize(answer))
     results = model.classify(dict([token, True] for token in custom_tokens))
@@ -65,5 +68,8 @@ def predict(request):
 def nlp_test_view(request):
     answer = Answer.objects.get(id='26').a1
     return render(request, 'nlp_test.html',{'answer':answer})
+
+file_path = os.path.join(BASE_DIR,'model.pickle')
+print(file_path)
 
 
