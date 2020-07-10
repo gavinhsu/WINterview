@@ -69,7 +69,5 @@ def nlp_test_view(request):
     answer = Answer.objects.get(id='26').a1
     return render(request, 'nlp_test.html',{'answer':answer})
 
-file_path = os.path.join(BASE_DIR,'model.pickle')
-print(file_path)
 
 
