@@ -7,6 +7,7 @@ import random
 from django.views.generic import TemplateView
 from questions.models import *
 from GTTS.forms import UploadAnswersForm
+from nlp.views import predict
 
 def equipCheck(request):
     return render(request, 'equipCheck.html')
@@ -23,9 +24,16 @@ class QuesView(TemplateView):
     
     def post(self, request):   
       if request.method == "POST":
+        # save answer to Answer models
         a1 = request.POST['note-textarea']
         unit = Answer.objects.create(a1=a1)
         unit.save()
+
+        # save result to Result models
+        r1 = predict()
+        res = Result.objects.create(r1=r1)
+        res.save()
+
         return redirect('speech_to_text/reply2/')
 
       return render(request, self.template_name,locals())   

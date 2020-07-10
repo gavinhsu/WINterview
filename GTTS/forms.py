@@ -5,7 +5,7 @@ class UploadAnswersForm(forms.Form):
     attrs={'placeholder':"Your answer will be shown here.", 'class':'answerNote'}
   ))
 
-  # def cleaan(self):
+  # def clean(self):
   #   cleaned_data = super(UploadAnswersForm, self).clean()
   #   answer_note = cleaned_data.get('answer_note')
   #   if not answer_note:

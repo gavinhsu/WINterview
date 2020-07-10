@@ -19,7 +19,7 @@ class Investment_Banking(models.Model):
     Ans = models.TextField(max_length=500, null=True)
 
     def __str__(self):
-        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ':' + str(self.Ques)
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 
 class Answer(models.Model):
@@ -37,8 +37,27 @@ class Answer(models.Model):
     a10 = models.CharField(max_length=500)
 
     def __str__(self):
-        result = str(self.id) + ':' + str(self.a1)
+        result = str(self.id) + ': ' + str(self.a1)
         return result
+
+
+class Result(models.Model):
+    userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True)
+    r1 = models.CharField(max_length=500, blank=True)
+    r2 = models.CharField(max_length=500)
+    r3 = models.CharField(max_length=500)
+    r4 = models.CharField(max_length=500)
+    r5 = models.CharField(max_length=500)
+    r6 = models.CharField(max_length=500)
+    r7 = models.CharField(max_length=500)
+    r8 = models.CharField(max_length=500)
+    r9 = models.CharField(max_length=500)
+    r10 = models.CharField(max_length=500)
+
+    def __str__(self):
+        result = str(self.id) + ': ' + str(self.r1)
+        return result
+    
 
 
 
