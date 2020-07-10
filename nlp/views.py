@@ -1,33 +1,26 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.http import HttpResponse
-import os
+import os, re, string
 from MockInterview.settings import BASE_DIR
 import random
 import pandas as pd
-import re, string
 # for nltk model building ######################################
 import nltk
-# nltk.download('averaged_perceptron_tagger')
-# nltk.download('wordnet')
-# nltk.download('punkt') 
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import twitter_samples, stopwords
-from nltk.tag import pos_tag # tag 詞彙的型態
+from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
-from nltk import FreqDist, classify, NaiveBayesClassifier # for model building
+from nltk import FreqDist, classify, NaiveBayesClassifier
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
 from questions.models import *
 # Create your views here.
 
-# retreive answer form user db
-answer = Answer.objects.get(id='25').a1
-#answer = Answer.objects.all()
 
 
-def predict(request):
+def predict():
 
     def remove_noise(tweet_tokens, stop_words = ()):
         cleaned_tokens = []
@@ -53,16 +46,19 @@ def predict(request):
                 cleaned_tokens.append(token.lower())
         return cleaned_tokens
 
+    # retreive answer from Answer model
+    answer = Answer.objects.all().order_by('-id')[0]
+    answer = str(answer)
 
     # unpickle
     file_path = os.path.join(BASE_DIR,'model.pickle')
     model = pd.read_pickle(file_path)
     #model = pd.read_pickle('model.pickle')
     custom_tokens = remove_noise(word_tokenize(answer))
-    results = model.classify(dict([token, True] for token in custom_tokens))
+    result = model.classify(dict([token, True] for token in custom_tokens))
+    
+    return result
 
-    final_result = answer + ' ====> ' + results
-    return HttpResponse(final_result)
 
 
 def nlp_test_view(request):
