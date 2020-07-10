@@ -55,20 +55,15 @@ def predict():
     model = pd.read_pickle(file_path)
     #model = pd.read_pickle('model.pickle')
     custom_tokens = remove_noise(word_tokenize(answer))
-    results = model.classify(dict([token, True] for token in custom_tokens))
+    result = model.classify(dict([token, True] for token in custom_tokens))
+    
+    return result
 
-    final_result = answer + ' ====> ' + results
-    #return HttpResponse(final_result)
-    return results
-
-    print(answer)
 
 
 def nlp_test_view(request):
     answer = Answer.objects.get(id='26').a1
     return render(request, 'nlp_test.html',{'answer':answer})
 
-file_path = os.path.join(BASE_DIR,'model.pickle')
-print(file_path)
 
 

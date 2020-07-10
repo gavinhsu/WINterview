@@ -36,6 +36,7 @@ class QuesView(TemplateView):
 
         return redirect('speech_to_text/reply2/')
 
+      
       return render(request, self.template_name,locals())   
 
 
