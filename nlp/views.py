@@ -16,8 +16,9 @@ from nltk import FreqDist, classify, NaiveBayesClassifier
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
 from questions.models import *
+import GTTS.views
+#from GTTS.views import QuesView2 
 # Create your views here.
-
 
 
 def predict():
@@ -46,14 +47,15 @@ def predict():
                 cleaned_tokens.append(token.lower())
         return cleaned_tokens
 
-    # retreive answer from Answer model
-    answer = Answer.objects.all().order_by('-id')[0]
-    answer = str(answer)
+
+    # ques_view = GTTS.views.QuesView2
+    # uid = ques_view.uid
+    uid = Answer.objects.all().order_by('-id')[0].id
+    answer = str(Answer.objects.get(id=uid))
 
     # unpickle
-    file_path = os.path.join(BASE_DIR,'model.pickle')
+    file_path = os.path.join(BASE_DIR, 'model.pickle')
     model = pd.read_pickle(file_path)
-    #model = pd.read_pickle('model.pickle')
     custom_tokens = remove_noise(word_tokenize(answer))
     result = model.classify(dict([token, True] for token in custom_tokens))
     
