@@ -8,6 +8,12 @@ body{
   //background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.25));
   //text-align: center;
 }
+.A1{
+float:left;
+width:300px;
+height:200px;
+display:inline;
+}
 .flex{
   height: 400px;
   width: 400px;
@@ -32,46 +38,68 @@ form{
     color: white;
     font-weight: bold;
     line-height: 25px;
+    position:fixed;
+    right: 20px;
+    bottom: 20px;
 }
 </style>
-
 <body>
-<form name="myForm">
+<form name="selectjob">
 <div class="container-fluid">
 <div class="flex">
 <h1 align=center>Select the Job.</h1>
-<!--<hr>-->
-
 <script>
 job=new Array();
 job[0]=["Hardware Engineer", "Senior Software Engineer","Software Engineer", "ERP Application R&D", "System Engineer","System Integration Engineer","Database Engineer","Database Administrator",
  "Multimedia Development Engineer","Game Development Engineer","E-commerce Software Engineer","Network Engineer","Information Security Engineer","Technical Support Engineer","Measure Engineer",
  "Standardization Engineer","System Testing QA","Software Testing QA","Hardware Testing QA","Communication Engineer","Wired Transmission Enginner","Wireless Communication Engineer","Telecommunication Network Engineer",
 "Data Communication Engineer","Mobile Communication Engineer"];
-job[1]=["Finance Consultant", "Accountant", "Cashier", "Finance Assistant", "Accounting Assistant","Financial Analyst","Cost Accounting Specialist",
+job[1]=["Finance Consultant", "Accountant / Accounting Assistant", "Cashier", "Finance Assistant","Financial Analyst","Cost Accounting Specialist",
 "Audit Executive","Tax Executive","Statistician","Securities Broker","Securities Analyst","Financial Analyst","Investment Advisor","Financial Management Advisor",
 "Treasury Specialist","Loan Officer","Credit Officer","Foreign Exchange","Settlement Officer","Bank Teller"];
 function renew(index){
 	for(var i=0;i<job[index].length;i++)
-		document.myForm.member.options[i]=new Option(job[index][i], job[index][i]);	// 設定新選項
-	document.myForm.member.length=job[index].length;	// 刪除多餘的選項
+		document.selectjob.jobb.options[i]=new Option(job[index][i], job[index][i]);	// 設定新選項
+	document.selectjob.jobb.length=job[index].length;	// 刪除多餘的選項
 }
+function isSelected(value) {
+var jobName;
+var jjob = document.getElementById("jobb");
+for(var i=0;i<job[index].length;i++){
+if(job[index][i].selected==true){
+jobName = job[index][i].innerText;
+alert(“jobName:” jobName);
+}}
+/*function check(){
+  if(selectjob.jobcate.value != "Information Technology/Engineering" || selectjob.jobcate.value != "Finance/Accounting" ){
+    alert("Please choose an occupation!");
+  }
+  else selectjob.submit();
+}*/
+/*function check(){
+    if(job[index][i] == null){
+    alert("Please choose an occupation!");
+  }
+}
+  else selectjob.submit();
+}*/
 </script>
-
-
+<div>
+<div class = "A1">
 Occupational Group
-<select size=3 onChange="renew(this.selectedIndex);">
-	<option value="Information Technology/Engineering">Information Technology/Engineering
-	<option value="Finance/Accounting">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
-</select>
+<select name="jobcate" size=3 onChange="renew(this.selectedIndex);">
+	<option value="01">Information Technology/Engineering
+	<option value="02">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
+</select></div>
+<div class = "A1">
 Occupation
-<select name="member" size=8>
-	<option value="">Choose the group on left hand side first.
-</select>
-<a href="/speech_to_text/equipCheck" class='button' type='button'>Affirm the job</a>
+<select name="jobb" size=8 onchange="isSelected(this.value);" id="jobb">
+<option value="00">You have to choose an occupational group above first.      </option>
+</select></div>-->
+
+<a href="/speech_to_text/equipCheck" class='button' type='button' onClick="check()">Affirm the job</a>
 </form>
 </div>
 </div>
-<!--<hr>-->
 </body>
 </html>
