@@ -35,13 +35,15 @@ class QuesView(TemplateView):
       if request.method == "POST":
         # save answer to Answer models
         a1 = request.POST['note-textarea']
-        unit = Answer.objects.create(a1=a1)
+        #unit = Answer.objects.create(a1=a1)
+        unit = Answer.objects.get(id=59)
+        unit.a1 = a1
         # retreive the latest id
         uid = Answer.objects.all().order_by('-id')[0].id
         unit.save()
 
         # save result to Result models
-        r1 = predict()
+        r1 = predict('a1')
         res = Result.objects.create(id=uid, r1=r1)
         res.save()
 
@@ -73,7 +75,7 @@ class QuesView2(TemplateView):
           unit.a2 = a2
           unit.save()
 
-          r2 = predict()
+          r2 = predict('a2')
           res = Result.objects.get(id=uid)
           res.r2 = r2
           res.save()
@@ -104,7 +106,7 @@ class QuesView3(TemplateView):
           unit.a3 = a3
           unit.save()
 
-          r3 = predict()
+          r3 = predict('a3')
           res = Result.objects.get(id=uid)
           res.r3 = r3
           res.save()

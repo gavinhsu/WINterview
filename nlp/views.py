@@ -21,7 +21,7 @@ import GTTS.views
 # Create your views here.
 
 
-def predict():
+def predict(n):
 
     def remove_noise(tweet_tokens, stop_words = ()):
         cleaned_tokens = []
@@ -51,12 +51,22 @@ def predict():
     # ques_view = GTTS.views.QuesView2
     # uid = ques_view.uid
     uid = Answer.objects.all().order_by('-id')[0].id
-    answer = str(Answer.objects.get(id=uid))
+    # str_n = str(n)
+    # answer1 = str(Answer.objects.filter(id=uid).values(str_n))
+    # for res in answer1:
+    #     res = res[str_n]
+    #     return res
+    answer = Answer.objects.filter(id=uid).values(n)
+    def res():
+        for res in answer:
+            res = res[n]
+            return res
+        
 
     # unpickle
     file_path = os.path.join(BASE_DIR, 'model.pickle')
     model = pd.read_pickle(file_path)
-    custom_tokens = remove_noise(word_tokenize(answer))
+    custom_tokens = remove_noise(word_tokenize(str(res())))
     result = model.classify(dict([token, True] for token in custom_tokens))
     
     return result
