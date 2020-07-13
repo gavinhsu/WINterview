@@ -38,7 +38,6 @@ def predict(n):
                 pos = 'v'
             else:
                 pos = 'a'
-
             lemmatizer = WordNetLemmatizer() # NORMALIZATION (turn different tenses of words into only one)
             token = lemmatizer.lemmatize(token, pos)
 
@@ -63,7 +62,6 @@ def predict(n):
     result = model.classify(dict([token, True] for token in custom_tokens))
     
     return result
-
 
 
 def nlp_test_view(request):

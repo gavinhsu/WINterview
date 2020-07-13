@@ -3,7 +3,6 @@ from django.contrib import auth
 import random
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
-
 from django.views.generic import TemplateView
 from questions.models import *
 from GTTS.forms import UploadAnswersForm
@@ -15,15 +14,6 @@ def equipCheck(request):
 
 class QuesView(TemplateView):
     template_name = 'speech_to_text.html'
-
-    # def __init__(self, init_args):
-    #     self.uid = Answer.objects.all().order_by('-id')[0].id
-
-    # def get_uid(self):
-    #   return self.uid
-
-    # def set_uid(self, val):
-    #   uid = x
 
     def get(self, request):
       max_id = Software_Engineer.objects.latest('id').id
