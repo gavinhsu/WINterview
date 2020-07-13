@@ -56,11 +56,6 @@ class QuesView(TemplateView):
 class QuesView2(TemplateView):
     template_name = 'reply2.html'
 
-    # def __init__(self):
-    #     uid = QuesView.get_uid(QuesView)
-    #     A = QuesView(init_args=uid)
-    #     #uid = QuesView.get_uid()
-
     def get(self, request):
       max_id = Software_Engineer.objects.latest('id').id
       random_ques_num = random.randint(1 , max_id)
@@ -86,11 +81,6 @@ class QuesView2(TemplateView):
 
 class QuesView3(TemplateView):
     template_name = 'reply3.html'
-
-    # def __init__(self):
-    #     uid = QuesView.get_uid(QuesView)
-    #     A = QuesView(init_args=uid)
-    #     #uid = QuesView.get_uid()
 
     def get(self, request):
       max_id = Software_Engineer.objects.latest('id').id

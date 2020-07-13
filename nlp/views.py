@@ -17,9 +17,8 @@ from nltk import FreqDist, classify, NaiveBayesClassifier
 from django.views.generic import TemplateView
 from questions.models import *
 import GTTS.views
-#from GTTS.views import QuesView2 
-# Create your views here.
 
+# Create your views here.
 
 def predict(n):
 
@@ -48,14 +47,8 @@ def predict(n):
         return cleaned_tokens
 
 
-    # ques_view = GTTS.views.QuesView2
-    # uid = ques_view.uid
     uid = Answer.objects.all().order_by('-id')[0].id
-    # str_n = str(n)
-    # answer1 = str(Answer.objects.filter(id=uid).values(str_n))
-    # for res in answer1:
-    #     res = res[str_n]
-    #     return res
+
     answer = Answer.objects.filter(id=uid).values(n)
     def res():
         for res in answer:
