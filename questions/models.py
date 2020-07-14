@@ -57,6 +57,9 @@ class Result(models.Model):
     def __str__(self):
         result = str(self.id) + ': ' + str(self.r1)
         return result
+
+#class Record(models.Model):
+
     
 
 
