@@ -58,7 +58,32 @@ class Result(models.Model):
         result = str(self.id) + ': ' + str(self.r1)
         return result
 
-#class Record(models.Model):
+class Record(models.Model):
+    userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True)
+    rec_a1 = models.CharField(max_length=500, blank=True)
+    rec_r1 = models.CharField(max_length=500, blank=True)
+    rec_a2 = models.CharField(max_length=500, blank=True)
+    rec_r2 = models.CharField(max_length=500, blank=True)
+    rec_a3 = models.CharField(max_length=500, blank=True)
+    rec_r3 = models.CharField(max_length=500, blank=True)
+    rec_a4 = models.CharField(max_length=500, blank=True)
+    rec_r4 = models.CharField(max_length=500, blank=True)
+    rec_a5 = models.CharField(max_length=500, blank=True)
+    rec_r5 = models.CharField(max_length=500, blank=True)
+    rec_a6 = models.CharField(max_length=500, blank=True)
+    rec_r6 = models.CharField(max_length=500, blank=True)
+    rec_a7 = models.CharField(max_length=500, blank=True)
+    rec_r7 = models.CharField(max_length=500, blank=True)
+    rec_a8 = models.CharField(max_length=500, blank=True)
+    rec_r8 = models.CharField(max_length=500, blank=True)
+    rec_a9 = models.CharField(max_length=500, blank=True)
+    rec_r9 = models.CharField(max_length=500, blank=True)
+    rec_a10 = models.CharField(max_length=500, blank=True)
+    rec_r10 = models.CharField(max_length=500, blank=True)
+
+    def __str__(self):
+        result = str(self.id) + ': ' + str(self.rec_a1)
+        return result
 
     
 

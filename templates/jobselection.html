@@ -6,8 +6,8 @@
 </head>
 <style>
   body {
-    background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.25));
-    text-align: center;
+    /* background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.25));
+    text-align: center; */
   }
 
   .A1 {
@@ -32,10 +32,10 @@
     text-align: center;
   }
 
-  .button {
+  input[type=button] {
     display: block;
     width: 115px;
-    height: 25px;
+    height: 40px;
     background: #4E9CAF;
     padding: 10px;
     text-align: center;
@@ -44,16 +44,25 @@
     font-weight: bold;
     line-height: 25px;
     position: fixed;
+    right: 800px;
+    bottom: 125px;
+  }
+
+  /* a{
+    transition: 0.5s ease;
+    cursor: pointer;
     right: 20px;
     bottom: 20px;
-  }
+    padding: 10px;
+    } */
 </style>
 
 <body>
   <form name="selectjob">
     <div class="container-fluid">
       <div class="flex">
-        <h1 align=center>Select the Job.</h1>
+        <h1 text-align=center>Select the Job.</h1>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>
           let occupation;
           job = new Array();
@@ -83,41 +92,43 @@
             console.log(jobName)
             alert(`jobName: ${jobName}`);
 
-            // }
           }
 
-          /*function check(){
-            if(selectjob.jobcate.value != "Information Technology/Engineering" || selectjob.jobcate.value != "Finance/Accounting" ){
-              alert("Please choose an occupation!");
-            }
-            else selectjob.submit();
-          }*/
-          /*function check(){
-              if(job[index][i] == null){
-              alert("Please choose an occupation!");
-            }
+          $(document).ready(function () {
+            $(".isSelected").prop('disabled', true);
+            $('.selectJob').change(function () {
+              if ($('.selectJob').val() == 0) {
+                $(".isSelected").prop('disabled', true);
+              } else {
+                $(".isSelected").prop('disabled', false);
+              }
+            });
+          });
+
+          if (typeof jQuery !== 'undefined') {
+            console.log('jQuery Loaded');
           }
-            else selectjob.submit();
-          }*/
+          else {
+            console.log('not loaded yet');
+          }
         </script>
-
         <div>
           <div class="A1">
             Occupational Group
-            <select name="jobcate" size=3 onchange="renew(this.selectedIndex);">
+            <select class="jobType" name="jobcate" size=3 onchange="renew(this.selectedIndex);">
               <option value="01">Information Technology/Engineering
               <option value="02">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
             </select></div>
           <div class="A1">
             Occupation
-            <select name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
+            <select class="selectJob" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
               <option value="00">You have to choose an occupational group above first. </option>
             </select></div>
+          <input onclick="location.href='/speech_to_text/equipCheck'" class="isSelected" type="button"
+            value="Confirm the job" onclick="isSelected()"></button>
 
-          <a href="/speech_to_text/equipCheck" class='button' type='button' onclick="check()">Affirm the job</a>
-  </form>
-  </div>
-  </div>
+        </div>
+      </div>
 </body>
 
 </html>
