@@ -24,7 +24,6 @@ class Investment_Banking(models.Model):
 
 class Answer(models.Model):
     userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True)
-    session_id = models.CharField(max_length=500,blank=True)
     a1 = models.CharField(max_length=500,blank=True)
     a2 = models.CharField(max_length=500,blank=True)
     a3 = models.CharField(max_length=500,blank=True)
