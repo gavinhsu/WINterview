@@ -86,8 +86,12 @@ class Record(models.Model):
         result = str(self.id) + ': ' + str(self.rec_a1)
         return result
 
-    
+class Video(models.Model):
+    videoname = models.CharField(max_length=100, blank=True)
+    videodate = models.DateTimeField()
 
 
 
-
+    def __str__(self):
+        result = str(self.videoname) + ' ' + str(self.videodate)
+        return result
