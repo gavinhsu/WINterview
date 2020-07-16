@@ -5,6 +5,7 @@ import random
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
 from questions.models import *
+from users.models import *
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
 
@@ -16,6 +17,15 @@ class QuesView(TemplateView):
     template_name = 'speech_to_text.html'
 
     def get(self, request):
+      #print(request.session.session_key)
+
+      # retreive user name
+      if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            print(account_name)
+
+            
+      
       max_id = Software_Engineer.objects.latest('id').id
       random_ques_num = random.randint(1 , max_id)
       random_question = Software_Engineer.objects.get(QuesNum=random_ques_num)

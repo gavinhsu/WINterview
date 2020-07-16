@@ -15,6 +15,6 @@ class Member(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        result = str(self.ID) + ' ' + str(self.Name)
+        result = str(self.Name)
         return result
 
