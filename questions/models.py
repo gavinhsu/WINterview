@@ -86,11 +86,8 @@ class Record(models.Model):
         return result
 
 class Video(models.Model):
-    videoname = models.CharField(max_length=100, blank=True)
-    videodate = models.DateTimeField()
-
-
+    name= models.CharField(max_length=500)
+    videofile= models.FileField(upload_to='videos/', null=True, verbose_name="")
 
     def __str__(self):
-        result = str(self.videoname) + ' ' + str(self.videodate)
-        return result
+        return self.name + ": " + str(self.videofile)

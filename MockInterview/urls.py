@@ -20,6 +20,8 @@ import users.views
 import GTTS.views
 import nlp.views
 #from GTTS.views import Speech
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,8 +30,8 @@ urlpatterns = [
     path('speech_to_text/', include("GTTS.url")),
     # nlp test
     path('nlp/', include('nlp.url'))
-    #  # for unauthorized access dynamic translation 
+    #  # for unauthorized access dynamic translation
     # path('gtts/', include('gTTS.urls')),
     # # for user authorized dynamic translation
     # path('gtts_auth/', include('gTTS.urls_auth')),
-]
+]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
