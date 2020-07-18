@@ -14,6 +14,38 @@ def equipCheck(request):
     return render(request, 'equipCheck.html')
 
 
+def create_ques(job):
+
+    max_id = job.objects.latest('id').id
+    # make a copy of number list
+    num_list = list(range(1, max_id+1))
+    random.shuffle(num_list)
+
+    rand_list = []
+    global ques_list
+    ques_list = []
+
+    for num in range(max_id):
+      num = num_list.pop()
+      rand_list.append(num)
+
+      question = job.objects.filter(id=num).values('Ques')
+      for ques in question:
+        ques = ques['Ques']
+        ques_list.append(ques)
+        
+    print(rand_list)
+    print(ques_list)
+ 
+create_ques(Software_Engineer)
+q1 = ques_list[0]
+q2 = ques_list[1]
+q3 = ques_list[2]
+q4 = ques_list[3]
+q5 = ques_list[4]
+q6 = ques_list[5]
+
+
 class QuesView(TemplateView):
     template_name = 'speech_to_text.html'
 
@@ -24,9 +56,10 @@ class QuesView(TemplateView):
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
 
-      max_id = Software_Engineer.objects.latest('id').id
-      random_ques_num = random.randint(1 , max_id)
-      random_question = Software_Engineer.objects.get(QuesNum=random_ques_num)
+      # max_id = Software_Engineer.objects.latest('id').id
+      # random_ques_num = random.randint(1 , max_id)
+      # random_question = Software_Engineer.objects.get(QuesNum=random_ques_num)
+      random_question = q1
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -45,7 +78,6 @@ class QuesView(TemplateView):
         unit.a1 = a1
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-        print(uid)
         unit.save()
 
         # save result to Result models
@@ -69,9 +101,7 @@ class QuesView2(TemplateView):
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
 
-      max_id = Software_Engineer.objects.latest('id').id
-      random_ques_num = random.randint(1 , max_id)
-      random_question = Software_Engineer.objects.get(QuesNum=random_ques_num)
+      random_question = q2
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -86,7 +116,6 @@ class QuesView2(TemplateView):
             # retreive the user's id
             uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
             unit = Answer.objects.get(id=uid)
-            print(unit)
             unit.a2 = a2
 
         unit.save()
@@ -112,9 +141,7 @@ class QuesView3(TemplateView):
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
 
-      max_id = Software_Engineer.objects.latest('id').id
-      random_ques_num = random.randint(1 , max_id)
-      random_question = Software_Engineer.objects.get(QuesNum=random_ques_num)
+      random_question = q3
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -129,7 +156,6 @@ class QuesView3(TemplateView):
             # retreive the user's id
             uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
             unit = Answer.objects.get(id=uid)
-            print(unit)
             unit.a3 = a3
 
         unit.save()

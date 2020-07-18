@@ -52,7 +52,7 @@ def predict(n):
     def res():
         for res in answer:
             res = res[n]
-            return res
+            return res 
         
 
     # unpickle
