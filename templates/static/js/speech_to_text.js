@@ -124,7 +124,7 @@ var pauseRecord = document.getElementById("pause-record-btn");
 var count = 5;     // Set count
 var timer = null;  // For referencing the timer
 var timer2 = null; 
-var count1 = 10;
+var count1 = 100;
 
 (function countDownStart() {
   // Display counter and start counting down

@@ -1,63 +1,168 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
-    <title>speech to text recording</title>
 
-  </head>
-  <body>
-    <div class="container">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
+  <title>speech to text recording</title>
+
+</head>
+
+<body>
+  <div class="container">
 
 
-      <p id = "question" style="color: #444;text-align: center;text-decoration: solid;font-size: 25px;">   
+    <p id="question" style="color: #444;text-align: left;text-decoration: solid;font-size: 25px;">
       {{ random_question.Ques }}
-      </p>
+    </p>
 
-      <input type="button" onclick="speak()" value="What is the question?" id="speak" style="display:none;position:absolute; left:27%;" >
-      <div class="app"> 
-        <span id="countStart" style="font-size:50px; color:red; "> </span>
-          <img src = "https://s.yimg.com/ny/api/res/1.2/0cS8e63meZSs2JdbW2tqOA--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9NDgwO2g9MzYwO2lsPXBsYW5l/http://media.zenfs.com/zh_hant_tw/News/NOWnews/i2132714.jpg" style="display:block; margin:auto;"/>        
-          <button id="start-record-btn" title="Start Recording" style="display:none;" >Start Recognition</button>
-          <button id="pause-record-btn" title="Pause Recording" style="display:none;">Pause Recognition</button>
-          <!-- <button id="save-note-btn" title="Save Note">Save Note</button>    -->
-          <p id="recording-instructions">Read the question carefully and answer it after countdown.</p>
-          
-          
-          <form id='ans' method="post">    
-            {% csrf_token %}    
-            <label for="note-textarea" style="text-align:center;">Your Answer</label>
-            <div class="input-single">
-              <textarea id="note-textarea" name = "note-textarea" placeholder="Your answer will be shown here." style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
-            </div>
-            <input type="submit" style="margin-left:1000px;margin-bottom:10px;" value = "Next question">
-            <span>{{mess}}</span>
-          </form>
+    <input type="button" onclick="speak()" value="What is the question?" id="speak"
+      style="display:none;position:absolute; left:27%;">
+    <div class="app">
+      <span id="countStart" style="font-size:50px; color:red; "> </span>
+      <img
+        src="https://s.yimg.com/ny/api/res/1.2/0cS8e63meZSs2JdbW2tqOA--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9NDgwO2g9MzYwO2lsPXBsYW5l/http://media.zenfs.com/zh_hant_tw/News/NOWnews/i2132714.jpg"
+        style="display:block; margin:auto;" />
+      <button id="start-record-btn" title="Start Recording" style="display:none;">Start Recognition</button>
+      <button id="pause-record-btn" title="Pause Recording" style="display:none;">Pause Recognition</button>
+      <!-- <button id="save-note-btn" title="Save Note">Save Note</button>    -->
+      <p id="recording-instructions">Read the question carefully and answer it after countdown.</p>
 
-        
-          <!--<h3>My Notes</h3>
+
+      <form id='ans' method="post">
+        {% csrf_token %}
+        <label for="note-textarea" style="text-align:center;">Your Answer</label>
+        <div class="input-single">
+          <textarea id="note-textarea" readonly name="note-textarea" placeholder="Your answer will be shown here."
+            style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
+        </div>
+        <input type="submit" style="margin-left:1000px;margin-bottom:10px;" value="Next question">
+        <span>{{mess}}</span>
+      </form>
+
+
+      <!--<h3>My Notes</h3>
           <ul id="notes">
               <li>
                   <p class="no-notes">You don't have any notes.</p>
               </li>
           </ul>-->
 
-      </div>
-      <p id="demo"></p>
-    
+    </div>
+    <p id="demo"></p>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="{% static "js/speech_to_text.js" %}"></script>
 
-    <style src="{% static "css/speech_to_text.css" %}"></style>
+    <style src="{% static "css/speech_to_text.css" %}">
+      ul {
+        list-style: none;
+        padding: 0;
+      }
 
- 
+      p {
+        color: #444;
+      }
 
-  </body>
+      button:focus {
+        outline: 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 50px;
+        text-align: center;
+      }
+
+      .container h1 {
+        margin-bottom: 20px;
+      }
+
+      .page-description {
+        font-size: 1.1rem;
+        margin: 0 auto;
+      }
+
+      .tz-link {
+        font-size: 1em;
+        color: #1da7da;
+        text-decoration: none;
+      }
+
+      .no-browser-support {
+        display: none;
+        font-size: 1.2rem;
+        color: #e64427;
+        margin-top: 35px;
+      }
+
+      .app {
+        margin: 40px auto;
+      }
+
+      #note-textarea {
+        margin: 20px 0;
+        border: none;
+      }
+
+      #recording-instructions {
+        margin: 15px auto 60px;
+      }
+
+      #notes {
+        padding-top: 20px;
+      }
+
+      .note .header {
+        font-size: 0.9em;
+        color: #888;
+        margin-bottom: 10px;
+      }
+
+      .note .delete-note,
+      .note .listen-note {
+        text-decoration: none;
+        margin-left: 15px;
+      }
+
+      .note .content {
+        margin-bottom: 40px;
+      }
+
+      .answerNote {
+        width: 1000px;
+        height: 150px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 50px 25px;
+        }
+
+        button {
+          margin-bottom: 10px;
+        }
+
+        @media (max-width: 1200px) {
+          #bsaHolder {
+            display: none;
+          }
+        }
+    </style>
+
+
+
+</body>
+
 </html>
