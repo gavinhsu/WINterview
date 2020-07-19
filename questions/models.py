@@ -102,7 +102,7 @@ class Venture_Capital(models.Model):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 class Answer(models.Model):
-    userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True)
+    userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True, blank=True)
     a1 = models.CharField(max_length=500,blank=True)
     a2 = models.CharField(max_length=500,blank=True)
     a3 = models.CharField(max_length=500,blank=True)
@@ -121,7 +121,7 @@ class Answer(models.Model):
 
 
 class Result(models.Model):
-    userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True)
+    userID = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
     r1 = models.CharField(max_length=500, blank=True)
     r2 = models.CharField(max_length=500)
     r3 = models.CharField(max_length=500)
