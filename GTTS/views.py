@@ -10,8 +10,8 @@ from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
 
-def equipCheck(request):
-    return render(request, 'equipCheck.html')
+# def equipCheck(request):
+#     return render(request, 'equipCheck.html')
 
 
 def create_ques(job):
@@ -54,9 +54,6 @@ class QuesView(TemplateView):
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
 
-      # max_id = Software_Engineer.objects.latest('id').id
-      # random_ques_num = random.randint(1 , max_id)
-      # random_question = Software_Engineer.objects.get(QuesNum=random_ques_num)
       random_question = q1
       return render(request, self.template_name, locals())
     

@@ -13,6 +13,7 @@ urlpatterns = [
 
   path('login/', users.views.login),
   path('jobselect/',users.views.jobselect),
+  path('jobselect/speech_to_text/equipCheck', users.views.equipCheck),
   #path('users/logout/', logout)
   path('logout/',users.views.logout)
  ]

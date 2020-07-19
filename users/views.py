@@ -8,7 +8,6 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from . import Form,models
 from django.contrib import auth
-from GTTS.views import equipCheck
 
 
 def homepage(request):
@@ -97,10 +96,14 @@ def jobselect(request):
     #if request.method == "GET":
     if 'is_login' in request.session and request.session['is_login']==True:
         user=request.session['account']
-        return render(request,'jobselection.html',{'current_user':user})
+        return render(request,'jobselection.html', {'current_user':user})
     else:
         return render(request,'login.html')
+
 
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
+
+def equipCheck(request):
+    return render(request, 'equipCheck.html')
