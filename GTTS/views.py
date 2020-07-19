@@ -34,8 +34,6 @@ def create_ques(job):
         ques = ques['Ques']
         ques_list.append(ques)
         
-    print(rand_list)
-    print(ques_list)
  
 create_ques(Software_Engineer)
 q1 = ques_list[0]

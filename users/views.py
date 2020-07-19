@@ -3,10 +3,12 @@ from django.shortcuts import render
 #from django.views.generic import TemplateViews
 from users.models import Member
 from django.http import HttpResponseRedirect,HttpResponse
+from django.shortcuts import redirect
 
 from django.views.decorators.csrf import csrf_exempt
 from . import Form,models
 from django.contrib import auth
+from GTTS.views import equipCheck
 
 
 def homepage(request):
@@ -85,13 +87,20 @@ def login(request):
             uf = Form.UserForm()
             return render(request,'login.html',{"error": 'The account is wrong!'})
 
+
 def jobselect(request):
+    if request.method == 'POST':
+        jobName = request.POST.get('jobName')  
+        print(jobName)
+        return redirect('speech_to_text/equipCheck')
+
     #if request.method == "GET":
-        if 'is_login' in request.session and request.session['is_login']==True:
-            user=request.session['account']
-            return render(request,'jobselection.html',{'current_user':user})
-        else:
-            return render(request,'login.html')
+    if 'is_login' in request.session and request.session['is_login']==True:
+        user=request.session['account']
+        return render(request,'jobselection.html',{'current_user':user})
+    else:
+        return render(request,'login.html')
+
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')

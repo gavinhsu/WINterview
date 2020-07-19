@@ -88,9 +88,8 @@
             console.log(index)
 
             jobName = job[occupation][index];
-
+            document.getElementById("jobName").value = jobName
             console.log(jobName)
-            alert(`jobName: ${jobName}`);
 
           }
 
@@ -127,17 +126,17 @@
               </select></div>
           </form>
 
-          <input onclick="location.href='/speech_to_text/equipCheck'" class="isSelected" type="button"
-            value="Confirm the job" onclick="isSelected()"></button>
+
 
         </div>
       </div>
-      <p id='get_job'></p>
-      <script>
-        function myFunction() {
-          document.getElementById("get_job").innerHTML = jobName;
-        }
-        </script> 
+
+      <form method="post">
+        {% csrf_token %} 
+        <input type="hidden" name="jobName" id="jobName" value="" />
+      <input onclick="location.href='/speech_to_text/equipCheck'" class="isSelected" type="submit" value="Confirm the job" onclick="isSelected()"></button>
+      </form>
+
 </body>
 
 </html>
