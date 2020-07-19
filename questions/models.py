@@ -6,22 +6,101 @@ class Software_Engineer(models.Model):
     QuesNum = models.IntegerField()
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
-    Ans = models.TextField(max_length=500, null=True)
+    Ans = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ':' + str(self.Ques)
+        return result
+
+class Data_Scientist(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
+
+class Database_Administrator(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
+
+class System_Engineer(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
+
+class Network_Engineer(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 
 class Investment_Banking(models.Model):
     QuesNum = models.IntegerField()
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
-    Ans = models.TextField(max_length=500, null=True)
+    Ans = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 
+class Sales_Trading(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
+
+class Research(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
+
+class Quantitative_Trading(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
+
+class Venture_Capital(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
 class Answer(models.Model):
     userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True, blank=True)
     a1 = models.CharField(max_length=500,blank=True)

@@ -119,16 +119,25 @@
               <option value="01">Information Technology/Engineering
               <option value="02">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
             </select></div>
-          <div class="A1">
-            Occupation
-            <select class="selectJob" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
-              <option value="00">You have to choose an occupational group above first. </option>
-            </select></div>
+          <form action="post" method="submit">
+            <div class="A1">
+              Occupation
+              <select class="selectJob" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
+                <option value="00">You have to choose an occupational group above first. </option>
+              </select></div>
+          </form>
+
           <input onclick="location.href='/speech_to_text/equipCheck'" class="isSelected" type="button"
             value="Confirm the job" onclick="isSelected()"></button>
 
         </div>
       </div>
+      <p id='get_job'></p>
+      <script>
+        function myFunction() {
+          document.getElementById("get_job").innerHTML = jobName;
+        }
+        </script> 
 </body>
 
 </html>

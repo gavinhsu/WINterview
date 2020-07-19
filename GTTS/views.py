@@ -170,7 +170,83 @@ class QuesView3(TemplateView):
 
       return render(request, self.template_name,locals())  
 
+class QuesView4(TemplateView):
+    template_name = 'reply4.html'
 
+    def get(self, request):
+      #print(request.session.session_key)
+
+      # retreive the current user name
+      if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+
+      random_question = q4
+      return render(request, self.template_name, locals())
+    
+    def post(self, request):   
+      if request.method == "POST":
+        # save answer to Answer models
+        a4 = request.POST['note-textarea']
+  
+        if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            # get Account instance from Member model
+            account_instance = Member.objects.get(Account=account_name)
+            # retreive the user's id
+            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+            unit = Answer.objects.get(id=uid)
+            unit.a4 = a4
+
+        unit.save()
+
+        # save result to Result models
+        r4 = predict('a4')
+        res = Result.objects.get(id=uid)
+        res.r4 = r4
+        res.save()
+
+        return redirect('reply5/')
+
+      return render(request, self.template_name,locals())  
+
+class QuesView5(TemplateView):
+    template_name = 'reply5.html'
+
+    def get(self, request):
+      #print(request.session.session_key)
+
+      # retreive the current user name
+      if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+
+      random_question = q5
+      return render(request, self.template_name, locals())
+    
+    def post(self, request):   
+      if request.method == "POST":
+        # save answer to Answer models
+        a4 = request.POST['note-textarea']
+  
+        if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            # get Account instance from Member model
+            account_instance = Member.objects.get(Account=account_name)
+            # retreive the user's id
+            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+            unit = Answer.objects.get(id=uid)
+            unit.a5 = a5
+
+        unit.save()
+
+        # save result to Result models
+        r5 = predict('a5')
+        res = Result.objects.get(id=uid)
+        res.r5 = r5
+        res.save()
+
+        return redirect('reply6/')
+
+      return render(request, self.template_name,locals())  
 
 # ---------------SAVE FOR FUTURE USE MAYBE-------------------------------------------------------
 # class QuesView3(TemplateView):
