@@ -28,9 +28,10 @@ urlpatterns = [
     path('', users.views.homepage),
     path('users/', include("users.url")),
     path('speech_to_text/', include("GTTS.url")),
+    path('users/jobselect/speech_to_text/equipCheck', GTTS.views.equipCheck.as_view()),
     # nlp test
     path('nlp/', include('nlp.url'))
-    #  # for unauthorized access dynamic translation
+    # for unauthorized access dynamic translation
     # path('gtts/', include('gTTS.urls')),
     # # for user authorized dynamic translation
     # path('gtts_auth/', include('gTTS.urls_auth')),

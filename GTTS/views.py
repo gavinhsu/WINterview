@@ -10,45 +10,76 @@ from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
 
-# def equipCheck(request):
-#     return render(request, 'equipCheck.html')
 
 
-def create_ques(job):
+class equipCheck(TemplateView):
+  template_name = 'equipCheck.html'
 
-    max_id = job.objects.latest('id').id
-    # make a copy of number list
-    num_list = list(range(1, max_id+1))
-    random.shuffle(num_list)
+  def __init__(self, job_name=None):
+    self.job_name = job_name
 
-    rand_list = []
-    global ques_list
-    ques_list = []
+  def get(self, request):
+    job_name = request.session['job_name']
+    self.job_name = job_name
+    print(job_name)
 
-    for num in range(max_id):
-      num = num_list.pop()
-      rand_list.append(num)
+    def create_ques(job):
+      # create random question
+      max_id = job.objects.latest('id').id
+      num_list = list(range(1, max_id+1))
+      random.shuffle(num_list)
 
-      question = job.objects.filter(id=num).values('Ques')
-      for ques in question:
-        ques = ques['Ques']
-        ques_list.append(ques)
-        
- 
-create_ques(Software_Engineer)
-q1 = ques_list[0]
-q2 = ques_list[1]
-q3 = ques_list[2]
-q4 = ques_list[3]
-q5 = ques_list[4]
-q6 = ques_list[5]
+      rand_list = []
+      global ques_list
+      ques_list = []
+
+      for num in range(max_id):
+        num = num_list.pop()
+        rand_list.append(num)
+
+        question = job.objects.filter(id=num).values('Ques')
+        for ques in question:
+          ques = ques['Ques']
+          ques_list.append(ques)
+
+      print(ques_list)
+      print(num_list)
+
+    # throw questions according to selected job ==> ADD JOBS IN FUTURE!!
+    if job_name == 'Software Engineer':
+      create_ques(Software_Engineer)
+    # elif job_name == 'Cashier':
+    #   create_ques(Sales_Trading)
+    else:
+      print('Job questions not created yet!!!')
+    global q1
+    global q2
+    global q3
+    global q4
+    global q5
+    global q6
+    q1 = ques_list[0]
+    q2 = ques_list[1]
+    q3 = ques_list[2]
+    q4 = ques_list[3]
+    q5 = ques_list[4]
+    q6 = ques_list[5]
+
+
+    return render(request, self.template_name)
+
 
 
 class QuesView(TemplateView):
     template_name = 'speech_to_text.html'
 
+    def __init__(self, job_name=None):
+      self.job_name = job_name
+
     def get(self, request):
-      #print(request.session.session_key)
+      job_name = request.session['job_name']
+      self.job_name = job_name
+      #print(self.job_name)
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
@@ -57,11 +88,10 @@ class QuesView(TemplateView):
       random_question = q1
       return render(request, self.template_name, locals())
     
-    def post(self, request):   
+    def post(self, request):
       if request.method == "POST":
         # save answer to Answer models
         a1 = request.POST['note-textarea']
-        
   
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -84,6 +114,8 @@ class QuesView(TemplateView):
 
       
       return render(request, self.template_name,locals())   
+
+
 
 
 class QuesView2(TemplateView):

@@ -89,8 +89,8 @@ def login(request):
 
 def jobselect(request):
     if request.method == 'POST':
-        jobName = request.POST.get('jobName')  
-        print(jobName)
+        jobName = request.POST.get('jobName')
+        request.session['job_name'] = jobName
         return redirect('speech_to_text/equipCheck')
 
     #if request.method == "GET":
@@ -105,5 +105,5 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
 
-def equipCheck(request):
-    return render(request, 'equipCheck.html')
+# def equipCheck(request):
+#     return render(request, 'equipCheck.html')
