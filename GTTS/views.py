@@ -25,45 +25,97 @@ class equipCheck(TemplateView):
 
     def create_ques(job):
       # create random question
-      max_id = job.objects.latest('id').id
-      num_list = list(range(1, max_id+1))
-      random.shuffle(num_list)
+      # max_id = job.objects.latest('id').id
+      # num_list = list(range(1, max_id+1))
+      # random.shuffle(num_list)
 
-      rand_list = []
-      global ques_list
-      ques_list = []
+      # rand_list = []
+      # global ques_list
+      # ques_list = []
 
-      for num in range(max_id):
-        num = num_list.pop()
-        rand_list.append(num)
+      # # output 6 questions for now, ADD MORE IN FUTURE
+      # for num in range(6):
+      #   num = num_list.pop()
+      #   rand_list.append(num)
 
-        question = job.objects.filter(id=num).values('Ques')
-        for ques in question:
-          ques = ques['Ques']
-          ques_list.append(ques)
+      #   question = job.objects.filter(id=num).values('Ques')
+      #   for ques in question:
+      #     ques = ques['Ques']
+      #     ques_list.append(ques)
 
-      print(ques_list)
-      print(num_list)
+      # print(ques_list)
+      # print(rand_list)
+
+
+      # EASY
+      easy_QS = job.objects.filter(Difficulties='easy').values('Ques')
+      easy_list = []
+      for ques in easy_QS:
+        ques = ques["Ques"]
+        easy_list.append(ques)
+
+      easy_length = len(easy_list)
+      easy_rand = random.sample(easy_list, 2)
+      # global r1
+      # global r2
+      global r1
+      global r2
+      r1 = easy_rand[0]
+      r2 = easy_rand[1]
+
+      # MEDIUM
+      medium_QS = job.objects.filter(Difficulties='medium').values('Ques')
+      medium_list = []
+      for ques in medium_QS:
+        ques = ques["Ques"]
+        medium_list.append(ques)
+
+      medium_length = len(medium_list)
+      medium_rand = random.sample(medium_list, 2)
+      global r3
+      global r4
+      r3 = medium_rand[0]
+      r4 = medium_rand[1]      
+
+      # HARD
+      hard_QS = job.objects.filter(Difficulties='hard').values('Ques')
+      hard_list = []
+      for ques in hard_QS:
+        ques = ques["Ques"]
+        hard_list.append(ques)
+
+      hard_length = len(hard_list)
+      hard_rand = random.sample(hard_list, 2)
+      global r5
+      global r6
+      r5 = hard_rand[0]
+      r6 = hard_rand[1]    
+
 
     # throw questions according to selected job ==> ADD JOBS IN FUTURE!!
     if job_name == 'Software Engineer':
       create_ques(Software_Engineer)
-    # elif job_name == 'Cashier':
-    #   create_ques(Sales_Trading)
+    elif job_name == 'Cashier':
+      create_ques(Venture_Capital)
     else:
       print('Job questions not created yet!!!')
+
+    final_list = [r1,r2,r3,r4,r5,r6]
+    rand_final_list = random.shuffle(final_list)
+    print(rand_final_list)
+
     global q1
     global q2
     global q3
     global q4
     global q5
     global q6
-    q1 = ques_list[0]
-    q2 = ques_list[1]
-    q3 = ques_list[2]
-    q4 = ques_list[3]
-    q5 = ques_list[4]
-    q6 = ques_list[5]
+    q1 = final_list[0]
+    q2 = final_list[1]
+    q3 = final_list[2]
+    q4 = final_list[3]
+    q5 = final_list[4]
+    q6 = final_list[5]
 
 
     return render(request, self.template_name)
@@ -103,7 +155,7 @@ class QuesView(TemplateView):
         unit.a1 = a1
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-        unit.save()
+        unit.save() 
 
         # save result to Result models
         r1 = predict('a1')
