@@ -3,18 +3,17 @@
 
 <head>
   <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
-  body {
-    /* background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.25));
-    text-align: center; */
+  .logo {
+  color: rgb(121, 147, 242);
+  font-size: 25px;
   }
-
-  .A1 {
-    float: left;
-    width: 300px;
-    height: 200px;
-    display: inline;
+  b{
+    font-size: 25px;
   }
 
   .flex {
@@ -56,12 +55,13 @@
     padding: 10px;
     } */
 </style>
-
 <body>
   <form name="selectjob">
     <div class="container-fluid">
       <div class="flex">
-        <h1 text-align=center>Select the Job.</h1>
+        <div class="header">
+        <h1 class="text-center text-nowrap"><b> Select the Job </b><span class="glyphicon glyphicon-check logo"></span></h1>
+      </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>
           let occupation;
@@ -111,30 +111,26 @@
             console.log('not loaded yet');
           }
         </script>
-        <div>
-          <div class="A1">
-            Occupational Group
-            <select class="jobType" name="jobcate" size=3 onchange="renew(this.selectedIndex);">
+        <div class="form-group">
+            <label for="inputoccupationalgroup">Occupational Group</label>
+            <select class="form-control" name="jobcate" size=3 onchange="renew(this.selectedIndex);">
               <option value="01">Information Technology/Engineering
               <option value="02">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
             </select></div>
-          <form action="post" method="submit">
-            <div class="A1">
-              Occupation
-              <select class="selectJob" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
-                <option value="00">You have to choose an occupational group above first. </option>
-              </select></div>
-          </form>
 
-
-
-        </div>
-      </div>
+            <!-- <div class="A1"> -->
+          <div class="form-group">
+            <label for="inputoccupation">Occupation</label>
+            <select class="form-control" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
+              <option value="00">You have to choose an occupational group above first. </option>
+            </select></div>
+          </form></div></div></div>
 
       <form method="post">
-        {% csrf_token %} 
+        {% csrf_token %}
         <input type="hidden" name="jobName" id="jobName" value="" />
       <input onclick="location.href='/speech_to_text/equipCheck'" class="isSelected" type="submit" value="Confirm the job" onclick="isSelected()"></button>
+
       </form>
 
 </body>

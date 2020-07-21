@@ -40,6 +40,12 @@
 a{
   cursor: pointer;
 }
+ul{
+  width: 1250px;
+}
+.sitemap{
+  width: 50px;
+}
 </style>
 
 <body>
@@ -69,7 +75,7 @@ a{
           <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
           <li><a href="/users/logout/">Log Out</a></li>
           <li class="menu-has-children"><a href="">Site Map</a>
-            <ul>
+            <ul class="sitemap">
               <!--{% if user.is_authenticated %}
                 Hello, {{ user.username }}.
               {% else %}-->
