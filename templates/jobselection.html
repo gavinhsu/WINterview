@@ -32,29 +32,20 @@
     text-align: center;
   }
 
-  input[type=button] {
+  input[type=submit] {
     display: block;
-    width: 115px;
+    width: 125px;
     height: 40px;
-    background: #4E9CAF;
+    /* background: #4E9CAF; */
     padding: 10px;
     text-align: center;
     border-radius: 5px;
-    color: white;
     font-weight: bold;
     line-height: 25px;
     position: fixed;
-    right: 800px;
-    bottom: 125px;
+    right: 755px;
+    bottom: 175px;
   }
-
-  /* a{
-    transition: 0.5s ease;
-    cursor: pointer;
-    right: 20px;
-    bottom: 20px;
-    padding: 10px;
-    } */
 </style>
 
 <body>
@@ -120,7 +111,7 @@
       <form action="post" type="submit">
       <div class="form-group">
         <label for="inputoccupation">Occupation</label>
-        <select class="selectJob" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
+        <select class="selectJob form-control" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
           <option value="00">You have to choose an occupational group above first. </option>
         </select></div>
       </form>
@@ -131,8 +122,8 @@
   <form method="post">
     {% csrf_token %}
     <input type="hidden" name="jobName" id="jobName" value="" />
-    <input name="isSelected" class="isSelected" type="submit" value="Confirm the job" onclick="isSelected()"></button>
-  </form>
+    <input name="isSelected" class="isSelected btn btn-primary" type="submit" value="Confirm the job" onclick="isSelected()"></button>
+ </form>
 </form>
 
 </body>
