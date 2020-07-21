@@ -9,10 +9,11 @@
 </head>
 <style>
   .logo {
-  color: rgb(121, 147, 242);
-  font-size: 25px;
+    color: rgb(121, 147, 242);
+    font-size: 25px;
   }
-  b{
+
+  b {
     font-size: 25px;
   }
 
@@ -55,83 +56,84 @@
     padding: 10px;
     } */
 </style>
+
 <body>
   <form name="selectjob">
-    <div class="container-fluid">
-      <div class="flex">
-        <div class="header">
-        <h1 class="text-center text-nowrap"><b> Select the Job </b><span class="glyphicon glyphicon-check logo"></span></h1>
+  <div class="container-fluid">
+    <div class="flex">
+      <div class="header">
+        <h1 class="text-center text-nowrap"><b> Select the Job </b><span class="glyphicon glyphicon-check logo"></span>
+        </h1>
       </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script>
-          let occupation;
-          job = new Array();
-          job[0] = ["Hardware Engineer", "Senior Software Engineer", "Software Engineer", "ERP Application R&D", "System Engineer", "System Integration Engineer", "Database Engineer", "Database Administrator",
-            "Multimedia Developvment Engineer", "Game Development Engineer", "E-commerce Software Engineer", "Network Engineer", "Information Security Engineer", "Technical Support Engineer", "Measure Engineer",
-            "Standardization Engineer", "System Testing QA", "Software Testing QA", "Hardware Testing QA", "Communication Engineer", "Wired Transmission Enginner", "Wireless Communication Engineer", "Telecommunication Network Engineer",
-            "Data Communication Engineer", "Mobile Communication Engineer"];
-          job[1] = ["Finance Consultant", "Accountant / Accounting Assistant", "Cashier", "Finance Assistant", "Financial Analyst", "Cost Accounting Specialist",
-            "Audit Executive", "Tax Executive", "Statistician", "Securities Broker", "Securities Analyst", "Financial Analyst", "Investment Advisor", "Financial Management Advisor",
-            "Treasury Specialist", "Loan Officer", "Credit Officer", "Foreign Exchange", "Settlement Officer", "Bank Teller"];
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script>
+        let occupation;
+        job = new Array();
+        job[0] = ["Hardware Engineer", "Senior Software Engineer", "Software Engineer", "ERP Application R&D", "System Engineer", "System Integration Engineer", "Database Engineer", "Database Administrator",
+          "Multimedia Developvment Engineer", "Game Development Engineer", "E-commerce Software Engineer", "Network Engineer", "Information Security Engineer", "Technical Support Engineer", "Measure Engineer",
+          "Standardization Engineer", "System Testing QA", "Software Testing QA", "Hardware Testing QA", "Communication Engineer", "Wired Transmission Enginner", "Wireless Communication Engineer", "Telecommunication Network Engineer",
+          "Data Communication Engineer", "Mobile Communication Engineer"];
+        job[1] = ["Finance Consultant", "Accountant / Accounting Assistant", "Cashier", "Finance Assistant", "Financial Analyst", "Cost Accounting Specialist",
+          "Audit Executive", "Tax Executive", "Statistician", "Securities Broker", "Securities Analyst", "Financial Analyst", "Investment Advisor", "Financial Management Advisor",
+          "Treasury Specialist", "Loan Officer", "Credit Officer", "Foreign Exchange", "Settlement Officer", "Bank Teller"];
 
-          function renew(index) {
-            occupation = index
-            for (var i = 0; i < job[index].length; i++)
-              document.selectjob.jobb.options[i] = new Option(job[index][i], job[index][i]); //設定新的選項
-            document.selectjob.jobb.length = job[index].length; //刪除多的選項
-          }
+        function renew(index) {
+          occupation = index
+          for (var i = 0; i < job[index].length; i++)
+            document.selectjob.jobb.options[i] = new Option(job[index][i], job[index][i]); //設定新的選項
+          document.selectjob.jobb.length = job[index].length; //刪除多的選項
+        }
 
 
-          function isSelected(index) {
+        function isSelected(index) {
 
-            var jobName;
-            console.log(index)
+          var jobName;
+          console.log(index)
 
-            jobName = job[occupation][index];
-            document.getElementById("jobName").value = jobName
-            console.log(jobName)
+          jobName = job[occupation][index];
+          document.getElementById("jobName").value = jobName
+          console.log(jobName)
 
-          }
+        }
 
-          $(document).ready(function () {
-            $(".isSelected").prop('disabled', true);
-            $('.selectJob').change(function () {
-              if ($('.selectJob').val() == 0) {
-                $(".isSelected").prop('disabled', true);
-              } else {
-                $(".isSelected").prop('disabled', false);
-              }
-            });
+        $(document).ready(function () {
+          $(".isSelected").prop('disabled', true);
+          $('.selectJob').change(function () {
+            if ($('.selectJob').val() == 0) {
+              $(".isSelected").prop('disabled', true);
+            } else {
+              $(".isSelected").prop('disabled', false);
+            }
           });
+        });
 
-          if (typeof jQuery !== 'undefined') {
-            console.log('jQuery Loaded');
-          }
-          else {
-            console.log('not loaded yet');
-          }
-        </script>
-        <div class="form-group">
-            <label for="inputoccupationalgroup">Occupational Group</label>
-            <select class="form-control" name="jobcate" size=3 onchange="renew(this.selectedIndex);">
-              <option value="01">Information Technology/Engineering
-              <option value="02">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
-            </select></div>
+      </script>
 
-            <!-- <div class="A1"> -->
-          <div class="form-group">
-            <label for="inputoccupation">Occupation</label>
-            <select class="form-control" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
-              <option value="00">You have to choose an occupational group above first. </option>
-            </select></div>
-          </form></div></div></div>
+      <div class="form-group">
+        <label for="inputoccupationalgroup">Occupational Group</label>
+        <select class="form-control" class="jobType" name="jobcate" size=3 onchange="renew(this.selectedIndex);">
+          <option value="01">Information Technology/Engineering
+          <option value="02">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
+        </select></div>
 
-      <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="jobName" id="jobName" value="" />
-      <input onclick="location.href='/speech_to_text/equipCheck'" class="isSelected" type="submit" value="Confirm the job" onclick="isSelected()"></button>
-
+      <!-- <div class="A1"> -->
+      <form action="post" type="submit">
+      <div class="form-group">
+        <label for="inputoccupation">Occupation</label>
+        <select class="selectJob" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
+          <option value="00">You have to choose an occupational group above first. </option>
+        </select></div>
       </form>
+    </div>
+  </div>
+  </div>
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="jobName" id="jobName" value="" />
+    <input name="isSelected" class="isSelected" type="submit" value="Confirm the job" onclick="isSelected()"></button>
+  </form>
+</form>
 
 </body>
 
