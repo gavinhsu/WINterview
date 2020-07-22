@@ -327,31 +327,45 @@ class QuesView5(TemplateView):
 
       return render(request, self.template_name,locals())  
 
-# ---------------SAVE FOR FUTURE USE MAYBE-------------------------------------------------------
-# class QuesView3(TemplateView):
-#     template_name = 'reply3.html'
 
-#     def get(self, request):
-#       max_id = Software_Engineer.objects.latest('id').id
-#       random_ques_num = random.randint(1 , max_id)
-#       random_question = Software_Engineer.objects.get(QuesNum=random_ques_num)
-#       return render(request, self.template_name, locals())
+class QuesView6(TemplateView):
+    template_name = 'reply6.html'
+
+    def get(self, request):
+      #print(request.session.session_key)
+
+      # retreive the current user name
+      if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+
+      random_question = q6
+      return render(request, self.template_name, locals())
+    
+    def post(self, request):   
+      if request.method == "POST":
+        # save answer to Answer models
+        a4 = request.POST['note-textarea']
   
-#     def post(self, request):     
-#         if request.method == "POST":
-#           a3 = request.POST['note-textarea']
-#           uid = Answer.objects.all().order_by('-id')[0].id
-#           unit = Answer.objects.get(id=uid)
-#           unit.a3 = a3
-#           unit.save()
+        if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            # get Account instance from Member model
+            account_instance = Member.objects.get(Account=account_name)
+            # retreive the user's id
+            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+            unit = Answer.objects.get(id=uid)
+            unit.a6 = a6
 
-#           r3 = predict('a3')
-#           res = Result.objects.get(id=uid)
-#           res.r3 = r3
-#           res.save()
-#           return redirect('reply4/')
+        unit.save()
 
-#         return render(request, self.template_name, locals())  
+        # save result to Result models
+        r5 = predict('a6')
+        res = Result.objects.get(id=uid)
+        res.r6 = r6
+        res.save()
+
+        return redirect('reply7/')
+
+      return render(request, self.template_name,locals()) 
 
         
 
