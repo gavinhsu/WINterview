@@ -13,6 +13,8 @@ from .models import Answer
 from .models import Result
 from .models import Record
 from .models import Video
+from .models import Test_Job_pls_dont_add_shit_into_this_model_thank
+
 
 # Register your models here.
 admin.site.register(Software_Engineer)
@@ -29,3 +31,6 @@ admin.site.register(Answer)
 admin.site.register(Result)
 admin.site.register(Record)
 admin.site.register(Video)
+# for testing purposes!!!!
+admin.site.register(Test_Job_pls_dont_add_shit_into_this_model_thank)
+

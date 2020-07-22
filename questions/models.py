@@ -101,6 +101,24 @@ class Venture_Capital(models.Model):
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
+
+# ----------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------
+# FOR TESTING PURPOSES ==> DO NOT ADD SHIT INTO THIS MODEL!!!!
+# ----------------------------------------------------------------------------------------
+class Test_Job_pls_dont_add_shit_into_this_model_thank(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
+# ---------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------
+
+
 class Answer(models.Model):
     userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True, blank=True)
     a1 = models.CharField(max_length=500,blank=True)

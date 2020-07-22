@@ -96,7 +96,7 @@ class equipCheck(TemplateView):
     if job_name == 'Software Engineer':
       create_ques(Software_Engineer)
     elif job_name == 'Cashier':
-      create_ques(Venture_Capital)
+      create_ques(Test_Job_pls_dont_add_shit_into_this_model_thank)
     else:
       print('Job questions not created yet!!!')
 
