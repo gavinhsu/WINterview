@@ -304,7 +304,7 @@ class QuesView5(TemplateView):
     def post(self, request):   
       if request.method == "POST":
         # save answer to Answer models
-        a4 = request.POST['note-textarea']
+        a5 = request.POST['note-textarea']
   
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -344,7 +344,7 @@ class QuesView6(TemplateView):
     def post(self, request):   
       if request.method == "POST":
         # save answer to Answer models
-        a4 = request.POST['note-textarea']
+        a6 = request.POST['note-textarea']
   
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']

@@ -14,8 +14,5 @@ urlpatterns = [
   path('reply2/reply3/reply4/reply5/', GTTS.views.QuesView5.as_view()),
   path('reply2/reply3/reply4/reply5/reply6', GTTS.views.QuesView6.as_view()),
 
-  #path('submit/', GTTS.views.UploadAnswersView.as_view()),
-  # path('',GTTS.views.post)
-  #path(button_click, views.),
   
  ]
