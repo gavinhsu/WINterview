@@ -12,7 +12,7 @@ urlpatterns = [
   path('reply2/reply3/', GTTS.views.QuesView3.as_view()),
   path('reply2/reply3/reply4/', GTTS.views.QuesView4.as_view()),
   path('reply2/reply3/reply4/reply5/', GTTS.views.QuesView5.as_view()),
-  path('reply2/reply3/reply4/reply5/reply6', GTTS.views.QuesView6.as_view()),
+  path('reply2/reply3/reply4/reply5/reply6/', GTTS.views.QuesView6.as_view()),
 
   
  ]
