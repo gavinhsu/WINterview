@@ -358,7 +358,7 @@ class QuesView6(TemplateView):
         unit.save()
 
         # save result to Result models
-        r5 = predict('a6')
+        r6 = predict('a6')
         res = Result.objects.get(id=uid)
         res.r6 = r6
         res.save()
