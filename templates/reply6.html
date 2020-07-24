@@ -42,22 +42,16 @@
             style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
         </div>
         <input type="submit" style="margin-left:1000px;margin-bottom:10px;" value="Next question">
-        <span>{{mess}}</span>
       </form>
-
-
-      <!--<h3>My Notes</h3>
-          <ul id="notes">
-              <li>
-                  <p class="no-notes">You don't have any notes.</p>
-              </li>
-          </ul>-->
 
     </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <script>
+      var count = {{prep_time6}};
+      var count1 = {{ans_time6}};
+    </script>
     <script src="{% static "js/speech_to_text.js" %}"></script>
 
     <style src="{% static "css/speech_to_text.css" %}">

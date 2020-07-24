@@ -42,7 +42,6 @@
             style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
         </div>
         <input type="submit" style="margin-left:1000px;margin-bottom:10px;" value="Next question">
-        <span>{{mess}}</span>
       </form>
 
 
@@ -54,11 +53,12 @@
           </ul>-->
 
     </div>
-    <p id="demo"></p>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <script>
+      var count = {{prep_time2}};
+      var count1 = {{ans_time2}};
+    </script>
     <script src="{% static "js/speech_to_text.js" %}"></script>
 
     <style src="{% static "css/speech_to_text.css" %}">

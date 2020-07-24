@@ -121,10 +121,10 @@ var spn = document.getElementById("countStart");
 var startRecord = document.getElementById("start-record-btn");
 var pauseRecord = document.getElementById("pause-record-btn");
 
-var count = 5;     // Set count
+     // Set count
 var timer = null;  // For referencing the timer
 var timer2 = null; 
-var count1 = 100;
+
 
 (function countDownStart() {
   // Display counter and start counting down
