@@ -106,7 +106,7 @@ class equipCheck(TemplateView):
     q5 = final_list[4]
     q6 = final_list[5]
 
-    # different time for different difficulty
+    # apply different time for different difficulty
     global prepare_time
     global answer_time
     prepare_time = []
@@ -117,7 +117,7 @@ class equipCheck(TemplateView):
         answer_time.append(100)
       elif diff_list[i] == 'medium':
         prepare_time.append(10)
-        answer_time.append(150)     
+        answer_time.append(150)
       else:
         prepare_time.append(20)
         answer_time.append(200)
@@ -131,8 +131,6 @@ class equipCheck(TemplateView):
     for x in range(0,6):
       time_dict["prep_time{0}".format(x+1)] = prepare_time[x]
       time_dict["ans_time{0}".format(x+1)] = answer_time[x]
-
-    print(time_dict)
     
     return render(request, self.template_name)
 
