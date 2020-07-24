@@ -21,31 +21,9 @@ class equipCheck(TemplateView):
   def get(self, request):
     job_name = request.session['job_name']
     self.job_name = job_name
-    print(job_name)
+    print('You selected: '+ job_name)
 
     def create_ques(job):
-      # create random question
-      # max_id = job.objects.latest('id').id
-      # num_list = list(range(1, max_id+1))
-      # random.shuffle(num_list)
-
-      # rand_list = []
-      # global ques_list
-      # ques_list = []
-
-      # # output 6 questions for now, ADD MORE IN FUTURE
-      # for num in range(6):
-      #   num = num_list.pop()
-      #   rand_list.append(num)
-
-      #   question = job.objects.filter(id=num).values('Ques')
-      #   for ques in question:
-      #     ques = ques['Ques']
-      #     ques_list.append(ques)
-
-      # print(ques_list)
-      # print(rand_list)
-
 
       # EASY
       easy_QS = job.objects.filter(Difficulties='easy').values('Ques')
@@ -89,20 +67,31 @@ class equipCheck(TemplateView):
       global r5
       global r6
       r5 = hard_rand[0]
-      r6 = hard_rand[1]    
+      r6 = hard_rand[1]
 
+      global final_list
+      final_list = [r1,r2,r3,r4,r5,r6]
+      random.shuffle(final_list)
+
+      # get difficulty of questions
+      global diff_list
+      diff_list = []
+      for r in final_list:
+        diff_QS = job.objects.filter(Ques=r).values('Difficulties')
+        for diff in diff_QS:
+          diff = diff['Difficulties']
+          diff_list.append(diff)
+    
 
     # throw questions according to selected job ==> ADD JOBS IN FUTURE!!
     if job_name == 'Software Engineer':
       create_ques(Software_Engineer)
+    # for testing purposes only
     elif job_name == 'Cashier':
       create_ques(Test_Job_pls_dont_add_shit_into_this_model_thank)
     else:
       print('Job questions not created yet!!!')
 
-    final_list = [r1,r2,r3,r4,r5,r6]
-    rand_final_list = random.shuffle(final_list)
-    print(rand_final_list)
 
     global q1
     global q2
@@ -117,7 +106,34 @@ class equipCheck(TemplateView):
     q5 = final_list[4]
     q6 = final_list[5]
 
+    # different time for different difficulty
+    global prepare_time
+    global answer_time
+    prepare_time = []
+    answer_time = []
+    for i in range(0,6):
+      if diff_list[i] == 'easy':
+        prepare_time.append(5)
+        answer_time.append(100)
+      elif diff_list[i] == 'medium':
+        prepare_time.append(10)
+        answer_time.append(150)     
+      else:
+        prepare_time.append(20)
+        answer_time.append(200)
 
+    print(diff_list)
+    print(prepare_time)
+    print(answer_time)
+
+    global time_dict
+    time_dict = {}
+    for x in range(0,6):
+      time_dict["prep_time{0}".format(x+1)] = prepare_time[x]
+      time_dict["ans_time{0}".format(x+1)] = answer_time[x]
+
+    print(time_dict)
+    
     return render(request, self.template_name)
 
 
@@ -131,13 +147,15 @@ class QuesView(TemplateView):
     def get(self, request):
       job_name = request.session['job_name']
       self.job_name = job_name
-      #print(self.job_name)
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
 
       random_question = q1
+      prep_time1 = time_dict['prep_time1']
+      ans_time1 = time_dict['ans_time1']
+      print(prep_time1, ans_time1)
       return render(request, self.template_name, locals())
     
     def post(self, request):
@@ -148,8 +166,7 @@ class QuesView(TemplateView):
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
             # get Account instance from Member model SUPER IMPORTANT!!!
-            account_instance = Member.objects.get(Account=account_name)
-            print(account_instance)
+            account_instance = Member.objects.get(Account=account_name)           
             unit = Answer.objects.create(userID=account_instance)
 
         unit.a1 = a1
@@ -181,6 +198,9 @@ class QuesView2(TemplateView):
             account_name = request.session['account']
 
       random_question = q2
+      prep_time2 = time_dict['prep_time2']
+      ans_time2 = time_dict['ans_time2']
+      print(prep_time2, ans_time2)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -221,6 +241,9 @@ class QuesView3(TemplateView):
             account_name = request.session['account']
 
       random_question = q3
+      prep_time3 = time_dict['prep_time3']
+      ans_time3 = time_dict['ans_time3']
+      print(prep_time3, ans_time3)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -260,6 +283,9 @@ class QuesView4(TemplateView):
             account_name = request.session['account']
 
       random_question = q4
+      prep_time4 = time_dict['prep_time4']
+      ans_time4 = time_dict['ans_time4']
+      print(prep_time4, ans_time4)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -299,6 +325,9 @@ class QuesView5(TemplateView):
             account_name = request.session['account']
 
       random_question = q5
+      prep_time5 = time_dict['prep_time5']
+      ans_time5 = time_dict['ans_time5']
+      print(prep_time5, ans_time5)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -339,6 +368,9 @@ class QuesView6(TemplateView):
             account_name = request.session['account']
 
       random_question = q6
+      prep_time6 = time_dict['prep_time6']
+      ans_time6 = time_dict['ans_time6']
+      print(prep_time6, ans_time6)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
