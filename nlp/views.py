@@ -69,4 +69,8 @@ def nlp_test_view(request):
     return render(request, 'nlp_test.html',{'answer':answer})
 
 
+file_path = os.path.join(BASE_DIR, 'test.pickle')
+w2v_model = pd.read_pickle(file_path)
+
+
 
