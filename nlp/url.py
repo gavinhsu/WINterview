@@ -6,7 +6,6 @@ app_name = 'nlp'
 
 urlpatterns = [
   path('', nlp.views.nlp_test_view),
-  path('classify/', nlp.views.predict),
 
   ]
   
