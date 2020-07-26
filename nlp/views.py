@@ -71,6 +71,7 @@ def nlp_test_view(request):
 
 file_path = os.path.join(BASE_DIR, 'test.pickle')
 w2v_model = pd.read_pickle(file_path)
+print(w2v_model.wv.most_similar('python', topn=10))
 
 
 
