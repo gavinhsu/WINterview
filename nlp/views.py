@@ -4,6 +4,7 @@ from django.http import HttpResponse
 import os, re, string
 from MockInterview.settings import BASE_DIR
 import random
+import pickle
 import pandas as pd
 # for nltk model building ######################################
 import nltk
@@ -17,6 +18,9 @@ from nltk import FreqDist, classify, NaiveBayesClassifier
 from django.views.generic import TemplateView
 from questions.models import *
 import GTTS.views
+
+
+
 
 # Create your views here.
 
@@ -72,6 +76,45 @@ def nlp_test_view(request):
 file_path = os.path.join(BASE_DIR, 'test.pickle')
 w2v_model = pd.read_pickle(file_path)
 print(w2v_model.wv.most_similar('python', topn=10))
+
+# import nltk
+# from nltk.corpus import stopwords
+# #nltk.download('stopwords')
+# from nltk.tokenize import word_tokenize
+
+# reply = 'python is a great way to program'
+# answer = 'python is a good programming language'
+# reply_tokens = word_tokenize(reply)
+# ans_tokens = word_tokenize(answer)
+
+# clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
+# clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
+
+# print('Reply ==> ', clean_reply)
+# print('Answer ==> ', clean_ans)
+
+# reply_list = []
+# for word in clean_reply:
+#     reply_list.append(model.wv.most_similar(word, topn=3))
+# #print(reply_list[:])
+
+    
+# #print(model.wv.rank(ans_tokens, reply_tokens))
+# #print(model.wv.similarity('apple', 'banana'))
+
+# s1 = 'I am great'
+# s2 = 'I am good'
+# similarity = model.wv.n_similarity(s1.lower().split(), s2.lower().split())
+# print(similarity)
+
+# d = model.wv.n_similarity(reply_tokens, ans_tokens)
+# print(d)
+
+
+# print('\n')
+# for word in clean_ans:
+#     print('ANSWER: ', model.wv.most_similar(word, topn=3))
+
 
 
 
