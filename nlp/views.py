@@ -6,6 +6,8 @@ from MockInterview.settings import BASE_DIR
 import random
 import pickle
 import pandas as pd
+import cloudpickle
+import torch
 # for nltk model building ######################################
 import nltk
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -68,52 +70,45 @@ def predict(n):
     return result
 
 
+# not used
 def nlp_test_view(request):
     answer = Answer.objects.get(id='26').a1
     return render(request, 'nlp_test.html',{'answer':answer})
 
-
+# GENSIM
 file_path = os.path.join(BASE_DIR, 'test.pickle')
 w2v_model = pd.read_pickle(file_path)
-print(w2v_model.wv.most_similar('python', topn=10))
 
-# import nltk
-# from nltk.corpus import stopwords
-# #nltk.download('stopwords')
-# from nltk.tokenize import word_tokenize
+import nltk
+from nltk.corpus import stopwords
+#nltk.download('stopwords')
+from nltk.tokenize import word_tokenize
 
-# reply = 'python is a great way to program'
-# answer = 'python is a good programming language'
-# reply_tokens = word_tokenize(reply)
-# ans_tokens = word_tokenize(answer)
+reply = 'python is a great way to program'
+answer = 'python is a good programming language'
+reply_tokens = word_tokenize(reply)
+ans_tokens = word_tokenize(answer)
 
-# clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
-# clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
+clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
+clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
 
-# print('Reply ==> ', clean_reply)
-# print('Answer ==> ', clean_ans)
+similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
+print(similarity)
 
-# reply_list = []
-# for word in clean_reply:
-#     reply_list.append(model.wv.most_similar(word, topn=3))
-# #print(reply_list[:])
+#######################################################################
+#BERT
+torch.nn.Module.dump_patches = True
 
-    
-# #print(model.wv.rank(ans_tokens, reply_tokens))
-# #print(model.wv.similarity('apple', 'banana'))
+bert_file_path = os.path.join(BASE_DIR, 'bert.pickle')
+bert = torch.load(bert_file_path)
+s1 = "python is a good programming language"
+s2 = "python is really great to program"
 
-# s1 = 'I am great'
-# s2 = 'I am good'
-# similarity = model.wv.n_similarity(s1.lower().split(), s2.lower().split())
-# print(similarity)
+predict = bert.predict([(s1, s2)])
+predict = float(predict)
+score = (predict/5)*100
+print('BERT ===> ', score, '%')
 
-# d = model.wv.n_similarity(reply_tokens, ans_tokens)
-# print(d)
-
-
-# print('\n')
-# for word in clean_ans:
-#     print('ANSWER: ', model.wv.most_similar(word, topn=3))
 
 
 

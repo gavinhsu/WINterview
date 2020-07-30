@@ -1,0 +1,11 @@
+--- /usr/local/lib/python3.6/dist-packages/torch/nn/modules/activation.py
++++ /usr/local/lib/python3.6/dist-packages/torch/nn/modules/activation.py
+@@ -2,7 +2,7 @@
+     r"""Applies the element-wise function:
+ 
+     .. math::
+-        \text{Tanh}(x) = \tanh(x) = \frac{e^x - e^{-x}} {e^x + e^{-x}}
++        \text{Tanh}(x) = \tanh(x) = \frac{\exp(x) - \exp(-x)} {\exp(x) + \exp(-x)}
+ 
+     Shape:
+         - Input: :math:`(N, *)` where `*` means, any number of additional
