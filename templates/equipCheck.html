@@ -13,11 +13,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
   <!-- /Bootstrap CSS -->
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
 
   <style src="{% static "css/equipCheck.css" %}" media="all"></style>
 </head>
 
 <body>
+  
   <div class="app"> 
     <button id="start-record-btn" title="Start Recording">Start Recognition</button>
     <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
@@ -55,6 +57,7 @@
           <div class="col-md-6 text-center">
             <div class="video-container d-flex align-items-center justify-content-center">
               <div class="is-recording"></div>
+              <!-- The controls attribute adds video controls, like play, pause, and volume. -->
               <video id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
             </div>
           </div>
