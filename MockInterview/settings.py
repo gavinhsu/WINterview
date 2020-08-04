@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'nlp',
     'GTTS',
+    'Blink', 
+    'background_task',
 ]
 
 MIDDLEWARE = [

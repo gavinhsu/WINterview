@@ -82,7 +82,7 @@ def nlp_test_view(request):
 
 import nltk
 from nltk.corpus import stopwords
-nltk.download('stopwords')
+#nltk.download('stopwords')
 from nltk.tokenize import word_tokenize
 
 reply = 'python is a great way to program'
