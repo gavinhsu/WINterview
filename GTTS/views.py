@@ -9,6 +9,7 @@ from users.models import *
 from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
+from Blink.views import blink
 
 
 
@@ -143,6 +144,7 @@ class QuesView(TemplateView):
       self.job_name = job_name
 
     def get(self, request):
+      blink()
       job_name = request.session['job_name']
       self.job_name = job_name
 

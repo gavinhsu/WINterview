@@ -10,6 +10,7 @@ import cloudpickle
 import torch
 # for nltk model building ######################################
 import nltk
+#nltk.download('punkt')
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
@@ -34,7 +35,7 @@ def predict(n):
         # REMOVING NOISE (IRRELEVANT LETTERS, HYPERLINKS, OR PUNCTUATION MARKS)
         for token, tag in pos_tag(tweet_tokens):
             # use re to search and replace the links that start with 'http://' with empty string''
-            token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'    
+            token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'
                         '(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', token)
             #replace @ followed by [special characters] with ''
             token = re.sub("(@[A-Za-z0-9_]+)", '', token)
@@ -58,15 +59,15 @@ def predict(n):
     def res():
         for res in answer:
             res = res[n]
-            return res 
-        
+            return res
+
 
     # unpickle
     file_path = os.path.join(BASE_DIR, 'model.pickle')
     model = pd.read_pickle(file_path)
     custom_tokens = remove_noise(word_tokenize(str(res())))
     result = model.classify(dict([token, True] for token in custom_tokens))
-    
+
     return result
 
 
@@ -76,8 +77,8 @@ def nlp_test_view(request):
     return render(request, 'nlp_test.html',{'answer':answer})
 
 # GENSIM
-file_path = os.path.join(BASE_DIR, 'test.pickle')
-w2v_model = pd.read_pickle(file_path)
+#file_path = os.path.join(BASE_DIR, 'test.pickle')
+#w2v_model = pd.read_pickle(file_path)
 
 import nltk
 from nltk.corpus import stopwords
@@ -92,24 +93,19 @@ ans_tokens = word_tokenize(answer)
 clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
 clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
 
-similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
-print(similarity)
+#similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
+#print(similarity)
 
 #######################################################################
 #BERT
-torch.nn.Module.dump_patches = True
+#torch.nn.Module.dump_patches = True
 
-bert_file_path = os.path.join(BASE_DIR, 'bert.pickle')
-bert = torch.load(bert_file_path)
+#bert_file_path = os.path.join(BASE_DIR, 'bert.pickle')
+#bert = torch.load(bert_file_path)
 s1 = "python is a good programming language"
 s2 = "python is really great to program"
 
-predict = bert.predict([(s1, s2)])
-predict = float(predict)
-score = (predict/5)*100
-print('BERT ===> ', score, '%')
-
-
-
-
-
+#predict = bert.predict([(s1, s2)])
+#predict = float(predict)
+#score = (predict/5)*100
+#print('BERT ===> ', score, '%')
