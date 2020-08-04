@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'nlp',
     'GTTS',
-    'Blink', 
+    'Blink',
     'background_task',
 ]
 
