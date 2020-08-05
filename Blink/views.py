@@ -4,6 +4,7 @@ from scipy.spatial import distance as dist
 from imutils.video import FileVideoStream
 from imutils.video import VideoStream
 from imutils import face_utils
+from io import StringIO
 from MockInterview.settings import BASE_DIR
 import numpy as np
 import argparse
@@ -83,7 +84,6 @@ def blink():
 
 
     # loop over frames from the video stream
-    time.sleep(5)
     while True:
     
         # if this is a file video stream, then we need to check if
