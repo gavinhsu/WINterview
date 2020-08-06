@@ -83,7 +83,6 @@ def blink():
 
 
     # loop over frames from the video stream
-    time.sleep(5)
     while True:
     
         # if this is a file video stream, then we need to check if
