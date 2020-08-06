@@ -19,6 +19,7 @@ from django.conf.urls import include, url
 import users.views
 import GTTS.views
 import nlp.views
+import questions.views
 #from GTTS.views import Speech
 from django.conf import settings
 from django.conf.urls.static import static
@@ -30,7 +31,8 @@ urlpatterns = [
     path('speech_to_text/', include("GTTS.url")),
     path('users/jobselect/speech_to_text/equipCheck', GTTS.views.equipCheck.as_view()),
     # nlp test
-    path('nlp/', include('nlp.url'))
+    path('nlp/', include('nlp.url')),
+    path('ques/', include('questions.url'))
     # for unauthorized access dynamic translation
     # path('gtts/', include('gTTS.urls')),
     # # for user authorized dynamic translation

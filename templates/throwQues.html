@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>vision recording</title>
+  </head>
+  <body>
+    <p>softwareEngineer</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form1.as_p }}
+        <input type="submit" name ='SoftwareEngineer'/>
+    </form>
+    <br>
+    <br>
+    <p>dataScientist</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form2.as_p }}
+        <input type="submit" name ='DataScientist'/>
+    </form>
+    <br>
+    <br>
+    <p>dbAdmin</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form3.as_p }}
+        <input type="submit" name ='DatabaseAdministrator'/>
+    </form>
+    <br>
+    <br>
+    <p>networkEngineer</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form4.as_p }}
+        <input type="submit" name ='NetworkEngineer' />
+    </form>
+    <br>
+    <br>
+    <p>investmentBanking</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form5.as_p }}
+        <input type="submit" name ='InvestmentBanking'/>
+    </form>
+    <br>
+    <br>
+    <p>salestrading</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form6.as_p }}
+        <input type="submit" name ='SalesTrading'/>
+    </form>
+    <br>
+    <br>
+    <p>research</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form7.as_p }}
+        <input type="submit" name ='Research'/>
+    </form>
+    <br>
+    <br>
+    <p>QuantitativeTrading</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form8.as_p }}
+        <input type="submit" name ='QuantitativeTrading'/>
+    </form>
+    <br>
+    <br>
+    <p>Venture_Capital</p>
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form9.as_p }}
+        <input type="submit" name ='Venture_Capital'/>
+    </form>
+
+  </body>
+</html>

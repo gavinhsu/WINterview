@@ -25,6 +25,7 @@ let isRecordingIcon = document.querySelector('.is-recording')
 let chunks = [] // 在 mediaRecord 要用的 chunks
 
 // 在 getUserMedia 使用的 constraints 變數
+//定義要取得的影音內容(影像和聲音)
 let constraints = {
   audio: true,
   video: true
@@ -89,13 +90,16 @@ function mediaRecorderSetup () {
   // 設定顯示的按鍵
   isRecordingBtn('start')
 
-  // mediaDevices.getUserMedia() 取得使用者媒體影音檔
+  // mediaDevices.getUserMedia() 取得使用者媒體影音檔/即時播放於瀏覽器
+  //請求開啟影音裝置
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then(function (stream) {
+      // 瀏覽器會去請求使用者的麥克風和相機權限
       /**
        * inputVideo Element
        * 將串流的 inputVideo 設定到 <video> 上
+       * HTMLMediaElement.srcObject或URL.createObjectURL()
        **/
       // Older browsers may not have srcObject
       if ('srcObject' in inputVideo) {
@@ -104,7 +108,7 @@ function mediaRecorderSetup () {
         // Avoid using this in new browsers, as it is going away.
         inputVideo.src = window.URL.createObjectURL(stream)
       }
-      inputVideo.controls = false
+      inputVideo.controls = false //是否顯示播放控制器
 
       /**
        * 透過 MediaRecorder 錄製影音串流
@@ -123,6 +127,8 @@ function mediaRecorderSetup () {
       ) // 有資料傳入時觸發
       mediaRecorder.addEventListener('stop', mediaRecorderOnStop) // 停止錄影時觸發
 
+      //e.data: 有可用資料傳入時利用dataavailable事件取得
+      //丟回整包錄製好的檔案，取得資料
       function mediaRecorderOnDataAvailable (e) {
         console.log('mediaRecorder on dataavailable', e.data)
         chunks.push(e.data)
@@ -143,7 +149,7 @@ function mediaRecorderSetup () {
           track.stop()
         })
       }
-    })
+    })//取得當前裝置的stream的錯誤發生時
     .catch(function (error) {
       if (error.name === 'ConstraintNotSatisfiedError') {
         errorMsg(
@@ -162,6 +168,8 @@ function mediaRecorderSetup () {
 
 /**
  * DOM EventListener
+ * 畫面卡頻問題
+ * 媒體檔的metadata完成載入時被觸發(播放媒體)
  */
 inputVideo.addEventListener('loadedmetadata', function () {
   inputVideo.play()
@@ -180,6 +188,7 @@ function errorMsg (msg, error) {
   }
 }
 
+// 自動下載
 function saveData (dataURL) {
   var fileName = 'my-download-' + Date.now() + '.webm'
   var a = document.createElement('a')
