@@ -15,5 +15,13 @@ urlpatterns = [
   path('jobselect/',users.views.jobselect),
   #path('jobselect/speech_to_text/equipCheck', users.views.equipCheck),
   #path('users/logout/', logout)
-  path('logout/',users.views.logout)
+  path('logout/',users.views.logout),
+  path('aboutUs/',users.views.aboutUs),
+  path('services/',users.views.services),
+  path('team/',users.views.services),
+  path('questionBank/',users.views.questionBank),
+  path('interviewSkill/',users.views.interviewSkill),
+  path('companyProfile/',users.views.companyProfile),
+  path('News/',users.views.News),
+  path('contactUs/',users.views.contactUs),
  ]
