@@ -22,6 +22,7 @@ let isRecordingIcon = document.querySelector('.is-recording')
 /**
  * Global variables
  */
+//透過start(只觸發一次，一次送回整包資料) 或 start(1000)每隔一定時間回傳一包資料(把取得資料推進chunk[])
 let chunks = [] // 在 mediaRecord 要用的 chunks
 
 // 在 getUserMedia 使用的 constraints 變數
@@ -85,7 +86,7 @@ function onReset (e) {
 /**
  * Setup MediaRecorder
  **/
-
+//再次錄製需要重新啟動，所以把啟動到錄製的步驟包在mediaRecorderSetup
 function mediaRecorderSetup () {
   // 設定顯示的按鍵
   isRecordingBtn('start')
@@ -134,15 +135,16 @@ function mediaRecorderSetup () {
         chunks.push(e.data)
       }
 
+      //chunk array轉成Blob物件(=檔案)
       function mediaRecorderOnStop (e) {
         console.log('mediaRecorder on stop')
         outputVideo.controls = true
-        var blob = new Blob(chunks, { type: 'video/webm' })
-        chunks = []
-        outputVideoURL = URL.createObjectURL(blob)
-        outputVideo.src = outputVideoURL
+        var blob = new Blob(chunks, { type: 'video/webm' }) //video/webm可透過chrome打開
+        chunks = [] //清空chunks
+        outputVideoURL = URL.createObjectURL(blob) //把影音連結丟給<video>
+        outputVideo.src = outputVideoURL //錄製好的影片可以呈現於outputvideo
 
-        saveData(outputVideoURL)
+        //saveData(outputVideoURL)
 
         // 停止所有的輸入或輸出的串流裝置（例如，關攝影機）
         stream.getTracks().forEach(function (track) {
@@ -188,16 +190,16 @@ function errorMsg (msg, error) {
   }
 }
 
-// 自動下載
-function saveData (dataURL) {
-  var fileName = 'my-download-' + Date.now() + '.webm'
-  var a = document.createElement('a')
-  document.body.appendChild(a)
-  a.style = 'display: none'
-  a.href = dataURL
-  a.download = fileName
-  a.click()
-}
+// // 自動下載
+// function saveData (dataURL) {
+//   var fileName = 'my-download-' + Date.now() + '.webm'
+//   var a = document.createElement('a')
+//   document.body.appendChild(a)
+//   a.style = 'display: none'
+//   a.href = dataURL
+//   a.download = fileName
+//   a.click()
+// }
 
 function isRecordingBtn (recordBtnState) {
   startBtn.style.display = 'none'

@@ -125,6 +125,8 @@ var pauseRecord = document.getElementById("pause-record-btn");
 var timer = null;  // For referencing the timer
 var timer2 = null; 
 
+var submit = document.getElementById("submit");
+
 
 (function countDownStart() {
   // Display counter and start counting down
@@ -149,6 +151,7 @@ var timer2 = null;
         count1--; // decrease the timer
       } else {
         // Enable the button
+        submit.click();
         pauseRecord.click();
         spn.style.display = "none"
       }
