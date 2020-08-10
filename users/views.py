@@ -15,6 +15,32 @@ def homepage(request):
 
 def signUp(request):
     return render(request, 'signUp.html')
+
+def aboutUs(request):
+    return render(request, 'aboutUs.html')
+
+def services(request):
+    return render(request,'services.html')
+
+def team(request):
+    return render(request,'team.html')
+
+def questionBank(request):
+    return render(request,'questionBank.html')
+
+def interviewSkill(request):
+    return render(request,'interviewSkill.html')
+
+def companyProfile(request):
+    return render(request,'companyProfile.html')
+
+def News(request):
+    return render(request,'News.html')
+
+def contactUs(request):
+    return render(request,'contactUs.html')
+
+
 # Create your views here.
 '''class JoinMemberView(TemplateView):
     template_name = 'signUp.html'
