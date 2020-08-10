@@ -9,8 +9,7 @@ from users.models import *
 from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
-from Blink.views import blink
-
+from Blink.views import *
 
 
 class equipCheck(TemplateView):
@@ -115,13 +114,13 @@ class equipCheck(TemplateView):
     for i in range(0,6):
       if diff_list[i] == 'easy':
         prepare_time.append(5)
-        answer_time.append(100)
+        answer_time.append(10)
       elif diff_list[i] == 'medium':
         prepare_time.append(10)
-        answer_time.append(150)
+        answer_time.append(15)
       else:
         prepare_time.append(20)
-        answer_time.append(200)
+        answer_time.append(20)
 
     print(diff_list)
     print(prepare_time)
@@ -144,18 +143,27 @@ class QuesView(TemplateView):
       self.job_name = job_name
 
     def get(self, request):
-      blink()
+      
       job_name = request.session['job_name']
       self.job_name = job_name
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)
+            # create answer & result table when getting website
+            unit = Answer.objects.create(userID=account_instance)
+            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+            res = Result.objects.create(userID=account_instance, id=uid)
 
       random_question = q1
       prep_time1 = time_dict['prep_time1']
       ans_time1 = time_dict['ans_time1']
-      print(prep_time1, ans_time1)
+      total_time1 = prep_time1 + ans_time1 - 5
+      # run blink detection in the background
+      blink1(total_time1)
+
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):
@@ -167,16 +175,17 @@ class QuesView(TemplateView):
             account_name = request.session['account']
             # get Account instance from Member model SUPER IMPORTANT!!!
             account_instance = Member.objects.get(Account=account_name)           
-            unit = Answer.objects.create(userID=account_instance)
-
-        unit.a1 = a1
+        
         # retreive the user's id
-        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-        unit.save() 
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a1 = a1
+        unit.save()
 
         # save result to Result models
         r1 = predict('a1')
-        res = Result.objects.create(userID=account_instance, id=uid, r1=r1)
+        res = Result.objects.get(id=uid)
+        res.r1 = r1
         res.save()
 
         return redirect('reply2/')
@@ -200,7 +209,9 @@ class QuesView2(TemplateView):
       random_question = q2
       prep_time2 = time_dict['prep_time2']
       ans_time2 = time_dict['ans_time2']
-      print(prep_time2, ans_time2)
+      total_time2 = prep_time2 + ans_time2 - 5
+      blink2(total_time2)
+
       return render(request, self.template_name, locals())
     
     def post(self, request):   
