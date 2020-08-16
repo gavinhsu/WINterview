@@ -19,7 +19,9 @@
   <video id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
   <video id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
   <button id="startBtn" class="btn btn-sm btn-outline-primary">Start Recording</button>
-  <button id="stopBtn" class="btn btn-sm btn-outline-danger" style='display:none' >Stop Recording</button>
+  <button id="stopBtn" class="btn btn-sm btn-outline-danger" >Stop Recording</button>
+
+
   <div class="container">
 
 
@@ -43,9 +45,7 @@
       <form id='ans' method="post">
         {% csrf_token %}
         <label for="note-textarea" style="text-align:center;">Your Answer</label>
-        
         <div class="input-single">
-          <!-- <input type="file" id="file" accept="video/*"> -->
           <textarea id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
             style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
         </div>
@@ -64,15 +64,12 @@
     </div>
 
 
-    <!-- <script src="js/jquery-3.1.1.js"></script>   
-    <script src="js/jquery.cookie.js"></script>   -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
       var count = {{ prep_time1 }};
       var count1 = {{ ans_time1 }};
     </script>
     <script src="{% static "js/speech_to_text.js" %}"></script>
-    <script src="{% static "js/s2t_media.js" %}"></script>
 
     <style src="{% static "css/speech_to_text.css" %}">
       ul {

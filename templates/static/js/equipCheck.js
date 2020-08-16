@@ -143,7 +143,6 @@ function mediaRecorderSetup () {
         chunks = [] //清空chunks
         outputVideoURL = URL.createObjectURL(blob) //把影音連結丟給<video>
         outputVideo.src = outputVideoURL //錄製好的影片可以呈現於outputvideo
-
         //saveData(outputVideoURL)
 
         // 停止所有的輸入或輸出的串流裝置（例如，關攝影機）

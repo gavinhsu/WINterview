@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'GTTS',
     'Blink',
     'background_task',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS_ORIGIN_WHITELIST = [
+#     " 0.0.0.0:8000",
+#     ]
+    
 
 ROOT_URLCONF = 'MockInterview.urls'
 

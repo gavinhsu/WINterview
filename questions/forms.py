@@ -3,7 +3,7 @@ from .models import *
 class VideoForm(forms.ModelForm):
     class Meta:
         model= Video
-        fields= ["name", "videofile"]
+        fields= ["videofile"]
 
 class SoftwareEngineerForm(forms.ModelForm):
     class Meta:
