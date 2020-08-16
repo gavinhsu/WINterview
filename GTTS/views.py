@@ -162,7 +162,7 @@ class QuesView(TemplateView):
       ans_time1 = time_dict['ans_time1']
       total_time1 = prep_time1 + ans_time1 - 5
       # run blink detection in the background
-      blink1(total_time1)
+      #blink1(total_time1)
 
       
       return render(request, self.template_name, locals())
@@ -264,7 +264,8 @@ class QuesView3(TemplateView):
       random_question = q3
       prep_time3 = time_dict['prep_time3']
       ans_time3 = time_dict['ans_time3']
-      print(prep_time3, ans_time3)
+      total_time3 = prep_time3 + ans_time3
+      blink3(total_time3)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -293,6 +294,7 @@ class QuesView3(TemplateView):
 
       return render(request, self.template_name,locals())  
 
+
 class QuesView4(TemplateView):
     template_name = 'reply4.html'
 
@@ -306,7 +308,8 @@ class QuesView4(TemplateView):
       random_question = q4
       prep_time4 = time_dict['prep_time4']
       ans_time4 = time_dict['ans_time4']
-      print(prep_time4, ans_time4)
+      total_time4 = prep_time4 + ans_time4
+      blink4(total_time4)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -348,7 +351,8 @@ class QuesView5(TemplateView):
       random_question = q5
       prep_time5 = time_dict['prep_time5']
       ans_time5 = time_dict['ans_time5']
-      print(prep_time5, ans_time5)
+      total_time5 = prep_time5 + ans_time5
+      blink3(total_time5)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -391,7 +395,8 @@ class QuesView6(TemplateView):
       random_question = q6
       prep_time6 = time_dict['prep_time6']
       ans_time6 = time_dict['ans_time6']
-      print(prep_time6, ans_time6)
+      total_time6 = prep_time6 + ans_time6
+      blink3(total_time6)
       return render(request, self.template_name, locals())
     
     def post(self, request):   
