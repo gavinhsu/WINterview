@@ -11,7 +11,7 @@ def create(request):
         if 'SoftwareEngineer' in request.POST:
             form = SoftwareEngineerForm(request.POST)
             if form.is_valid():
-                new = form1.save()
+                new = form.save()
                 return HttpResponseRedirect('/ques/')
 
         if 'DataScientist' in request.POST:
@@ -20,31 +20,31 @@ def create(request):
                 new = form.save()
                 return HttpResponseRedirect('/ques/')
         if 'DatabaseAdministrator' in request.POST:
-            form = DataScientistForm(request.POST)
+            form = DatabaseAdministratorForm(request.POST)
             if form.is_valid():
                 new = form.save()
                 return HttpResponseRedirect('/ques/')
         
         if 'NetworkEngineer' in request.POST:
-            form = DataScientistForm(request.POST)
+            form = NetworkEngineerForm(request.POST)
             if form.is_valid():
                 new = form.save()
                 return HttpResponseRedirect('/ques/')
         
         if 'InvestmentBanking' in request.POST:
-            form = DataScientistForm(request.POST)
+            form = InvestmentBankingForm(request.POST)
             if form.is_valid():
                 new = form.save()
                 return HttpResponseRedirect('/ques/')
         
         if 'SalesTrading' in request.POST:
-            form = DataScientistForm(request.POST)
+            form = SalesTradingForm(request.POST)
             if form.is_valid():
                 new = form.save()
                 return HttpResponseRedirect('/ques/')
 
         if 'SalesTrading' in request.POST:
-            form = DataScientistForm(request.POST)
+            form = SalesTradingForm(request.POST)
             if form.is_valid():
                 new = form.save()
                 return HttpResponseRedirect('/ques/')
