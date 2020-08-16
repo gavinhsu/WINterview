@@ -11,7 +11,7 @@ def create(request):
         if 'SoftwareEngineer' in request.POST:
             form = SoftwareEngineerForm(request.POST)
             if form.is_valid():
-                new = form1.save()
+                new = form.save()
                 return HttpResponseRedirect('/ques/')
 
         if 'DataScientist' in request.POST:
