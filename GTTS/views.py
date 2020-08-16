@@ -5,6 +5,7 @@ import random
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
 from questions.models import *
+from questions.forms import *
 from users.models import *
 from users.models import Member
 from GTTS.forms import UploadAnswersForm
@@ -113,14 +114,14 @@ class equipCheck(TemplateView):
     answer_time = []
     for i in range(0,6):
       if diff_list[i] == 'easy':
-        prepare_time.append(5)
+        prepare_time.append(100)
         answer_time.append(10)
       elif diff_list[i] == 'medium':
-        prepare_time.append(10)
-        answer_time.append(15)
+        prepare_time.append(100)
+        answer_time.append(10)
       else:
-        prepare_time.append(20)
-        answer_time.append(20)
+        prepare_time.append(200)
+        answer_time.append(10)
 
     print(diff_list)
     print(prepare_time)
@@ -170,7 +171,16 @@ class QuesView(TemplateView):
       if request.method == "POST":
         # save answer to Answer models
         a1 = request.POST['note-textarea']
-  
+        # videofile = request.FILES['video']
+        # blobFile = request.POST['blob'] 
+        # firstvideo = Video.objects.last()
+        # videofile= firstvideo.file.url
+        # form = VideoForm(request.POST or None, request.FILES or None)
+        # if form.is_valid():
+        #   form.save()
+        # context= {'file_url': videofile,
+        #           'form': form
+        #           }
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
             # get Account instance from Member model SUPER IMPORTANT!!!
