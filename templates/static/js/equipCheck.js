@@ -221,6 +221,10 @@ function isRecordingBtn (recordBtnState) {
   }
 }
 
+
+
+
+
 try {
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
@@ -230,9 +234,6 @@ catch(e) {
   // $('.no-browser-support').show();
   $('.app').show();
 }
-
-
-
 
 
 var noteTextarea = $('#note-textarea');
