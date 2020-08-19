@@ -176,7 +176,7 @@ def blink():
     res = Result.objects.get(id=uid)
     res.b1 = total_blinks
     res.save()
-blink()
+#blink()
 
 
 @background()

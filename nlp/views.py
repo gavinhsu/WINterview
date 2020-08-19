@@ -10,7 +10,8 @@ import cloudpickle
 import torch
 # for nltk model building ######################################
 import nltk
-#nltk.download('punkt')
+# nltk.download('punkt')
+# nltk.download('stopwords')
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
