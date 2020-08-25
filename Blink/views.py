@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from django.http import HttpResponse
 from scipy.spatial import distance as dist
 from imutils.video import FileVideoStream
@@ -17,6 +18,18 @@ import numpy
 import time
 from questions.models import *
 from background_task import background
+
+class AjaxSaveAudio(TemplateView):
+    template_name = 'videoUploadTest.html'
+    def post(self, request):
+        """Save recorded audio blob sent by user."""
+        audio_file = request.FILES.get('video')
+        myObj = MyModel() # Put aurguments to properly according to your model
+        myObj.voice_record = audio_file
+        myObj.save()
+        return JsonResponse({
+            'success': True,
+        })
 
 
 def blink():
@@ -176,7 +189,7 @@ def blink():
     res = Result.objects.get(id=uid)
     res.b1 = total_blinks
     res.save()
-blink()
+# blink()
 
 
 @background()

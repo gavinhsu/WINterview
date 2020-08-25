@@ -19,7 +19,7 @@
   <video id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
   <video id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
   <button id="startBtn" class="btn btn-sm btn-outline-primary">Start Recording</button>
-  <button id="stopBtn" class="btn btn-sm btn-outline-danger" style='display:none' >Stop Recording</button>
+  <button id="stopBtn" class="btn btn-sm btn-outline-danger" style='display:none'>Stop Recording</button>
   <div class="container">
 
 
@@ -40,19 +40,20 @@
       <p id="recording-instructions">Read the question carefully and answer it after countdown.</p>
 
 
-      <form id='ans' method="post">
+      <form id='ans' method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="note-textarea" style="text-align:center;">Your Answer</label>
-        
         <div class="input-single">
-          <!-- <input type="file" id="file" accept="video/*"> -->
+          <!-- <input type="file" name='video' id="video" accept="video/*"> -->
           <textarea id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
             style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
         </div>
         <input type="submit" id="submit" style="margin-left:1000px;margin-bottom:10px;" value="Next question">
         <span>{{mess}}</span>
       </form>
-
+      <span id="blobURL"></span><br>
+      <span id="download"></span>
+      <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 
       <!--<h3>My Notes</h3>
           <ul id="notes">

@@ -69,10 +69,21 @@ function mediaRecorderSetup() {
             chunks = [] //清空chunks
             outputVideoURL = URL.createObjectURL(blob) //把影音連結丟給<video>
             outputVideo.src = outputVideoURL //錄製好的影片可以呈現於outputvideo
+            console.log(blob)
 
-            var form = new FormData();
-            form.append('video', blob);
-            form.value = '{% csrf_token %}'
+            function blobToFile(blob, fileName) {
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "top: 1000px";
+                var url = window.URL.createObjectURL(blob);
+                a.href = url;
+                a.download = fileName;
+                a.textContent = "DOWNLOAD " + fileName;
+                document.getElementById('blobURL').innerHTML = "BLOB URL: <b>" + url + "</b>";
+                document.getElementById('download').appendChild(a);
+            }
+            var myFile = blobToFile(blob, "video.mp4");
+            console.log(myFile)
 
             function getCookie(name) {
                 var cookieValue = null;
@@ -82,87 +93,62 @@ function mediaRecorderSetup() {
                         var cookie = jQuery.trim(cookies[i]);
                         // Does this cookie string begin with the name we want?
                         if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue =   decodeURIComponent(cookie.substring(name.length + 1));
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                             break;
                         }
                     }
                 }
                 return cookieValue;
             }
+
             var csrftoken = getCookie('csrftoken');
             // function csrfSafeMethod(method) {
             //     // these HTTP methods do not require CSRF protection
             //     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
             // }
             // $.ajaxSetup({
-            //     beforeSend: function(xhr, settings) {
+            //     beforeSend: function (xhr, settings) {
             //         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
             //             xhr.setRequestHeader("X-CSRFToken", csrftoken);
             //         }
             //     }
             // });
-
+            console.log(csrftoken)
+            var fd = new FormData()
+            fd.append('video', blob)
+            fd.append('csrfmiddlewaretoken', csrftoken);
             $.ajax({
-                url: 'http://localhost:8000/speech_to_text/',
-                // enctype: 'multipart/form-data',
-                headers:{"X-CSRFToken": csrftoken},
-                type: 'POST',
-                data:  form,
-                // {'form': form,
-                //         csrfmiddlewaretoken:csrftoken
-                //     },
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    console.log('response' + JSON.stringify(data));
-                },
-                error: function () {
-                    // handle error case here
-                    console.log('ajax failed')
-                    console.log(csrftoken)
-                }
+            url: 'http://127.0.0.1:8000/speech_to_text/',
+            enctype: 'multipart/form-data',
+            method: 'POST',
+            data:  fd,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                console.log('response' + JSON.stringify(data));
+            },
+            error: function (e) {
+                // handle error case here
+                console.log("ERROR : ", e);
+            }
             });
-            // var file = document.getElementById('#file')
-            // file.onchange = function(){
-            //     outputVideoURL = URL.createObjectURL(file.files[0]);
-            //     outputVideo.load();
-            //     // even if it's just a pointer to the real file here
-            //     outputVideo.onended = function(){
-            //         URL.revokeObjectURL(outputVideo.currentSrc);
-            //       };
-            //     }
-            // function blobToFile(theBlob, fileName){
-            //     //A Blob() is almost a File() - it's just missing the two properties below which we will add
-            //     theBlob.lastModifiedDate = new Date();
-            //     theBlob.name = fileName;
-            //     return theBlob;
-            // }
-            // var myFile = blobToFile(blob, "video.mp4");
-            // console.log(myFile)
-            // file.addEventListener('change', function (event) {
-            //       // 透過 FileReader 取得檔案內容
-            //       let reader = new FileReader();
-            //       // 利用 DataURL 的格式讀取圖片
-            //       reader.readAsDataURL(myFile);
-            //     }
-            //   );
-            document.getElementById('note-textarea').value = outputVideoURL
+
             // var xhr = new XMLHttpRequest
             // xhr.responseType = 'blob'
-            // xhr.onload = function(){
+            // xhr.onload = function () {
             //     var recoveredBlob = xhr.response
             //     var reader = new FileReader
-            //     reader.onload = function(){
+            //     reader.onload = function () {
             //         var blobAsDataUrl = reader.result
             //         window.location = blobAsDataUrl
             //     }
             //     reader.readAsDataURL(recoveredBlob)
             // }
-            // xhr.open('GET',outputVideoURL)
+            // xhr.open('GET', outputVideoURL)
             // console.log('OPENED', xhr.status);
             // xhr.send()
-            // var form = new FormData()
-            // form.append('video',blob)
+
             stream.getTracks().forEach(function (track) {
                 track.stop()
 

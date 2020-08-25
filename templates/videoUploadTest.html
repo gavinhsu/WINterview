@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
+    <title>speech to text recording</title>
+
+</head>
+
+<body>
+
+    <!-- The controls attribute adds video controls, like play, pause, and volume. -->
+    <video id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
+    <video id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
+    <button id="startBtn" class="btn btn-sm btn-outline-primary">Start Recording</button>
+    <button id="stopBtn" class="btn btn-sm btn-outline-danger" style='display:none'>Stop Recording</button>
+    <div class="container">
+        <audio id="myAudio" class="video-js vjs-default-skin"></audio>
+        <button class="audio-btn strt disable-btn" id="submit" disabled>Submit</button>
+        <span class="upload-comp">Uploading Complete</span>
+        <span id="blobURL"></span><br>
+        <span id="download"></span>
+        <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    </div>
+
+
+    <!-- <script src="js/jquery-3.1.1.js"></script>   
+    <script src="js/jquery.cookie.js"></script>   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static "js/video.js" %}"></script>
+
+    <style>
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        p {
+            color: #444;
+        }
+
+        button:focus {
+            outline: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 50px;
+            text-align: center;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+        }
+
+        .page-description {
+            font-size: 1.1rem;
+            margin: 0 auto;
+        }
+
+        .tz-link {
+            font-size: 1em;
+            color: #1da7da;
+            text-decoration: none;
+        }
+
+        .no-browser-support {
+            display: none;
+            font-size: 1.2rem;
+            color: #e64427;
+            margin-top: 35px;
+        }
+
+        .app {
+            margin: 40px auto;
+        }
+
+        #note-textarea {
+            margin: 20px 0;
+            border: none;
+        }
+
+        #recording-instructions {
+            margin: 15px auto 60px;
+        }
+
+        #notes {
+            padding-top: 20px;
+        }
+
+        .note .header {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .note .delete-note,
+        .note .listen-note {
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .note .content {
+            margin-bottom: 40px;
+        }
+
+        .answerNote {
+            width: 1000px;
+            height: 150px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 50px 25px;
+            }
+
+            button {
+                margin-bottom: 10px;
+            }
+
+            @media (max-width: 1200px) {
+                #bsaHolder {
+                    display: none;
+                }
+            }
+    </style>
+
+
+
+</body>
+
+</html>

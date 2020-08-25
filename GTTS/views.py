@@ -166,21 +166,22 @@ class QuesView(TemplateView):
 
       
       return render(request, self.template_name, locals())
-    
+        
     def post(self, request):
       if request.method == "POST":
         # save answer to Answer models
         a1 = request.POST['note-textarea']
-        # videofile = request.FILES['video']
-        # blobFile = request.POST['blob'] 
-        # firstvideo = Video.objects.last()
-        # videofile= firstvideo.file.url
-        # form = VideoForm(request.POST or None, request.FILES or None)
-        # if form.is_valid():
-        #   form.save()
-        # context= {'file_url': videofile,
-        #           'form': form
-        #           }
+
+        #save video to Video models
+        video_file = request.FILES.get('video')
+
+        video = Video()
+        video.videofile = video_file
+        video.save()
+        return JsonResponse({
+            'success': True,
+        })
+
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
             # get Account instance from Member model SUPER IMPORTANT!!!
