@@ -189,7 +189,11 @@ def blink():
     res = Result.objects.get(id=uid)
     res.b1 = total_blinks
     res.save()
+<<<<<<< HEAD
 # blink()
+=======
+#blink()
+>>>>>>> 3ae425e78e267f147651607eb4364a749c4ec871
 
 
 @background()

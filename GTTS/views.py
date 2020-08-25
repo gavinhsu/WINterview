@@ -90,6 +90,16 @@ class equipCheck(TemplateView):
     # for testing purposes only
     elif job_name == 'Cashier':
       create_ques(Test_Job_pls_dont_add_shit_into_this_model_thank)
+    elif job_name == 'Investment Advisor':
+      create_ques(Sales_Trading)
+    elif job_name == 'System Engineer':
+      create_ques(System_Engineer)
+    elif job_name == '':
+      pass
+    elif job_name == '':
+      pass
+    elif job_name == '':
+      pass
     else:
       print('Job questions not created yet!!!')
 
