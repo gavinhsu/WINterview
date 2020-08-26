@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 import random
+import base64
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
@@ -11,6 +12,15 @@ from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
 from Blink.views import *
+
+
+# TEST get base64 ###############################################
+unit = Answer.objects.get(id=196)
+text = unit.a1
+# fh = open("test_video.mp4", "wb")
+# fh.write(base64.b64decode(text))
+# fh.close()
+print('DONE!BITCH')
 
 
 class equipCheck(TemplateView):
