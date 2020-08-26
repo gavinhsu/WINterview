@@ -212,10 +212,10 @@ class QuesView(TemplateView):
         unit.save()
 
         # save result to Result models
-        r1 = predict('a1')
-        res = Result.objects.get(id=uid)
-        res.r1 = r1
-        res.save()
+        # r1 = predict('a1')
+        # res = Result.objects.get(id=uid)
+        # res.r1 = r1
+        # res.save()
 
         return redirect('reply2/')
 
