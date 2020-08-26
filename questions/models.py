@@ -121,7 +121,7 @@ class Test_Job_pls_dont_add_shit_into_this_model_thank(models.Model):
 
 class Answer(models.Model):
     userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True, blank=True)
-    a1 = models.CharField(max_length=500,blank=True)
+    a1 = models.TextField(blank=True)
     a2 = models.CharField(max_length=500,blank=True)
     a3 = models.CharField(max_length=500,blank=True)
     a4 = models.CharField(max_length=500,blank=True)

@@ -182,15 +182,13 @@ class QuesView(TemplateView):
         # save answer to Answer models
         a1 = request.POST['note-textarea']
 
-        #save video to Video models
-        video_file = request.FILES.get('video')
-
-        video = Video()
-        video.videofile = video_file
-        video.save()
-        return JsonResponse({
-            'success': True,
-        })
+        # save video to Video models
+        # video_file = request.FILES.get['video']
+        # video_base64 = image_base64.split('base64,', 1 )
+        # print(video_base64)
+        # video = Video()
+        # video.videofile = video_file
+        # video.save()
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']

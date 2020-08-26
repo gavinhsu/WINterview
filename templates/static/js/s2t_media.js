@@ -70,38 +70,63 @@ function mediaRecorderSetup() {
             outputVideoURL = URL.createObjectURL(blob) //把影音連結丟給<video>
             outputVideo.src = outputVideoURL //錄製好的影片可以呈現於outputvideo
             console.log(blob)
-
-            function blobToFile(blob, fileName) {
-                var a = document.createElement("a");
-                document.body.appendChild(a);
-                a.style = "top: 1000px";
-                var url = window.URL.createObjectURL(blob);
-                a.href = url;
-                a.download = fileName;
-                a.textContent = "DOWNLOAD " + fileName;
-                document.getElementById('blobURL').innerHTML = "BLOB URL: <b>" + url + "</b>";
-                document.getElementById('download').appendChild(a);
-            }
-            var myFile = blobToFile(blob, "video.mp4");
-            console.log(myFile)
-
-            function getCookie(name) {
-                var cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    var cookies = document.cookie.split(';');
-                    for (var i = 0; i < cookies.length; i++) {
-                        var cookie = jQuery.trim(cookies[i]);
-                        // Does this cookie string begin with the name we want?
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
+            var reader = new FileReader();
+            reader.readAsDataURL(blob); 
+            reader.onloadend = function() {
+                var base64data = reader.result; 
+                // var video = document.getElementById("video")
+                // function urlB64ToUint8Array(base64String) {
+                //     const padding = '='.repeat((4 - base64String.length % 4) % 4);
+                //     const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+                
+                //     const rawData = window.atob(base64);
+                //     const outputArray = new Uint8Array(rawData.length);
+                
+                //     for (let i = 0; i < rawData.length; ++i) {
+                //         outputArray[i] = rawData.charCodeAt(i);
+                //     }
+                
+                //     return outputArray;
+                // }
+                // var base64String =  urlB64ToUint8Array(base64data)
+                var text = document.getElementById("note-textarea") 
+                // var decodedString = atob(base64data);
+                text.value = base64data
+                // video.src = base64data              
+                console.log(base64data);
             }
 
-            var csrftoken = getCookie('csrftoken');
+            // function blobToFile(blob, fileName) {
+            //     var a = document.createElement("a");
+            //     document.body.appendChild(a);
+            //     a.style = "top: 1000px";
+            //     var url = window.URL.createObjectURL(blob);
+            //     a.href = url;
+            //     a.download = fileName;
+            //     a.textContent = "DOWNLOAD " + fileName;
+            //     document.getElementById('blobURL').innerHTML = "BLOB URL: <b>" + url + "</b>";
+            //     document.getElementById('download').appendChild(a);
+            // }
+            // var myFile = blobToFile(blob, "video.mp4");
+            // console.log(myFile)
+
+            // function getCookie(name) {
+            //     var cookieValue = null;
+            //     if (document.cookie && document.cookie !== '') {
+            //         var cookies = document.cookie.split(';');
+            //         for (var i = 0; i < cookies.length; i++) {
+            //             var cookie = jQuery.trim(cookies[i]);
+            //             // Does this cookie string begin with the name we want?
+            //             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            //                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            //                 break;
+            //             }
+            //         }
+            //     }
+            //     return cookieValue;
+            // }
+
+            // var csrftoken = getCookie('csrftoken');
             // function csrfSafeMethod(method) {
             //     // these HTTP methods do not require CSRF protection
             //     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -113,26 +138,26 @@ function mediaRecorderSetup() {
             //         }
             //     }
             // });
-            console.log(csrftoken)
-            var fd = new FormData()
-            fd.append('video', blob)
-            fd.append('csrfmiddlewaretoken', csrftoken);
-            $.ajax({
-            url: 'http://127.0.0.1:8000/speech_to_text/',
-            enctype: 'multipart/form-data',
-            method: 'POST',
-            data:  fd,
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (data) {
-                console.log('response' + JSON.stringify(data));
-            },
-            error: function (e) {
-                // handle error case here
-                console.log("ERROR : ", e);
-            }
-            });
+            // console.log(csrftoken)
+            // var fd = new FormData()
+            // fd.append('video', blob)
+            // fd.append('csrfmiddlewaretoken', csrftoken);
+            // $.ajax({
+            // url: 'http://127.0.0.1:8000/speech_to_text/',
+            // enctype: 'multipart/form-data',
+            // method: 'POST',
+            // data:  fd,
+            // processData: false,
+            // contentType: false,
+            // cache: false,
+            // success: function (data) {
+            //     console.log('response' + JSON.stringify(data));
+            // },
+            // error: function (e) {
+            //     // handle error case here
+            //     console.log("ERROR : ", e);
+            // }
+            // });
 
             // var xhr = new XMLHttpRequest
             // xhr.responseType = 'blob'
@@ -150,7 +175,7 @@ function mediaRecorderSetup() {
             // xhr.send()
 
             stream.getTracks().forEach(function (track) {
-                track.stop()
+                track.stop()    
 
             })
         }
