@@ -32,7 +32,7 @@ class AjaxSaveAudio(TemplateView):
         })
 
 
-def blink():
+def blink(path_to_vid):
     start = time.time()
     PERIOD_OF_TIME = 5
 
@@ -85,7 +85,7 @@ def blink():
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         #vs = cv2.VideoCapture(r"C:\Users\asus\Desktop\Emotion\demo\dinner.mp4") # Video file source
-        vs = FileVideoStream(r"C:\Users\asus\Desktop\Emotion\demo\dinner.mp4").start()
+        vs = FileVideoStream(path_to_vid).start()
 
     fileStream = True
 

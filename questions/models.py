@@ -192,7 +192,8 @@ class Record(models.Model):
         result = str(self.id) + ': ' + str(self.rec_a1)
         return result
 
+
 class Video(models.Model):
-    videofile= models.FileField(upload_to='videos/', null=True, verbose_name="")
+    videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
     def __str__(self):
-        return str(self.videofile)
+        return str(self.id) + ': ' + str(self.videofile)

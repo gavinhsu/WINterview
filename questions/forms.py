@@ -1,9 +1,10 @@
 from django import forms
 from .models import *
+
 class VideoForm(forms.ModelForm):
     class Meta:
-        model= Video
-        fields= ["videofile"]
+        model = Video
+        fields = ["videofile"]
 
 class SoftwareEngineerForm(forms.ModelForm):
     class Meta:

@@ -17,13 +17,23 @@ from Blink.views import *
 # TEST get base64 ###############################################
 unit = Answer.objects.get(id=196)
 text = unit.a1
-# fh = open("test_video.mp4", "wb")
-# fh.write(base64.b64decode(text))
-# fh.close()
-print('DONE!BITCH')
+fh = open("test_vid.mp4", "wb")
+fh.write(base64.b64decode(text))
+fh.close()
+print('VIDEO DECODED')
+
+f = open("test_vid.mp4", 'rb')
+vid_unit = Video.objects.get(id=4)
+vid_unit.videofile.save('testvid', f)
+f.close()
+print('VIDEO SAVED TO MODEL')
+vid_result = Video.objects.get(id=4).videofile
+vid_result = str(vid_result)
+print(vid_result[7:])
+blink(vid_result)
 
 
-class equipCheck(TemplateView):
+class equipCheck(TemplateView): 
   template_name = 'equipCheck.html'
 
   def __init__(self, job_name=None):
