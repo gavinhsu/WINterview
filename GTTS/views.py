@@ -12,25 +12,33 @@ from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
 from Blink.views import *
+from django.core.files import File
 
 
 # TEST get base64 ###############################################
-unit = Answer.objects.get(id=196)
+
+# decode from base64 to mp4 file
+unit = Answer.objects.get(id=199)
 text = unit.a1
+text = text[23:]
 fh = open("test_vid.mp4", "wb")
 fh.write(base64.b64decode(text))
 fh.close()
 print('VIDEO DECODED')
 
-f = open("test_vid.mp4", 'rb')
-vid_unit = Video.objects.get(id=4)
-vid_unit.videofile.save('testvid', f)
+# save t django model
+f = open('test_vid.mp4', 'rb')
+vid_unit = Video.objects.get(id=7)
+vid_unit.videofile.save('test_vid.mp4', File(f), True)
 f.close()
 print('VIDEO SAVED TO MODEL')
-vid_result = Video.objects.get(id=4).videofile
-vid_result = str(vid_result)
-print(vid_result[7:])
-blink(vid_result)
+
+# retrieve video file
+vid_instance = Video.objects.get(id=7).videofile 
+vid_instance = str(vid_instance)
+vidname = str(vid_instance[7:])
+print(vidname)
+
 
 
 class equipCheck(TemplateView): 

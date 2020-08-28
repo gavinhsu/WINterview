@@ -41,14 +41,11 @@ def blink(path_to_vid):
         # vertical eye landmarks (x, y)-coordinates
         A = dist.euclidean(eye[1], eye[5])
         B = dist.euclidean(eye[2], eye[4])
-
         # compute the euclidean distance between the horizontal
         # eye landmark (x, y)-coordinates
         C = dist.euclidean(eye[0], eye[3])
-
         # compute the eye aspect ratio
         ear = (A + B) / (2.0 * C)
-
         # return the eye aspect ratio
         return ear
 
@@ -89,17 +86,7 @@ def blink(path_to_vid):
 
     fileStream = True
 
-
-
-    # loop over frames from the video stream
     while True:
-    
-        # if this is a file video stream, then we need to check if
-        # there any more frames left in the buffer to process
-
-        # grab the frame from the threaded video file stream, resize
-        # it, and convert it to grayscale
-        # channels)
         frame = vs.read()
         #ret, bgr_image = vs.read()
         frame = imutils.resize(frame, width=450)
@@ -182,14 +169,11 @@ def blink(path_to_vid):
 
     total_blinks = int(TOTAL)
     print('Your total blinks ===> ', total_blinks)
-
-
     # save total_blinks to model RESULT
     uid = Answer.objects.all().order_by('-id')[:1].values('id') 
     res = Result.objects.get(id=uid)
     res.b1 = total_blinks
     res.save()
-#blink()
 
 
 @background()
