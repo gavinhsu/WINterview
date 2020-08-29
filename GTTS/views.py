@@ -18,26 +18,26 @@ from django.core.files import File
 # TEST get base64 ###############################################
 
 # decode from base64 to mp4 file
-unit = Answer.objects.get(id=199)
-text = unit.a1
-text = text[23:]
-fh = open("test_vid.mp4", "wb")
-fh.write(base64.b64decode(text))
-fh.close()
-print('VIDEO DECODED')
+# unit = Answer.objects.get(id=199)
+# text = unit.a1
+# text = text[23:]
+# fh = open("test_vid.mp4", "wb")
+# fh.write(base64.b64decode(text))
+# fh.close()
+# print('VIDEO DECODED')
 
-# save t django model
-f = open('test_vid.mp4', 'rb')
-vid_unit = Video.objects.get(id=7)
-vid_unit.videofile.save('test_vid.mp4', File(f), True)
-f.close()
-print('VIDEO SAVED TO MODEL')
+# # save to django model
+# f = open('test_vid.mp4', 'rb')
+# vid_unit = Video.objects.get(id=7)
+# vid_unit.videofile.save('test_vid.mp4', File(f), True)
+# f.close()
+# print('VIDEO SAVED TO MODEL')
 
-# retrieve video file
-vid_instance = Video.objects.get(id=7).videofile 
-vid_instance = str(vid_instance)
-vidname = str(vid_instance[7:])
-print(vidname)
+# # retrieve video file
+# vid_instance = Video.objects.get(id=7).videofile 
+# vid_instance = str(vid_instance)
+# vidname = str(vid_instance[7:])
+# print(vidname)
 
 
 
