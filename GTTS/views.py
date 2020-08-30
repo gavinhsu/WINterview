@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 import random
 import base64
+import os, re, string
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
@@ -18,26 +19,28 @@ from django.core.files import File
 # TEST get base64 ###############################################
 
 # decode from base64 to mp4 file
-# unit = Answer.objects.get(id=199)
-# text = unit.a1
-# text = text[23:]
-# fh = open("test_vid.mp4", "wb")
-# fh.write(base64.b64decode(text))
-# fh.close()
-# print('VIDEO DECODED')
+unit = Answer.objects.get(id=199)
+text = unit.a1
+text = text[23:]
+fh = open("test_vid.mp4", "wb")
+fh.write(base64.b64decode(text))
+fh.close()
+print('VIDEO DECODED')
 
-# # save to django model
-# f = open('test_vid.mp4', 'rb')
-# vid_unit = Video.objects.get(id=7)
-# vid_unit.videofile.save('test_vid.mp4', File(f), True)
-# f.close()
-# print('VIDEO SAVED TO MODEL')
+# save to django model
+f = open('test_vid.mp4', 'rb')
+vid_unit = Video.objects.get(id=7)
+vid_unit.videofile.save('test_vid.mp4', File(f), True)
+f.close()
+print('VIDEO SAVED TO MODEL')
 
-# # retrieve video file
-# vid_instance = Video.objects.get(id=7).videofile 
-# vid_instance = str(vid_instance)
-# vidname = str(vid_instance[7:])
-# print(vidname)
+# retrieve video file
+vid_instance = Video.objects.get(id=7).videofile 
+vid_instance = str(vid_instance)
+vidname = str(vid_instance[7:])
+print(vidname)
+vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+blink(vid_path)
 
 
 
@@ -65,8 +68,7 @@ class equipCheck(TemplateView):
       easy_rand = random.sample(easy_list, 2)
       # global r1
       # global r2
-      global r1
-      global r2
+      global r1, r2
       r1 = easy_rand[0]
       r2 = easy_rand[1]
 
@@ -79,8 +81,7 @@ class equipCheck(TemplateView):
 
       medium_length = len(medium_list)
       medium_rand = random.sample(medium_list, 2)
-      global r3
-      global r4
+      global r3, r4
       r3 = medium_rand[0]
       r4 = medium_rand[1]      
 
@@ -93,8 +94,7 @@ class equipCheck(TemplateView):
 
       hard_length = len(hard_list)
       hard_rand = random.sample(hard_list, 2)
-      global r5
-      global r6
+      global r5, r6
       r5 = hard_rand[0]
       r6 = hard_rand[1]
 
@@ -132,12 +132,7 @@ class equipCheck(TemplateView):
       print('Job questions not created yet!!!')
 
 
-    global q1
-    global q2
-    global q3
-    global q4
-    global q5
-    global q6
+    global q1,q2,q3,q4,q5,q6
     q1 = final_list[0]
     q2 = final_list[1]
     q3 = final_list[2]
