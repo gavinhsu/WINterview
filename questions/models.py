@@ -7,6 +7,7 @@ class Software_Engineer(models.Model):
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ':' + str(self.Ques)
@@ -17,36 +18,40 @@ class Data_Scientist(models.Model):
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True) 
+     
+    def __str__(self):
+        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
+        return result
+
+class MIS(models.Model):
+    QuesNum = models.IntegerField()
+    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
+    Ques = models.TextField(max_length=500)
+    Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 
-class Database_Administrator(models.Model):
+class ML_Engineer(models.Model):
     QuesNum = models.IntegerField()
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 
-class System_Engineer(models.Model):
+class Hardware_Engineer(models.Model):
     QuesNum = models.IntegerField()
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
-
-    def __str__(self):
-        result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
-        return result
-
-class Network_Engineer(models.Model):
-    QuesNum = models.IntegerField()
-    Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
-    Ques = models.TextField(max_length=500)
-    Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
@@ -57,6 +62,7 @@ class Investment_Banking(models.Model):
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
@@ -67,6 +73,7 @@ class Sales_Trading(models.Model):
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
@@ -77,26 +84,29 @@ class Research(models.Model):
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 
-class Quantitative_Trading(models.Model):
+class Quantitative(models.Model):
     QuesNum = models.IntegerField()
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 
-class Venture_Capital(models.Model):
+class Audit(models.Model):
     QuesNum = models.IntegerField()
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
+    Keywords = models.TextField(max_length=800, null=True)
 
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)

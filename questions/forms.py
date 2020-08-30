@@ -16,15 +16,20 @@ class DataScientistForm(forms.ModelForm):
         model = Data_Scientist
         fields = ['QuesNum','Difficulties', 'Ques', 'Ans']
 
-class DatabaseAdministratorForm(forms.ModelForm):
+class MISForm(forms.ModelForm):
     class Meta:
-        model = Database_Administrator
+        model = MIS
         fields = ['QuesNum','Difficulties', 'Ques', 'Ans']
 
-class NetworkEngineerForm(forms.ModelForm):
+class HardwareEngineerForm(forms.ModelForm):
     class Meta:
-        model = Network_Engineer
+        model = Hardware_Engineer
         fields = ['QuesNum','Difficulties', 'Ques', 'Ans']
+
+class MLEngineerForm(forms.ModelForm):
+    class Meta:
+        model = ML_Engineer
+        fields = ['QuesNum','Difficulties', 'Ques', 'Ans']        
 
 class InvestmentBankingForm(forms.ModelForm):
     class Meta:
@@ -41,12 +46,12 @@ class ResearchForm(forms.ModelForm):
         model = Research
         fields = ['QuesNum','Difficulties', 'Ques', 'Ans']
 
-class QuantitativeTradingForm(forms.ModelForm):
+class QuantitativeForm(forms.ModelForm):
     class Meta:
-        model = Quantitative_Trading
+        model = Quantitative
         fields = ['QuesNum','Difficulties', 'Ques', 'Ans']
 
-class Venture_CapitalForm(forms.ModelForm):
+class AuditForm(forms.ModelForm):
     class Meta:
-        model = Venture_Capital
+        model = Audit
         fields = ['QuesNum','Difficulties', 'Ques', 'Ans']
