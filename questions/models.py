@@ -130,18 +130,27 @@ class Test_Job_pls_dont_add_shit_into_this_model_thank(models.Model):
 
 
 class Answer(models.Model):
-    userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True, blank=True)
+    userID = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)
     a1 = models.TextField(blank=True)
-    a2 = models.CharField(max_length=500,blank=True)
-    a3 = models.CharField(max_length=500,blank=True)
-    a4 = models.CharField(max_length=500,blank=True)
-    a5 = models.CharField(max_length=500,blank=True)
-    a6 = models.CharField(max_length=500,blank=True)
-    a6 = models.CharField(max_length=500,blank=True)
-    a7 = models.CharField(max_length=500,blank=True)
-    a8 = models.CharField(max_length=500,blank=True)
-    a9 = models.CharField(max_length=500,blank=True)
-    a10 = models.CharField(max_length=500,blank=True)
+    v1 = models.TextField(blank=True)
+    a2 = models.TextField(blank=True)
+    v2 = models.TextField(blank=True)
+    a3 = models.TextField(blank=True)
+    v3 = models.TextField(blank=True)
+    a4 = models.TextField(blank=True)
+    v4 = models.TextField(blank=True)
+    a5 = models.TextField(blank=True)
+    v5 = models.TextField(blank=True)
+    a6 = models.TextField(blank=True)
+    v6 = models.TextField(blank=True)
+    a7 = models.TextField(blank=True)
+    v7 = models.TextField(blank=True)
+    a8 = models.TextField(blank=True)
+    v8 = models.TextField(blank=True)
+    a9 = models.TextField(blank=True)
+    v9 = models.TextField(blank=True)
+    a10 = models.TextField(blank=True)
+    v10 = models.TextField(blank=True)
 
     def __str__(self):
         result = str(self.id) + ': ' + str(self.a1)
@@ -176,7 +185,7 @@ class Result(models.Model):
         return result
 
 class Record(models.Model):
-    userID = models.ForeignKey(Member,on_delete=models.CASCADE, null=True)
+    userID = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
     rec_a1 = models.CharField(max_length=500, blank=True)
     rec_r1 = models.CharField(max_length=500, blank=True)
     rec_a2 = models.CharField(max_length=500, blank=True)
@@ -204,6 +213,7 @@ class Record(models.Model):
 
 
 class Video(models.Model):
+    userID = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)
     videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
     def __str__(self):
         return str(self.id) + ': ' + str(self.videofile)
