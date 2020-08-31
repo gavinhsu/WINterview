@@ -131,6 +131,7 @@ class Test_Job_pls_dont_add_shit_into_this_model_thank(models.Model):
 
 class Answer(models.Model):
     userID = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)
+    selected_job = models.TextField(blank=True)
     a1 = models.TextField(blank=True)
     v1 = models.TextField(blank=True)
     a2 = models.TextField(blank=True)
@@ -214,6 +215,16 @@ class Record(models.Model):
 
 class Video(models.Model):
     userID = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)
-    videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid1 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid2 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid3 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid4 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid5 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid6 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid7 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid8 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid9 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+    vid10 = models.FileField(upload_to='videos/', null=True, verbose_name="")
+
     def __str__(self):
-        return str(self.id) + ': ' + str(self.videofile)
+        return str(self.id) + ': ' + str(self.vid1)

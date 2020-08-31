@@ -186,16 +186,17 @@ class QuesView(TemplateView):
             account_name = request.session['account']
             account_instance = Member.objects.get(Account=account_name)
             # create answer & result table when getting website
-            unit = Answer.objects.create(userID=account_instance)
+            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
             uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
             res = Result.objects.create(userID=account_instance, id=uid)
+            # create video table when getting website
+            vid_unit = Video.objects.create(userID=account_instance, id=uid)
+            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
 
       random_question = q1
       prep_time1 = time_dict['prep_time1']
       ans_time1 = time_dict['ans_time1']
       total_time1 = prep_time1 + ans_time1 - 5
-      # run blink detection in the background
-      #blink1(total_time1)
 
       
       return render(request, self.template_name, locals())
@@ -205,18 +206,13 @@ class QuesView(TemplateView):
         # save answer to Answer models
         a1 = request.POST['note-textarea']
 
-        # save video to Video models
-        # video_file = request.FILES.get['video']
-        # video_base64 = image_base64.split('base64,', 1 )
-        # print(video_base64)
-        # video = Video()
-        # video.videofile = video_file
-        # video.save()
-
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            # get Account instance from Member model SUPER IMPORTANT!!!
-            account_instance = Member.objects.get(Account=account_name)           
+            account_instance = Member.objects.get(Account=account_name)
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')          
         
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
@@ -229,6 +225,29 @@ class QuesView(TemplateView):
         # res = Result.objects.get(id=uid)
         # res.r1 = r1
         # res.save()
+
+        # decode base64 to mp4 file
+        text = unit.a1
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid1.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid1
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink1(vid_path)
 
         return redirect('reply2/')
 
