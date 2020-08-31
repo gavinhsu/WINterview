@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 import random
 import base64
+from MockInterview.settings import BASE_DIR
 import os, re, string
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
@@ -12,7 +13,7 @@ from users.models import *
 from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
-from Blink.views import *
+from Blink.tasks import *
 from django.core.files import File
 
 
@@ -257,7 +258,7 @@ class QuesView(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink1(vid_path)
+        blink1(vid_path, account_name)
 
         return redirect('reply2/')
 
@@ -281,7 +282,6 @@ class QuesView2(TemplateView):
       prep_time2 = time_dict['prep_time2']
       ans_time2 = time_dict['ans_time2']
       total_time2 = prep_time2 + ans_time2 - 5
-      blink2(total_time2)
 
       return render(request, self.template_name, locals())
     
@@ -316,7 +316,6 @@ class QuesView3(TemplateView):
     template_name = 'reply3.html'
 
     def get(self, request):
-      #print(request.session.session_key)
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
@@ -326,7 +325,7 @@ class QuesView3(TemplateView):
       prep_time3 = time_dict['prep_time3']
       ans_time3 = time_dict['ans_time3']
       total_time3 = prep_time3 + ans_time3
-      blink3(total_time3)
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -370,7 +369,7 @@ class QuesView4(TemplateView):
       prep_time4 = time_dict['prep_time4']
       ans_time4 = time_dict['ans_time4']
       total_time4 = prep_time4 + ans_time4
-      blink4(total_time4)
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -413,7 +412,7 @@ class QuesView5(TemplateView):
       prep_time5 = time_dict['prep_time5']
       ans_time5 = time_dict['ans_time5']
       total_time5 = prep_time5 + ans_time5
-      blink3(total_time5)
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -457,7 +456,7 @@ class QuesView6(TemplateView):
       prep_time6 = time_dict['prep_time6']
       ans_time6 = time_dict['ans_time6']
       total_time6 = prep_time6 + ans_time6
-      blink3(total_time6)
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):   

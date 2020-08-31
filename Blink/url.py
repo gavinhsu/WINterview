@@ -7,6 +7,5 @@ import Blink.views
 app_name = 'Blink'
 
 urlpatterns = [
-  path('', Blink.views.AjaxSaveAudio.as_view())
 
  ]
