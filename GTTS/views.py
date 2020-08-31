@@ -118,16 +118,24 @@ class equipCheck(TemplateView):
     # for testing purposes only
     elif job_name == 'Cashier':
       create_ques(Test_Job_pls_dont_add_shit_into_this_model_thank)
-    elif job_name == 'Investment Advisor':
+    elif job_name == 'Sales Trading':
       create_ques(Sales_Trading)
-    elif job_name == 'System Engineer':
-      create_ques(System_Engineer)
-    elif job_name == '':
-      pass
-    elif job_name == '':
-      pass
-    elif job_name == '':
-      pass
+    elif job_name == 'Hardware Engineer':
+      create_ques(Hardware_Engineer)
+    elif job_name == 'ML Engineer':
+      create_ques(ML_Engineer)
+    elif job_name == 'MIS':
+      create_ques(MIS)
+    elif job_name == 'Audit':
+      create_ques(Audit)
+    elif job_name == 'Quantitative':
+      create_ques(Quantitative)
+    elif job_name == 'Research':
+      create_ques(Research)
+    elif job_name == 'Investment Banking':
+      create_ques(Investment_Banking)
+    elif job_name == 'Data Scientist':
+      create_ques(Data_Scientist)
     else:
       print('Job questions not created yet!!!')
 
@@ -208,17 +216,17 @@ class QuesView(TemplateView):
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            account_instance = Member.objects.get(Account=account_name)
-
-        # retrieve video instance
-        vid_unit = Video.objects.get(userID=account_instance, id=uid)
-        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')          
+            account_instance = Member.objects.get(Account=account_name)        
         
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
         unit.a1 = a1
         unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
 
         # save result to Result models
         # r1 = predict('a1')
@@ -242,6 +250,8 @@ class QuesView(TemplateView):
 
         # retrieve video file from django model
         vid_instance = Video.objects.get(id=uid).vid1
+        print(vid_instance)
+        vid_instance = str(vid_instance)
         vidname = str(vid_instance[7:])
         print(vidname)
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
