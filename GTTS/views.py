@@ -215,6 +215,7 @@ class QuesView(TemplateView):
         # save answer to Answer models
         a1 = request.POST['note-textarea']
         v1 = request.POST['video']
+        print('what the fuck lol: ', v1[:20])
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
