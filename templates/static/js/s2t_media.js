@@ -89,7 +89,7 @@ function mediaRecorderSetup() {
                 //     return outputArray;
                 // }
                 // var base64String =  urlB64ToUint8Array(base64data)
-                var text = document.getElementById("note-textarea") 
+                var text = document.getElementById("video") 
                 // var decodedString = atob(base64data);
                 text.value = base64data
                 // video.src = base64data              

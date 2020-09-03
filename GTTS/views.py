@@ -214,6 +214,7 @@ class QuesView(TemplateView):
       if request.method == "POST":
         # save answer to Answer models
         a1 = request.POST['note-textarea']
+        v1 = request.POST['video']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -223,11 +224,13 @@ class QuesView(TemplateView):
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
         unit.a1 = a1
+        unit.v1 = v1
         unit.save()
 
         # retrieve video instance
         vid_unit = Video.objects.get(userID=account_instance, id=uid)
         vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
 
         # save result to Result models
         # r1 = predict('a1')
