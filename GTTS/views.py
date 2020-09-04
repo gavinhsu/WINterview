@@ -156,14 +156,14 @@ class equipCheck(TemplateView):
     answer_time = []
     for i in range(0,6):
       if diff_list[i] == 'easy':
-        prepare_time.append(100)
-        answer_time.append(10)
+        prepare_time.append(10)
+        answer_time.append(30)
       elif diff_list[i] == 'medium':
-        prepare_time.append(100)
-        answer_time.append(10)
+        prepare_time.append(10)
+        answer_time.append(30)
       else:
-        prepare_time.append(200)
-        answer_time.append(10)
+        prepare_time.append(10)
+        answer_time.append(30)
 
     print(diff_list)
     print(prepare_time)
@@ -240,7 +240,7 @@ class QuesView(TemplateView):
         # res.save()
 
         # decode base64 to mp4 file
-        text = unit.a1
+        text = unit.v1
         text = text[23:]
         fh = open('interview_vid.mp4', 'wb')
         fh.write(base64.b64decode(text))
