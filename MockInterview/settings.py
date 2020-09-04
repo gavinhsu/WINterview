@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Blink',
     'background_task',
     'corsheaders',
+    'Emotion',
 ]
 
 MIDDLEWARE = [

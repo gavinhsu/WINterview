@@ -15,6 +15,7 @@ from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
 from Blink.tasks import *
 from django.core.files import File
+from Emotion.views import *
 
 
 # TEST get base64 ###############################################
@@ -215,7 +216,6 @@ class QuesView(TemplateView):
         # save answer to Answer models
         a1 = request.POST['note-textarea']
         v1 = request.POST['video']
-        print('what the fuck lol: ', v1[:20])
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -240,7 +240,7 @@ class QuesView(TemplateView):
         # res.save()
 
         # decode base64 to mp4 file
-        text = unit.a1
+        text = unit.v1
         text = text[23:]
         fh = open('interview_vid.mp4', 'wb')
         fh.write(base64.b64decode(text))
@@ -263,6 +263,7 @@ class QuesView(TemplateView):
         
         # do blink detection and save to Result model
         blink1(vid_path, account_name)
+        emotion(vid_path)
 
         return redirect('reply2/')
 
