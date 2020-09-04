@@ -67,8 +67,7 @@
       var timer2 = null;
       var submit = document.getElementById("submit");
 
-      (function 
-      () {
+      (function countDownStart() {
         // Display counter and start counting down
         spn.textContent = count;
 
@@ -105,11 +104,11 @@
         }
       }());
 
-      function submit(){
-        if (submit.click()){
-          stopVideo.click();
-        }
-      }
+      // function submit(){
+      //   if (submit.click()){
+      //     stopVideo.click();
+      //   }
+      // }
     </script>
     <script src="{% static "js/speech_to_text.js" %}"></script>
     <script src="{% static "js/s2t_media.js" %}"></script>
