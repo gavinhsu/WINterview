@@ -11,10 +11,11 @@ from Emotion.utils.inference import apply_offsets
 from Emotion.utils.inference import load_detection_model
 from Emotion.utils.preprocessor import preprocess_input
 from background_task import background
+from questions.models import *
 
 
 @background(schedule=1)
-def emotion(vid_path):
+def emotion(vid_path, account_name):
     # get rid of cpu warning
     import os
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -138,6 +139,20 @@ def emotion(vid_path):
     fear_res = emotion_list.count('fear')/len(emotion_list)*100
     surprise_res = emotion_list.count('surprise')/len(emotion_list)*100
 
+    # save emotion results to Result model
+    account_instance = Member.objects.get(Account=account_name)
+    uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+
+    res = Result.objects.get(id=uid)
+    
+    res.neutral_1 = neutral_res
+    res.happy_1 = happy_res
+    res.angry_1 = angry_res
+    res.fear_1 = fear_res
+    res.surprise_1 = surprise_res
+    res.save()
+
+    print('EMOTION SAVED')
 
     cv2.destroyAllWindows()
 
