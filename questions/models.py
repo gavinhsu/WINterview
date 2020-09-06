@@ -19,12 +19,12 @@ class Data_Scientist(models.Model):
     Ques = models.TextField(max_length=500)
     Ans = models.TextField(max_length=800, null=True)
     Keywords = models.TextField(max_length=800, null=True) 
-     
+
     def __str__(self):
         result = str(self.QuesNum) + ' ' + str(self.Difficulties) + ': ' + str(self.Ques)
         return result
 
-class MIS(models.Model):
+class DBA(models.Model):
     QuesNum = models.IntegerField()
     Difficulties = models.CharField(max_length=100, choices=[('easy','easy'),('medium','medium'),('hard','hard')])
     Ques = models.TextField(max_length=500)
