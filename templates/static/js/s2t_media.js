@@ -89,7 +89,7 @@ function mediaRecorderSetup() {
                 //     return outputArray;
                 // }
                 // var base64String =  urlB64ToUint8Array(base64data)
-                var text = document.getElementById("note-textarea") 
+                var text = document.getElementById("video") 
                 // var decodedString = atob(base64data);
                 text.value = base64data
                 // video.src = base64data              
@@ -205,44 +205,3 @@ function isRecordingBtn(recordBtnState) {
 }
 
 
-//countdown
-var spn = document.getElementById("countStart");
-var startRecord = document.getElementById("start-record-btn");
-var pauseRecord = document.getElementById("pause-record-btn");
-
-// Set count
-var timer = null;  // For referencing the timer
-var timer2 = null;
-
-var submit = document.getElementById("submit");
-
-(function countDownStart() {
-    // Display counter and start counting down
-    spn.textContent = count;
-
-    // Run the function again every second if the count is not zero
-    if (count !== 0) {
-        timer = setTimeout(countDownStart, 1000);
-        count--; // decrease the timer
-    } else {
-        // Enable the button
-        startRecord.click();
-        spn.style.display = "none"
-
-        if (spn.style.display = "none") {
-            spn.textContent = count1;
-            spn.style.display = "block";
-
-            // Run the function again every second if the count is not zero
-            if (count1 !== 0) {
-                timer2 = setTimeout(countDownStart, 1000);
-                count1--; // decrease the timer
-            } else {
-                // Enable the button
-                submit.click();
-                pauseRecord.click();
-                spn.style.display = "none"
-            }
-        }
-    }
-}());

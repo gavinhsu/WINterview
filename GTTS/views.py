@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 import random
 import base64
+from MockInterview.settings import BASE_DIR
 import os, re, string
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
@@ -12,8 +13,9 @@ from users.models import *
 from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
-from Blink.views import *
+from Blink.tasks import *
 from django.core.files import File
+from Emotion.views import *
 
 
 # TEST get base64 ###############################################
@@ -118,16 +120,24 @@ class equipCheck(TemplateView):
     # for testing purposes only
     elif job_name == 'Cashier':
       create_ques(Test_Job_pls_dont_add_shit_into_this_model_thank)
-    elif job_name == 'Investment Advisor':
+    elif job_name == 'Sales Trading':
       create_ques(Sales_Trading)
-    elif job_name == 'System Engineer':
-      create_ques(System_Engineer)
-    elif job_name == '':
-      pass
-    elif job_name == '':
-      pass
-    elif job_name == '':
-      pass
+    elif job_name == 'Hardware Engineer':
+      create_ques(Hardware_Engineer)
+    elif job_name == 'ML Engineer':
+      create_ques(ML_Engineer)
+    elif job_name == 'MIS':
+      create_ques(MIS)
+    elif job_name == 'Audit':
+      create_ques(Audit)
+    elif job_name == 'Quantitative':
+      create_ques(Quantitative)
+    elif job_name == 'Research':
+      create_ques(Research)
+    elif job_name == 'Investment Banking':
+      create_ques(Investment_Banking)
+    elif job_name == 'Data Scientist':
+      create_ques(Data_Scientist)
     else:
       print('Job questions not created yet!!!')
 
@@ -147,14 +157,14 @@ class equipCheck(TemplateView):
     answer_time = []
     for i in range(0,6):
       if diff_list[i] == 'easy':
-        prepare_time.append(100)
-        answer_time.append(10)
+        prepare_time.append(10)
+        answer_time.append(30)
       elif diff_list[i] == 'medium':
-        prepare_time.append(100)
-        answer_time.append(10)
+        prepare_time.append(10)
+        answer_time.append(30)
       else:
-        prepare_time.append(200)
-        answer_time.append(10)
+        prepare_time.append(10)
+        answer_time.append(30)
 
     print(diff_list)
     print(prepare_time)
@@ -186,16 +196,17 @@ class QuesView(TemplateView):
             account_name = request.session['account']
             account_instance = Member.objects.get(Account=account_name)
             # create answer & result table when getting website
-            unit = Answer.objects.create(userID=account_instance)
+            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
             uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
             res = Result.objects.create(userID=account_instance, id=uid)
+            # create video table when getting website
+            vid_unit = Video.objects.create(userID=account_instance, id=uid)
+            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
 
       random_question = q1
       prep_time1 = time_dict['prep_time1']
       ans_time1 = time_dict['ans_time1']
       total_time1 = prep_time1 + ans_time1 - 5
-      # run blink detection in the background
-      #blink1(total_time1)
 
       
       return render(request, self.template_name, locals())
@@ -204,31 +215,55 @@ class QuesView(TemplateView):
       if request.method == "POST":
         # save answer to Answer models
         a1 = request.POST['note-textarea']
-
-        # save video to Video models
-        # video_file = request.FILES.get['video']
-        # video_base64 = image_base64.split('base64,', 1 )
-        # print(video_base64)
-        # video = Video()
-        # video.videofile = video_file
-        # video.save()
+        v1 = request.POST['video']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            # get Account instance from Member model SUPER IMPORTANT!!!
-            account_instance = Member.objects.get(Account=account_name)           
+            account_instance = Member.objects.get(Account=account_name)        
         
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
         unit.a1 = a1
+        unit.v1 = v1
         unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
 
         # save result to Result models
         # r1 = predict('a1')
         # res = Result.objects.get(id=uid)
         # res.r1 = r1
         # res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v1
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid1.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid1
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink1(vid_path, account_name)
+        emotion(vid_path)
 
         return redirect('reply2/')
 
@@ -252,7 +287,6 @@ class QuesView2(TemplateView):
       prep_time2 = time_dict['prep_time2']
       ans_time2 = time_dict['ans_time2']
       total_time2 = prep_time2 + ans_time2 - 5
-      blink2(total_time2)
 
       return render(request, self.template_name, locals())
     
@@ -287,7 +321,6 @@ class QuesView3(TemplateView):
     template_name = 'reply3.html'
 
     def get(self, request):
-      #print(request.session.session_key)
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
@@ -297,7 +330,7 @@ class QuesView3(TemplateView):
       prep_time3 = time_dict['prep_time3']
       ans_time3 = time_dict['ans_time3']
       total_time3 = prep_time3 + ans_time3
-      blink3(total_time3)
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -341,7 +374,7 @@ class QuesView4(TemplateView):
       prep_time4 = time_dict['prep_time4']
       ans_time4 = time_dict['ans_time4']
       total_time4 = prep_time4 + ans_time4
-      blink4(total_time4)
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -384,7 +417,7 @@ class QuesView5(TemplateView):
       prep_time5 = time_dict['prep_time5']
       ans_time5 = time_dict['ans_time5']
       total_time5 = prep_time5 + ans_time5
-      blink3(total_time5)
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):   
@@ -428,7 +461,7 @@ class QuesView6(TemplateView):
       prep_time6 = time_dict['prep_time6']
       ans_time6 = time_dict['ans_time6']
       total_time6 = prep_time6 + ans_time6
-      blink3(total_time6)
+      
       return render(request, self.template_name, locals())
     
     def post(self, request):   
