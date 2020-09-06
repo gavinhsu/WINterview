@@ -266,7 +266,6 @@ class QuesView(TemplateView):
         emotion(vid_path, account_name)
 
         return redirect('reply2/')
-
       
       return render(request, self.template_name,locals())   
 
