@@ -16,9 +16,9 @@ class DataScientistForm(forms.ModelForm):
         model = Data_Scientist
         fields = ['QuesNum','Difficulties', 'Ques', 'Ans']
 
-class MISForm(forms.ModelForm):
+class DBAForm(forms.ModelForm):
     class Meta:
-        model = MIS
+        model = DBA
         fields = ['QuesNum','Difficulties', 'Ques', 'Ans']
 
 class HardwareEngineerForm(forms.ModelForm):

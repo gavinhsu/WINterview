@@ -149,6 +149,3 @@ function getAllNotes() {
   return notes;
 }
 
-
-
-
