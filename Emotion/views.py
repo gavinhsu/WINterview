@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import cv2
 import numpy as np
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from statistics import mode
 from Emotion.utils.datasets import get_labels
 from Emotion.utils.inference import detect_faces
@@ -10,16 +10,17 @@ from Emotion.utils.inference import draw_bounding_box
 from Emotion.utils.inference import apply_offsets
 from Emotion.utils.inference import load_detection_model
 from Emotion.utils.preprocessor import preprocess_input
+from background_task import background
 
 
-# get rid of cpu warning
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
-USE_WEBCAM = False # If false, loads video file source
-
-
+@background(schedule=1)
 def emotion(vid_path):
+    # get rid of cpu warning
+    import os
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+    USE_WEBCAM = False # If false, loads video file source
+
     # parameters for loading data and images
     emotion_model_path = './Emotion/models/emotion_model.hdf5'
     emotion_labels = get_labels('fer2013')
@@ -130,5 +131,14 @@ def emotion(vid_path):
     cap.release()
     print('The emotion list is ===> ', emotion_list)
 
+    # calculate the portion of each emotion
+    neutral_res = emotion_list.count('neutral')/len(emotion_list)*100
+    happy_res = emotion_list.count('happy')/len(emotion_list)*100
+    angry_res = emotion_list.count('angry')/len(emotion_list)*100
+    fear_res = emotion_list.count('fear')/len(emotion_list)*100
+    surprise_res = emotion_list.count('surprise')/len(emotion_list)*100
+
+
     cv2.destroyAllWindows()
+
 
