@@ -234,10 +234,10 @@ class QuesView(TemplateView):
         
 
         # save result to Result models
-        # r1 = predict('a1')
-        # res = Result.objects.get(id=uid)
-        # res.r1 = r1
-        # res.save()
+        r1 = predict('a1')
+        res = Result.objects.get(id=uid)
+        res.r1 = r1
+        res.save()
 
         # decode base64 to mp4 file
         text = unit.v1
@@ -263,7 +263,7 @@ class QuesView(TemplateView):
         
         # do blink detection and save to Result model
         blink1(vid_path, account_name)
-        emotion(vid_path, account_name)
+        emotion1(vid_path, account_name)
 
         return redirect('reply2/')
       
@@ -293,23 +293,55 @@ class QuesView2(TemplateView):
       if request.method == "POST":
         # save answer to Answer models
         a2 = request.POST['note-textarea']
-  
+        v2 = request.POST['video']
+
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            # get Account instance from Member model
-            account_instance = Member.objects.get(Account=account_name)
-            # retreive the user's id
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            unit = Answer.objects.get(id=uid)
-            unit.a2 = a2
-
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a2 = a2
+        unit.v2 = v2
         unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
 
         # save result to Result models
         r2 = predict('a2')
         res = Result.objects.get(id=uid)
         res.r2 = r2
         res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v2
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid2.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid2
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink2(vid_path, account_name)
+        emotion2(vid_path, account_name)
 
         return redirect('reply3/')
 
@@ -336,23 +368,55 @@ class QuesView3(TemplateView):
       if request.method == "POST":
         # save answer to Answer models
         a3 = request.POST['note-textarea']
-  
+        v3 = request.POST['video']
+
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            # get Account instance from Member model
-            account_instance = Member.objects.get(Account=account_name)
-            # retreive the user's id
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            unit = Answer.objects.get(id=uid)
-            unit.a3 = a3
-
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a3 = a3
+        unit.v3 = v3
         unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
 
         # save result to Result models
         r3 = predict('a3')
         res = Result.objects.get(id=uid)
         res.r3 = r3
         res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v3
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid3.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid3
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink3(vid_path, account_name)
+        emotion3(vid_path, account_name)
 
         return redirect('reply4/')
 
@@ -380,17 +444,23 @@ class QuesView4(TemplateView):
       if request.method == "POST":
         # save answer to Answer models
         a4 = request.POST['note-textarea']
-  
+        v4 = request.POST['video']
+
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            # get Account instance from Member model
-            account_instance = Member.objects.get(Account=account_name)
-            # retreive the user's id
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            unit = Answer.objects.get(id=uid)
-            unit.a4 = a4
-
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a4 = a4
+        unit.v4 = v4
         unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
 
         # save result to Result models
         r4 = predict('a4')
@@ -398,6 +468,31 @@ class QuesView4(TemplateView):
         res.r4 = r4
         res.save()
 
+        # decode base64 to mp4 file
+        text = unit.v4
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid4.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid4
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink4(vid_path, account_name)
+        emotion4(vid_path, account_name)
         return redirect('reply5/')
 
       return render(request, self.template_name,locals())  
@@ -423,23 +518,55 @@ class QuesView5(TemplateView):
       if request.method == "POST":
         # save answer to Answer models
         a5 = request.POST['note-textarea']
-  
+        v5 = request.POST['video']
+
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            # get Account instance from Member model
-            account_instance = Member.objects.get(Account=account_name)
-            # retreive the user's id
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            unit = Answer.objects.get(id=uid)
-            unit.a5 = a5
-
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a5 = a5
+        unit.v5 = v5
         unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
 
         # save result to Result models
         r5 = predict('a5')
         res = Result.objects.get(id=uid)
         res.r5 = r5
         res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v5
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid5.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid5
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink5(vid_path, account_name)
+        emotion5(vid_path, account_name)
 
         return redirect('reply6/')
 
@@ -466,24 +593,56 @@ class QuesView6(TemplateView):
     def post(self, request):   
       if request.method == "POST":
         # save answer to Answer models
-        a6 = request.POST['note-textarea']
-  
+        a1 = request.POST['note-textarea']
+        v1 = request.POST['video']
+
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            # get Account instance from Member model
-            account_instance = Member.objects.get(Account=account_name)
-            # retreive the user's id
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            unit = Answer.objects.get(id=uid)
-            unit.a6 = a6
-
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a6 = a6
+        unit.v6 = v6
         unit.save()
 
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
+
         # save result to Result models
-        r6 = predict('a6')
+        r1 = predict('a6')
         res = Result.objects.get(id=uid)
         res.r6 = r6
         res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v6
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid6.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid6
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink6(vid_path, account_name)
+        emotion6(vid_path, account_name)
 
         return redirect('reply7/')
 
