@@ -263,7 +263,7 @@ class QuesView(TemplateView):
         
         # do blink detection and save to Result model
         blink1(vid_path, account_name)
-        emotion(vid_path)
+        emotion(vid_path, account_name)
 
         return redirect('reply2/')
 
