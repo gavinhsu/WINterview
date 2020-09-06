@@ -35,16 +35,16 @@
         {% csrf_token %}
         <label for="note-textarea" style="text-align:center;">Your Answer</label>
         <div class="input-single">
-          <textarea  id="video" name="video"></textarea>
-          <textarea id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
+          <textarea style="display: none;" id="video" name="video"></textarea>
+          <textarea  id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
             style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
         </div>
         <input type="submit" id="submit" style="margin-left:1000px;margin-bottom:10px;" value="Next question">
       </form>
-      <video width="200" height="200" id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
-      <video width="200" height="200" id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
-      <button id="startBtn" class="btn btn-sm btn-outline-primary">Start Recording</button>
-      <button id="stopBtn" class="btn btn-sm btn-outline-danger" style='display:none'>Stop Recording</button>
+      <video  width="200" height="200" id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
+      <video  width="200" height="200" id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
+      <button style="visibility: hidden;" id="startBtn" class="btn btn-sm btn-outline-primary">Start Recording</button>
+      <button style="visibility: hidden;" id="stopBtn" class="btn btn-sm btn-outline-danger" style='display:none'>Stop Recording</button>
       <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 
     </div>
@@ -55,7 +55,7 @@
       var count1 = {{ ans_time1 }};
       /*-----------------------------
       countdown function 
-------------------------------*/
+      ------------------------------*/
       var spn = document.getElementById("countStart");
       var startRecord = document.getElementById("start-record-btn");
       var pauseRecord = document.getElementById("pause-record-btn");
@@ -74,7 +74,8 @@
         // Run the function again every second if the count is not zero
         if (count !== 0) {
           timer = setTimeout(countDownStart, 1000);
-          count--; // decrease the timer
+          count -= 1;
+           // decrease the timer
         } else {
           // Enable the button
           startRecord.click();
@@ -84,31 +85,24 @@
           if (spn.style.display = "none") {
             spn.textContent = count1;
             spn.style.display = "block";
-
             // Run the function again every second if the count is not zero
             if (count1 !== 0) {
               timer2 = setTimeout(countDownStart, 1000);
-              count1--; // decrease the timer
-            } 
-            // else if(count1 == 3){
-            //   pauseRecord.click();
-            //   }
+              count1 -=1;
+              // decrease the timer
+            }
             else {
               // Enable the button
               pauseRecord.click();
-              stopVideo.click();
               submit.click();
               spn.style.display = "none"
             }
+            if(count1 == 1){
+              stopVideo.click();
+              }
           }
         }
       }());
-
-      // function submit(){
-      //   if (submit.click()){
-      //     stopVideo.click();
-      //   }
-      // }
     </script>
     <script src="{% static "js/speech_to_text.js" %}"></script>
     <script src="{% static "js/s2t_media.js" %}"></script>
