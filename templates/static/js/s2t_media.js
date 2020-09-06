@@ -73,7 +73,6 @@ function mediaRecorderSetup() {
             var reader = new FileReader();
             reader.readAsDataURL(blob); 
             reader.onloadend = function() {
-             
                 var text = document.getElementById("video") 
                 // var decodedString = atob(base64data);
                 text.value = base64data
@@ -94,6 +93,19 @@ inputVideo.addEventListener('loadedmetadata', function () {
     console.log('inputVideo on loadedmetadata')
 })
 
-
+function isRecordingBtn(recordBtnState) {
+    startBtn.style.display = 'none'
+    stopBtn.style.display = 'none'
+    switch (recordBtnState) {
+        case 'start':
+            startBtn.style.display = 'block' // show startBtn
+            break
+        case 'stop':
+            stopBtn.style.display = 'block' // show stopBtn
+            break
+        default:
+            console.warn('isRecordingBtn error')
+    }
+}
 
 
