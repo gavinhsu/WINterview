@@ -33,11 +33,8 @@ class AjaxSaveAudio(TemplateView):
         })
 
 
-@background(schedule=1)
+#@background(schedule=1)
 def blink1(path_to_vid, account_name):
-    start = time.time()
-    PERIOD_OF_TIME = 5
-
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
         # vertical eye landmarks (x, y)-coordinates
@@ -84,6 +81,13 @@ def blink1(path_to_vid, account_name):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
+        cap = cv2.VideoCapture(path_to_vid)
+        # countdown
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = duration
 
     fileStream = True
 
@@ -174,10 +178,9 @@ def blink1(path_to_vid, account_name):
     res.save()
 
 
+
 @background(schedule=1)
 def blink2(path_to_vid, account_name):
-    start = time.time()
-    PERIOD_OF_TIME = 5
 
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
@@ -225,6 +228,13 @@ def blink2(path_to_vid, account_name):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
+        cap = cv2.VideoCapture(path_to_vid)
+        # countdown
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = duration
 
     fileStream = True
 
@@ -318,8 +328,6 @@ def blink2(path_to_vid, account_name):
 
 @background(schedule=1)
 def blink3(path_to_vid, account_name):
-    start = time.time()
-    PERIOD_OF_TIME = 5
 
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
@@ -367,6 +375,13 @@ def blink3(path_to_vid, account_name):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
+        cap = cv2.VideoCapture(path_to_vid)
+        # countdown
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = duration
 
     fileStream = True
 
@@ -458,8 +473,6 @@ def blink3(path_to_vid, account_name):
 
 @background(schedule=1)
 def blink4(path_to_vid, account_name):
-    start = time.time()
-    PERIOD_OF_TIME = 5
 
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
@@ -507,6 +520,13 @@ def blink4(path_to_vid, account_name):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
+        cap = cv2.VideoCapture(path_to_vid)
+        # countdown
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = duration
 
     fileStream = True
 
@@ -599,8 +619,6 @@ def blink4(path_to_vid, account_name):
 
 @background(schedule=1)
 def blink5(path_to_vid):
-    start = time.time()
-    PERIOD_OF_TIME = 5
 
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
@@ -648,6 +666,13 @@ def blink5(path_to_vid):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
+        cap = cv2.VideoCapture(path_to_vid)
+        # countdown
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = duration
 
     fileStream = True
 
@@ -742,8 +767,6 @@ def blink5(path_to_vid):
 
 @background(schedule=1)
 def blink6(path_to_vid, account_name):
-    start = time.time()
-    PERIOD_OF_TIME = 5
 
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
@@ -791,6 +814,13 @@ def blink6(path_to_vid, account_name):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
+        cap = cv2.VideoCapture(path_to_vid)
+        # countdown
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = duration
 
     fileStream = True
 
@@ -883,8 +913,6 @@ def blink6(path_to_vid, account_name):
 
 @background(schedule=1)
 def blink7(path_to_vid, account_name):
-    start = time.time()
-    PERIOD_OF_TIME = 5
 
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
@@ -932,6 +960,13 @@ def blink7(path_to_vid, account_name):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
+        cap = cv2.VideoCapture(path_to_vid)
+        # countdown
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = duration
 
     fileStream = True
 
@@ -1024,8 +1059,6 @@ def blink7(path_to_vid, account_name):
 
 @background(schedule=1)
 def blink8(path_to_vid, account_name):
-    start = time.time()
-    PERIOD_OF_TIME = 5
 
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
@@ -1073,6 +1106,13 @@ def blink8(path_to_vid, account_name):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
+        cap = cv2.VideoCapture(path_to_vid)
+        # countdown
+        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = duration
 
     fileStream = True
 

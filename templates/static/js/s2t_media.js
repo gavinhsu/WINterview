@@ -94,19 +94,19 @@ inputVideo.addEventListener('loadedmetadata', function () {
     console.log('inputVideo on loadedmetadata')
 })
 
-function isRecordingBtn(recordBtnState) {
-    startBtn.style.display = 'none'
-    stopBtn.style.display = 'none'
-    switch (recordBtnState) {
-        case 'start':
-            startBtn.style.display = 'block' // show startBtn
-            break
-        case 'stop':
-            stopBtn.style.display = 'block' // show stopBtn
-            break
-        default:
-            console.warn('isRecordingBtn error')
-    }
-}
+// function isRecordingBtn(recordBtnState) {
+//     startBtn.style.display = 'none'
+//     stopBtn.style.display = 'none'
+//     switch (recordBtnState) {
+//         case 'start':
+//             startBtn.style.display = 'block' // show startBtn
+//             break
+//         case 'stop':
+//             stopBtn.style.display = 'block' // show stopBtn
+//             break
+//         default:
+//             console.warn('isRecordingBtn error')
+//     }
+// }
 
 

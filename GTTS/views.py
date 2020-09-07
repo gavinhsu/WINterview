@@ -127,7 +127,11 @@ class equipCheck(TemplateView):
     elif job_name == 'ML Engineer':
       create_ques(ML_Engineer)
     elif job_name == 'DBA':
+<<<<<<< HEAD
       create_ques(MIS)
+=======
+      create_ques(DBA)
+>>>>>>> 7a73982631e2f2ef1835dcbd1690b7edc6ff636b
     elif job_name == 'Audit':
       create_ques(Audit)
     elif job_name == 'Quantitative':
@@ -263,10 +267,9 @@ class QuesView(TemplateView):
         
         # do blink detection and save to Result model
         blink1(vid_path, account_name)
-        emotion(vid_path, account_name)
+        emotion1(vid_path, account_name)
 
         return redirect('reply2/')
-
       
       return render(request, self.template_name,locals())   
 
@@ -342,7 +345,7 @@ class QuesView2(TemplateView):
         
         # do blink detection and save to Result model
         blink2(vid_path, account_name)
-        emotion(vid_path, account_name)
+        emotion2(vid_path, account_name)
 
         return redirect('reply3/')
 
@@ -417,7 +420,7 @@ class QuesView3(TemplateView):
         
         # do blink detection and save to Result model
         blink3(vid_path, account_name)
-        emotion(vid_path, account_name)
+        emotion3(vid_path, account_name)
 
         return redirect('reply4/')
 
@@ -493,7 +496,7 @@ class QuesView4(TemplateView):
         
         # do blink detection and save to Result model
         blink4(vid_path, account_name)
-        emotion(vid_path, account_name)
+        emotion4(vid_path, account_name)
         return redirect('reply5/')
 
       return render(request, self.template_name,locals())  
@@ -567,7 +570,7 @@ class QuesView5(TemplateView):
         
         # do blink detection and save to Result model
         blink5(vid_path, account_name)
-        emotion(vid_path, account_name)
+        emotion5(vid_path, account_name)
 
         return redirect('reply6/')
 
@@ -643,7 +646,7 @@ class QuesView6(TemplateView):
         
         # do blink detection and save to Result model
         blink6(vid_path, account_name)
-        emotion(vid_path, account_name)
+        emotion6(vid_path, account_name)
 
         return redirect('reply7/')
 

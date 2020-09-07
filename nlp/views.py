@@ -12,6 +12,7 @@ import torch
 import nltk
 # nltk.download('punkt')
 # nltk.download('stopwords')
+# nltk.download('averaged_perceptron_tagger')
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
