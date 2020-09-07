@@ -198,7 +198,7 @@ class QuesView(TemplateView):
             # create answer & result table when getting website
             unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
             uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            res = Result.objects.create(userID=account_instance, id=uid)
+            res = Result.objects.create(userID=account_instance, id=uid, selected_job=job_name)
             # create video table when getting website
             vid_unit = Video.objects.create(userID=account_instance, id=uid)
             vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')

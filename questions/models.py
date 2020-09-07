@@ -160,6 +160,7 @@ class Answer(models.Model):
 
 class Result(models.Model):
     userID = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
+    selected_job = models.CharField(max_length=500, blank=True)
     r1 = models.CharField(max_length=500, blank=True)
     b1 = models.IntegerField(null=True)
     neutral_1 = models.FloatField(null=True, blank=True, default=None)
