@@ -73,6 +73,7 @@ function mediaRecorderSetup() {
             var reader = new FileReader();
             reader.readAsDataURL(blob); 
             reader.onloadend = function() {
+                var base64data = reader.result; 
                 var text = document.getElementById("video") 
                 // var decodedString = atob(base64data);
                 text.value = base64data

@@ -35,7 +35,7 @@
         {% csrf_token %}
         <label for="note-textarea" style="text-align:center;">Your Answer</label>
         <div class="input-single">
-          <textarea id="video" name="video"></textarea>
+          <textarea style = "display: none" id="video" name="video"></textarea>
           <textarea  id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
             style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
         </div>
@@ -97,7 +97,7 @@
               submit.click();
               spn.style.display = "none"
             }
-            if(count1 == 1){
+            if(count1 == 2){
               stopVideo.click();
               }
           }
