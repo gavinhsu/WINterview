@@ -106,6 +106,9 @@ def emotion1(vid_path, account_name):
             elif emotion_text == 'surprise':
                 color = emotion_probability * np.asarray((0, 255, 255))
                 emotion_list.append('surprise')
+            elif emotion_text == 'fear':
+                color = emotion_probability * np.asarray((0, 255, 255))
+                emotion_list.append('fear')
             else:
                 color = emotion_probability * np.asarray((0, 255, 0))
                 emotion_list.append('neutral')

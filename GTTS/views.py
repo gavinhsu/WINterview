@@ -126,8 +126,8 @@ class equipCheck(TemplateView):
       create_ques(Hardware_Engineer)
     elif job_name == 'ML Engineer':
       create_ques(ML_Engineer)
-    elif job_name == 'MIS':
-      create_ques(MIS)
+    elif job_name == 'DBA':
+      create_ques(DBA)
     elif job_name == 'Audit':
       create_ques(Audit)
     elif job_name == 'Quantitative':
