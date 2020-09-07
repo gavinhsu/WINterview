@@ -13,6 +13,11 @@ urlpatterns = [
   path('reply2/reply3/reply4/', GTTS.views.QuesView4.as_view()),
   path('reply2/reply3/reply4/reply5/', GTTS.views.QuesView5.as_view()),
   path('reply2/reply3/reply4/reply5/reply6/', GTTS.views.QuesView6.as_view()),
+  path('reply2/reply3/reply4/reply5/reply6/reply7/', GTTS.views.QuesView7.as_view()),
+  path('reply2/reply3/reply4/reply5/reply6/reply7/reply8/', GTTS.views.QuesView8.as_view()),
+  path('reply2/reply3/reply4/reply5/reply6/reply7/reply8/reply9/', GTTS.views.QuesView9.as_view()),
+  path('reply2/reply3/reply4/reply5/reply6/reply7/reply8/reply9/reply10/', GTTS.views.QuesView10.as_view()),
+  path('reply2/reply3/reply4/reply5/reply6/reply7/reply8/reply9/reply10/result/', GTTS.views.QuesView10.as_view()),
 
   
  ]

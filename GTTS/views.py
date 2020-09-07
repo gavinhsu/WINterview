@@ -67,12 +67,13 @@ class equipCheck(TemplateView):
         easy_list.append(ques)
 
       easy_length = len(easy_list)
-      easy_rand = random.sample(easy_list, 2)
+      easy_rand = random.sample(easy_list, 3)
       # global r1
       # global r2
-      global r1, r2
+      global r1, r2, r3
       r1 = easy_rand[0]
       r2 = easy_rand[1]
+      r3 = easy_rand[2]
 
       # MEDIUM
       medium_QS = job.objects.filter(Difficulties='medium').values('Ques')
@@ -82,10 +83,12 @@ class equipCheck(TemplateView):
         medium_list.append(ques)
 
       medium_length = len(medium_list)
-      medium_rand = random.sample(medium_list, 2)
-      global r3, r4
-      r3 = medium_rand[0]
-      r4 = medium_rand[1]      
+      medium_rand = random.sample(medium_list, 4)
+      global r4, r5, r6, r7
+      r4 = medium_rand[0]
+      r5 = medium_rand[1]     
+      r6 = medium_rand[2]
+      r7 = medium_rand[3] 
 
       # HARD
       hard_QS = job.objects.filter(Difficulties='hard').values('Ques')
@@ -95,13 +98,14 @@ class equipCheck(TemplateView):
         hard_list.append(ques)
 
       hard_length = len(hard_list)
-      hard_rand = random.sample(hard_list, 2)
-      global r5, r6
-      r5 = hard_rand[0]
-      r6 = hard_rand[1]
+      hard_rand = random.sample(hard_list, 3)
+      global r8, r9 ,r10
+      r8 = hard_rand[0]
+      r9 = hard_rand[1]
+      r10 = hard_rand[2]
 
       global final_list
-      final_list = [r1,r2,r3,r4,r5,r6]
+      final_list = [r1,r2,r3,r4,r5,r6,r7,r8,r9,r10]
       random.shuffle(final_list)
 
       # get difficulty of questions
@@ -127,11 +131,7 @@ class equipCheck(TemplateView):
     elif job_name == 'ML Engineer':
       create_ques(ML_Engineer)
     elif job_name == 'DBA':
-<<<<<<< HEAD
-      create_ques(MIS)
-=======
       create_ques(DBA)
->>>>>>> 7a73982631e2f2ef1835dcbd1690b7edc6ff636b
     elif job_name == 'Audit':
       create_ques(Audit)
     elif job_name == 'Quantitative':
@@ -146,20 +146,24 @@ class equipCheck(TemplateView):
       print('Job questions not created yet!!!')
 
 
-    global q1,q2,q3,q4,q5,q6
+    global q1,q2,q3,q4,q5,q6,q7,q8,q9,q10
     q1 = final_list[0]
     q2 = final_list[1]
     q3 = final_list[2]
     q4 = final_list[3]
     q5 = final_list[4]
     q6 = final_list[5]
+    q7 = final_list[6]
+    q8 = final_list[7]
+    q9 = final_list[8]
+    q10 = final_list[9]
 
     # apply different time for different difficulty
     global prepare_time
     global answer_time
     prepare_time = []
     answer_time = []
-    for i in range(0,6):
+    for i in range(0,10):
       if diff_list[i] == 'easy':
         prepare_time.append(10)
         answer_time.append(30)
@@ -176,7 +180,7 @@ class equipCheck(TemplateView):
 
     global time_dict
     time_dict = {}
-    for x in range(0,6):
+    for x in range(0,10):
       time_dict["prep_time{0}".format(x+1)] = prepare_time[x]
       time_dict["ans_time{0}".format(x+1)] = answer_time[x]
     
@@ -597,8 +601,8 @@ class QuesView6(TemplateView):
     def post(self, request):   
       if request.method == "POST":
         # save answer to Answer models
-        a1 = request.POST['note-textarea']
-        v1 = request.POST['video']
+        a6 = request.POST['note-textarea']
+        v6 = request.POST['video']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -653,5 +657,362 @@ class QuesView6(TemplateView):
       return render(request, self.template_name,locals()) 
 
         
+class QuesView7(TemplateView):
+    template_name = 'speech_to_text.html'
+
+    def __init__(self, job_name=None):
+      self.job_name = job_name
+
+    def get(self, request):
+      
+      job_name = request.session['job_name']
+      self.job_name = job_name
+
+      # retreive the current user name
+      if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)
+            # create answer & result table when getting website
+            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
+            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+            res = Result.objects.create(userID=account_instance, id=uid)
+            # create video table when getting website
+            vid_unit = Video.objects.create(userID=account_instance, id=uid)
+            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+
+      random_question = q7
+      prep_time7 = time_dict['prep_time7']
+      ans_time7 = time_dict['ans_time7']
+      total_time7 = prep_time7 + ans_time7 - 5
+
+      
+      return render(request, self.template_name, locals())
+        
+    def post(self, request):
+      if request.method == "POST":
+        # save answer to Answer models
+        a7 = request.POST['note-textarea']
+        v7 = request.POST['video']
+
+        if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a7 = a7
+        unit.v7 = v7
+        unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
+
+        # save result to Result models
+        r7 = predict('a7')
+        res = Result.objects.get(id=uid)
+        res.r7 = r7
+        res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v7
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid7.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid1
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink1(vid_path, account_name)
+        emotion7(vid_path, account_name)
+
+        return redirect('reply8/')
+      
+      return render(request, self.template_name,locals())   
+
+
+class QuesView8(TemplateView):
+    template_name = 'speech_to_text.html'
+
+    def __init__(self, job_name=None):
+      self.job_name = job_name
+
+    def get(self, request):
+      
+      job_name = request.session['job_name']
+      self.job_name = job_name
+
+      # retreive the current user name
+      if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)
+            # create answer & result table when getting website
+            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
+            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+            res = Result.objects.create(userID=account_instance, id=uid)
+            # create video table when getting website
+            vid_unit = Video.objects.create(userID=account_instance, id=uid)
+            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+
+      random_question = q8
+      prep_time8 = time_dict['prep_time8']
+      ans_time8 = time_dict['ans_time8']
+      total_time8 = prep_time8 + ans_time8 - 5
+
+      
+      return render(request, self.template_name, locals())
+        
+    def post(self, request):
+      if request.method == "POST":
+        # save answer to Answer models
+        a8 = request.POST['note-textarea']
+        v8 = request.POST['video']
+
+        if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a8 = a8
+        unit.v8 = v8
+        unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
+
+        # save result to Result models
+        r8 = predict('a8')
+        res = Result.objects.get(id=uid)
+        res.r8 = r8
+        res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v8
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid8.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid1
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink1(vid_path, account_name)
+        emotion8(vid_path, account_name)
+
+        return redirect('reply9/')
+      
+      return render(request, self.template_name,locals())   
+
+
+class QuesView9(TemplateView):
+    template_name = 'speech_to_text.html'
+
+    def __init__(self, job_name=None):
+      self.job_name = job_name
+
+    def get(self, request):
+      
+      job_name = request.session['job_name']
+      self.job_name = job_name
+
+      # retreive the current user name
+      if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)
+            # create answer & result table when getting website
+            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
+            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+            res = Result.objects.create(userID=account_instance, id=uid)
+            # create video table when getting website
+            vid_unit = Video.objects.create(userID=account_instance, id=uid)
+            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+
+      random_question = q9
+      prep_time9 = time_dict['prep_time9']
+      ans_time9 = time_dict['ans_time9']
+      total_time9 = prep_time9 + ans_time9 - 5
+
+      
+      return render(request, self.template_name, locals())
+        
+    def post(self, request):
+      if request.method == "POST":
+        # save answer to Answer models
+        a9 = request.POST['note-textarea']
+        v9 = request.POST['video']
+
+        if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a9 = a9
+        unit.v9 = v9
+        unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
+
+        # save result to Result models
+        r9 = predict('a9')
+        res = Result.objects.get(id=uid)
+        res.r9 = r9
+        res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v9
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid9.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid1
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink1(vid_path, account_name)
+        emotion9(vid_path, account_name)
+
+        return redirect('reply10/')
+      
+      return render(request, self.template_name,locals())   
+
+class QuesView10(TemplateView):
+    template_name = 'speech_to_text.html'
+
+    def __init__(self, job_name=None):
+      self.job_name = job_name
+
+    def get(self, request):
+      
+      job_name = request.session['job_name']
+      self.job_name = job_name
+
+      # retreive the current user name
+      if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)
+            # create answer & result table when getting website
+            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
+            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+            res = Result.objects.create(userID=account_instance, id=uid)
+            # create video table when getting website
+            vid_unit = Video.objects.create(userID=account_instance, id=uid)
+            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+
+      random_question = q10
+      prep_time10 = time_dict['prep_time10']
+      ans_time10 = time_dict['ans_time10']
+      total_time10 = prep_time10 + ans_time10 - 5
+
+      
+      return render(request, self.template_name, locals())
+        
+    def post(self, request):
+      if request.method == "POST":
+        # save answer to Answer models
+        a10 = request.POST['note-textarea']
+        v10 = request.POST['video']
+
+        if 'is_login' in request.session and request.session['is_login']==True:
+            account_name = request.session['account']
+            account_instance = Member.objects.get(Account=account_name)        
+        
+        # retreive the user's id
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
+        unit = Answer.objects.get(id=uid)
+        unit.a10 = a10
+        unit.v10 = v10
+        unit.save()
+
+        # retrieve video instance
+        vid_unit = Video.objects.get(userID=account_instance, id=uid)
+        vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')  
+        
+
+        # save result to Result models
+        r10 = predict('a10')
+        res = Result.objects.get(id=uid)
+        res.r10 = r10
+        res.save()
+
+        # decode base64 to mp4 file
+        text = unit.v10
+        text = text[23:]
+        fh = open('interview_vid.mp4', 'wb')
+        fh.write(base64.b64decode(text))
+        fh.close()
+        print('VIDEO DECODED!', '\n')
+
+        # save to django video model
+        f = open('interview_vid.mp4', 'rb')
+        vid_unit.vid10.save('interview_vid.mp4', File(f), True)
+        f.close()
+        print('VIDEO SAVED TO MODEL!', '\n')
+
+        # retrieve video file from django model
+        vid_instance = Video.objects.get(id=uid).vid1
+        print(vid_instance)
+        vid_instance = str(vid_instance)
+        vidname = str(vid_instance[7:])
+        print(vidname)
+        vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
+        
+        # do blink detection and save to Result model
+        blink1(vid_path, account_name)
+        emotion1(vid_path, account_name)
+
+        return redirect('Result/')
+      
+      return render(request, self.template_name,locals())   
 
 
