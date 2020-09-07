@@ -85,9 +85,14 @@ def blink1(path_to_vid, account_name):
         # countdown
         frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
         fps = cap.get(cv2.CAP_PROP_FPS)
-        duration = frame_count / fps 
-        start = time.time()
-        PERIOD_OF_TIME = duration
+        while True:
+            if fps > 0:
+                duration = frame_count / fps 
+                start = time.time()
+                PERIOD_OF_TIME = duration
+            else:
+                print('SORRY, VIDEO FILE NOT FOUND.')
+                break
 
     fileStream = True
 
