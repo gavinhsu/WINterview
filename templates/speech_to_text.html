@@ -35,7 +35,11 @@
         {% csrf_token %}
         <label for="note-textarea" style="text-align:center;">Your Answer</label>
         <div class="input-single">
+<<<<<<< HEAD
+          <textarea style = "display: none" id="video" name="video"></textarea>
+=======
           <textarea style="display: none;"id="video" name="video"></textarea>
+>>>>>>> 7a73982631e2f2ef1835dcbd1690b7edc6ff636b
           <textarea  id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
             style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
         </div>
@@ -97,7 +101,7 @@
               submit.click();
               spn.style.display = "none"
             }
-            if(count1 == 1){
+            if(count1 == 2){
               stopVideo.click();
               }
           }
