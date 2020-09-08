@@ -658,7 +658,7 @@ class QuesView6(TemplateView):
 
         
 class QuesView7(TemplateView):
-    template_name = 'speech_to_text.html'
+    template_name = 'reply7.html'
 
     def __init__(self, job_name=None):
       self.job_name = job_name
@@ -739,7 +739,7 @@ class QuesView7(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink1(vid_path, account_name)
+        blink7(vid_path, account_name)
         emotion7(vid_path, account_name)
 
         return redirect('reply8/')
@@ -748,7 +748,7 @@ class QuesView7(TemplateView):
 
 
 class QuesView8(TemplateView):
-    template_name = 'speech_to_text.html'
+    template_name = 'reply8.html'
 
     def __init__(self, job_name=None):
       self.job_name = job_name
@@ -829,7 +829,7 @@ class QuesView8(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink1(vid_path, account_name)
+        blink8(vid_path, account_name)
         emotion8(vid_path, account_name)
 
         return redirect('reply9/')
@@ -838,7 +838,7 @@ class QuesView8(TemplateView):
 
 
 class QuesView9(TemplateView):
-    template_name = 'speech_to_text.html'
+    template_name = 'reply9.html'
 
     def __init__(self, job_name=None):
       self.job_name = job_name
@@ -919,7 +919,7 @@ class QuesView9(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink1(vid_path, account_name)
+        blink9(vid_path, account_name)
         emotion9(vid_path, account_name)
 
         return redirect('reply10/')
@@ -927,7 +927,7 @@ class QuesView9(TemplateView):
       return render(request, self.template_name,locals())   
 
 class QuesView10(TemplateView):
-    template_name = 'speech_to_text.html'
+    template_name = 'reply10.html'
 
     def __init__(self, job_name=None):
       self.job_name = job_name
@@ -1008,8 +1008,8 @@ class QuesView10(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink1(vid_path, account_name)
-        emotion1(vid_path, account_name)
+        blink10(vid_path, account_name)
+        emotion10(vid_path, account_name)
 
         return redirect('Result/')
       

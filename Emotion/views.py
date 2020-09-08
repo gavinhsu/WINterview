@@ -47,11 +47,11 @@ def emotion1(vid_path, account_name):
         path = vid_path
         cap = cv2.VideoCapture(path)
         # countdown
-        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-        fps = cap.get(cv2.CAP_PROP_FPS)
-        duration = frame_count / fps 
+        # frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        # fps = cap.get(cv2.CAP_PROP_FPS)
+        # duration = frame_count / fps 
         start = time.time()
-        PERIOD_OF_TIME = duration
+        PERIOD_OF_TIME = 10
 
     emotion_list = []
     while cap.isOpened(): # True:
@@ -189,11 +189,11 @@ def emotion2(vid_path, account_name):
         path = vid_path
         cap = cv2.VideoCapture(path)
         # countdown
-        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-        fps = cap.get(cv2.CAP_PROP_FPS)
-        duration = frame_count / fps 
+        # frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        # fps = cap.get(cv2.CAP_PROP_FPS)
+        # duration = frame_count / fps 
         start = time.time()
-        PERIOD_OF_TIME = duration
+        PERIOD_OF_TIME = 10
 
     emotion_list = []
     while cap.isOpened(): # True:

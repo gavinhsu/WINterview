@@ -33,7 +33,7 @@ class AjaxSaveAudio(TemplateView):
         })
 
 
-#@background(schedule=1)
+@background(schedule=1)
 def blink1(path_to_vid, account_name):
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of
@@ -81,18 +81,13 @@ def blink1(path_to_vid, account_name):
         vs = cv2.VideoCapture(0) # Webcam source
     else:
         vs = FileVideoStream(path_to_vid).start()
-        cap = cv2.VideoCapture(path_to_vid)
+        #cap = cv2.VideoCapture(path_to_vid)
         # countdown
-        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-        fps = cap.get(cv2.CAP_PROP_FPS)
-        while True:
-            if fps > 0:
-                duration = frame_count / fps 
-                start = time.time()
-                PERIOD_OF_TIME = duration
-            else:
-                print('SORRY, VIDEO FILE NOT FOUND.')
-                break
+        # frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        # fps = cap.get(cv2.CAP_PROP_FPS)
+        # duration = frame_count / fps 
+        start = time.time()
+        PERIOD_OF_TIME = 10
 
     fileStream = True
 
@@ -183,7 +178,6 @@ def blink1(path_to_vid, account_name):
     res.save()
 
 
-
 @background(schedule=1)
 def blink2(path_to_vid, account_name):
 
@@ -235,11 +229,11 @@ def blink2(path_to_vid, account_name):
         vs = FileVideoStream(path_to_vid).start()
         cap = cv2.VideoCapture(path_to_vid)
         # countdown
-        frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-        fps = cap.get(cv2.CAP_PROP_FPS)
-        duration = frame_count / fps 
+        # frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        # fps = cap.get(cv2.CAP_PROP_FPS)
+        # duration = frame_count / fps 
         start = time.time()
-        PERIOD_OF_TIME = duration
+        PERIOD_OF_TIME = 10
 
     fileStream = True
 
@@ -623,7 +617,7 @@ def blink4(path_to_vid, account_name):
 
 
 @background(schedule=1)
-def blink5(path_to_vid):
+def blink5(path_to_vid, account_name):
 
     def eye_aspect_ratio(eye):
         # compute the euclidean distances between the two sets of

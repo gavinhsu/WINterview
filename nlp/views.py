@@ -13,7 +13,7 @@ import nltk
 # nltk.download('punkt')
 # nltk.download('stopwords')
 # nltk.download('averaged_perceptron_tagger')
-nltk.download('wordnet')
+# nltk.download('wordnet')
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
