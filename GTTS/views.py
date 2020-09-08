@@ -224,6 +224,7 @@ class QuesView(TemplateView):
         # save answer to Answer models
         a1 = request.POST['note-textarea']
         v1 = request.POST['video']
+        t1 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -234,6 +235,7 @@ class QuesView(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a1 = a1
         unit.v1 = v1
+        unit.t1 = t1
         unit.save()
 
         # retrieve video instance
@@ -270,7 +272,7 @@ class QuesView(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink1(vid_path, account_name)
+        #blink1(vid_path, account_name)
         emotion1(vid_path, account_name)
 
         return redirect('reply2/')
@@ -348,7 +350,7 @@ class QuesView2(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink2(vid_path, account_name)
+        #blink2(vid_path, account_name)
         emotion2(vid_path, account_name)
 
         return redirect('reply3/')
@@ -423,7 +425,7 @@ class QuesView3(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink3(vid_path, account_name)
+        #blink3(vid_path, account_name)
         emotion3(vid_path, account_name)
 
         return redirect('reply4/')

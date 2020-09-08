@@ -80,8 +80,8 @@ def nlp_test_view(request):
     return render(request, 'nlp_test.html',{'answer':answer})
 
 # GENSIM
-#file_path = os.path.join(BASE_DIR, 'test.pickle')
-#w2v_model = pd.read_pickle(file_path)
+file_path = os.path.join(BASE_DIR, 'test.pickle')
+w2v_model = pd.read_pickle(file_path)
 
 import nltk
 from nltk.corpus import stopwords
@@ -96,8 +96,9 @@ ans_tokens = word_tokenize(answer)
 clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
 clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
 
-#similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
-#print(similarity)
+similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
+print(similarity)
+
 
 #######################################################################
 #BERT
