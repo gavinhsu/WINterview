@@ -27,7 +27,6 @@ import GTTS.views
 
 
 
-
 # Create your views here.
 
 def predict(n):
@@ -96,8 +95,8 @@ ans_tokens = word_tokenize(answer)
 clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
 clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
 
-similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
-print(similarity)
+# similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
+# print(similarity)
 
 
 #######################################################################
