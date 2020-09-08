@@ -19,6 +19,36 @@ let outputVideoURL = null
 
 startBtn.addEventListener('click', onStartRecording)
 stopBtn.addEventListener('click', onStopRecording)
+var submit = document.getElementById("submit");
+submit.addEventListener('click', simulateClick);
+
+function simulateClick() {
+    stopBtn.click()
+}
+
+
+(function () {
+    // set flag to indicate whether we should wait or actually submit
+    var delaySubmit = true;
+    // get form el
+    var form = document.getElementById('ans');
+    form.addEventListener("submit", function (e) {
+        document.getElementById("submit").value = "Next question";
+        // if we've already waited the 2 seconds, submit
+        if (!delaySubmit)
+            return;
+
+        // otherwise, stop the submission
+        e.preventDefault();
+        // set the flag for next time
+        delaySubmit = false;
+
+        // and resubmit in 2 seconds. 
+        window.setTimeout(function () {
+            this.submit();
+        }, 2000);
+    });
+})();
 
 function onStartRecording(e) {
     e.preventDefault()
@@ -55,6 +85,7 @@ function mediaRecorderSetup() {
             'dataavailable',
             mediaRecorderOnDataAvailable
         ) // 有資料傳入時觸發
+
         mediaRecorder.addEventListener('stop', mediaRecorderOnStop) // 停止錄影時觸發
 
         function mediaRecorderOnDataAvailable(e) {
@@ -71,18 +102,17 @@ function mediaRecorderSetup() {
             outputVideo.src = outputVideoURL //錄製好的影片可以呈現於outputvideo
             console.log(blob)
             var reader = new FileReader();
-            reader.readAsDataURL(blob); 
-            reader.onloadend = function() {
-                var base64data = reader.result; 
-                var text = document.getElementById("video") 
+            reader.readAsDataURL(blob);
+            reader.onloadend = function () {
+                var base64data = reader.result;
+                var text = document.getElementById("video")
                 // var decodedString = atob(base64data);
                 text.value = base64data
                 // video.src = base64data              
                 console.log(base64data);
             }
             stream.getTracks().forEach(function (track) {
-                track.stop()    
-
+                track.stop()
             })
         }
     })//取得當前裝置的stream的錯誤發生時
@@ -108,5 +138,4 @@ function isRecordingBtn(recordBtnState) {
             console.warn('isRecordingBtn error')
     }
 }
-
 
