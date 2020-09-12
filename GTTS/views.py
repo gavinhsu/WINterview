@@ -16,7 +16,12 @@ from nlp.views import predict
 from Blink.tasks import *
 from django.core.files import File
 from Emotion.views import *
+import sqlite3
 
+
+conn=sqlite3.connect('db.sqlite3')
+conn.execute("VACUUM")
+conn.close()
 
 class equipCheck(TemplateView): 
   template_name = 'equipCheck.html'
@@ -577,18 +582,15 @@ class QuesView5(TemplateView):
         print('PATH =====> ', path)
         blink5(vid_path, account_name, t, path)
         emotion5(vid_path, account_name, t, path)
-
         return redirect('reply6/')
 
-      return render(request, self.template_name,locals())  
+      return render(request, self.template_name,locals())   
 
 
 class QuesView6(TemplateView):
     template_name = 'reply6.html'
 
     def get(self, request):
-      #print(request.session.session_key)
-
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -627,7 +629,7 @@ class QuesView6(TemplateView):
         
 
         # save result to Result models
-        r1 = predict('a6')
+        r6 = predict('a6')
         res = Result.objects.get(id=uid)
         res.r6 = r6
         res.save()
@@ -679,20 +681,10 @@ class QuesView7(TemplateView):
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            account_instance = Member.objects.get(Account=account_name)
-            # create answer & result table when getting website
-            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            res = Result.objects.create(userID=account_instance, id=uid)
-            # create video table when getting website
-            vid_unit = Video.objects.create(userID=account_instance, id=uid)
-            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
 
       random_question = q7
       prep_time7 = time_dict['prep_time7']
       ans_time7 = time_dict['ans_time7']
-      total_time7 = prep_time7 + ans_time7 - 5
-
       
       return render(request, self.template_name, locals())
         
@@ -775,14 +767,6 @@ class QuesView8(TemplateView):
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            account_instance = Member.objects.get(Account=account_name)
-            # create answer & result table when getting website
-            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            res = Result.objects.create(userID=account_instance, id=uid)
-            # create video table when getting website
-            vid_unit = Video.objects.create(userID=account_instance, id=uid)
-            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
 
       random_question = q8
       prep_time8 = time_dict['prep_time8']
@@ -871,20 +855,10 @@ class QuesView9(TemplateView):
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            account_instance = Member.objects.get(Account=account_name)
-            # create answer & result table when getting website
-            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            res = Result.objects.create(userID=account_instance, id=uid)
-            # create video table when getting website
-            vid_unit = Video.objects.create(userID=account_instance, id=uid)
-            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
 
       random_question = q9
       prep_time9 = time_dict['prep_time9']
       ans_time9 = time_dict['ans_time9']
-      total_time9 = prep_time9 + ans_time9 - 5
-
       
       return render(request, self.template_name, locals())
         
@@ -966,20 +940,10 @@ class QuesView10(TemplateView):
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
-            account_instance = Member.objects.get(Account=account_name)
-            # create answer & result table when getting website
-            unit = Answer.objects.create(userID=account_instance, selected_job=job_name)
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            res = Result.objects.create(userID=account_instance, id=uid)
-            # create video table when getting website
-            vid_unit = Video.objects.create(userID=account_instance, id=uid)
-            vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
 
       random_question = q10
       prep_time10 = time_dict['prep_time10']
       ans_time10 = time_dict['ans_time10']
-      total_time10 = prep_time10 + ans_time10 - 5
-
       
       return render(request, self.template_name, locals())
         
