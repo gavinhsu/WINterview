@@ -19,36 +19,6 @@ let outputVideoURL = null
 
 startBtn.addEventListener('click', onStartRecording)
 stopBtn.addEventListener('click', onStopRecording)
-var submit = document.getElementById("submit");
-submit.addEventListener('click', simulateClick);
-
-function simulateClick() {
-    stopBtn.click()
-}
-
-
-(function () {
-    // set flag to indicate whether we should wait or actually submit
-    var delaySubmit = true;
-    // get form el
-    var form = document.getElementById('ans');
-    form.addEventListener("submit", function (e) {
-        document.getElementById("submit").value = "Next question";
-        // if we've already waited the 2 seconds, submit
-        if (!delaySubmit)
-            return;
-
-        // otherwise, stop the submission
-        e.preventDefault();
-        // set the flag for next time
-        delaySubmit = false;
-
-        // and resubmit in 2 seconds. 
-        window.setTimeout(function () {
-            this.submit();
-        }, 2000);
-    });
-})();
 
 function onStartRecording(e) {
     e.preventDefault()
@@ -137,5 +107,15 @@ function isRecordingBtn(recordBtnState) {
         default:
             console.warn('isRecordingBtn error')
     }
+}
+
+var submit = document.getElementById("submit")
+var firstBtn = document.getElementById("firstBtn");
+firstBtn.addEventListener('click', simulateClick);
+
+function simulateClick() {
+    stopBtn.click()
+    submit.style.display = "block"
+    firstBtn.style.display = "none"
 }
 

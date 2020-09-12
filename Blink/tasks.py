@@ -187,7 +187,7 @@ def blink1(path_to_vid, account_name, duration, curr_path):
 
 
 @background(schedule=1)
-def blink2(path_to_vid, account_name):
+def blink2(path_to_vid, account_name, duration, curr_path):
     a = 0
     current = curr_path
     while current == '/speech_to_text/' and a==0:
@@ -337,7 +337,7 @@ def blink2(path_to_vid, account_name):
 
 
 @background(schedule=1)
-def blink3(path_to_vid, account_name):
+def blink3(path_to_vid, account_name, duration, curr_path):
     a = 0
     current = curr_path
     while current == '/speech_to_text/' and a==0:
@@ -485,7 +485,7 @@ def blink3(path_to_vid, account_name):
     res.save()
 
 @background(schedule=1)
-def blink4(path_to_vid, account_name):
+def blink4(path_to_vid, account_name, duration, curr_path):
     a = 0
     current = curr_path
     while current == '/speech_to_text/' and a==0:
@@ -634,7 +634,7 @@ def blink4(path_to_vid, account_name):
 
 
 @background(schedule=1)
-def blink5(path_to_vid, account_name):
+def blink5(path_to_vid, account_name, duration, curr_path):
     a = 0
     current = curr_path
     while current == '/speech_to_text/' and a==0:
@@ -785,7 +785,7 @@ def blink5(path_to_vid, account_name):
 
 
 @background(schedule=1)
-def blink6(path_to_vid, account_name):
+def blink6(path_to_vid, account_name, duration, curr_path):
     a = 0
     current = curr_path
     while current == '/speech_to_text/' and a==0:
@@ -934,7 +934,7 @@ def blink6(path_to_vid, account_name):
 
 
 @background(schedule=1)
-def blink7(path_to_vid, account_name):
+def blink7(path_to_vid, account_name, duration, curr_path):
     a = 0
     current = curr_path
     while current == '/speech_to_text/' and a==0:
@@ -1083,7 +1083,7 @@ def blink7(path_to_vid, account_name):
 
 
 @background(schedule=1)
-def blink8(path_to_vid, account_name):
+def blink8(path_to_vid, account_name, duration, curr_path):
     a = 0
     current = curr_path
     while current == '/speech_to_text/' and a==0:

@@ -281,6 +281,7 @@ class QuesView2(TemplateView):
         v2 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t2 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -291,6 +292,7 @@ class QuesView2(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a2 = a2
         unit.v2 = v2
+        unit.t2 = t2
         unit.save()
 
         # retrieve video instance
@@ -360,6 +362,7 @@ class QuesView3(TemplateView):
         v3 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t3 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -370,6 +373,7 @@ class QuesView3(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a3 = a3
         unit.v3 = v3
+        unit.t3 = t3
         unit.save()
 
         # retrieve video instance
@@ -440,6 +444,7 @@ class QuesView4(TemplateView):
         v4 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t4 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -450,6 +455,7 @@ class QuesView4(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a4 = a4
         unit.v4 = v4
+        unit.t4 = t4
         unit.save()
 
         # retrieve video instance
@@ -519,6 +525,7 @@ class QuesView5(TemplateView):
         v5 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t5 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -529,6 +536,7 @@ class QuesView5(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a5 = a5
         unit.v5 = v5
+        unit.t5 = t5
         unit.save()
 
         # retrieve video instance
@@ -599,6 +607,7 @@ class QuesView6(TemplateView):
         v6 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t6 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -609,6 +618,7 @@ class QuesView6(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a6 = a6
         unit.v6 = v6
+        unit.t6 = t6
         unit.save()
 
         # retrieve video instance
@@ -693,6 +703,7 @@ class QuesView7(TemplateView):
         v7 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t7 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -703,6 +714,7 @@ class QuesView7(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a7 = a7
         unit.v7 = v7
+        unit.t7 = t7
         unit.save()
 
         # retrieve video instance
@@ -787,6 +799,7 @@ class QuesView8(TemplateView):
         v8 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t8 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -797,6 +810,7 @@ class QuesView8(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a8 = a8
         unit.v8 = v8
+        unit.t8 =t8
         unit.save()
 
         # retrieve video instance
@@ -881,6 +895,7 @@ class QuesView9(TemplateView):
         v9 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t9 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -891,6 +906,7 @@ class QuesView9(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a9 = a9
         unit.v9 = v9
+        unit.t9 = t9
         unit.save()
 
         # retrieve video instance
@@ -974,6 +990,7 @@ class QuesView10(TemplateView):
         v10 = request.POST['video']
         t = request.POST['time']
         t = int(t)
+        t10 = request.POST['time']
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -984,6 +1001,7 @@ class QuesView10(TemplateView):
         unit = Answer.objects.get(id=uid)
         unit.a10 = a10
         unit.v10 = v10
+        unit.t10 = t10
         unit.save()
 
         # retrieve video instance
