@@ -18,34 +18,6 @@ from django.core.files import File
 from Emotion.views import *
 
 
-# TEST get base64 ###############################################
-
-# decode from base64 to mp4 file
-# unit = Answer.objects.get(id=199)
-# text = unit.a1
-# text = text[23:]
-# fh = open("test_vid.mp4", "wb")
-# fh.write(base64.b64decode(text))
-# fh.close()
-# print('VIDEO DECODED')
-
-# # save to django model
-# f = open('test_vid.mp4', 'rb')
-# vid_unit = Video.objects.get(id=7)
-# vid_unit.videofile.save('test_vid.mp4', File(f), True)
-# f.close()
-# print('VIDEO SAVED TO MODEL')
-
-# # retrieve video file
-# vid_instance = Video.objects.get(id=7).videofile 
-# vid_instance = str(vid_instance)
-# vidname = str(vid_instance[7:])
-# print(vidname)
-# vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
-# blink(vid_path)
-
-
-
 class equipCheck(TemplateView): 
   template_name = 'equipCheck.html'
 
@@ -53,6 +25,8 @@ class equipCheck(TemplateView):
     self.job_name = job_name
 
   def get(self, request):
+    path = request.path
+    print('current path: ', path)
     job_name = request.session['job_name']
     self.job_name = job_name
     print('You selected: '+ job_name)
@@ -195,7 +169,6 @@ class QuesView(TemplateView):
       self.job_name = job_name
 
     def get(self, request):
-      
       job_name = request.session['job_name']
       self.job_name = job_name
 
@@ -214,8 +187,6 @@ class QuesView(TemplateView):
       random_question = q1
       prep_time1 = time_dict['prep_time1']
       ans_time1 = time_dict['ans_time1']
-      total_time1 = prep_time1 + ans_time1 - 5
-
       
       return render(request, self.template_name, locals())
         
@@ -225,6 +196,7 @@ class QuesView(TemplateView):
         a1 = request.POST['note-textarea']
         v1 = request.POST['video']
         t1 = request.POST['time']
+        t1 = int(t1)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -272,8 +244,11 @@ class QuesView(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        #blink1(vid_path, account_name)
-        emotion1(vid_path, account_name)
+        print('TIME =======> ', t1)
+        path = request.path
+        print('PATH =====> ', path)
+        blink1(vid_path, account_name, t1, path)
+        emotion1(vid_path, account_name, t1, path)
 
         return redirect('reply2/')
       
@@ -304,6 +279,8 @@ class QuesView2(TemplateView):
         # save answer to Answer models
         a2 = request.POST['note-textarea']
         v2 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -350,8 +327,10 @@ class QuesView2(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        #blink2(vid_path, account_name)
-        emotion2(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink2(vid_path, account_name, t, path)
+        emotion2(vid_path, account_name, t, path)
 
         return redirect('reply3/')
 
@@ -379,6 +358,8 @@ class QuesView3(TemplateView):
         # save answer to Answer models
         a3 = request.POST['note-textarea']
         v3 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -425,8 +406,10 @@ class QuesView3(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        #blink3(vid_path, account_name)
-        emotion3(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink3(vid_path, account_name, t, path)
+        emotion3(vid_path, account_name, t, path)
 
         return redirect('reply4/')
 
@@ -455,6 +438,8 @@ class QuesView4(TemplateView):
         # save answer to Answer models
         a4 = request.POST['note-textarea']
         v4 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -501,11 +486,14 @@ class QuesView4(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink4(vid_path, account_name)
-        emotion4(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink4(vid_path, account_name, t, path)
+        emotion4(vid_path, account_name, t, path)
         return redirect('reply5/')
 
       return render(request, self.template_name,locals())  
+
 
 class QuesView5(TemplateView):
     template_name = 'reply5.html'
@@ -529,6 +517,8 @@ class QuesView5(TemplateView):
         # save answer to Answer models
         a5 = request.POST['note-textarea']
         v5 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -575,8 +565,10 @@ class QuesView5(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink5(vid_path, account_name)
-        emotion5(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink5(vid_path, account_name, t, path)
+        emotion5(vid_path, account_name, t, path)
 
         return redirect('reply6/')
 
@@ -605,6 +597,8 @@ class QuesView6(TemplateView):
         # save answer to Answer models
         a6 = request.POST['note-textarea']
         v6 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -651,8 +645,10 @@ class QuesView6(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink6(vid_path, account_name)
-        emotion6(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink6(vid_path, account_name, t, path)
+        emotion6(vid_path, account_name, t, path)
 
         return redirect('reply7/')
 
@@ -695,6 +691,8 @@ class QuesView7(TemplateView):
         # save answer to Answer models
         a7 = request.POST['note-textarea']
         v7 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -741,8 +739,10 @@ class QuesView7(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink7(vid_path, account_name)
-        emotion7(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink7(vid_path, account_name, t, path)
+        emotion7(vid_path, account_name, t, path)
 
         return redirect('reply8/')
       
@@ -785,6 +785,8 @@ class QuesView8(TemplateView):
         # save answer to Answer models
         a8 = request.POST['note-textarea']
         v8 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -831,8 +833,10 @@ class QuesView8(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink8(vid_path, account_name)
-        emotion8(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink8(vid_path, account_name, t, path)
+        emotion8(vid_path, account_name, t, path)
 
         return redirect('reply9/')
       
@@ -875,6 +879,8 @@ class QuesView9(TemplateView):
         # save answer to Answer models
         a9 = request.POST['note-textarea']
         v9 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -921,8 +927,10 @@ class QuesView9(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink9(vid_path, account_name)
-        emotion9(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink9(vid_path, account_name, t, path)
+        emotion9(vid_path, account_name, t, path)
 
         return redirect('reply10/')
       
@@ -964,6 +972,8 @@ class QuesView10(TemplateView):
         # save answer to Answer models
         a10 = request.POST['note-textarea']
         v10 = request.POST['video']
+        t = request.POST['time']
+        t = int(t)
 
         if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
@@ -1010,8 +1020,10 @@ class QuesView10(TemplateView):
         vid_path = os.path.join(BASE_DIR + '\\media\\videos\\' + vidname)
         
         # do blink detection and save to Result model
-        blink10(vid_path, account_name)
-        emotion10(vid_path, account_name)
+        path = request.path
+        print('PATH =====> ', path)
+        blink10(vid_path, account_name, t, path)
+        emotion10(vid_path, account_name, t, path)
 
         return redirect('Result/')
       
