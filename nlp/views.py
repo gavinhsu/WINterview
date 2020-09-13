@@ -75,20 +75,7 @@ def predict(n):
     return result
 
 
-class ResultView(TemplateView):
-    template_name = 'result.html'
-
-    def __init__(self, job_name=None):
-    self.job_name = job_name
-
-    def get(self, request):
-      job_name = request.session['job_name']
-      self.job_name = job_name
-
-    def nlp_test(self):
-        print("result")
-        keywords = 
-        return render(request, self.template_name)
+        
 
 # GENSIM
 file_path = os.path.join(BASE_DIR, 'test.pickle')
@@ -124,3 +111,35 @@ s2 = "python is really great to program"
 #predict = float(predict)
 #score = (predict/5)*100
 #print('BERT ===> ', score, '%')
+
+
+
+class ResultView(TemplateView):
+    template_name = 'result.html'
+
+    def __init__(self, job_name=None):
+        self.job_name = job_name
+
+    def get(self, request):
+        job_name = request.session['job_name']
+        self.job_name = job_name
+        
+        keyword = Data_Scientist.objects.get(QuesNum='1').Keywords
+        res = word_tokenize(keyword)
+        #print(res)
+        # sim_words = w2v_model.wv.most_similar
+
+        w_list = []
+        for w in res:
+            word = w2v_model.wv.most_similar(w, topn=5)
+            w_list.append(word)
+        print(w_list)
+
+        key_list = []
+        for i in range(len(w_list)):
+            for j in range(len(w_list[i])):
+                key_list.append(w_list[i][j][0])
+        print('\n', key_list)
+
+
+        return render(request, self.template_name)
