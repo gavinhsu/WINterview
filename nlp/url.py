@@ -5,7 +5,6 @@ import nlp.views
 app_name = 'nlp'
 
 urlpatterns = [
-  path('', nlp.views.nlp_test_view),
-
+  path('', nlp.views.ResultView.as_view()),
   ]
   

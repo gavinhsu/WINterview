@@ -31,7 +31,7 @@ urlpatterns = [
     path('speech_to_text/', include("GTTS.url")),
     path('users/jobselect/speech_to_text/equipCheck', GTTS.views.equipCheck.as_view()),
     # nlp test
-    path('nlp/', include('nlp.url')),
+    path('result/', include('nlp.url')),
     path('ques/', include('questions.url')),
     path('videoUploadTest/',include('Blink.url'))
     # for unauthorized access dynamic translation

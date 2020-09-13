@@ -3,6 +3,8 @@ from django.contrib import auth
 from django.http import HttpResponse
 import os, re, string
 from MockInterview.settings import BASE_DIR
+from questions.models import *
+from users.models import *
 import random
 import pickle
 import pandas as pd
@@ -73,10 +75,20 @@ def predict(n):
     return result
 
 
-# not used
-def nlp_test_view(request):
-    answer = Answer.objects.get(id='26').a1
-    return render(request, 'nlp_test.html',{'answer':answer})
+class ResultView(TemplateView):
+    template_name = 'result.html'
+
+    def __init__(self, job_name=None):
+    self.job_name = job_name
+
+    def get(self, request):
+      job_name = request.session['job_name']
+      self.job_name = job_name
+
+    def nlp_test(self):
+        print("result")
+        keywords = 
+        return render(request, self.template_name)
 
 # GENSIM
 file_path = os.path.join(BASE_DIR, 'test.pickle')
