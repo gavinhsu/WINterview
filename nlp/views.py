@@ -26,14 +26,12 @@ from nltk import FreqDist, classify, NaiveBayesClassifier
 from django.views.generic import TemplateView
 from questions.models import *
 import GTTS.views
+from sre_parse import Tokenizer
 
 
 
 # Create your views here.
-
-def predict(n):
-
-    def remove_noise(tweet_tokens, stop_words = ()):
+def remove_noise(tweet_tokens, stop_words = ()):
         cleaned_tokens = []
 
         # REMOVING NOISE (IRRELEVANT LETTERS, HYPERLINKS, OR PUNCTUATION MARKS)
@@ -57,6 +55,7 @@ def predict(n):
         return cleaned_tokens
 
 
+def predict(n):
     uid = Answer.objects.all().order_by('-id')[0].id
 
     answer = Answer.objects.filter(id=uid).values(n)
@@ -81,18 +80,17 @@ def predict(n):
 file_path = os.path.join(BASE_DIR, 'test.pickle')
 w2v_model = pd.read_pickle(file_path)
 
-import nltk
-from nltk.corpus import stopwords
-#nltk.download('stopwords')
-from nltk.tokenize import word_tokenize
+# import nltk
+# from nltk.corpus import stopwords
+# from nltk.tokenize import word_tokenize
 
-reply = 'python is a great way to program'
-answer = 'python is a good programming language'
-reply_tokens = word_tokenize(reply)
-ans_tokens = word_tokenize(answer)
+# reply = 'python is a great way to program'
+# answer = 'python is a good programming language'
+# reply_tokens = word_tokenize(reply)
+# #ans_tokens = word_tokenize(answer)
 
-clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
-clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
+# clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
+#clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
 
 # similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
 # print(similarity)
@@ -124,22 +122,57 @@ class ResultView(TemplateView):
         job_name = request.session['job_name']
         self.job_name = job_name
         
-        keyword = Data_Scientist.objects.get(QuesNum='1').Keywords
-        res = word_tokenize(keyword)
-        #print(res)
-        # sim_words = w2v_model.wv.most_similar
+        keywords = Data_Scientist.objects.get(QuesNum='1').Keywords
+        key_split = word_tokenize(keywords)
 
-        w_list = []
-        for w in res:
-            word = w2v_model.wv.most_similar(w, topn=5)
-            w_list.append(word)
-        print(w_list)
+        # get similar keywords of correct answer
+        a_list = []
+        for w in key_split:
+            word = w2v_model.wv.most_similar(w, topn=10)
+            a_list.append(word)
+        ans_list = []
+        for i in range(len(a_list)): 
+            for j in range(len(a_list[i])):
+                ans_list.append(a_list[i][j][0])
+        for key in key_split:
+            ans_list.append(key)
+        print('\n', 'ANSWER ==== ', ans_list)
 
-        key_list = []
-        for i in range(len(w_list)):
-            for j in range(len(w_list[i])):
-                key_list.append(w_list[i][j][0])
-        print('\n', key_list)
+        
+        ans = 'It is a graphical plot to programmatically illustrate a binary classifier to see whether valid.'
+        ans_tokens = word_tokenize(ans)
+        reply_token = [word for word in ans_tokens if not word in stopwords.words()]
+        clean_reply = remove_noise(reply_token)
+
+        # get similar keywords of user reply
+        r_list = []
+        for w in clean_reply:
+            word = w2v_model.wv.most_similar(w, topn=10)
+            r_list.append(word)
+        reply_list = []
+        for i in range(len(r_list)): 
+            for j in range(len(r_list[i])):
+                reply_list.append(r_list[i][j][0])
+        for key in clean_reply:
+            reply_list.append(key)
+        print('\n', 'REPLY ==== ', reply_list)
+
+        mean = int((len(reply_list)+len(ans_list))/2)
+
+        # run similarity between reply & answer similar keywords
+        while clean_reply:
+            try:
+                similarity = round((w2v_model.wv.n_similarity(reply_list, ans_list)) * 100, 2)
+                print(similarity)
+                break
+            except Exception:
+                print('word not found')
+                break
+        
+        # see how many words are same between reply & answer
+        same_words = set(reply_list) & set(ans_list)
+        num_of_same_words = len(same_words)
+        same_percentage = round(num_of_same_words/mean, 4) * 100
 
 
-        return render(request, self.template_name)
+        return render(request, self.template_name, locals())

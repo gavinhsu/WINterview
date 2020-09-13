@@ -341,7 +341,7 @@ class QuesView2(TemplateView):
 
         return redirect('reply3/')
 
-      return render(request, self.template_name,locals())   
+      return render(request, self.template_name, locals())   
 
 
 class QuesView3(TemplateView):
