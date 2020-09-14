@@ -14,9 +14,18 @@
 </head>
 
 <body>
-  Similarity --> {{ similarity }} %
+  <p>Selected Job: {{job_name}}</p>
   <p>
-    There are {{ num_of_same_words }} same words out of {{ mean }} words. --> {{ same_percentage }} %
+    Gensim Similarity --> {{ gensim_score }} %
+  </p> 
+  <p>
+    There are {{ num_of_same_words }} same words out of {{ mean }} words.
+  </p>
+  <p>
+    BERT Score --> {{bert_score}} %
+  </p>
+  <p>
+    FINAL SCORE --> {{final_score}} 
   </p>
   
 

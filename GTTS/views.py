@@ -37,7 +37,6 @@ class equipCheck(TemplateView):
     print('You selected: '+ job_name)
 
     def create_ques(job):
-
       # EASY
       easy_QS = job.objects.filter(Difficulties='easy').values('Ques')
       easy_list = []
@@ -670,13 +669,7 @@ class QuesView6(TemplateView):
 class QuesView7(TemplateView):
     template_name = 'reply7.html'
 
-    def __init__(self, job_name=None):
-      self.job_name = job_name
-
     def get(self, request):
-      
-      job_name = request.session['job_name']
-      self.job_name = job_name
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
@@ -685,7 +678,7 @@ class QuesView7(TemplateView):
       random_question = q7
       prep_time7 = time_dict['prep_time7']
       ans_time7 = time_dict['ans_time7']
-      
+
       return render(request, self.template_name, locals())
         
     def post(self, request):
@@ -756,13 +749,7 @@ class QuesView7(TemplateView):
 class QuesView8(TemplateView):
     template_name = 'reply8.html'
 
-    def __init__(self, job_name=None):
-      self.job_name = job_name
-
     def get(self, request):
-      
-      job_name = request.session['job_name']
-      self.job_name = job_name
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
@@ -771,9 +758,7 @@ class QuesView8(TemplateView):
       random_question = q8
       prep_time8 = time_dict['prep_time8']
       ans_time8 = time_dict['ans_time8']
-      total_time8 = prep_time8 + ans_time8 - 5
 
-      
       return render(request, self.template_name, locals())
         
     def post(self, request):
@@ -844,22 +829,16 @@ class QuesView8(TemplateView):
 class QuesView9(TemplateView):
     template_name = 'reply9.html'
 
-    def __init__(self, job_name=None):
-      self.job_name = job_name
-
     def get(self, request):
-      
-      job_name = request.session['job_name']
-      self.job_name = job_name
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
 
-      random_question = q9
-      prep_time9 = time_dict['prep_time9']
-      ans_time9 = time_dict['ans_time9']
-      
+      random_question = q8
+      prep_time8 = time_dict['prep_time8']
+      ans_time8 = time_dict['ans_time8']
+
       return render(request, self.template_name, locals())
         
     def post(self, request):
@@ -929,13 +908,7 @@ class QuesView9(TemplateView):
 class QuesView10(TemplateView):
     template_name = 'reply10.html'
 
-    def __init__(self, job_name=None):
-      self.job_name = job_name
-
     def get(self, request):
-      
-      job_name = request.session['job_name']
-      self.job_name = job_name
 
       # retreive the current user name
       if 'is_login' in request.session and request.session['is_login']==True:
@@ -944,7 +917,7 @@ class QuesView10(TemplateView):
       random_question = q10
       prep_time10 = time_dict['prep_time10']
       ans_time10 = time_dict['ans_time10']
-      
+
       return render(request, self.template_name, locals())
         
     def post(self, request):

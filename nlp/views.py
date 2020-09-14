@@ -10,7 +10,6 @@ import pickle
 import pandas as pd
 import cloudpickle
 import torch
-# for nltk model building ######################################
 import nltk
 # nltk.download('punkt')
 # nltk.download('stopwords')
@@ -24,16 +23,14 @@ from nltk import FreqDist, classify, NaiveBayesClassifier
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
-from questions.models import *
 import GTTS.views
-from sre_parse import Tokenizer
-
+import warnings
+import questions
 
 
 # Create your views here.
 def remove_noise(tweet_tokens, stop_words = ()):
         cleaned_tokens = []
-
         # REMOVING NOISE (IRRELEVANT LETTERS, HYPERLINKS, OR PUNCTUATION MARKS)
         for token, tag in pos_tag(tweet_tokens):
             # use re to search and replace the links that start with 'http://' with empty string''
@@ -64,7 +61,6 @@ def predict(n):
             res = res[n]
             return res
 
-
     # unpickle
     file_path = os.path.join(BASE_DIR, 'model.pickle')
     model = pd.read_pickle(file_path)
@@ -74,42 +70,21 @@ def predict(n):
     return result
 
 
-        
+########################################################
+#BERT
+torch.nn.Module.dump_patches = True
+warnings.filterwarnings("ignore")
+
+bert_file_path = os.path.join(BASE_DIR, 'bert.pickle')
+bert = torch.load(bert_file_path)
 
 # GENSIM
-file_path = os.path.join(BASE_DIR, 'test.pickle')
-w2v_model = pd.read_pickle(file_path)
-
-# import nltk
-# from nltk.corpus import stopwords
-# from nltk.tokenize import word_tokenize
-
-# reply = 'python is a great way to program'
-# answer = 'python is a good programming language'
-# reply_tokens = word_tokenize(reply)
-# #ans_tokens = word_tokenize(answer)
-
-# clean_reply = [word for word in reply_tokens if not word in stopwords.words()]
-#clean_ans = [word for word in ans_tokens if not word in stopwords.words()]
-
-# similarity = w2v_model.wv.n_similarity(reply_tokens, ans_tokens)
-# print(similarity)
-
-
-#######################################################################
-#BERT
-#torch.nn.Module.dump_patches = True
-
-#bert_file_path = os.path.join(BASE_DIR, 'bert.pickle')
-#bert = torch.load(bert_file_path)
-s1 = "python is a good programming language"
-s2 = "python is really great to program"
-
-#predict = bert.predict([(s1, s2)])
-#predict = float(predict)
-#score = (predict/5)*100
-#print('BERT ===> ', score, '%')
-
+# tech model
+tech_path = os.path.join(BASE_DIR, 'test.pickle')
+tech_model = pd.read_pickle(tech_path)
+# finance model
+fin_path = os.path.join(BASE_DIR, 'analOthman.pkl')
+fin_model = pd.read_pickle(fin_path)
 
 
 class ResultView(TemplateView):
@@ -122,13 +97,24 @@ class ResultView(TemplateView):
         job_name = request.session['job_name']
         self.job_name = job_name
         
-        keywords = Data_Scientist.objects.get(QuesNum='1').Keywords
-        key_split = word_tokenize(keywords)
+        if job_name == "Hardware Engineer"or"Software Engineer"or"ML Engineer"or"DBA"or"Data Scientist":
+            model = tech_model
+        else:
+            model = fin_model
 
-        # get similar keywords of correct answer
+        for letter in str(job_name):
+            new_job = job_name.replace(' ', '_')  
+
+        #account_instance = questions.objects.get(Account=account_name)
+        job_selection = getattr(questions.models, new_job)
+        answer = str(job_selection.objects.get(QuesNum='1').Ans)
+        keywords = job_selection.objects.get(QuesNum='1').Keywords
+        key_split = word_tokenize(keywords)
+        
+        # get similar keywords of CORRECT ANSWER
         a_list = []
         for w in key_split:
-            word = w2v_model.wv.most_similar(w, topn=10)
+            word = model.wv.most_similar(w, topn=10)
             a_list.append(word)
         ans_list = []
         for i in range(len(a_list)): 
@@ -136,18 +122,18 @@ class ResultView(TemplateView):
                 ans_list.append(a_list[i][j][0])
         for key in key_split:
             ans_list.append(key)
-        print('\n', 'ANSWER ==== ', ans_list)
+        #print('\n', 'ANSWER ==== ', ans_list)
 
         
-        ans = 'It is a graphical plot to programmatically illustrate a binary classifier to see whether valid.'
-        ans_tokens = word_tokenize(ans)
-        reply_token = [word for word in ans_tokens if not word in stopwords.words()]
+        reply = 'It is a graphical plot to programmatically illustrate a binary classifier to see whether valid.'
+        reply_tokens = word_tokenize(reply)
+        reply_token = [word for word in reply_tokens if not word in stopwords.words()]
         clean_reply = remove_noise(reply_token)
 
-        # get similar keywords of user reply
+        # get similar keywords of USER REPLY
         r_list = []
         for w in clean_reply:
-            word = w2v_model.wv.most_similar(w, topn=10)
+            word = model.wv.most_similar(w, topn=10)
             r_list.append(word)
         reply_list = []
         for i in range(len(r_list)): 
@@ -155,24 +141,31 @@ class ResultView(TemplateView):
                 reply_list.append(r_list[i][j][0])
         for key in clean_reply:
             reply_list.append(key)
-        print('\n', 'REPLY ==== ', reply_list)
+        #print('\n', 'REPLY ==== ', reply_list)
 
         mean = int((len(reply_list)+len(ans_list))/2)
 
-        # run similarity between reply & answer similar keywords
+
+        # run similarity between REPLY & ANSWER similar keywords
         while clean_reply:
             try:
-                similarity = round((w2v_model.wv.n_similarity(reply_list, ans_list)) * 100, 2)
-                print(similarity)
+                gensim_score = round((model.wv.n_similarity(reply_list, ans_list)) * 100, 2)
                 break
             except Exception:
                 print('word not found')
                 break
         
-        # see how many words are same between reply & answer
+        # see how many words are same between REPLY & ANSWER
         same_words = set(reply_list) & set(ans_list)
         num_of_same_words = len(same_words)
-        same_percentage = round(num_of_same_words/mean, 4) * 100
 
+        # BERT prediction
+        bert_predict = bert.predict([(reply, answer)])
+        bert_res = bert_predict[0]
+        bert_score = round((bert_res/5)*100, 2)
+
+        # FINAL SCORE
+        final_score = (bert_score + gensim_score)/2 + num_of_same_words
 
         return render(request, self.template_name, locals())
+
