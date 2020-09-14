@@ -94,7 +94,9 @@ class ResultView(TemplateView):
         self.job_name = job_name
 
     def get(self, request):
+        account_name = request.session['account']
         job_name = request.session['job_name']
+        self.account_name = account_name
         self.job_name = job_name
         
         if job_name == "Hardware Engineer"or"Software Engineer"or"ML Engineer"or"DBA"or"Data Scientist":
@@ -105,7 +107,13 @@ class ResultView(TemplateView):
         for letter in str(job_name):
             new_job = job_name.replace(' ', '_')  
 
-        #account_instance = questions.objects.get(Account=account_name)
+        # get the entire result table 
+        account_instance = Member.objects.get(Account=account_name)
+        res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
+        res_unit = Result.objects.get(id=res_id)
+        
+
+        # NLP PROCESSING #####################################################
         job_selection = getattr(questions.models, new_job)
         answer = str(job_selection.objects.get(QuesNum='1').Ans)
         keywords = job_selection.objects.get(QuesNum='1').Keywords
@@ -165,7 +173,19 @@ class ResultView(TemplateView):
         bert_score = round((bert_res/5)*100, 2)
 
         # FINAL SCORE
-        final_score = (bert_score + gensim_score)/2 + num_of_same_words
+        final_score = int(round(((bert_score + gensim_score)/2 + num_of_same_words), 0))
+
+
+        # BLINK PROCESSING #####################################################
+        total_blinks = 0
+        for x in range(10):
+            blink = "b{0}".format(x+1)
+            num = getattr(res_unit, blink)
+            total_blinks += num
+
+        mean_blinks = total_blinks/10
+
+        # EMOTION PROCESSING #####################################################
+        
 
         return render(request, self.template_name, locals())
-
