@@ -20,6 +20,14 @@ from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 from nltk import FreqDist, classify, NaiveBayesClassifier
+
+from nltk.classify import ClassifierI
+from nltk.classify.scikitlearn import SklearnClassifier
+from sklearn.naive_bayes import MultinomialNB, BernoulliNB
+from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.svm import SVC, LinearSVC, NuSVC
+from nltk.classify import ClassifierI
+from statistics import mode
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
@@ -54,7 +62,6 @@ def remove_noise(tweet_tokens, stop_words = ()):
 
 def predict(n):
     uid = Answer.objects.all().order_by('-id')[0].id
-
     answer = Answer.objects.filter(id=uid).values(n)
     def res():
         for res in answer:
@@ -186,6 +193,64 @@ class ResultView(TemplateView):
         mean_blinks = total_blinks/10
 
         # EMOTION PROCESSING #####################################################
-        
+
 
         return render(request, self.template_name, locals())
+
+
+########################################################
+## new nlp model with percentage #######################
+positive_tweets = twitter_samples.strings('positive_tweets.json')
+negative_tweets = twitter_samples.strings('negative_tweets.json')
+
+all_words = []
+documents = []
+
+stop_words = list(set(stopwords.words('english')))
+
+#allowed_word_types = ["J","R","V"]
+allowed_word_types = ["J"]
+
+for p in  positive_tweets:
+    documents.append( (p, "pos") )
+         
+for p in negative_tweets:
+    documents.append( (p, "neg") )
+
+f = open('.\\all_words.txt', "r")
+content = f.readlines()
+for string in content:
+    tmp = string.replace('\n', '')
+    all_words.append(tmp)
+
+all_words = nltk.FreqDist(all_words)
+word_features = list(all_words.keys())[:5000]
+
+def find_features(document):
+    words = word_tokenize(document)
+    features = {}
+    for w in word_features:
+        features[w] = (w in words)
+    return features
+
+classifier_path = os.path.join(BASE_DIR, 'classifier_model.pickle')
+classifier = pd.read_pickle(classifier_path)
+ensemble_path = os.path.join(BASE_DIR, 'confidence_model.pickle')
+ensemble_clf = pd.read_pickle(ensemble_path)
+
+def sentiment(n, account_name):
+    account_instance = Member.objects.get(Account=account_name)
+    uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
+    ans_unit = Answer.objects.get(id=uid)
+    a = "a{0}".format(n)
+    answer = getattr(ans_unit, a)
+    print(answer)
+
+    feats = find_features(answer)
+    print(classifier.classify(feats))
+    print(ensemble_clf.confidence(feats))
+
+    return classifier.classify(feats), ensemble_clf.confidence(feats)
+
+#sentiment(1, 'abc123')
+
