@@ -15,6 +15,7 @@ import nltk
 # nltk.download('stopwords')
 # nltk.download('averaged_perceptron_tagger')
 # nltk.download('wordnet')
+# nltk.download('twitter_samples')
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
@@ -219,8 +220,8 @@ for p in negative_tweets:
 
 f = open('.\\all_words.txt', "r")
 content = f.readlines()
-for string in content:
-    tmp = string.replace('\n', '')
+for word in content:
+    tmp = word.replace('\n', '')
     all_words.append(tmp)
 
 all_words = nltk.FreqDist(all_words)
