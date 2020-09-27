@@ -19,7 +19,16 @@ import time
 from questions.models import *
 from background_task import background
 from urllib import request
+from background_task.models import Task
 
+
+def delete_task(name):
+    boo = Task.objects.filter(task_name=name).exists()
+    if boo == True:
+        b_task = Task.objects.get(task_name=name)
+        b_task.delete()
+    else:
+        pass
 
 @background(schedule=1)
 def blink1(path_to_vid, account_name, duration, curr_path):
@@ -171,6 +180,7 @@ def blink1(path_to_vid, account_name, duration, curr_path):
         res.b1 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink1')
 
 
 
@@ -324,6 +334,7 @@ def blink2(path_to_vid, account_name, duration, curr_path):
         res.b2 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink2')
 
 
 @background(schedule=1)
@@ -475,6 +486,7 @@ def blink3(path_to_vid, account_name, duration, curr_path):
         res.b3 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink3')
 
 
 @background(schedule=1)
@@ -626,6 +638,7 @@ def blink4(path_to_vid, account_name, duration, curr_path):
         res.b4 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink4')
 
 
 @background(schedule=1)
@@ -769,16 +782,16 @@ def blink5(path_to_vid, account_name, duration, curr_path):
 
         total_blinks = int(TOTAL)
         print('Your total blinks ===> ', total_blinks)
+
         # save total_blinks to model RESULT
-        if 'is_login' in request.session and request.session['is_login']==True:
-            account_name = request.session['account']
-            account_instance = Member.objects.get(Account=account_name)
-            uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-            
+        account_instance = Member.objects.get(Account=account_name)
+        uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+
         res = Result.objects.get(id=uid)
         res.b5 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink5')
 
 
 @background(schedule=1)
@@ -930,6 +943,7 @@ def blink6(path_to_vid, account_name, duration, curr_path):
         res.b6 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink6')
 
 
 @background(schedule=1)
@@ -1081,6 +1095,7 @@ def blink7(path_to_vid, account_name, duration, curr_path):
         res.b7 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink7')
 
 
 @background(schedule=1)
@@ -1232,6 +1247,7 @@ def blink8(path_to_vid, account_name, duration, curr_path):
         res.b8 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink8')
 
 
 @background(schedule=1)
@@ -1383,6 +1399,7 @@ def blink9(path_to_vid, account_name, duration, curr_path):
         res.b9 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink9')
 
 
 @background(schedule=1)
@@ -1534,3 +1551,4 @@ def blink10(path_to_vid, account_name, duration, curr_path):
         res.b10 = total_blinks
         res.save()
         a += 1
+        delete_task('Blink.tasks.blink10')

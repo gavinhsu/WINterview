@@ -13,7 +13,15 @@ from Emotion.utils.preprocessor import preprocess_input
 from background_task import background
 from questions.models import *
 import time
+from background_task.models import Task
 
+def delete_task(name):
+    boo = Task.objects.filter(task_name=name).exists()
+    if boo == True:
+        b_task = Task.objects.get(task_name=name)
+        b_task.delete()
+    else:
+        pass
 
 @background(schedule=1)
 def emotion1(vid_path, account_name, duration, curr_path):
@@ -161,6 +169,8 @@ def emotion1(vid_path, account_name, duration, curr_path):
         cv2.destroyAllWindows()
         a += 1
 
+    delete_task('Emotion.views.emotion1')
+
 
 @background(schedule=1)
 def emotion2(vid_path, account_name, duration, curr_path):
@@ -306,6 +316,7 @@ def emotion2(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion2')
 
 
 @background(schedule=1)
@@ -452,6 +463,7 @@ def emotion3(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion3')
 
 
 @background(schedule=1)
@@ -598,6 +610,7 @@ def emotion4(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion4')
 
 
 
@@ -745,6 +758,7 @@ def emotion5(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion5')
 
 
 @background(schedule=1)
@@ -891,6 +905,7 @@ def emotion6(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion6')
 
 
 
@@ -1038,6 +1053,7 @@ def emotion7(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion7')
 
 
 @background(schedule=1)
@@ -1184,6 +1200,7 @@ def emotion8(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion8')
 
 
 
@@ -1331,6 +1348,7 @@ def emotion9(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion9')
 
 
 @background(schedule=1)
@@ -1477,3 +1495,4 @@ def emotion10(vid_path, account_name, duration, curr_path):
 
         cv2.destroyAllWindows()
         a += 1
+        delete_task('Emotion.views.emotion10')

@@ -13,15 +13,16 @@ from users.models import *
 from users.models import Member
 from GTTS.forms import UploadAnswersForm
 from nlp.views import predict
+from nlp.views import sentiment
 from Blink.tasks import *
 from django.core.files import File
 from Emotion.views import *
 import sqlite3
 
 
-conn=sqlite3.connect('db.sqlite3')
-conn.execute("VACUUM")
-conn.close()
+# conn=sqlite3.connect('db.sqlite3')
+# conn.execute("VACUUM")
+# conn.close()
 
 class equipCheck(TemplateView): 
   template_name = 'equipCheck.html'
@@ -220,9 +221,10 @@ class QuesView(TemplateView):
         
 
         # save result to Result models
-        r1 = predict('a1')
+        r1 = sentiment(1, account_name)
         res = Result.objects.get(id=uid)
         res.r1 = r1
+        res.time1 = t1
         res.save()
 
         # decode base64 to mp4 file
@@ -305,9 +307,10 @@ class QuesView2(TemplateView):
         
 
         # save result to Result models
-        r2 = predict('a2')
+        r2 = sentiment(2, account_name)
         res = Result.objects.get(id=uid)
         res.r2 = r2
+        res.time2 = t2
         res.save()
 
         # decode base64 to mp4 file
@@ -386,9 +389,10 @@ class QuesView3(TemplateView):
         
 
         # save result to Result models
-        r3 = predict('a3')
+        r3 = sentiment(3, account_name)
         res = Result.objects.get(id=uid)
         res.r3 = r3
+        res.time3 = t3
         res.save()
 
         # decode base64 to mp4 file
@@ -468,9 +472,10 @@ class QuesView4(TemplateView):
         
 
         # save result to Result models
-        r4 = predict('a4')
+        r4 = sentiment(4, account_name)
         res = Result.objects.get(id=uid)
         res.r4 = r4
+        res.time4 = t4
         res.save()
 
         # decode base64 to mp4 file
@@ -549,9 +554,10 @@ class QuesView5(TemplateView):
         
 
         # save result to Result models
-        r5 = predict('a5')
+        r5 = sentiment(5, account_name)
         res = Result.objects.get(id=uid)
         res.r5 = r5
+        res.time5 = t5
         res.save()
 
         # decode base64 to mp4 file
@@ -628,9 +634,10 @@ class QuesView6(TemplateView):
         
 
         # save result to Result models
-        r6 = predict('a6')
+        r6 = sentiment(6, account_name)
         res = Result.objects.get(id=uid)
         res.r6 = r6
+        res.time6 = t6
         res.save()
 
         # decode base64 to mp4 file
@@ -708,9 +715,10 @@ class QuesView7(TemplateView):
         
 
         # save result to Result models
-        r7 = predict('a7')
+        r7 = sentiment(7, account_name)
         res = Result.objects.get(id=uid)
         res.r7 = r7
+        res.time7 = t7
         res.save()
 
         # decode base64 to mp4 file
@@ -788,9 +796,10 @@ class QuesView8(TemplateView):
         
 
         # save result to Result models
-        r8 = predict('a8')
+        r8 = sentiment(8, account_name)
         res = Result.objects.get(id=uid)
         res.r8 = r8
+        res.time8 = t8
         res.save()
 
         # decode base64 to mp4 file
@@ -835,9 +844,9 @@ class QuesView9(TemplateView):
       if 'is_login' in request.session and request.session['is_login']==True:
             account_name = request.session['account']
 
-      random_question = q8
-      prep_time8 = time_dict['prep_time8']
-      ans_time8 = time_dict['ans_time8']
+      random_question = q9
+      prep_time9 = time_dict['prep_time9']
+      ans_time9 = time_dict['ans_time9']
 
       return render(request, self.template_name, locals())
         
@@ -868,9 +877,10 @@ class QuesView9(TemplateView):
         
 
         # save result to Result models
-        r9 = predict('a9')
+        r9 = sentiment(9, account_name)
         res = Result.objects.get(id=uid)
         res.r9 = r9
+        res.time9 = t9
         res.save()
 
         # decode base64 to mp4 file
@@ -947,9 +957,10 @@ class QuesView10(TemplateView):
         
 
         # save result to Result models
-        r10 = predict('a10')
+        r10 = sentiment(10, account_name)
         res = Result.objects.get(id=uid)
         res.r10 = r10
+        res.time10 = t10
         res.save()
 
         # decode base64 to mp4 file
@@ -980,7 +991,7 @@ class QuesView10(TemplateView):
         blink10(vid_path, account_name, t, path)
         emotion10(vid_path, account_name, t, path)
 
-        return redirect('Result/')
+        return redirect('result/')
       
       return render(request, self.template_name,locals())   
 

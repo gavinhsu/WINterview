@@ -138,7 +138,6 @@ class ResultView(TemplateView):
                 ans_list.append(a_list[i][j][0])
         for key in key_split:
             ans_list.append(key)
-        #print('\n', 'ANSWER ==== ', ans_list)
 
         
         reply = 'It is a graphical plot to programmatically illustrate a binary classifier to see whether valid.'
@@ -157,7 +156,6 @@ class ResultView(TemplateView):
                 reply_list.append(r_list[i][j][0])
         for key in clean_reply:
             reply_list.append(key)
-        #print('\n', 'REPLY ==== ', reply_list)
 
         mean = int((len(reply_list)+len(ans_list))/2)
 
@@ -181,22 +179,39 @@ class ResultView(TemplateView):
         bert_score = round((bert_res/5)*100, 2)
 
         # FINAL SCORE
-        final_score = int(round(((bert_score + gensim_score)/2 + num_of_same_words), 0))
+        final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score + num_of_same_words), 0))
 
 
         # BLINK PROCESSING #####################################################
+        # total_blinks = 0
+        # for x in range(10):
+        #     blink = "b{0}".format(x+1)
+        #     num = getattr(res_unit, blink)
+        #     total_blinks += num
+
+        # mean_blinks = total_blinks/10
+
+        blink_dict = {}
         total_blinks = 0
         for x in range(10):
             blink = "b{0}".format(x+1)
             num = getattr(res_unit, blink)
-            total_blinks += num
+            t = "time{0}".format(x+1)
+            seconds = getattr(res_unit, t)
+            minutes = int(seconds)/60
+            blink_dict["bpm{0}".format(x+1)] = num/minutes
+            total_blinks += blink_dict["bpm{0}".format(x+1)]
+            exec(f'BPM_{x+1} = num/minutes')
 
-        mean_blinks = total_blinks/10
+        avg_blinks = round(total_blinks/10, 2)
+        
 
         # EMOTION PROCESSING #####################################################
 
 
         return render(request, self.template_name, locals())
+
+
 
 
 ########################################################
@@ -253,5 +268,4 @@ def sentiment(n, account_name):
 
     return classifier.classify(feats), ensemble_clf.confidence(feats)
 
-#sentiment(1, 'abc123')
 
