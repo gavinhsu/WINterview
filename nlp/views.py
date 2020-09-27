@@ -207,7 +207,26 @@ class ResultView(TemplateView):
         
 
         # EMOTION PROCESSING #####################################################
+        emotion_dict = {}
+        for x in range(10):
+            n = "neutral_{0}".format(x+1)
+            neutral = getattr(res_unit, n)
+            emotion_dict['n{0}'.format(x+1)] = neutral
+            h = "neutral_{0}".format(x+1)
+            happy = getattr(res_unit, h)
+            emotion_dict['h{0}'.format(x+1)] = happy
+            a = "neutral_{0}".format(x+1)
+            angry = getattr(res_unit, a)
+            emotion_dict['a{0}'.format(x+1)] = angry
+            f = "neutral_{0}".format(x+1)
+            fear = getattr(res_unit, f)
+            emotion_dict['f{0}'.format(x+1)] = fear
+            s = "neutral_{0}".format(x+1)
+            surprise = getattr(res_unit, s)
+            emotion_dict['s{0}'.format(x+1)] = surprise
 
+
+        print(emotion_dict)
 
         return render(request, self.template_name, locals())
 
