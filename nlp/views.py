@@ -29,6 +29,13 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.svm import SVC, LinearSVC, NuSVC
 from nltk.classify import ClassifierI
 from statistics import mode
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import plotly.express as px
+import pandas as pd
+from math import pi
+from io import BytesIO
+import base64
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
 from django.views.generic import TemplateView
@@ -173,6 +180,40 @@ class ResultView(TemplateView):
         same_words = set(reply_list) & set(ans_list)
         num_of_same_words = len(same_words)
 
+        #gensim score chart
+        fig, ax = plt.subplots()
+        start = 0
+        key = num_of_same_words
+        ax.broken_barh([(start, key)], [10, 9], facecolors=((0.3,0.1,0.4,0.6)))
+        ax.set_ylim(5, 15)
+        ax.set_xlim(0, mean)
+        ax.spines['left'].set_visible(False)
+        ax.spines['bottom'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.set_yticks([15, 25])
+        ax.set_xticks([0, 25, 50, 75, mean])
+        ax.set_axisbelow(True) 
+        ax.set_yticklabels(['keywords'])
+        ax.grid(axis='x')
+        ax.text(key+1, 15, '{:.2f}%'.format(key/mean*100), fontsize=8)
+
+        #fig.suptitle('This is title of the chart', fontsize=16)
+
+        #leg1 = mpatches.Patch(color='#6259D8', label='start')
+        #leg2 = mpatches.Patch(color='#E53F08', label='key')
+        # ax.legend(handles=[leg1, leg2], ncol=2)
+        plt.tight_layout()
+
+        #save_plot
+        keywords_buffer = BytesIO()
+        plt.savefig(keywords_buffer, format='png')
+        keywords_buffer.seek(0)
+        image_png = keywords_buffer.getvalue()
+        keywords_buffer.close()
+
+        keywords_bar = base64.b64encode(image_png)
+        keywords_bar = keywords_bar.decode('utf-8')
+
         # BERT prediction
         bert_predict = bert.predict([(reply, answer)])
         bert_res = bert_predict[0]
@@ -180,6 +221,8 @@ class ResultView(TemplateView):
 
         # FINAL SCORE
         final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score + num_of_same_words), 0))
+
+        #answer&reply similarity
 
 
         # BLINK PROCESSING #####################################################
@@ -207,26 +250,61 @@ class ResultView(TemplateView):
         
 
         # EMOTION PROCESSING #####################################################
-        emotion_dict = {}
-        for x in range(10):
-            n = "neutral_{0}".format(x+1)
-            neutral = getattr(res_unit, n)
-            emotion_dict['n{0}'.format(x+1)] = neutral
-            h = "neutral_{0}".format(x+1)
-            happy = getattr(res_unit, h)
-            emotion_dict['h{0}'.format(x+1)] = happy
-            a = "neutral_{0}".format(x+1)
-            angry = getattr(res_unit, a)
-            emotion_dict['a{0}'.format(x+1)] = angry
-            f = "neutral_{0}".format(x+1)
-            fear = getattr(res_unit, f)
-            emotion_dict['f{0}'.format(x+1)] = fear
-            s = "neutral_{0}".format(x+1)
-            surprise = getattr(res_unit, s)
-            emotion_dict['s{0}'.format(x+1)] = surprise
+        # emotion_dict = {}
+        # for x in range(10):
+        #     n = "neutral_{0}".format(x+1)
+        #     neutral = getattr(res_unit, n)
+        #     emotion_dict['n{0}'.format(x+1)] = neutral
+        #     h = "neutral_{0}".format(x+1)
+        #     happy = getattr(res_unit, h)
+        #     emotion_dict['h{0}'.format(x+1)] = happy
+        #     a = "neutral_{0}".format(x+1)
+        #     angry = getattr(res_unit, a)
+        #     emotion_dict['a{0}'.format(x+1)] = angry
+        #     f = "neutral_{0}".format(x+1)
+        #     fear = getattr(res_unit, f)
+        #     emotion_dict['f{0}'.format(x+1)] = fear
+        #     s = "neutral_{0}".format(x+1)
+        #     surprise = getattr(res_unit, s)
+        #     emotion_dict['s{0}'.format(x+1)] = surprise
+        
+        neutral = getattr(res_unit, 'neutral_1')
+        happy = getattr(res_unit, 'happy_1')
+        angry = getattr(res_unit, 'angry_1')
+        fear = getattr(res_unit, 'fear_1')
+        surprise = getattr(res_unit, 'surprise_1')
+        #emotion radar plot
+        emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
+        df = pd.DataFrame([emo],index=["emo"])
+        Attributes =list(df)
+        AttNo = len(Attributes)
+        values = df.iloc[0].tolist()
+        values += values [:1]
+        angles = [n / float(AttNo) * 2 * pi for n in range(AttNo)]
+        angles += angles [:1]
+        ax = plt.subplot(111, polar=True)
 
+        #Add the attribute labels to our axes
+        plt.xticks(angles[:-1],Attributes)
 
-        print(emotion_dict)
+        #Plot the line around the outside of the filled area, using the angles and values calculated before
+        ax.plot(angles,values)
+
+        #Fill in the area plotted in the last line
+        ax.fill(angles, values, 'teal', alpha=0.1)
+
+        #Give the plot a title and show it
+        ax.set_title("Emotion Radar Plot")
+
+        #save plot
+        emo_buffer = BytesIO()
+        plt.savefig(emo_buffer, format='png')
+        emo_buffer.seek(0)
+        image_png = emo_buffer.getvalue()
+        emo_buffer.close()
+
+        emo_bar = base64.b64encode(image_png)
+        emo_bar = emo_bar.decode('utf-8')
 
         return render(request, self.template_name, locals())
 
@@ -287,4 +365,4 @@ def sentiment(n, account_name):
 
     return classifier.classify(feats), ensemble_clf.confidence(feats)
 
-
+ 

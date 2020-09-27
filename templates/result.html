@@ -14,6 +14,7 @@
 </head>
 
 <body>
+  <h1>Winterview Performance</h1>
   <p></p>
   Username: {{account_name}}<br>
   <p>Selected Job: {{job_name}}</p>
@@ -23,6 +24,8 @@
   <p>FINAL SCORE --> {{final_score}} </p>
   <p>Average Blinks per Minute: {{avg_blinks}} times</p>
   <p>You blinked {{BPM_1}} times/minute during question1.</p>
+  <img src="data:image/png;base64,{{keywords_bar|safe}}" style="width: 500px;height: 350px;">
+  <img src="data:image/png;base64,{{emo_bar|safe}}" style="width: 500px;height: 350px;">
   <p>You blinked {{BPM_2}} times/minute during question2.</p>
   <p>You blinked {{BPM_3}} times/minute during question3.</p>
   <p>You blinked {{BPM_4}} times/minute during question4.</p>
