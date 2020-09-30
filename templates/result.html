@@ -8,24 +8,51 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <title>Final Results</title>
 
 </head>
+<style src="{% static "css/result.css" %}"></style>
 
 <body>
-  <h1>Winterview Performance</h1>
-  <p></p>
-  Username: {{account_name}}<br>
-  <p>Selected Job: {{job_name}}</p>
-  <p>Gensim Similarity --> {{ gensim_score }} %</p> 
-  <p>There are {{ num_of_same_words }} same words out of {{ mean }} words.</p>
-  <p>BERT Score --> {{bert_score}} %</p>
-  <p>FINAL SCORE --> {{final_score}} </p>
+  <h1>WINterview Performance</h1>
+  <h2>username:{{account_name}}</h2><br>
+  <h2>selected job:{{job_name}}</h2>
+
+  <ul class="quesmenu">
+    <button class="quesnum" class="btn btn-outline-primary" id="btn1">1.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn2">2.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn3">3.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn4">4.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn5">5.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn6">6.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn7">7.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn8">8.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn9">9.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn10">10.</button>
+  </ul>
+  <div class="result1">
+    <div id="num1">1.</div>
+    <div id="ques1">{{ques}}</div>
+    <label for="reply1">Your reply</label>
+    <textarea readonly id="reply1" name="reply1" cols="10" rows="10"></textarea>
+    <label for="ans1">Reference answer</label>
+    <textarea readonly id="ans1" name="reply1" cols="10" rows="10">{{answer}}</textarea>
+    <div class="nlpchart">
+      <img src="data:image/png;base64,{{final_bar|safe}}" style="width: 600px;height: 320px;">
+    </div>
+    <div class="nlpchart">
+      <img src="data:image/png;base64,{{keywords_bar|safe}}" style="width: 600px;height: 320px;">
+    </div>
+    <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 550px;height: 400px;">
+
+  </div>
+
   <p>Average Blinks per Minute: {{avg_blinks}} times</p>
   <p>You blinked {{BPM_1}} times/minute during question1.</p>
-  <img src="data:image/png;base64,{{keywords_bar|safe}}" style="width: 500px;height: 350px;">
-  <img src="data:image/png;base64,{{emo_bar|safe}}" style="width: 500px;height: 350px;">
   <p>You blinked {{BPM_2}} times/minute during question2.</p>
   <p>You blinked {{BPM_3}} times/minute during question3.</p>
   <p>You blinked {{BPM_4}} times/minute during question4.</p>
@@ -36,7 +63,246 @@
   <p>You blinked {{BPM_9}} times/minute during question9.</p>
   <p>You blinked {{BPM_10}} times/minute during question10.</p>
 
-  
+
 </body>
+<style>
+  @font-face {
+    font-family: 'Helios Rounded';
+    /* Change to your font's name. */
+    src: url('fonts/Helios Rounded.woff');
+    /* Change to match your font file's location. */
+  }
+
+  h1 {
+    color: #7c795d;
+    font-family: 'Trocchi', serif;
+    font-size: 45px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 0;
+    text-align: center;
+  }
+
+  h2 {
+    color: burlywood;
+    font-family: 'Trocchi', serif;
+    position: relative;
+    left: 60px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 40px;
+    display: flex;
+    /* text-shadow: 0 1px 0 #ccc,
+      0 2px 0 #c9c9c9,
+      0 3px 0 #bbb,
+      0 4px 0 #b9b9b9,
+      0 5px 0 #aaa,
+      0 6px 1px rgba(0, 0, 0, .1),
+      0 0 5px rgba(0, 0, 0, .1),
+      0 1px 3px rgba(0, 0, 0, .3),
+      0 3px 5px rgba(0, 0, 0, .2),
+      0 5px 10px rgba(0, 0, 0, .25),
+      0 10px 10px rgba(0, 0, 0, .2),
+      0 20px 20px rgba(0, 0, 0, .15); */
+  }
+
+  .quesmenu {
+    padding: 20px;
+    display: block;
+    text-align: center;
+  }
+
+  .quesnum {
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: #008CBA;
+    border-radius: 8px;
+    line-height: 9px;
+  }
+
+  #btn1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn1:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn2 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn2:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn3 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn3:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn4 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn4:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn5 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn5:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn6 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn6:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn7 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn7:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn8 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn8:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn9 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn9:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  #btn10 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+  }
+
+  #btn10:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  label {
+    color: #B4886B;
+    font-weight: bold;
+    display: block;
+    width: 150px; 
+  }
+
+  .result1 {
+    left: 50px;
+    position: relative;
+    border: 3px solid red;
+    width: 1200px;
+    height: 1100px;
+  }
+
+  #num1 {
+    display: inline-block;
+    position: absolute;
+  }
+
+  #ques1 {
+    display: flex;
+    position: relative;
+    left: 40px;
+  }
+
+  #reply1 {
+    height: 150px;
+    width: 600px;
+    border: none;
+    position: relative;
+    top: 5px;
+    left: 10px;
+  }
+
+  #ans1 {
+    height: 150px;
+    width: 600px;
+    border: none;
+  }
+
+  .nlpchart {
+    display: flexbox;
+  }
+
+  #emochart {
+    position: relative;
+    left: 600px;
+    top: -1000px;
+  }
+</style>
+<script>
+  $(function () {
+    $('#btn1').click(function () {
+      $('.result1').toggle("slow");
+    });
+
+    $('#btn2').click(function () {
+      $('.paymentinfocontainer').toggle("slow");
+    });
+
+    $('#btn3').click(function () {
+      $('.confirmationinfocontainer').toggle("slow");
+    });
+  });
+</script>
 
 </html>

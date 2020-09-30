@@ -82,13 +82,7 @@
       var timer = null;  // For referencing the timer
       var timer2 = null;
 
-      stopVideo.addEventListener("click", getVideoLength);
-      function getVideoLength() {
-        var videoLength = document.getElementById("time")
-        var time = {{ ans_time1 }} - count1
-      videoLength.value = time
-      console.log(time)
-      }
+
 
 
 
@@ -130,6 +124,15 @@
           }
         }
       }());
+
+      stopVideo.addEventListener("click", getVideoLength);
+      function getVideoLength() {
+        var videoLength = document.getElementById("time")
+        var time = {{ ans_time1 }} - count1
+      videoLength.value = time
+      clearInterval(timer2);
+      console.log(time)
+      }
     </script>
 
     <script src="{% static "js/speech_to_text.js" %}"></script>
