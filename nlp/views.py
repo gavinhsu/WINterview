@@ -180,6 +180,28 @@ class ResultView(TemplateView):
         same_words = set(reply_list) & set(ans_list)
         num_of_same_words = len(same_words)
 
+
+        # Calculate the proportion of same keywords
+        counter = 0
+        for w in key_split:
+            k_list = []
+            word = model.wv.most_similar(w, topn=10)
+            k_list.append(word)
+
+            key_list = []
+            for i in range(len(k_list)): 
+                for j in range(len(k_list[i])):
+                    key_list.append(k_list[i][j][0])
+            same_num = len([i for i in reply_list if i in key_list])
+            if same_num >= 1:
+                counter += 1
+
+        keyword_score = (counter/len(key_split))*100
+        print('KEYSCORE===> ', keyword_score, '%')
+        
+        
+
+        ########################################################################
         #gensim score chart
         fig, ax = plt.subplots()
         start = 0
@@ -193,7 +215,7 @@ class ResultView(TemplateView):
         ax.set_yticks([15, 25])
         ax.set_xticks([0, 25, 50, 75, mean])
         ax.set_axisbelow(True) 
-        ax.set_yticklabels(['keywords'])
+        #ax.set_yticklabels(['keywords'])
         ax.grid(axis='x')
         ax.text(key+1, 15, '{:.2f}%'.format(key/mean*100), fontsize=8)
 
@@ -247,7 +269,7 @@ class ResultView(TemplateView):
             exec(f'BPM_{x+1} = num/minutes')
 
         avg_blinks = round(total_blinks/10, 2)
-        
+      
 
         # EMOTION PROCESSING #####################################################
         # emotion_dict = {}
@@ -267,46 +289,46 @@ class ResultView(TemplateView):
         #     s = "neutral_{0}".format(x+1)
         #     surprise = getattr(res_unit, s)
         #     emotion_dict['s{0}'.format(x+1)] = surprise
-        
-        neutral = getattr(res_unit, 'neutral_1')
-        happy = getattr(res_unit, 'happy_1')
-        angry = getattr(res_unit, 'angry_1')
-        fear = getattr(res_unit, 'fear_1')
-        surprise = getattr(res_unit, 'surprise_1')
-        #emotion radar plot
-        emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
-        df = pd.DataFrame([emo],index=["emo"])
-        Attributes =list(df)
-        AttNo = len(Attributes)
-        values = df.iloc[0].tolist()
-        values += values [:1]
-        angles = [n / float(AttNo) * 2 * pi for n in range(AttNo)]
-        angles += angles [:1]
-        ax = plt.subplot(111, polar=True)
 
-        #Add the attribute labels to our axes
-        plt.xticks(angles[:-1],Attributes)
+        def draw_emotion(x):
+            neutral = getattr(res_unit, 'neutral_{0}'.format(x+1))
+            happy = getattr(res_unit, 'happy_{0}'.format(x+1))
+            angry = getattr(res_unit, 'angry_{0}'.format(x+1))
+            fear = getattr(res_unit, 'fear_{0}'.format(x+1))
+            surprise = getattr(res_unit, 'surprise_{0}'.format(x+1))
+            #emotion radar plot
+            emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
+            df = pd.DataFrame([emo],index=["emo"])
+            Attributes =list(df)
+            AttNo = len(Attributes)
+            values = df.iloc[0].tolist()
+            values += values [:1]
+            angles = [n / float(AttNo) * 2 * pi for n in range(AttNo)]
+            angles += angles [:1]
+            ax = plt.subplot(111, polar=True)
+            #Add the attribute labels to our axes
+            plt.xticks(angles[:-1],Attributes)
+            #Plot the line around the outside of the filled area, using the angles and values calculated before
+            ax.plot(angles,values)
+            #Fill in the area plotted in the last line
+            ax.fill(angles, values, 'teal', alpha=0.1)
+            #Give the plot a title and show it
+            ax.set_title("Emotion Radar Plot")
+            #save plot
+            emo_buffer = BytesIO()
+            plt.savefig(emo_buffer, format='png')
+            emo_buffer.seek(0)
+            image_png = emo_buffer.getvalue()
+            emo_buffer.close()
 
-        #Plot the line around the outside of the filled area, using the angles and values calculated before
-        ax.plot(angles,values)
+            emo_bar = base64.b64encode(image_png)
+            emo_bar = emo_bar.decode('utf-8')
 
-        #Fill in the area plotted in the last line
-        ax.fill(angles, values, 'teal', alpha=0.1)
-
-        #Give the plot a title and show it
-        ax.set_title("Emotion Radar Plot")
-
-        #save plot
-        emo_buffer = BytesIO()
-        plt.savefig(emo_buffer, format='png')
-        emo_buffer.seek(0)
-        image_png = emo_buffer.getvalue()
-        emo_buffer.close()
-
-        emo_bar = base64.b64encode(image_png)
-        emo_bar = emo_bar.decode('utf-8')
+        draw_emotion(1)
 
         return render(request, self.template_name, locals())
+
+
 
 
 
