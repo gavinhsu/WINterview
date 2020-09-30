@@ -190,6 +190,8 @@ class QuesView(TemplateView):
             vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
 
       random_question = q1
+      unit.q1 = q1
+      unit.save()
       prep_time1 = time_dict['prep_time1']
       ans_time1 = time_dict['ans_time1']
       
@@ -296,6 +298,7 @@ class QuesView2(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q2 = q2
         unit.a2 = a2
         unit.v2 = v2
         unit.t2 = t2
@@ -378,6 +381,7 @@ class QuesView3(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q3 = q3
         unit.a3 = a3
         unit.v3 = v3
         unit.t3 = t3
@@ -461,6 +465,7 @@ class QuesView4(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q4 = q4
         unit.a4 = a4
         unit.v4 = v4
         unit.t4 = t4
@@ -543,6 +548,7 @@ class QuesView5(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q5 = q5
         unit.a5 = a5
         unit.v5 = v5
         unit.t5 = t5
@@ -623,6 +629,7 @@ class QuesView6(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q6 = q6
         unit.a6 = a6
         unit.v6 = v6
         unit.t6 = t6
@@ -704,6 +711,7 @@ class QuesView7(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q7 = q7
         unit.a7 = a7
         unit.v7 = v7
         unit.t7 = t7
@@ -785,6 +793,7 @@ class QuesView8(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q8 = q8
         unit.a8 = a8
         unit.v8 = v8
         unit.t8 =t8
@@ -866,6 +875,7 @@ class QuesView9(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q9 = q9
         unit.a9 = a9
         unit.v9 = v9
         unit.t9 = t9
@@ -946,6 +956,7 @@ class QuesView10(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
+        unit.q10 = q10
         unit.a10 = a10
         unit.v10 = v10
         unit.t10 = t10
