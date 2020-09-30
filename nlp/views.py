@@ -128,8 +128,17 @@ class ResultView(TemplateView):
         res_unit = Result.objects.get(id=res_id)
         
 
+        #get teply and answer
+        # reply_dict = {}
+        # for x in range(10):
+        #     reply = "r{0}".format(x+1)
+        #     get_reply = getattr(res_unit, reply)
+        #     reply_dict["r{0}".format(x+1)] = get_reply
+        # r1 = reply_dict['r1']
+
         # NLP PROCESSING #####################################################
         job_selection = getattr(questions.models, new_job)
+        ques = str(job_selection.objects.get(QuesNum='1').Ques)
         answer = str(job_selection.objects.get(QuesNum='1').Ans)
         keywords = job_selection.objects.get(QuesNum='1').Keywords
         key_split = word_tokenize(keywords)
@@ -180,22 +189,23 @@ class ResultView(TemplateView):
         same_words = set(reply_list) & set(ans_list)
         num_of_same_words = len(same_words)
 
-        #gensim score chart
-        fig, ax = plt.subplots()
-        start = 0
+
+        #keyword score chart
+        key_fig, key_ax = plt.subplots()
+        key_start = 0
         key = num_of_same_words
-        ax.broken_barh([(start, key)], [10, 9], facecolors=((0.3,0.1,0.4,0.6)))
-        ax.set_ylim(5, 15)
-        ax.set_xlim(0, mean)
-        ax.spines['left'].set_visible(False)
-        ax.spines['bottom'].set_visible(False)
-        ax.spines['top'].set_visible(False)
-        ax.set_yticks([15, 25])
-        ax.set_xticks([0, 25, 50, 75, mean])
-        ax.set_axisbelow(True) 
-        ax.set_yticklabels(['keywords'])
-        ax.grid(axis='x')
-        ax.text(key+1, 15, '{:.2f}%'.format(key/mean*100), fontsize=8)
+        key_ax.broken_barh([(key_start, key)], [10, 9], facecolors=((0.3,0.1,0.4,0.6)))
+        key_ax.set_ylim(5, 15)
+        key_ax.set_xlim(0, mean)
+        key_ax.spines['left'].set_visible(False)
+        key_ax.spines['bottom'].set_visible(False)
+        key_ax.spines['top'].set_visible(False)
+        key_ax.set_yticks([15, 25])
+        key_ax.set_xticks([0, 25, 50, 75, mean])
+        key_ax.set_axisbelow(True) 
+        key_ax.set_yticklabels(['Keywords\nAccuracy'],fontsize=14)
+        key_ax.grid(axis='x')
+        key_ax.text(key+1, 15, '{:.2f}%'.format(key/mean*100),fontsize=14)
 
         #fig.suptitle('This is title of the chart', fontsize=16)
 
@@ -208,10 +218,10 @@ class ResultView(TemplateView):
         keywords_buffer = BytesIO()
         plt.savefig(keywords_buffer, format='png')
         keywords_buffer.seek(0)
-        image_png = keywords_buffer.getvalue()
+        key_image = keywords_buffer.getvalue()
         keywords_buffer.close()
 
-        keywords_bar = base64.b64encode(image_png)
+        keywords_bar = base64.b64encode(key_image)
         keywords_bar = keywords_bar.decode('utf-8')
 
         # BERT prediction
@@ -220,9 +230,42 @@ class ResultView(TemplateView):
         bert_score = round((bert_res/5)*100, 2)
 
         # FINAL SCORE
-        final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score + num_of_same_words), 0))
+        final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score), 0))
 
-        #answer&reply similarity
+        #answer&reply similarity chart
+        final_fig, final_ax = plt.subplots()
+        final_start = 0
+        final_score = final_score
+        final_ax.broken_barh([(final_start, final_score)], [10, 9], facecolors=((0.3,0.1,0.4,0.6)))
+        final_ax.set_ylim(5, 15)
+        final_ax.set_xlim(0, mean)
+        final_ax.spines['left'].set_visible(False)
+        final_ax.spines['bottom'].set_visible(False)
+        final_ax.spines['top'].set_visible(False)
+        final_ax.set_yticks([15, 25])
+        final_ax.set_xticks([0, 25, 50, 75, 100])
+        final_ax.set_axisbelow(True) 
+        final_ax.set_yticklabels(['Correctness'],fontsize=14)
+        final_ax.grid(axis='x')
+        final_ax.text(final_score+1, 15, str(final_score)+'%', fontsize=14)
+
+        #fig.suptitle('This is title of the chart', fontsize=16)
+
+        #leg1 = mpatches.Patch(color='#6259D8', label='start')
+        #leg2 = mpatches.Patch(color='#E53F08', label='key')
+        # ax.legend(handles=[leg1, leg2], ncol=2)
+        plt.tight_layout()
+
+        #save_plot
+        final_buffer = BytesIO()
+        plt.savefig(final_buffer, format='png')
+        final_buffer.seek(0)
+        final_inage = final_buffer.getvalue()
+        final_buffer.close()
+
+        final_bar = base64.b64encode(final_inage)
+        final_bar = final_bar.decode('utf-8')
+
 
 
         # BLINK PROCESSING #####################################################
@@ -249,30 +292,31 @@ class ResultView(TemplateView):
         avg_blinks = round(total_blinks/10, 2)
         
 
-        # EMOTION PROCESSING #####################################################
-        # emotion_dict = {}
-        # for x in range(10):
-        #     n = "neutral_{0}".format(x+1)
-        #     neutral = getattr(res_unit, n)
-        #     emotion_dict['n{0}'.format(x+1)] = neutral
-        #     h = "neutral_{0}".format(x+1)
-        #     happy = getattr(res_unit, h)
-        #     emotion_dict['h{0}'.format(x+1)] = happy
-        #     a = "neutral_{0}".format(x+1)
-        #     angry = getattr(res_unit, a)
-        #     emotion_dict['a{0}'.format(x+1)] = angry
-        #     f = "neutral_{0}".format(x+1)
-        #     fear = getattr(res_unit, f)
-        #     emotion_dict['f{0}'.format(x+1)] = fear
-        #     s = "neutral_{0}".format(x+1)
-        #     surprise = getattr(res_unit, s)
-        #     emotion_dict['s{0}'.format(x+1)] = surprise
+        ##EMOTION PROCESSING #####################################################
+        emotion_dict = {}
+        for x in range(10):
+            n = "neutral_{0}".format(x+1)
+            neutral = getattr(res_unit, n)
+            emotion_dict['n{0}'.format(x+1)] = neutral
+            h = "neutral_{0}".format(x+1)
+            happy = getattr(res_unit, h)
+            emotion_dict['h{0}'.format(x+1)] = happy
+            a = "neutral_{0}".format(x+1)
+            angry = getattr(res_unit, a)
+            emotion_dict['a{0}'.format(x+1)] = angry
+            f = "neutral_{0}".format(x+1)
+            fear = getattr(res_unit, f)
+            emotion_dict['f{0}'.format(x+1)] = fear
+            s = "neutral_{0}".format(x+1)
+            surprise = getattr(res_unit, s)
+            emotion_dict['s{0}'.format(x+1)] = surprise
         
-        neutral = getattr(res_unit, 'neutral_1')
+        neutral = emotion_dict['n1']
         happy = getattr(res_unit, 'happy_1')
         angry = getattr(res_unit, 'angry_1')
         fear = getattr(res_unit, 'fear_1')
         surprise = getattr(res_unit, 'surprise_1')
+
         #emotion radar plot
         emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
         df = pd.DataFrame([emo],index=["emo"])
