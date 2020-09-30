@@ -193,7 +193,7 @@ class ResultView(TemplateView):
         ax.set_yticks([15, 25])
         ax.set_xticks([0, 25, 50, 75, mean])
         ax.set_axisbelow(True) 
-        ax.set_yticklabels(['keywords'])
+        #ax.set_yticklabels(['keywords'])
         ax.grid(axis='x')
         ax.text(key+1, 15, '{:.2f}%'.format(key/mean*100), fontsize=8)
 
