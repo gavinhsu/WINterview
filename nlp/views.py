@@ -122,6 +122,7 @@ class ResultView(TemplateView):
         for letter in str(job_name):
             new_job = job_name.replace(' ', '_')  
 
+
         # get the entire result table 
         account_instance = Member.objects.get(Account=account_name)
         res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
@@ -155,11 +156,21 @@ class ResultView(TemplateView):
         for key in key_split:
             ans_list.append(key)
 
-        
-        reply = 'It is a graphical plot to programmatically illustrate a binary classifier to see whether valid.'
+        word_vectors = model.wv
+
+
+        reply = 'I would use the Cash Flow Statement because it gives a true picture of how much cash the company is actually generating, independent of all the non-cash expenses that might have. And that’s the #1 thing you care about when analyzing the overall financial health of any business – its cash flow.'
         reply_tokens = word_tokenize(reply)
         reply_token = [word for word in reply_tokens if not word in stopwords.words()]
-        clean_reply = remove_noise(reply_token)
+        c_reply = remove_noise(reply_token)
+
+        clean_reply = []
+        for w in c_reply:
+            if w in word_vectors.vocab:
+                clean_reply.append(w)
+
+        print(clean_reply)
+
 
         # get similar keywords of USER REPLY
         r_list = []
@@ -211,17 +222,17 @@ class ResultView(TemplateView):
         #keyword score chart
         key_fig, key_ax = plt.subplots()
         key_start = 0
-        key = num_of_same_words
+        key = keyword_score
         key_ax.broken_barh([(key_start, key)], [10, 9], facecolors=((0.3,0.1,0.4,0.6)))
         key_ax.set_ylim(5, 15)
-        key_ax.set_xlim(0, mean)
+        key_ax.set_xlim(0, 100)
         key_ax.spines['left'].set_visible(False)
         key_ax.spines['bottom'].set_visible(False)
         key_ax.spines['top'].set_visible(False)
         key_ax.set_yticks([15, 25])
-        key_ax.set_xticks([0, 25, 50, 75, mean])
+        key_ax.set_xticks([0, 25, 50, 75, 100])
         key_ax.set_axisbelow(True) 
-        key_ax.set_yticklabels(['Keywords\nAccuracy'],fontsize=14)
+        #key_ax.set_yticklabels(['Keywords\nAccuracy'],fontsize=14)
         key_ax.grid(axis='x')
         key_ax.text(key+1, 15, '{:.2f}%'.format(key/mean*100),fontsize=14)
 
@@ -249,6 +260,7 @@ class ResultView(TemplateView):
 
         # FINAL SCORE
         final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score), 0))
+        print('FINAL_SCORE ===> ', final_score)
 
         #answer&reply similarity chart
         final_fig, final_ax = plt.subplots()
@@ -263,7 +275,7 @@ class ResultView(TemplateView):
         final_ax.set_yticks([15, 25])
         final_ax.set_xticks([0, 25, 50, 75, 100])
         final_ax.set_axisbelow(True) 
-        final_ax.set_yticklabels(['Correctness'],fontsize=14)
+        #final_ax.set_yticklabels(['Correctness'],fontsize=14)
         final_ax.grid(axis='x')
         final_ax.text(final_score+1, 15, str(final_score)+'%', fontsize=14)
 
