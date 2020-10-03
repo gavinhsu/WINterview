@@ -21,7 +21,6 @@ from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 from nltk import FreqDist, classify, NaiveBayesClassifier
-
 from nltk.classify import ClassifierI
 from nltk.classify.scikitlearn import SklearnClassifier
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
@@ -127,9 +126,10 @@ class ResultView(TemplateView):
         account_instance = Member.objects.get(Account=account_name)
         res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
         res_unit = Result.objects.get(id=res_id)
+        ans_unit = Answer.objects.get(id=res_id)
         
 
-        #get teply and answer
+        # get reply and answer
         # reply_dict = {}
         # for x in range(10):
         #     reply = "r{0}".format(x+1)
@@ -137,11 +137,13 @@ class ResultView(TemplateView):
         #     reply_dict["r{0}".format(x+1)] = get_reply
         # r1 = reply_dict['r1']
 
+
         # NLP PROCESSING #####################################################
+        # find the question unit according to answer unit
         job_selection = getattr(questions.models, new_job)
-        ques = str(job_selection.objects.get(QuesNum='1').Ques)
-        answer = str(job_selection.objects.get(QuesNum='1').Ans)
-        keywords = job_selection.objects.get(QuesNum='1').Keywords
+        question = ans_unit.q1 # NEEDS FURTHER UPDATES CHANGE NUM INTO VARIABLE!!!!!!!!!!!!!!!!!!
+        answer = str(job_selection.objects.get(Ques=question).Ans)
+        keywords = job_selection.objects.get(Ques=question).Keywords
         key_split = word_tokenize(keywords)
         
         # get similar keywords of CORRECT ANSWER
@@ -156,20 +158,18 @@ class ResultView(TemplateView):
         for key in key_split:
             ans_list.append(key)
 
-        word_vectors = model.wv
 
-
-        reply = 'I would use the Cash Flow Statement because it gives a true picture of how much cash the company is actually generating, independent of all the non-cash expenses that might have. And that’s the #1 thing you care about when analyzing the overall financial health of any business – its cash flow.'
+        reply = ans_unit.a1 # NEEDS FURTHR UPDATES CHANGE NUM INTO VARIABLE!!!!!!!!!!!!!!!!!!
         reply_tokens = word_tokenize(reply)
         reply_token = [word for word in reply_tokens if not word in stopwords.words()]
         c_reply = remove_noise(reply_token)
 
+        # solve word not in dictionary 
+        word_vectors = model.wv
         clean_reply = []
         for w in c_reply:
             if w in word_vectors.vocab:
                 clean_reply.append(w)
-
-        print(clean_reply)
 
 
         # get similar keywords of USER REPLY
@@ -183,8 +183,6 @@ class ResultView(TemplateView):
                 reply_list.append(r_list[i][j][0])
         for key in clean_reply:
             reply_list.append(key)
-
-        mean = int((len(reply_list)+len(ans_list))/2)
 
 
         # run similarity between REPLY & ANSWER similar keywords
@@ -260,8 +258,19 @@ class ResultView(TemplateView):
         bert_res = bert_predict[0]
         bert_score = round((bert_res/5)*100, 2)
 
+        # P/N confidence prediction
+        clean_pn = res_unit.r1[1:-1].split() # NEEDS FURTHER UPDATES CHANGE NUM INTO VARIABLE!!!!!!!!!!!!!!!!
+        pn_result = clean_pn[0][1:-2]
+        pn_percent = float(clean_pn[-1])
+
+
         # FINAL SCORE
         final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score), 0))
+        if pn_percent == 'positive':
+            final_score += pn_percent*2
+        else:
+            final_score -= pn_percent*2
+
         print('FINAL_SCORE ===> ', final_score)
 
         #answer&reply similarity chart
@@ -331,16 +340,16 @@ class ResultView(TemplateView):
             n = "neutral_{0}".format(x+1)
             neutral = getattr(res_unit, n)
             emotion_dict['n{0}'.format(x+1)] = neutral
-            h = "neutral_{0}".format(x+1)
+            h = "happy_{0}".format(x+1)
             happy = getattr(res_unit, h)
             emotion_dict['h{0}'.format(x+1)] = happy
-            a = "neutral_{0}".format(x+1)
+            a = "angry_{0}".format(x+1)
             angry = getattr(res_unit, a)
             emotion_dict['a{0}'.format(x+1)] = angry
-            f = "neutral_{0}".format(x+1)
+            f = "fear_{0}".format(x+1)
             fear = getattr(res_unit, f)
             emotion_dict['f{0}'.format(x+1)] = fear
-            s = "neutral_{0}".format(x+1)
+            s = "surprise_{0}".format(x+1)
             surprise = getattr(res_unit, s)
             emotion_dict['s{0}'.format(x+1)] = surprise
         
