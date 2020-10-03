@@ -221,20 +221,22 @@ class ResultView(TemplateView):
 
         #keyword score chart
         key_fig, key_ax = plt.subplots()
+        key_fig.set_figheight(3)
+        key_fig.set_figwidth(4)
         key_start = 0
         key = keyword_score
-        key_ax.broken_barh([(key_start, key)], [10, 9], facecolors=((0.3,0.1,0.4,0.6)))
-        key_ax.set_ylim(5, 15)
+        key_ax.broken_barh([(key_start, key)], [1,2], facecolors=((0.3,0.1,0.4,0.6)))
+        key_ax.set_ylim(0, 4)
         key_ax.set_xlim(0, 100)
         key_ax.spines['left'].set_visible(False)
         key_ax.spines['bottom'].set_visible(False)
         key_ax.spines['top'].set_visible(False)
-        key_ax.set_yticks([15, 25])
         key_ax.set_xticks([0, 25, 50, 75, 100])
         key_ax.set_axisbelow(True) 
-        #key_ax.set_yticklabels(['Keywords\nAccuracy'],fontsize=14)
+        key_ax.set_yticks([])
+        key_ax.set_title('Keywords Accuracy',fontsize=14) 
         key_ax.grid(axis='x')
-        key_ax.text(key+1, 15, '{:.2f}%'.format(key/mean*100),fontsize=14)
+        key_ax.text(key+1, 2, str(keyword_score)+'%',fontsize=14)
 
         #fig.suptitle('This is title of the chart', fontsize=16)
 
@@ -264,21 +266,22 @@ class ResultView(TemplateView):
 
         #answer&reply similarity chart
         final_fig, final_ax = plt.subplots()
+        final_fig.set_figheight(3)
+        final_fig.set_figwidth(4)
         final_start = 0
-        final_score = final_score
-        final_ax.broken_barh([(final_start, final_score)], [10, 9], facecolors=((0.3,0.1,0.4,0.6)))
-        final_ax.set_ylim(5, 15)
-        final_ax.set_xlim(0, mean)
+        final = final_score
+        final_ax.broken_barh([(final_start, final)], [1, 2], facecolors=((0.3,0.1,0.4,0.6)))
+        final_ax.set_xlim(0, 100)
+        final_ax.set_ylim(0, 4)
         final_ax.spines['left'].set_visible(False)
         final_ax.spines['bottom'].set_visible(False)
         final_ax.spines['top'].set_visible(False)
-        final_ax.set_yticks([15, 25])
         final_ax.set_xticks([0, 25, 50, 75, 100])
-        final_ax.set_axisbelow(True) 
-        #final_ax.set_yticklabels(['Correctness'],fontsize=14)
+        final_ax.set_yticks([])
+        final_ax.set_axisbelow(True)
+        final_ax.set_title('Correctness',fontsize=14) 
         final_ax.grid(axis='x')
-        final_ax.text(final_score+1, 15, str(final_score)+'%', fontsize=14)
-
+        final_ax.text(final+1, 2, str(final)+'%', fontsize=14)
         #fig.suptitle('This is title of the chart', fontsize=16)
 
         #leg1 = mpatches.Patch(color='#6259D8', label='start')
