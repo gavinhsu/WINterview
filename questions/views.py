@@ -5,6 +5,8 @@ from .forms import *
 from questions.models import *
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
+# for news fetching
+from newsapi import NewsApiClient
 
 def create(request):
     if request.method == 'POST':
@@ -99,3 +101,74 @@ def showvideo(request):
 
 
     return render(request, 'Blog/videos.html', context)
+
+
+
+def newsfin(request):
+    newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
+    topheadlines = newsapi.get_top_headlines(sources='al-jazeera-english')
+
+    all_articles = newsapi.get_everything(domains='wsj.com', language='en')
+    top_headlines = newsapi.get_top_headlines(category='business',language='en',country='us')
+
+    articles = all_articles['articles']
+
+    desc = []
+    news = []
+    img = []
+    url = []
+    time = []
+
+    for i in range(len(articles)):
+        myarticles = articles[i]
+
+        news.append(myarticles['title'])
+        descript = myarticles['description'].replace('<ol>','').replace('<li>','').replace('</li>','')
+        desc.append(descript)
+        print(myarticles['description'])
+        img.append(myarticles['urlToImage'])
+        url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ')
+        p2 = p.replace('Z', ' ')
+        time.append(p2)
+
+
+    mylist = zip(news, desc, img, url, time)
+    print('DESC===> ', desc)
+
+
+    return render(request, 'newsfin.html', context={"mylist":mylist})
+
+
+
+def newstech(request):
+    newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
+    topheadlines = newsapi.get_top_headlines(sources='techcrunch')
+
+
+    articles = topheadlines['articles']
+
+    desc = []
+    news = []
+    img = []
+    url = []
+    time = []
+
+    for i in range(len(articles)):
+        myarticles = articles[i]
+
+        news.append(myarticles['title'])
+        desc.append(myarticles['description'])
+        img.append(myarticles['urlToImage'])
+        url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ')
+        p2 = p.replace('Z', ' ')
+        time.append(p2)
+
+
+    mylist = zip(news, desc, img, url, time)
+
+
+    return render(request, 'newstech.html', context={"mylist":mylist})

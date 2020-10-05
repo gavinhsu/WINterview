@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tech News</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="jumbotron" style="color:black">
+
+    <h1 style="color:black">
+        The Latest Tech News
+
+    </h1>
+
+</div>
+
+
+<div class="container">
+    {% for new, des, im , ur, tim in mylist %}
+    
+    <h3>{{new}}</h3> 
+    {{value | linebreaks}}
+
+    Published Time: {{tim}}
+    {{value | linebreaks}}
+    
+    <img src="{{im}}" alt="">
+
+    <h6></h6>{{des}}
+    {{value | linebreaks}}
+
+    <h6>View the link below for further information: </h6>
+    <a href={{ur}}>{{ur}}</a>
+    {{value | linebreaks}}
+
+    <br>
+
+
+    {% endfor %}
+
+
+</div>
+
+</body>
+</html>
