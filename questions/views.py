@@ -134,7 +134,6 @@ def newsfin(request):
 
 
     mylist = zip(news, desc, img, url, time)
-    print('DESC===> ', desc)
 
 
     return render(request, 'newsfin.html', context={"mylist":mylist})
