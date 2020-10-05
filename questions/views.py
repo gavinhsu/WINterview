@@ -106,10 +106,9 @@ def showvideo(request):
 
 def newsfin(request):
     newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
-    topheadlines = newsapi.get_top_headlines(sources='al-jazeera-english')
 
     all_articles = newsapi.get_everything(domains='wsj.com', language='en')
-    top_headlines = newsapi.get_top_headlines(category='business',language='en',country='us')
+    #top_headlines = newsapi.get_top_headlines(category='business',language='en',country='us')
 
     articles = all_articles['articles']
 
@@ -123,8 +122,8 @@ def newsfin(request):
         myarticles = articles[i]
 
         news.append(myarticles['title'])
-        descript = myarticles['description'].replace('<ol>','').replace('<li>','').replace('</li>','')
-        desc.append(descript)
+        descript = str(myarticles['content']).split("…")[0]
+        desc.append(descript + '...')
         print(myarticles['description'])
         img.append(myarticles['urlToImage'])
         url.append(myarticles['url'])
@@ -144,8 +143,7 @@ def newsfin(request):
 
 def newstech(request):
     newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
-    topheadlines = newsapi.get_top_headlines(sources='techcrunch')
-
+    topheadlines = newsapi.get_top_headlines(sources='techcrunch, the-verge')
 
     articles = topheadlines['articles']
 
