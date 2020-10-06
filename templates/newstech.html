@@ -35,7 +35,7 @@
     
     <div align:center;>
         <div class="tech">
-            {% for new, des, im , ur, tim in mylist %}
+            {% for new, des, im , ur, tim in tech_list %}
             <h3>{{new}}</h3>
             {{value | linebreaks}}
             Published Time: {{tim}}
@@ -49,10 +49,23 @@
             <br>
             {% endfor %}
         </div>
+        
     </div>
     
         <div class='fin'>
-            hiiiii
+            {% for new, des, im , ur, tim in fin_list %}
+            <h3>{{new}}</h3>
+            {{value | linebreaks}}
+            Published Time: {{tim}}
+            {{value | linebreaks}}
+            <img src="{{im}}" alt="" style="width:650px;height:400px;">
+            <h6></h6>{{des}}
+            {{value | linebreaks}}
+            <h6>View the link below for further information: </h6>
+            <a href={{ur}}>{{ur}}</a>
+            {{value | linebreaks}}
+            <br>
+            {% endfor %}
         </div>
 
     

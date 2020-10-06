@@ -142,30 +142,55 @@ def newsfin(request):
 
 def newstech(request):
     newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
-    topheadlines = newsapi.get_top_headlines(sources='techcrunch, the-verge')
 
-    articles = topheadlines['articles']
+    # FINANCE news
+    fin_news = newsapi.get_everything(domains='wsj.com', language='en')
+    fin_articles = fin_news['articles']
 
-    desc = []
-    news = []
-    img = []
-    url = []
-    time = []
+    fin_desc = []
+    fin_news = []
+    fin_img = []
+    fin_url = []
+    fin_time = []
 
-    for i in range(len(articles)):
-        myarticles = articles[i]
+    for i in range(len(fin_articles)):
+        myarticles = fin_articles[i]
 
-        news.append(myarticles['title'])
-        desc.append(myarticles['description'])
-        img.append(myarticles['urlToImage'])
-        url.append(myarticles['url'])
+        fin_news.append(myarticles['title'])
+        fin_desc.append(myarticles['description'])
+        fin_img.append(myarticles['urlToImage'])
+        fin_url.append(myarticles['url'])
         published_time = myarticles['publishedAt']
         p = published_time.replace('T', ' ')
         p2 = p.replace('Z', ' ')
-        time.append(p2)
+        fin_time.append(p2)
+
+    fin_list = zip(fin_news, fin_desc, fin_img, fin_url, fin_time)
+
+    # TECH news
+    tech_news = newsapi.get_top_headlines(sources='techcrunch, the-verge')
+
+    tech_articles = tech_news['articles']
+
+    tech_desc = []
+    tech_news = []
+    tech_img = []
+    tech_url = []
+    tech_time = []
+
+    for i in range(len(tech_articles)):
+        myarticles = tech_articles[i]
+
+        tech_news.append(myarticles['title'])
+        tech_desc.append(myarticles['description'])
+        tech_img.append(myarticles['urlToImage'])
+        tech_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ')
+        p2 = p.replace('Z', ' ')
+        tech_time.append(p2)
+
+    tech_list = zip(tech_news, tech_desc, tech_img, tech_url, tech_time)
 
 
-    mylist = zip(news, desc, img, url, time)
-
-
-    return render(request, 'newstech.html', context={"mylist":mylist})
+    return render(request, 'newstech.html', context={"tech_list":tech_list, "fin_list":fin_list})
