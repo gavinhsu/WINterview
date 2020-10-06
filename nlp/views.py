@@ -145,10 +145,17 @@ class ResultView(TemplateView):
         answer = str(job_selection.objects.get(Ques=question).Ans)
         keywords = job_selection.objects.get(Ques=question).Keywords
         key_split = word_tokenize(keywords)
+
+        # solve answer keyword not in dictionary 
+        word_vectors = model.wv
+        clean_ans = []
+        for w in key_split:
+            if w in word_vectors.vocab:
+                clean_ans.append(w)
         
         # get similar keywords of CORRECT ANSWER
         a_list = []
-        for w in key_split:
+        for w in clean_ans:
             word = model.wv.most_similar(w, topn=10)
             a_list.append(word)
         ans_list = []
@@ -164,7 +171,7 @@ class ResultView(TemplateView):
         reply_token = [word for word in reply_tokens if not word in stopwords.words()]
         c_reply = remove_noise(reply_token)
 
-        # solve word not in dictionary 
+        # solve reply word not in dictionary 
         word_vectors = model.wv
         clean_reply = []
         for w in c_reply:
