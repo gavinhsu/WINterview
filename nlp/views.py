@@ -267,6 +267,7 @@ class ResultView(TemplateView):
 
         # P/N confidence prediction
         clean_pn = res_unit.r1[1:-1].split() # NEEDS FURTHER UPDATES CHANGE NUM INTO VARIABLE!!!!!!!!!!!!!!!!
+        print(clean_pn)
         pn_result = clean_pn[0][1:-2]
         pn_percent = float(clean_pn[-1])
 
