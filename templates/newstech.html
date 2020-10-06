@@ -1,48 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Tech News</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
 
-<div class="jumbotron" style="color:black">
+    <div class="jumbotron" style="color:black">
 
-    <h1 style="color:black">
-        The Latest Tech News
+        <h1 style="color:black; text-align: center;">
+            The Latest News
 
-    </h1>
+        </h1>
 
-</div>
+    </div>
 
-
-<div class="container">
-    {% for new, des, im , ur, tim in mylist %}
+    <center>
+        <button class="click btn-success">Tech News</button>
+        <button class="click1 btn-success">Finance News</button>
+    </center>
     
-    <h3>{{new}}</h3> 
-    {{value | linebreaks}}
-
-    Published Time: {{tim}}
-    {{value | linebreaks}}
+    <div align:center;>
+        <div class="tech">
+            {% for new, des, im , ur, tim in mylist %}
+            <h3>{{new}}</h3>
+            {{value | linebreaks}}
+            Published Time: {{tim}}
+            {{value | linebreaks}}
+            <img src="{{im}}" alt="">
+            <h6></h6>{{des}}
+            {{value | linebreaks}}
+            <h6>View the link below for further information: </h6>
+            <a href={{ur}}>{{ur}}</a>
+            {{value | linebreaks}}
+            <br>
+            {% endfor %}
+        </div>
+    </div>
     
-    <img src="{{im}}" alt="">
+        <div class='fin'>
+            hiiiii
+        </div>
 
-    <h6></h6>{{des}}
-    {{value | linebreaks}}
-
-    <h6>View the link below for further information: </h6>
-    <a href={{ur}}>{{ur}}</a>
-    {{value | linebreaks}}
-
-    <br>
-
-
-    {% endfor %}
-
-
-</div>
+    
 
 </body>
+<script>
+    $(document).ready(function(){
+      $(".click").click(function(){
+        $(".tech").show();
+        $(".fin").hide();
+      })
+    });
+
+    $(document).ready(function(){
+      $(".click1").click(function(){
+        $(".fin").show();
+        $(".tech").hide();
+      })
+    });
+</script>
+<style>
+    .btn-success {
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 1px;
+        display: block;
+        padding: 8px 28px;
+        border-radius: 10px;
+        transition: 0.5s;
+        margin: 10px;
+        border: 2px solid #fff;
+        color: #fff;
+    }
+
+    .btn-success:hover {
+        background: #2dc997;
+        border: 2px solid #2dc997;
+    }
+</style>
+
 </html>
