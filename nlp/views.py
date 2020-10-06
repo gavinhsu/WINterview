@@ -145,7 +145,8 @@ class ResultView(TemplateView):
         answer = str(job_selection.objects.get(Ques=question).Ans)
         keywords = job_selection.objects.get(Ques=question).Keywords
         key_split = word_tokenize(keywords)
-        
+        print(job_selection)
+        print(key_split)
         # get similar keywords of CORRECT ANSWER
         a_list = []
         for w in key_split:
@@ -260,6 +261,7 @@ class ResultView(TemplateView):
 
         # P/N confidence prediction
         clean_pn = res_unit.r1[1:-1].split() # NEEDS FURTHER UPDATES CHANGE NUM INTO VARIABLE!!!!!!!!!!!!!!!!
+        print(clean_pn)
         pn_result = clean_pn[0][1:-2]
         pn_percent = float(clean_pn[-1])
 
