@@ -1002,7 +1002,7 @@ class QuesView10(TemplateView):
         blink10(vid_path, account_name, t, path)
         emotion10(vid_path, account_name, t, path)
 
-        return redirect('result/')
+        return redirect('/')
       
       return render(request, self.template_name,locals())   
 

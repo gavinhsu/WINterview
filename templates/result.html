@@ -33,18 +33,53 @@
     <button class="quesnum" class="btn btn-outline-primary" id="btn9">9.</button>
     <button class="quesnum" class="btn btn-outline-primary" id="btn10">10.</button>
   </ul>
+
   <div class="result1">
     <div id="num1">1.</div>
-    <div id="ques1">{{ques}}</div>
+    <div id="ques1">{{ques1}}</div>
     <label for="reply1">Your reply</label>
-    <textarea readonly id="reply1" name="reply1" cols="10" rows="10">{{reply}}</textarea>
+    <textarea readonly id="reply1" name="reply1" cols="10" rows="10">{{reply1}}</textarea>
     <label for="ans1">Reference answer</label>
-    <textarea readonly id="ans1" name="reply1" cols="10" rows="10">{{answer}}</textarea>
+    <textarea readonly id="ans1" name="reply1" cols="10" rows="10">{{answer1}}</textarea>
     <div class="nlpchart">
-      <img src="data:image/png;base64,{{final_bar|safe}}" style="width: 230px;height: 190px;">
+      <img src="data:image/png;base64,{{final_bar1|safe}}" style="width: 230px;height: 190px;">
     </div>
     <div class="nlpchart">
-      <img src="data:image/png;base64,{{keywords_bar|safe}}" style="width: 230px;height: 190px;">
+      <img src="data:image/png;base64,{{keywords_bar1|safe}}" style="width: 230px;height: 190px;">
+    </div>
+    <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
+
+  </div>
+
+  <div class="result2">
+    <div id="num2">2.</div>
+    <div id="ques2">{{ques2}}</div>
+    <label for="reply2">Your reply</label>
+    <textarea readonly id="reply2" name="reply2" cols="10" rows="10">{{reply2}}</textarea>
+    <label for="ans1">Reference answer</label>
+    <textarea readonly id="ans2" name="reply2" cols="10" rows="10">{{answer2}}</textarea>
+    <div class="nlpchart">
+      <img src="data:image/png;base64,{{final_bar2|safe}}" style="width: 230px;height: 190px;">
+    </div>
+    <div class="nlpchart">
+      <img src="data:image/png;base64,{{keywords_bar2|safe}}" style="width: 230px;height: 190px;">
+    </div>
+    <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
+
+  </div>
+
+  <div class="result3">
+    <div id="num3">3.</div>
+    <div id="ques3">{{ques3}}</div>
+    <label for="reply3">Your reply</label>
+    <textarea readonly id="reply3" name="reply3" cols="10" rows="10">{{reply3}}</textarea>
+    <label for="ans1">Reference answer</label>
+    <textarea readonly id="ans3" name="reply3" cols="10" rows="10">{{answer3}}</textarea>
+    <div class="nlpchart">
+      <img src="data:image/png;base64,{{final_bar3|safe}}" style="width: 230px;height: 190px;">
+    </div>
+    <div class="nlpchart">
+      <img src="data:image/png;base64,{{keywords_bar3|safe}}" style="width: 230px;height: 190px;">
     </div>
     <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
 
@@ -278,6 +313,40 @@
     border: none;
   }
 
+  .result2 {
+    left: 50px;
+    position: relative;
+    border: 3px solid #B4886B;
+    width: 870px;
+    height: 670px;
+  }
+
+  #num2 {
+    display: inline-block;
+    position: absolute;
+  }
+
+  #ques2 {
+    display: flex;
+    position: relative;
+    left: 40px;
+  }
+
+  #reply2 {
+    height: 160px;
+    width: 500px;
+    border: none;
+    position: relative;
+    top: 5px;
+    left: 10px;
+  }
+
+  #ans2 {
+    height: 160px;
+    width: 500px;
+    border: none;
+  }
+
   .nlpchart {
     display: contents;
   }
@@ -295,11 +364,11 @@
     });
 
     $('#btn2').click(function () {
-      $('.paymentinfocontainer').toggle("slow");
+      $('.result2').toggle("slow");
     });
 
     $('#btn3').click(function () {
-      $('.confirmationinfocontainer').toggle("slow");
+      $('.result3').toggle("slow");
     });
   });
 </script>

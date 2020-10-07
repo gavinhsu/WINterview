@@ -226,6 +226,7 @@ h1, h2, h3, h4, h5, h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /* Nav Menu Essentials */
+
 .nav-menu, .nav-menu * {
   margin: 0;
   padding: 0;
@@ -234,10 +235,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu ul {
   position: absolute;
-  display: none;
+  display: inline-block;
   top: 100%;
   left: 0;
   z-index: 99;
+  display: inline-block;
 }
 
 .nav-menu li {
