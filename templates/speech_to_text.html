@@ -7,17 +7,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>speech to text recording</title>
 
 </head>
 
 <body>
+  <div class="title" style="background-color: white; overflow: hidden;">
+    <div id="hiddenmenu" style="display: flex; background-color: turquoise; position: relative; top: 60px;">
+      <button id="home"><i class="fa fa-home" style="position: absolute;left: 12%;font-size: 30px;top: 0px; "></i></button>
+      <h1 style="position: relative; left: 43%; text-align: center;">
+        <a id="win">WINterview</a>
+      </h1>
+    </div>
+  </div>
 
   <!-- The controls attribute adds video controls, like play, pause, and volume. -->
-  <div class="container">
-    <p id="question" style="color: #444;text-align: left;text-decoration: solid;font-size: 25px;">
+  <div class="container" style="background-image: url({% static "img/teacher.jpeg" %}" );>
+    <img src="{% static "img/say.jpg" %}" style="top: 55px;position: absolute;left: 3%; width: 95%; height: 75px;">
+    <p id="question" style="color: yellowgreen;text-decoration: solid;font-size: 25px;">
       {{ random_question }}
     </p>
 
@@ -25,33 +35,9 @@
       style="display:none;position:absolute; left:27%;">
 
     <div class="app">
-      <span id="countStart" style="font-size:50px; color:red; "> </span>
-
-      <img
-        src="https://s.yimg.com/ny/api/res/1.2/0cS8e63meZSs2JdbW2tqOA--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9NDgwO2g9MzYwO2lsPXBsYW5l/http://media.zenfs.com/zh_hant_tw/News/NOWnews/i2132714.jpg"
-        style="display:block; margin:auto;" />
-
+      <span id="countStart" style="font-size:50px; color:violet; left: 1150px; position: absolute;top: 120px;"> </span>
       <button id="start-record-btn" title="Start Recording" style="display:none;">Start Recognition</button>
       <button id="pause-record-btn" title="Pause Recording" style="display:none;">Pause Recognition</button>
-
-      <p id="recording-instructions">Read the question carefully and answer it after countdown.</p>
-
-      <form id='ans' method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="note-textarea" style="text-align:center;">Your Answer</label>
-        <div class="input-single">
-          <textarea style="display: none;" id="time" name="time"></textarea>
-          <textarea style="display: none;" id="video" name="video"></textarea>
-          <textarea id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
-            style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
-        </div>
-
-        <input style="display:none;" type="submit" id="submit"
-          style="margin-left:950px;margin-bottom:10px;" value="NextQuestion">
-        <input disabled=true style="margin-left:1000px;margin-bottom:10px;" type="button" id="firstBtn" value="Stop Answering">
-      </form>
-
-
       <video style="display:none;" width="200" height="200" id="inputVideo" alt="在這裡錄影" muted>Video stream not
         available.</video>
       <video style="display:none;" width="200" height="200" id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not
@@ -60,183 +46,257 @@
       <button style="visibility: hidden" id="stopBtn" class="btn btn-sm btn-outline-danger" style='display:none'>Stop
         Recording</button>
       <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
-
+    </div>
+  </div>
+  <p id="recording-instructions">Read the question carefully and answer it after countdown.</p>
+  
+  <form id='ans' method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="input-single">
+      <textarea style="display: none;" id="time" name="time"></textarea>
+      <textarea style="display: none;" id="video" name="video"></textarea>
+      <textarea id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
+        style="position: relative;width:85%;height:125px;display:block;"></textarea>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
+    <input type="submit" id="submit" style="position:absolute; left: 1120px; top: 520px;visibility: hidden;"
+      value="Next Question">
+      <input  disabled=true; style="position:absolute; top: 520px; left:1110px;"
+      type="button" id="firstBtn" value="Stop Answering">
+  </form>
 
-      var count = {{ prep_time1 }};
-      var count1 = {{ ans_time1 }};
-      /*-----------------------------
-      countdown function 
-      ------------------------------*/
-      var spn = document.getElementById("countStart");
-      var startRecord = document.getElementById("start-record-btn");
-      var pauseRecord = document.getElementById("pause-record-btn");
-      var startVideo = document.getElementById("startBtn");
-      var stopVideo = document.getElementById("stopBtn");
-      var firstBtn = document.getElementById("firstBtn")
 
-      // Set count
-      var timer = null;  // For referencing the timer
-      var timer2 = null;
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    var title = $('.title')
+    var menu = $('#hiddenmenu')
+    title.on('mousemove',function(event){
+      if(60 - event.clientY < 0){
+        menu.css({top:60 - event.clientY})
+      } else {
+        menu.css({top: 0})
+      }
+    }).on('mouseout',function(){
+      menu.css({top:-60})
+    })
+  </script>
+  <script>
+    var submit = document.getElementById("submit")
+    var firstBtn = document.getElementById("firstBtn");
+    firstBtn.addEventListener('click', simulateClick);
 
-      stopVideo.addEventListener("click", getVideoLength);
-      function getVideoLength() {
-        var videoLength = document.getElementById("time")
-        var time = {{ ans_time1 }} - count1
+    function simulateClick() {
+        stopBtn.click()
+        firstBtn.style.visibility = "hidden"
+        submit.style.visibility = "visible"
+    }
+
+  </script>
+  <script>
+
+    var count = {{ prep_time1 }};
+    var count1 = {{ ans_time1 }};
+    /*-----------------------------
+    countdown function 
+    ------------------------------*/
+    var spn = document.getElementById("countStart");
+    var startRecord = document.getElementById("start-record-btn");
+    var pauseRecord = document.getElementById("pause-record-btn");
+    var startVideo = document.getElementById("startBtn");
+    var stopVideo = document.getElementById("stopBtn");
+    var firstBtn = document.getElementById("firstBtn")
+
+    // Set count
+    var timer = null;  // For referencing the timer
+    var timer2 = null;
+
+    stopVideo.addEventListener("click", getVideoLength);
+    function getVideoLength() {
+      var videoLength = document.getElementById("time")
+      var time = {{ ans_time1 }} - count1
       videoLength.value = time
       console.log(time)
-      }
+    }
 
+    (function countDownStart() {
+      // Display counter and start counting down
+      spn.textContent = count;
 
+      // Run the function again every second if the count is not zero
+      if (count !== 0) {
+        timer = setTimeout(countDownStart, 1000);
+        count -= 1;
+        // decrease the timer
+      } else {
+        // Enable the button
+        startRecord.click();
+        startVideo.click();
+        spn.style.display = "none"
 
-      (function countDownStart() {
-        // Display counter and start counting down
-        spn.textContent = count;
+        if (spn.style.display = "none") {
+          spn.textContent = count1;
+          spn.style.display = "block";
+          firstBtn.disabled = false
 
-        // Run the function again every second if the count is not zero
-        if (count !== 0) {
-          timer = setTimeout(countDownStart, 1000);
-          count -= 1;
-          // decrease the timer
-        } else {
-          // Enable the button
-          startRecord.click();
-          startVideo.click();
-          spn.style.display = "none"
-
-          if (spn.style.display = "none") {
-            spn.textContent = count1;
-            spn.style.display = "block";
-            firstBtn.disabled = false
-
-            // Run the function again every second if the count is not zero
-            if (count1 !== 0) {
-              timer2 = setTimeout(countDownStart, 1000);
-              count1 -= 1;
-              // decrease the timer
-            }
-            else {
-              // Enable the button
-              pauseRecord.click();
-              submit.click()
-              spn.style.display = "none"
-            }
-            if (count1 == 1) {
-              stopVideo.click();
-            }
+          // Run the function again every second if the count is not zero
+          if (count1 !== 0) {
+            timer2 = setTimeout(countDownStart, 1000);
+            count1 -= 1;
+            // decrease the timer
+          }
+          else {
+            // Enable the button
+            pauseRecord.click();
+            submit.click()
+            spn.style.display = "none"
+          }
+          if (count1 == 1) {
+            stopVideo.click();
           }
         }
-      }());
-    </script>
-
-    <script src="{% static "js/speech_to_text.js" %}"></script>
-    <script src="{% static "js/s2t_media.js" %}"></script>
-
-    <style src="{% static "css/speech_to_text.css" %}">
-      ul {
-        list-style: none;
-        padding: 0;
       }
+    }());
 
-      p {
-        color: #444;
-      }
 
-      button:focus {
-        outline: 0;
-      }
+  </script>
 
+  <script src="{% static "js/speech_to_text.js" %}"></script>
+  <script src="{% static "js/s2t_media.js" %}"></script>
+  <style src="{% static "css/speech_to_text.css" %}">
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    h1{
+      font-family: 'Lobster', Helvetica, arial;
+    }
+    #win{
+      color: #666;
+      text-decoration: none;
+      position: absolute;
+    }
+
+    h1:after{
+      content : 'WINterview';
+      color: #d6d6d6;
+    }
+
+    #home{
+      background-color: darkseagreen;
+      border: none;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+      padding: 12px 16px;
+      position: absolute;
+      left: 10%;
+      top: 15px;
+      height: 30px;
+      width: 40px;
+    }
+
+    #home:hover{
+      background-color: darkgreen;
+
+    }
+
+    p {
+      color: #444;
+    }
+
+    button:focus {
+      outline: 0;
+    }
+
+    .container {
+      max-width: 100%;
+      height: 370px;
+      margin: 0 auto;
+      padding: 100px 50px;
+      text-align: center;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+
+    .container h1 {
+      margin-bottom: 20px;
+    }
+
+    .container p {
+      position: absolute;
+      top: 10%;
+    }
+
+    .page-description {
+      font-size: 1.1rem;
+      margin: 0 auto;
+    }
+
+    .tz-link {
+      font-size: 1em;
+      color: #1da7da;
+      text-decoration: none;
+    }
+
+    .no-browser-support {
+      display: none;
+      font-size: 1.2rem;
+      color: #e64427;
+      margin-top: 35px;
+    }
+
+    .app {
+      margin: 40px auto;
+    }
+
+    #note-textarea {
+      border: none;
+    }
+
+
+    #notes {
+      padding-top: 20px;
+    }
+
+    .note .header {
+      font-size: 0.9em;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .note .delete-note,
+    .note .listen-note {
+      text-decoration: none;
+      margin-left: 15px;
+    }
+
+    .note .content {
+      margin-bottom: 40px;
+    }
+
+    .answerNote {
+      width: 1000px;
+      height: 150px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 768px) {
       .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 100px 50px;
-        text-align: center;
+        padding: 50px 25px;
       }
 
-      .container h1 {
-        margin-bottom: 20px;
-      }
-
-      .page-description {
-        font-size: 1.1rem;
-        margin: 0 auto;
-      }
-
-      .tz-link {
-        font-size: 1em;
-        color: #1da7da;
-        text-decoration: none;
-      }
-
-      .no-browser-support {
-        display: none;
-        font-size: 1.2rem;
-        color: #e64427;
-        margin-top: 35px;
-      }
-
-      .app {
-        margin: 40px auto;
-      }
-
-      #note-textarea {
-        margin: 20px 0;
-        border: none;
-      }
-
-      #recording-instructions {
-        margin: 15px auto 60px;
-      }
-
-      #notes {
-        padding-top: 20px;
-      }
-
-      .note .header {
-        font-size: 0.9em;
-        color: #888;
+      button {
         margin-bottom: 10px;
       }
 
-      .note .delete-note,
-      .note .listen-note {
-        text-decoration: none;
-        margin-left: 15px;
-      }
-
-      .note .content {
-        margin-bottom: 40px;
-      }
-
-      .answerNote {
-        width: 1000px;
-        height: 150px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          padding: 50px 25px;
+      @media (max-width: 1200px) {
+        #bsaHolder {
+          display: none;
         }
-
-        button {
-          margin-bottom: 10px;
-        }
-
-        @media (max-width: 1200px) {
-          #bsaHolder {
-            display: none;
-          }
-        }
-    </style>
-
-
-
+      }
+  </style>
 </body>
 
 </html>

@@ -109,13 +109,4 @@ function isRecordingBtn(recordBtnState) {
     }
 }
 
-var submit = document.getElementById("submit")
-var firstBtn = document.getElementById("firstBtn");
-firstBtn.addEventListener('click', simulateClick);
-
-function simulateClick() {
-    stopBtn.click()
-    submit.style.display = "block"
-    firstBtn.style.display = "none"
-}
 

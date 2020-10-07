@@ -12,15 +12,13 @@ button:focus {
 }
 
 .container {
-    max-width: 700px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 100px 50px;
     text-align: center;
+    background-image: url("{% static 'img/mock background.gif' %}");
 }
 
-.container h1 {
-    margin-bottom: 20px;
-}
 
 .page-description {
     font-size: 1.1rem;
@@ -40,9 +38,6 @@ button:focus {
     margin-top: 35px;
 }
 
-.app {
-    margin: 40px auto;
-}
 
 #note-textarea {
     margin: 20px 0;

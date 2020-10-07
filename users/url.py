@@ -22,6 +22,6 @@ urlpatterns = [
   path('questionBank/',users.views.questionBank),
   path('interviewSkill/',users.views.interviewSkill),
   path('companyProfile/',users.views.companyProfile),
-  path('News/',users.views.News),
-  path('contactUs/',users.views.contactUs),
+  path('News/', users.views.News),
+  path('contactUs/', users.views.contactUs),
  ]

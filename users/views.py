@@ -35,7 +35,7 @@ def companyProfile(request):
     return render(request,'companyProfile.html')
 
 def News(request):
-    return render(request,'News.html')
+    return render(request,'newstech.html')
 
 def contactUs(request):
     return render(request,'contactUs.html')

@@ -5,6 +5,8 @@ from .forms import *
 from questions.models import *
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
+# for news fetching
+from newsapi import NewsApiClient
 
 def create(request):
     if request.method == 'POST':
@@ -99,3 +101,96 @@ def showvideo(request):
 
 
     return render(request, 'Blog/videos.html', context)
+
+
+
+def newsfin(request):
+    newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
+
+    all_articles = newsapi.get_everything(domains='wsj.com', language='en')
+    #top_headlines = newsapi.get_top_headlines(category='business',language='en',country='us')
+
+    articles = all_articles['articles']
+
+    desc = []
+    news = []
+    img = []
+    url = []
+    time = []
+
+    for i in range(len(articles)):
+        myarticles = articles[i]
+
+        news.append(myarticles['title'])
+        descript = str(myarticles['content']).split("…")[0]
+        desc.append(descript + '...')
+        print(myarticles['description'])
+        img.append(myarticles['urlToImage'])
+        url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ')
+        p2 = p.replace('Z', ' ')
+        time.append(p2)
+
+
+    mylist = zip(news, desc, img, url, time)
+
+
+    return render(request, 'newsfin.html', context={"mylist":mylist})
+
+
+
+def newstech(request):
+    newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
+
+    # FINANCE news
+    fin_news = newsapi.get_everything(domains='wsj.com', language='en')
+    fin_articles = fin_news['articles']
+
+    fin_desc = []
+    fin_news = []
+    fin_img = []
+    fin_url = []
+    fin_time = []
+
+    for i in range(len(fin_articles)):
+        myarticles = fin_articles[i]
+
+        fin_news.append(myarticles['title'])
+        fin_desc.append(myarticles['description'])
+        fin_img.append(myarticles['urlToImage'])
+        fin_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ')
+        p2 = p.replace('Z', ' ')
+        fin_time.append(p2)
+
+    fin_list = zip(fin_news, fin_desc, fin_img, fin_url, fin_time)
+
+    # TECH news
+    tech_news = newsapi.get_top_headlines(sources='techcrunch, the-verge')
+
+    tech_articles = tech_news['articles']
+
+    tech_desc = []
+    tech_news = []
+    tech_img = []
+    tech_url = []
+    tech_time = []
+
+    for i in range(len(tech_articles)):
+        myarticles = tech_articles[i]
+
+        tech_news.append(myarticles['title'])
+        tech_desc.append(myarticles['description'])
+        tech_img.append(myarticles['urlToImage'])
+        tech_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ')
+        p2 = p.replace('Z', ' ')
+        tech_time.append(p2)
+
+    tech_list = zip(tech_news, tech_desc, tech_img, tech_url, tech_time)
+
+
+    return render(request, 'newstech.html', context={"tech_list":tech_list, "fin_list":fin_list})

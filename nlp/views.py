@@ -21,7 +21,6 @@ from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 from nltk import FreqDist, classify, NaiveBayesClassifier
-
 from nltk.classify import ClassifierI
 from nltk.classify.scikitlearn import SklearnClassifier
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
@@ -122,107 +121,249 @@ class ResultView(TemplateView):
         for letter in str(job_name):
             new_job = job_name.replace(' ', '_')  
 
+
         # get the entire result table 
+        job_selection = getattr(questions.models, new_job)
         account_instance = Member.objects.get(Account=account_name)
         res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
         res_unit = Result.objects.get(id=res_id)
+        ans_unit = Answer.objects.get(id=res_id)
         
 
-        # NLP PROCESSING #####################################################
-        job_selection = getattr(questions.models, new_job)
-        answer = str(job_selection.objects.get(QuesNum='1').Ans)
-        keywords = job_selection.objects.get(QuesNum='1').Keywords
-        key_split = word_tokenize(keywords)
+        # retreive reply, questions, keywords, and answers
+        full_reply = []
+        full_ques = []
+        full_ans = []
+        full_key = []
+        full_pn = []
+
+        for x in range(10):
+            reply = "a{0}".format(x+1)
+            ques = "q{0}".format(x+1)
+            pn = "r{0}".format(x+1)
+            get_reply = getattr(ans_unit, reply)
+            get_ques = getattr(ans_unit, ques)
+            get_pn = getattr(res_unit, pn)
+            get_ans = str(job_selection.objects.get(Ques=get_ques).Ans)
+            get_key = job_selection.objects.get(Ques=get_ques).Keywords
+            full_reply.append(get_reply)
+            full_ques.append(get_ques)
+            full_ans.append(get_ans)
+            full_key.append(get_key)
+            full_pn.append(get_pn)
+            exec(f'reply{x+1} = full_reply[x]')
+            exec(f'ques{x+1} = full_ques[x]')
+            exec(f'answer{x+1} = full_ans[x]')
+            exec(f'keyword{x+1} = full_key[x]')
         
-        # get similar keywords of CORRECT ANSWER
-        a_list = []
-        for w in key_split:
-            word = model.wv.most_similar(w, topn=10)
-            a_list.append(word)
-        ans_list = []
-        for i in range(len(a_list)): 
-            for j in range(len(a_list[i])):
-                ans_list.append(a_list[i][j][0])
-        for key in key_split:
-            ans_list.append(key)
 
+        keyscore_list = []
+        final_list = []
+
+        # NLP PROCESSING #####################################################   
+        for NUM in range(10):    
+            key_split = word_tokenize(full_key[NUM])
+
+            # solve answer keyword not in dictionary 
+            word_vectors = model.wv
+            
+            # get similar keywords of CORRECT ANSWER
+            a_list = []
+            for w in key_split:
+                if w in word_vectors.vocab:
+                    word = model.wv.most_similar(w, topn=10)
+                    a_list.append(word)
+                else:
+                    a_list.append(w)
+
+            ans_list = []
+            for i in range(len(a_list)): 
+                for j in range(len(a_list[i])):
+                    ans_list.append(a_list[i][j][0])
+            # add the original words
+            for key in key_split:
+                ans_list.append(key)
+
+
+            # Reply processing
+            reply_tokens = word_tokenize(full_reply[NUM])
+            reply_token = [word for word in reply_tokens if not word in stopwords.words()]
+            c_reply = remove_noise(reply_token)
+
+            # solve reply word not in dictionary 
+            word_vectors = model.wv
+
+            # get similar keywords of USER REPLY
+            r_list = []
+            for w in c_reply:
+                if w in word_vectors.vocab:
+                    word = model.wv.most_similar(w, topn=10)
+                    r_list.append(word)
+                else:
+                    r_list.append(w)
+
+            reply_list = []
+            for i in range(len(r_list)): 
+                for j in range(len(r_list[i])):
+                    reply_list.append(r_list[i][j][0])
+            # add the original words
+            for key in c_reply:
+                reply_list.append(key)
+
+            print('---------', NUM+1, '----------------------------------------')
+            # print('REPLY ==> ', reply_list)
+            # print('ANSWER ==> ', ans_list)
+
+
+            # run similarity between REPLY & ANSWER similar keywords
+            gensim_reply = []
+            for w in reply_list:
+                if w in word_vectors.vocab:
+                    gensim_reply.append(w)
+            
+            gensim_ans = []
+            for w in ans_list:
+                if w in word_vectors.vocab:
+                    gensim_ans.append(w)
+
+            while c_reply:
+                try:
+                    gensim_score = round((model.wv.n_similarity(gensim_reply, gensim_ans)) * 100, 2)
+                    break
+                except Exception:
+                    print('word not found')
+                    break
         
-        reply = 'It is a graphical plot to programmatically illustrate a binary classifier to see whether valid.'
-        reply_tokens = word_tokenize(reply)
-        reply_token = [word for word in reply_tokens if not word in stopwords.words()]
-        clean_reply = remove_noise(reply_token)
-
-        # get similar keywords of USER REPLY
-        r_list = []
-        for w in clean_reply:
-            word = model.wv.most_similar(w, topn=10)
-            r_list.append(word)
-        reply_list = []
-        for i in range(len(r_list)): 
-            for j in range(len(r_list[i])):
-                reply_list.append(r_list[i][j][0])
-        for key in clean_reply:
-            reply_list.append(key)
-
-        mean = int((len(reply_list)+len(ans_list))/2)
+            # see how many words are same between REPLY & ANSWER
+            same_words = set(reply_list) & set(ans_list)
+            num_of_same_words = len(same_words)
 
 
-        # run similarity between REPLY & ANSWER similar keywords
-        while clean_reply:
-            try:
-                gensim_score = round((model.wv.n_similarity(reply_list, ans_list)) * 100, 2)
-                break
-            except Exception:
-                print('word not found')
-                break
+            # Calculate the proportion of same keywords
+            counter = 0
+            for w in key_split:
+                k_list = []
+                if w in word_vectors.vocab:
+                    word = model.wv.most_similar(w, topn=10)
+                    k_list.append(word)
+                else:
+                    k_list.append(w)
+
+                key_list = []
+                for i in range(len(k_list)): 
+                    for j in range(len(k_list[i])):
+                        key_list.append(k_list[i][j][0])
+                same_num = len([i for i in reply_list if i in key_list])
+                if same_num >= 1:
+                    counter += 1
+
+            keyword_score = round((counter/len(key_split))*100, 2)
+            keyscore_list.append(keyword_score)
+            print('KEYSCORE ===> ', keyword_score, '%')
         
-        # see how many words are same between REPLY & ANSWER
-        same_words = set(reply_list) & set(ans_list)
-        num_of_same_words = len(same_words)
 
-        #gensim score chart
-        fig, ax = plt.subplots()
-        start = 0
-        key = num_of_same_words
-        ax.broken_barh([(start, key)], [10, 9], facecolors=((0.3,0.1,0.4,0.6)))
-        ax.set_ylim(5, 15)
-        ax.set_xlim(0, mean)
-        ax.spines['left'].set_visible(False)
-        ax.spines['bottom'].set_visible(False)
-        ax.spines['top'].set_visible(False)
-        ax.set_yticks([15, 25])
-        ax.set_xticks([0, 25, 50, 75, mean])
-        ax.set_axisbelow(True) 
-        #ax.set_yticklabels(['keywords'])
-        ax.grid(axis='x')
-        ax.text(key+1, 15, '{:.2f}%'.format(key/mean*100), fontsize=8)
+            # BERT prediction
+            rep = full_reply[NUM]
+            answ = full_ans[NUM]
+            bert_predict = bert.predict([(rep, answ)])
+            bert_res = bert_predict[0]
+            bert_score = round((bert_res/5)*100, 2)
 
-        #fig.suptitle('This is title of the chart', fontsize=16)
+            # P/N confidence prediction
+            clean_pn = full_pn[NUM][1:-1].split()
+            print(clean_pn)
+            pn_result = clean_pn[0][1:-2]
+            print(pn_result)
+            pn_percent = float(clean_pn[-1])
 
-        #leg1 = mpatches.Patch(color='#6259D8', label='start')
-        #leg2 = mpatches.Patch(color='#E53F08', label='key')
-        # ax.legend(handles=[leg1, leg2], ncol=2)
-        plt.tight_layout()
+            # FINAL SCORE
+            final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score), 0))
+            if pn_percent == 'positive':
+                final_score += pn_percent*2
+            else:
+                final_score -= pn_percent*2
 
-        #save_plot
-        keywords_buffer = BytesIO()
-        plt.savefig(keywords_buffer, format='png')
-        keywords_buffer.seek(0)
-        image_png = keywords_buffer.getvalue()
-        keywords_buffer.close()
+            final_list.append(final_score)
+            print('FINAL_SCORE ===> ', final_score)
+            
 
-        keywords_bar = base64.b64encode(image_png)
-        keywords_bar = keywords_bar.decode('utf-8')
+        print('KEYWORD LIST--------', keyscore_list)
+        print('FINAL LIST--------', final_list)
+        
 
-        # BERT prediction
-        bert_predict = bert.predict([(reply, answer)])
-        bert_res = bert_predict[0]
-        bert_score = round((bert_res/5)*100, 2)
 
-        # FINAL SCORE
-        final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score + num_of_same_words), 0))
+        # Plot keyword accuracy
+        for i in range(10):           
+            key_fig, key_ax = plt.subplots()
+            key_fig.set_figheight(3)
+            key_fig.set_figwidth(4)
+            key_start = 0
+            key = keyscore_list[i]
+            key_ax.broken_barh([(key_start, key)], [1,2], facecolors=((0.3,0.1,0.4,0.6)))
+            key_ax.set_ylim(0, 4)
+            key_ax.set_xlim(0, 100)
+            key_ax.spines['left'].set_visible(False)
+            key_ax.spines['bottom'].set_visible(False)
+            key_ax.spines['top'].set_visible(False)
+            key_ax.set_xticks([0, 25, 50, 75, 100])
+            key_ax.set_axisbelow(True) 
+            key_ax.set_yticks([])
+            key_ax.set_title('Keyword Accuracy', fontsize=14) 
+            key_ax.grid(axis='x')
+            key_ax.text(key+1, 2, str(keyscore_list[i])+'%', fontsize=14)
 
-        #answer&reply similarity
+            #fig.suptitle('This is title of the chart', fontsize=16)
+            #leg1 = mpatches.Patch(color='#6259D8', label='start')
+            #leg2 = mpatches.Patch(color='#E53F08', label='key')
+            # ax.legend(handles=[leg1, leg2], ncol=2)
+            plt.tight_layout()
+
+            #save_plot
+            keywords_buffer = BytesIO()
+            plt.savefig(keywords_buffer, format='png')
+            keywords_buffer.seek(0)
+            key_image = keywords_buffer.getvalue()
+            keywords_buffer.close()
+
+            keywords_bar = base64.b64encode(key_image)
+            exec(f"keywords_bar{i+1} = keywords_bar.decode('utf-8')")
+
+
+
+        # plot final similarity score
+        for i in range(10):
+            final_fig, final_ax = plt.subplots()
+            final_fig.set_figheight(3)
+            final_fig.set_figwidth(4)
+            final_start = 0
+            final = final_list[i]
+            final_ax.broken_barh([(final_start, final)], [1, 2], facecolors=((0.3,0.1,0.4,0.6)))
+            final_ax.set_xlim(0, 100)
+            final_ax.set_ylim(0, 4)
+            final_ax.spines['left'].set_visible(False)
+            final_ax.spines['bottom'].set_visible(False)
+            final_ax.spines['top'].set_visible(False)
+            final_ax.set_xticks([0, 25, 50, 75, 100])
+            final_ax.set_yticks([])
+            final_ax.set_axisbelow(True)
+            final_ax.set_title('Answer Correctness',fontsize=14) 
+            final_ax.grid(axis='x')
+            final_ax.text(final+1, 2, str(final_list[i])+'%', fontsize=14)
+            #fig.suptitle('This is title of the chart', fontsize=16)
+            #leg1 = mpatches.Patch(color='#6259D8', label='start')
+            #leg2 = mpatches.Patch(color='#E53F08', label='key')
+            # ax.legend(handles=[leg1, leg2], ncol=2)
+            plt.tight_layout()
+            #save_plot
+            final_buffer = BytesIO()
+            plt.savefig(final_buffer, format='png')
+            final_buffer.seek(0)
+            final_inage = final_buffer.getvalue()
+            final_buffer.close()
+
+            final_bar = base64.b64encode(final_inage)
+            exec(f"final_bar{i+1} = final_bar.decode('utf-8')")
+
 
 
         # BLINK PROCESSING #####################################################
@@ -247,32 +388,33 @@ class ResultView(TemplateView):
             exec(f'BPM_{x+1} = num/minutes')
 
         avg_blinks = round(total_blinks/10, 2)
-        
+      
 
-        # EMOTION PROCESSING #####################################################
-        # emotion_dict = {}
-        # for x in range(10):
-        #     n = "neutral_{0}".format(x+1)
-        #     neutral = getattr(res_unit, n)
-        #     emotion_dict['n{0}'.format(x+1)] = neutral
-        #     h = "neutral_{0}".format(x+1)
-        #     happy = getattr(res_unit, h)
-        #     emotion_dict['h{0}'.format(x+1)] = happy
-        #     a = "neutral_{0}".format(x+1)
-        #     angry = getattr(res_unit, a)
-        #     emotion_dict['a{0}'.format(x+1)] = angry
-        #     f = "neutral_{0}".format(x+1)
-        #     fear = getattr(res_unit, f)
-        #     emotion_dict['f{0}'.format(x+1)] = fear
-        #     s = "neutral_{0}".format(x+1)
-        #     surprise = getattr(res_unit, s)
-        #     emotion_dict['s{0}'.format(x+1)] = surprise
+        ##EMOTION PROCESSING #####################################################
+        emotion_dict = {}
+        for x in range(10):
+            n = "neutral_{0}".format(x+1)
+            neutral = getattr(res_unit, n)
+            emotion_dict['n{0}'.format(x+1)] = neutral
+            h = "happy_{0}".format(x+1)
+            happy = getattr(res_unit, h)
+            emotion_dict['h{0}'.format(x+1)] = happy
+            a = "angry_{0}".format(x+1)
+            angry = getattr(res_unit, a)
+            emotion_dict['a{0}'.format(x+1)] = angry
+            f = "fear_{0}".format(x+1)
+            fear = getattr(res_unit, f)
+            emotion_dict['f{0}'.format(x+1)] = fear
+            s = "surprise_{0}".format(x+1)
+            surprise = getattr(res_unit, s)
+            emotion_dict['s{0}'.format(x+1)] = surprise
         
-        neutral = getattr(res_unit, 'neutral_1')
+        neutral = emotion_dict['n1']
         happy = getattr(res_unit, 'happy_1')
         angry = getattr(res_unit, 'angry_1')
         fear = getattr(res_unit, 'fear_1')
         surprise = getattr(res_unit, 'surprise_1')
+
         #emotion radar plot
         emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
         df = pd.DataFrame([emo],index=["emo"])
@@ -307,6 +449,8 @@ class ResultView(TemplateView):
         emo_bar = emo_bar.decode('utf-8')
 
         return render(request, self.template_name, locals())
+
+
 
 
 

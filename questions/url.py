@@ -5,6 +5,6 @@ import questions.views
 app_name = 'questions'
 
 urlpatterns = [
-  path('', questions.views.create)
+  path('', questions.views.create),
 
   ]

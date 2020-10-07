@@ -190,10 +190,10 @@ class QuesView(TemplateView):
             vid_id = Video.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
 
       random_question = q1
-      unit.q1 = q1
-      unit.save()
       prep_time1 = time_dict['prep_time1']
       ans_time1 = time_dict['ans_time1']
+      unit.q1 = q1
+      unit.save()
       
       return render(request, self.template_name, locals())
         
@@ -629,7 +629,7 @@ class QuesView6(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
-        unit.q6 = q6
+        unit.q6 = a6
         unit.a6 = a6
         unit.v6 = v6
         unit.t6 = t6
@@ -1002,7 +1002,7 @@ class QuesView10(TemplateView):
         blink10(vid_path, account_name, t, path)
         emotion10(vid_path, account_name, t, path)
 
-        return redirect('result/')
+        return redirect('/')
       
       return render(request, self.template_name,locals())   
 
