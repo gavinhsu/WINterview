@@ -1,177 +1,294 @@
 @font-face {
-    font-family: 'Helios Rounded';
-    /* Change to your font's name. */
-    src: url('fonts/Helios Rounded.woff');
-    /* Change to match your font file's location. */
-  }
+  font-family: 'Helios Rounded';
+  /* Change to your font's name. */
+  src: url('fonts/Helios Rounded.woff');
+  /* Change to match your font file's location. */
+}
 
-  h1 {
-    color: #7c795d;
-    font-family: 'Trocchi', serif;
-    font-size: 45px;
-    font-weight: normal;
-    line-height: 48px;
-    margin: 0;
-    text-align: center;
-  }
+h1 {
+  color: #7c795d;
+  font-family: 'Trocchi', serif;
+  font-size: 45px;
+  font-weight: normal;
+  line-height: 48px;
+  margin: 0;
+  text-align: center;
+}
 
 h2 {
-    color: burlywood;
-    font-family: 'Trocchi', serif;
-    position: relative;
-    left: 60px;
-    vertical-align:middle;
-    text-align:center;
-    font-size: 40px;
-    display: flex;
-    /* text-shadow: 0 1px 0 #ccc,
-      0 2px 0 #c9c9c9,
-      0 3px 0 #bbb,
-      0 4px 0 #b9b9b9,
-      0 5px 0 #aaa,
-      0 6px 1px rgba(0, 0, 0, .1),
-      0 0 5px rgba(0, 0, 0, .1),
-      0 1px 3px rgba(0, 0, 0, .3),
-      0 3px 5px rgba(0, 0, 0, .2),
-      0 5px 10px rgba(0, 0, 0, .25),
-      0 10px 10px rgba(0, 0, 0, .2),
-      0 20px 20px rgba(0, 0, 0, .15); */
-  }
+  color: burlywood;
+  font-family: 'Trocchi', serif;
+  position: relative;
+  left: 60px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 40px;
+  display: flex;
+  /* text-shadow: 0 1px 0 #ccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0, 0, 0, .1),
+    0 0 5px rgba(0, 0, 0, .1),
+    0 1px 3px rgba(0, 0, 0, .3),
+    0 3px 5px rgba(0, 0, 0, .2),
+    0 5px 10px rgba(0, 0, 0, .25),
+    0 10px 10px rgba(0, 0, 0, .2),
+    0 20px 20px rgba(0, 0, 0, .15); */
+}
 
-  .quesmenu {
-    padding: 20px;
-    display: block;
-    text-align: center;
-  }
+/* .hide{
+  display: none;
+} */
 
-  .quesnum {
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    background-color: #008CBA;
-    border-radius: 8px;
-    line-height: 9px;
-  }
+.quesmenu {
+  padding: 20px;
+  display: block;
+  text-align: center;
+}
 
-  #ques1 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+.quesnum {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: #008CBA;
+  border-radius: 8px;
+  line-height: 9px;
+}
 
-  #ques1:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques2 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn1:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques2:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn2 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques3 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn2:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques3:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn3 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques4 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn3:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques4:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn4 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques5 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn4:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques5:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques6 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn5:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques6:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn6 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques7 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn6:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques7:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn7 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques8 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn7:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques8:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn8 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques9 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn8:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques9:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn9 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  #ques10 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
+#btn9:hover {
+  background-color: #008CBA;
+  color: white;
+}
 
-  #ques10:hover {
-    background-color: #008CBA;
-    color: white;
-  }
+#btn10 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
 
-  .result1 {
-    left: 50px;
-    position: relative;
-    border: 3px solid red;
-  }
+#btn10:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+label {
+  color: #B4886B;
+  font-weight: bold;
+  display: block;
+  width: 150px;
+}
+
+.result1 {
+  left: 50px;
+  position: relative;
+  border: 3px solid #B4886B;
+  width: 870px;
+  height: 670px;
+}
+
+#num1 {
+  display: inline-block;
+  position: absolute;
+}
+
+#ques1 {
+  display: flex;
+  position: relative;
+  left: 40px;
+}
+
+#reply1 {
+  height: 160px;
+  width: 500px;
+  border: none;
+  position: relative;
+  top: 5px;
+  left: 10px;
+}
+
+#ans1 {
+  height: 160px;
+  width: 500px;
+  border: none;
+}
+
+.result2 {
+  left: 50px;
+  position: relative;
+  border: 3px solid #B4886B;
+  width: 870px;
+  height: 670px;
+}
+
+#num2 {
+  display: inline-block;
+  position: absolute;
+}
+
+#ques2 {
+  display: flex;
+  position: relative;
+  left: 40px;
+}
+
+#reply2 {
+  height: 160px;
+  width: 500px;
+  border: none;
+  position: relative;
+  top: 5px;
+  left: 10px;
+}
+
+#ans2 {
+  height: 160px;
+  width: 500px;
+  border: none;
+}
+
+.result3 {
+  left: 50px;
+  position: relative;
+  border: 3px solid #B4886B;
+  width: 870px;
+  height: 670px;
+}
+
+#num3 {
+  display: inline-block;
+  position: absolute;
+}
+
+#ques3 {
+  display: flex;
+  position: relative;
+  left: 40px;
+}
+
+#reply3 {
+  height: 160px;
+  width: 500px;
+  border: none;
+  position: relative;
+  top: 5px;
+  left: 10px;
+}
+
+#ans3 {
+  height: 160px;
+  width: 500px;
+  border: none;
+}
+
+.nlpchart {
+  display: contents;
+}
+
+#emochart {
+  position: relative;
+  left: 40px;
+  top: -400px;
+}
