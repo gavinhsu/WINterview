@@ -46,6 +46,7 @@ h2 {
   padding: 20px;
   display: block;
   text-align: center;
+  margin: auto;
 }
 
 .quesnum {
@@ -182,7 +183,6 @@ label {
 }
 
 .result1 {
-  left: 50px;
   position: relative;
   border: 3px solid #B4886B;
   width: 870px;
@@ -216,7 +216,6 @@ label {
 }
 
 .result2 {
-  left: 50px;
   position: relative;
   border: 3px solid #B4886B;
   width: 870px;
@@ -250,7 +249,6 @@ label {
 }
 
 .result3 {
-  left: 50px;
   position: relative;
   border: 3px solid #B4886B;
   width: 870px;

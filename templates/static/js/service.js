@@ -5,6 +5,7 @@ $(document).ready(function () {
         });
     });
 });
+
 $(document).ready(function () {
     $(function () {
         $('#menu02').click(function () {
@@ -12,6 +13,7 @@ $(document).ready(function () {
         });
     });
 });
+
 $(document).ready(function () {
     $(function () {
         $('#menu03').click(function () {
@@ -19,20 +21,24 @@ $(document).ready(function () {
         });
     });
 });
+
 $(document).ready(function () {
     $(function () {
         $('#menu04').click(function () {
             $('html,body').animate({ scrollTop: $('#sec04').offset().top }, 500);
         });
     });
-    $(document).ready(function () {
-        $(function () {
-            $('#menu05').click(function () {
-                $('html,body').animate({ scrollTop: $('#sec05').offset().top }, 500);
-            });
+});
+
+$(document).ready(function () {
+    $(function () {
+        $('#menu05').click(function () {
+            $('html,body').animate({ scrollTop: $('#sec05').offset().top }, 500);
         });
     });
 });
+
+
 $(document).ready(function () {
     $(function () {
         $('click').click(function () {
