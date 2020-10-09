@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 
 <head>
@@ -6,121 +7,46 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
-<style>
-  .logo {
-    color: rgb(121, 147, 242);
-    font-size: 25px;
-  }
-
-  b {
-    font-size: 25px;
-  }
-
-  .flex {
-    height: 400px;
-    width: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -200px;
-    margin-left: -200px;
-  }
-
-  form {
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.25));
-    text-align: center;
-  }
-
-  input[type=submit] {
-    display: block;
-    width: 125px;
-    height: 40px;
-    /* background: #4E9CAF; */
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    font-weight: bold;
-    line-height: 25px;
-    position: absolute;
-    left: 600px;
-    top: 500px;
-  }
-</style>
-
+<link href="{% static "css/jobselection.css" %}" rel="stylesheet">
+<script src="{% static "js/jobselection.js" %}"></script>
 <body>
   <form name="selectjob">
-  <div class="container-fluid">
-    <div class="flex">
-      <div class="header">
-        <h1 class="text-center text-nowrap"><b> Select the Job </b><span class="glyphicon glyphicon-check logo"></span>
-        </h1>
+    <div class="container-fluid">
+      <div class="flex">
+        <div class="header">
+          <h1 class="text-center text-nowrap"><b> Select the Job </b><span
+              class="glyphicon glyphicon-check logo"></span>
+          </h1>
+        </div>
+        <div class="form-group">
+          <label for="inputoccupationalgroup">Occupational Group</label>
+          <select class="form-control" class="jobType" name="jobcate" size=3 onchange="renew(this.selectedIndex);">
+            <option value="01">Information Technology/Engineering
+            <option value="02">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
+          </select></div>
+
+        <!-- <div class="A1"> -->
+        <form action="post" type="submit">
+          <div class="form-group">
+            <label for="inputoccupation">Occupation</label>
+            <select class="selectJob form-control" name="jobb" size=8 onchange="isSelected(this.selectedIndex);"
+              id="jobb">
+              <option value="00">You have to choose an occupational group above first. </option>
+            </select></div>
+        </form>
       </div>
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <script>
-        let occupation;
-        job = new Array();
-        job[0] = ["Hardware Engineer", "Software Engineer", "ML Engineer", "DBA", "Data Scientist","IT Specialist","System Analyst","System Engineer","MIS Engineer","Software Program Designer","Software Testing Personnel","Communications Engineer","ERP Technical/Application Consultant","Information Security Engineer","Software QA Engineer","Hardware QA Engineer","Network Engineer","Webmaster","Website Programmer","Computer Gaming Programmer","	Electronics Engineer","BIOS Engineer","CIM Engineer"];
-        job[1] = ["Cashier", "Sales Trading", "Audit", "Quantitative", "Research", "Investment Banking","	Finance Sales Personnel","Financial Planning Personnel","	Finance Researcher","	Financial Analyst","Treasury Specialist","Accountant","Cost Accounting Specialis","Stock Broker","Certified Investment Analyst","Industrial Analyst","	Loan/Credit Officer","Actuary","Account Collection Personnel","Claim Adjuster","Stock Affair Specialist","Underwriting Personnel","Bond Analyst","Bond Trader"];
-
-        function renew(index) {
-          occupation = index
-          for (var i = 0; i < job[index].length; i++)
-            document.selectjob.jobb.options[i] = new Option(job[index][i], job[index][i]); 
-          document.selectjob.jobb.length = job[index].length; 
-        }
-
-
-        function isSelected(index) {
-
-          var jobName;
-          console.log(index)
-
-          jobName = job[occupation][index];
-          document.getElementById("jobName").value = jobName
-          console.log(jobName)
-
-        }
-
-        $(document).ready(function () {
-          $(".isSelected").prop('disabled', true);
-          $('.selectJob').change(function () {
-            if ($('.selectJob').val() == 0) {
-              $(".isSelected").prop('disabled', true);
-            } else {
-              $(".isSelected").prop('disabled', false);
-            }
-          });
-        });
-
-      </script>
-
-      <div class="form-group">
-        <label for="inputoccupationalgroup">Occupational Group</label>
-        <select class="form-control" class="jobType" name="jobcate" size=3 onchange="renew(this.selectedIndex);">
-          <option value="01">Information Technology/Engineering
-          <option value="02">Finance/Accounting/Audit/Tax/Securities/Investment/Bank
-        </select></div>
-
-      <!-- <div class="A1"> -->
-      <form action="post" type="submit">
-      <div class="form-group">
-        <label for="inputoccupation">Occupation</label>
-        <select class="selectJob form-control" name="jobb" size=8 onchange="isSelected(this.selectedIndex);" id="jobb">
-          <option value="00">You have to choose an occupational group above first. </option>
-        </select></div>
-      </form>
     </div>
-  </div>
-  </div>
+    </div>
 
-  <form method="post">
-    {% csrf_token %}
-    <input type="hidden" name="jobName" id="jobName" value="" />
-    <input name="isSelected" class="isSelected btn btn-primary" type="submit" value="Confirm the job" onclick="isSelected()"></button>
- </form>
-</form>
-
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="jobName" id="jobName" value="" />
+      <input name="isSelected" class="isSelected btn btn-primary" type="submit" value="Confirm the job"
+        onclick="isSelected()"></button>
+    </form>
+  </form>
 </body>
 
 </html>

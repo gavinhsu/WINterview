@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -8,7 +9,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
+
 </head>
+<link href="{% static "css/interviewSkill.css" %}" rel="stylesheet">
 
 <body>
     <div class="container">
@@ -30,15 +33,14 @@
                 visibility: hidden;
             }
 
-            #topic{
+            #topic {
                 visibility: hidden;
             }
         </style>
-        <div id="home" onmouseover="document.getElementById('topic').style.visibility = 'visible';" onmouseout="document.getElementById('topic').style.visibility = 'hidden';">
+        <div id="home" onmouseover="document.getElementById('topic').style.visibility = 'visible';"
+            onmouseout="document.getElementById('topic').style.visibility = 'hidden';">
             <p id="topic">WINterview</p>
         </div>
-
-
         <script type="text/javascript">
             var appear = function (elem, visibility) {
                 elem.style.visibility = visibility
