@@ -1,39 +1,61 @@
+.navbar {
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity: 0.9;
+    font-family: sans-serif;
+}
+.navbar li a, .navbar .navbar-brand {
+    color: #d5d5d5 !important;
+}
+.navbar-nav li a:hover {
+    color: #fff !important;
+}
+.navbar-nav li.active a {
+    color: #fff !important;
+    background-color:#29292c !important;
+}
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
 
 .logo {
     color: rgb(121, 147, 242);
     font-size: 25px;
-  }
+}
 
-  b {
-    font-size: 25px;
-  }
+b {
+  font-size: 25px;
+}
 
-  .flex {
-    height: 400px;
-    width: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -200px;
-    margin-left: -200px;
-  }
+.flex {
+  height: 400px;
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -200px;
+}
 
-  form {
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.25));
-    text-align: center;
-  }
+form {
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.25));
+  text-align: center;
+}
 
-  input[type=submit] {
-    display: block;
-    width: 125px;
-    height: 40px;
-    /* background: #4E9CAF; */
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    font-weight: bold;
-    line-height: 25px;
-    position: absolute;
-    left: 600px;
-    top: 500px;
+input[type=submit] {
+  display: block;
+  width: 125px;
+  height: 40px;
+  /* background: #4E9CAF; */
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: bold;
+  line-height: 25px;
+  position: absolute;
+  left: 600px;
+  top: 500px;
   }

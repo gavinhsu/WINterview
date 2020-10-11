@@ -3,7 +3,7 @@
 <html lang="zh-Hant">
 
 <head>
-  <title>透過 JavaScript 打造一個視訊錄影機吧</title>
+  <title>Check the surrounding equipments</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,31 +19,41 @@
 </head>
 
 <body>
-  
-  <div class="app"> 
-    <button id="start-record-btn" title="Start Recording">Start Recognition</button>
-    <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
-    <button id="save-note-btn" title="Save Note">Save Note</button>   
-    <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
-  
-    <div class="input-single">
-      <textarea id="note-textarea" name = "note-textarea" placeholder="Your answer will be shown here." style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href='/' >Home</a></li>
+          <li><a href='/users/services/'>Services</a></li>
+          <li><a href='/users/questionBank/'>Question Bank</a></li>
+          <li><a href='/users/interviewSkill/'>Interview Skills</a></li>
+          <li><a href='/users/companyProfile/'>Company Profile</a></li>
+          <li><a href='/newstech/'>News</a></li>
+          <li><a href='/users/login/'>Sign In</a></li>
+          <li><a href='/users/signUp/'>Sign Up</a></li>
+          <li><a href="/users/logout/">Log Out</a></li>
+          <li><a href='/users/aboutUs/'>About Us</a></li>`
+          <li><a href='/users/aboutUs/'>Personal Profile</a></li>
+        </ul>
+      </div>
     </div>
-
-    <!--<h3>My Notes</h3>
-    <ul id="notes">
-        <li>
-            <p class="no-notes">You don't have any notes.</p>
-        </li>
-    </ul>-->
-
+  </nav>
+  <div id="audio" class="Audio" style="position: relative; margin-top: 10%;"> 
+    <div style="position: relative; text-align: center;">
+      <h1>Check the mircophone</h1>
+      <button id="start-record-btn" type="button" title="Start Recording" class="btn btn-outline-success">Start Recognition</button>
+      <button id="pause-record-btn" type="button" title="Pause Recording" class="btn btn-outline-danger">Pause Recognition</button>    
+      <button id="save-note-btn" type="button" class="btn btn-outline-secondary" title="Clear record">Clear Record</button>   
+      <button id="next" type="button" class="btn btn-outline-primary">Next Step</button>
+      <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+    </div>
+      <textarea id="note-textarea" name = "note-textarea" placeholder="Your answer will be shown here." style="width: 80%;position: relative;left: 10%;height: 250px"></textarea>
 </div>
-  <div class="container">
-    <div class="card">
+  <div class="container" id="video" style="display: none;">
       <div class="card-body">
         <div class="row mb-4">
           <div class="col-12">
-            <h1 class="text-center mb-3">Surrounding Equipment Inspection</h1>
+            <h1 class="text-center mb-3" style="position:relative; top: 70px;">Check the Web Camera</h1>
             <!-- <p>
               這個範例示範如何透過瀏覽器內建的 MediaStream API 來打造影音錄影的功能
               <small class="text-muted">
@@ -58,22 +68,17 @@
             <div class="video-container d-flex align-items-center justify-content-center">
               <div class="is-recording"></div>
               <!-- The controls attribute adds video controls, like play, pause, and volume. -->
-              <video width="540" height="450" id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
-            </div>
-          </div>
-
-          <div class="col-md-6 text-center">
-            <div class="video-container d-flex align-items-center justify-content-center">
-              <video width="540" height="450" id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
+              <video style="position: relative; left: 30%" width="450" height="450" id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
+              <video style="position:relative; top: 40px;" width="450" height="340" id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
             </div>
           </div>
         </div>
 
         <div class="row mb-4 justify-content-center align-items-center">
-          <div class="col-4 d-flex justify-content-center align-items-center">
+          <div style="position: relative;top: -80px;display: flex;" class="col-4 d-flex justify-content-center align-items-center">
             <button id="startBtn" class="btn btn-sm btn-outline-primary">Start Recording</button>
             <button id="stopBtn" class="btn btn-sm btn-outline-danger" style="display:none">Stop Recording</button>
-            <button id="resetBtn" class="btn btn-sm btn-outline-info" style="display:none">Restart Recorder</button>
+            <button id="resetBtn" class="btn btn-sm btn-outline-info" style="position: relative;top: 80px;left: 60px;display:none">Restart Recorder</button>
           </div>
         </div>
 
@@ -83,9 +88,8 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
-  <a href="/speech_to_text" class='button' type='button'>Start Interview!</a>
+
 
   <!-- Vendor -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

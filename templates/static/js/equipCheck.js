@@ -64,6 +64,7 @@ function onStopRecording (e) {
   e.stopPropagation()
   isRecordingBtn('reset')
   mediaRecorder.stop()
+  inputVideo.style.display="none"
   console.log('mediaRecorder.stop()')
 }
 
@@ -71,6 +72,7 @@ function onStopRecording (e) {
 function onReset (e) {
   e.preventDefault()
   e.stopPropagation()
+  inputVideo.style.display="block"
 
   // 釋放記憶體
   URL.revokeObjectURL(inputVideoURL)
@@ -220,9 +222,6 @@ function isRecordingBtn (recordBtnState) {
       console.warn('isRecordingBtn error')
   }
 }
-
-
-
 
 
 try {
@@ -445,4 +444,12 @@ function getAllNotes() {
 
 function deleteNote(dateTime) {
   localStorage.removeItem('note-' + dateTime); 
+}
+
+document.getElementById("next").addEventListener("click", audio2video);
+
+function audio2video(){
+  document.getElementById("audio").style.display="none"
+  document.getElementById("video").style.display="block"
+
 }
