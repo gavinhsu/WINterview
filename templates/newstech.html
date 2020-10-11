@@ -18,19 +18,80 @@
         border-radius: 15px;
     }
 </style>
-
 <body>
-
-
-    <div class="jumbotron" style="color:black">
-
-        <h1 style="color:rgb(67, 138, 231); font-size:300%; font-family:Lucida Bright">
-            <i class="fas fa-newspaper"></i> The Latest News
-        </h1>
-
-    </div>
-
-    </div>
+    <div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right"style="display:inline;">
+                        <li><a onclick="location.href='/'" style= cursor: pointer;>Home</a></li>
+                        <li><a onclick="location.href='/users/services/'">Services</a></li>
+                        <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
+                        <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
+                        <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
+                        <li><a onclick="location.href='/newstech/'">News</a></li>
+                        <li><a onclick="location.href='/users/login/'">Sign In</a></li>
+                        <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
+                        <li><a href="/users/logout/">Log Out</a></li>
+                        <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
+                        <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+      <style>
+        .navbar {
+          margin-bottom: 0;
+          background-color: #2d2d30;
+          border: 0;
+          font-size: 11px !important;
+          letter-spacing: 4px;
+          opacity: 0.9;
+          font-family: sans-serif;
+      }
+      .navbar li a, .navbar .navbar-brand {
+          color: #d5d5d5 !important;
+      }
+      .navbar-nav li a:hover {
+          color: #fff !important;
+      }
+      .navbar-nav li.active a {
+          color: #fff !important;
+          background-color:#29292c !important;
+      }
+      .navbar-default .navbar-toggle {
+          border-color: transparent;
+      }
+      .open .dropdown-toggle {
+          color: #fff ;
+          background-color: #555 !important;
+      }
+      .dropdown-menu li a {
+          color: #000 !important;
+      }
+      .dropdown-menu li a:hover {
+          background-color: red !important;
+      }
+      /* .menu{
+      cursor: pointer;
+      font-size: 20px;
+      position: relative;
+      width: 100%;
+      height: 100px;
+      color:rgb(24, 108, 192);
+      line-height: 40px;
+      } */
+      li:hover{
+          text-decoration: none;
+          color: #e8e8e8;  
+          text-decoration:underline;
+          color:rgb(74, 151, 228);   
+      }
+      a{
+          cursor: pointer;
+      }
+      </style>
 
     <div class="newsbtn">
         <button class="click btn-success">Tech News</button>
@@ -39,7 +100,7 @@
 
 
     <div align:center;>
-        <div class="tech" style="display:none;position: absolute;left: 20%;width: 50%;">
+        <div class="tech" style="display:none;position: absolute;left: 20%; width: 50%;">
             {% for new, des, im , ur, tim in tech_list %}
             <h3>{{new}}</h3>
             {{value | linebreaks}}
@@ -54,10 +115,9 @@
             <br>
             {% endfor %}
         </div>
-
     </div>
 
-    <div class='fin' style="display:none;position: absolute;left: 20%;width: 50%;">
+    <div class='fin' style="display:none;position: absolute;left: 20%; width: 50%;">
         {% for new, des, im , ur, tim in fin_list %}
         <h3>{{new}}</h3>
         {{value | linebreaks}}
@@ -74,8 +134,9 @@
     </div>
 
 
-
+</div>
 </body>
+
 <script>
     $(document).ready(function () {
         $(".click").click(function () {

@@ -6,6 +6,7 @@
     font-size: 11px !important;
     letter-spacing: 4px;
     opacity: 0.9;
+    font-family: sans-serif;
 }
   
 /* Add a gray color to all navbar links */
@@ -123,3 +124,12 @@ button{
     top: 20px;
     left: 40px;
 }
+a{
+    cursor: pointer;
+}
+/* .menu{
+    color: #5cb85c;
+}
+.menu:hover{
+    color: #2dc997;
+} */
