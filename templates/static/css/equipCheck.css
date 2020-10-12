@@ -1,10 +1,8 @@
 body{
     padding:40px;
-    background:#fafafa}
-.video-container{
-    border:1px solid #dadada;
-    position:relative
+    background:#fafafa
 }
+
 .video-container .is-recording{
     position:absolute;
     top:13px;
@@ -16,15 +14,33 @@ body{
     background-size:contain;
     animation:recording 1s 0s infinite alternate
 }
-#inputVideo,#outputVideo{
-    max-width:100%;
-    height:380px
-}
 @keyframes recording{
     0%{opacity:.3}
     100%{opacity:1}
 }
 
+.navbar {
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity: 0.9;
+    font-family: sans-serif;
+}
+.navbar li a, .navbar .navbar-brand {
+    color: #d5d5d5 !important;
+}
+.navbar-nav li a:hover {
+    color: #fff !important;
+}
+.navbar-nav li.active a {
+    color: #fff !important;
+    background-color:#29292c !important;
+}
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
 
 ul {
     list-style: none;
@@ -68,13 +84,6 @@ button:focus {
     margin-top: 35px;
 }
 
-.app {
-    margin: 40px auto;
-}
-
-#note-textarea {
-    margin: 20px 0;
-}
 
 #recording-instructions {
     margin: 15px auto 60px;
@@ -119,4 +128,23 @@ button:focus {
 
 @media (max-width: 1200px) {
     #bsaHolder{ display:none;}
+}
+
+.nextorprev {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 10px;
+    transition: 0.5s;
+    margin: 10px;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.nextorprev:hover {
+    background: #2dc997;
+    border: 2px solid #2dc997;
 }
