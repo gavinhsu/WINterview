@@ -23,16 +23,23 @@
           <li><a href='/users/interviewSkill/'>Interview Skills</a></li>
           <li><a href='/users/companyProfile/'>Company Profile</a></li>
           <li><a href='/newstech/'>News</a></li>
-          <li><a href='/users/login/'>Sign In</a></li>
-          <li><a href='/users/signUp/'>Sign Up</a></li>
-          <li><a href="/users/logout/">Log Out</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href='/users/signUp/'>Sign Up</a></li>
+              <li><a href="/users/logout/">Log Out</a></li>
+            </ul>
+          </li>
           <li><a href='/users/aboutUs/'>About Us</a></li>`
           <li><a href='/users/aboutUs/'>Personal Profile</a></li>
         </ul>
       </div>
     </div>
   </nav>
-  <form name="selectjob" style="margin: auto;">
+  <div class="container" style="margin: auto;">
+  <form name="selectjob">
     <div class="container-fluid">
       <div class="flex">
         <div class="header">
@@ -67,6 +74,7 @@
         onclick="isSelected()"></button>
     </form>
   </form>
+</div>
 </body>
 
 </html>

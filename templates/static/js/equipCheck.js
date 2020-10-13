@@ -331,7 +331,7 @@ $('#save-note-btn').on('click', function(e) {
   recognition.stop();
 
   if(!noteContent.length) {
-    instructions.text('Could not save empty note. Please add a message to your note.');
+    instructions.text('Could not clear empty message. Please say something to your microphone.');
   }
   else {
     // Save note to localStorage.
@@ -342,7 +342,7 @@ $('#save-note-btn').on('click', function(e) {
     noteContent = '';
     renderNotes(getAllNotes());
     noteTextarea.val('');
-    instructions.text('Note saved successfully.');
+    instructions.text('Speech cleared successfully.');
   }
       
 })

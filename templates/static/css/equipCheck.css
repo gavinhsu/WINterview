@@ -1,6 +1,8 @@
 body{
-    padding:40px;
-    background:#fafafa
+    background: #2f2f31;
+    -webkit-transform: rotateX(0.003deg);
+            transform: rotateX(0.003deg);
+    height: 100vh;
 }
 
 .video-container .is-recording{
@@ -148,3 +150,4 @@ button:focus {
     background: #2dc997;
     border: 2px solid #2dc997;
 }
+
