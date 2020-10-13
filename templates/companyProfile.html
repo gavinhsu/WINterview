@@ -17,144 +17,202 @@
   <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="myNavbar">
-              <ul class="nav navbar-nav navbar-right">
-                  <li><a onclick="location.href='/'" style= cursor: pointer;>HOME</a></li>
-                  <li><a onclick="location.href='/users/services/'">Services</a></li>
-                  <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
-                  <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
-                  <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
-                  <li><a onclick="location.href='/newstech/'">News</a></li>
-                  <li><a onclick="location.href='/users/login/'">Sign In</a></li>
-                  <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
-                  <li><a href="/users/logout/">Log Out</a></li>
-                  <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
-                  <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
-              </ul>
-          </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a onclick="location.href='/'" style=cursor: pointer;>HOME</a></li>
+            <li><a onclick="location.href='/users/services/'">Services</a></li>
+            <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
+            <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
+            <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
+            <li><a onclick="location.href='/newstech/'">News</a></li>
+            <li><a onclick="location.href='/users/login/'">Sign In</a></li>
+            <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
+            <li><a href="/users/logout/">Log Out</a></li>
+            <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
+            <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+          </ul>
+        </div>
       </div>
-  </nav>
-  <style>
-    .navbar {
-      margin-bottom: 0;
-      background-color: #2d2d30;
-      border: 0;
-      font-size: 11px !important;
-      letter-spacing: 4px;
-      opacity: 0.9;
-      font-family: sans-serif;
-  }
-  .navbar li a, .navbar .navbar-brand {
-      color: #d5d5d5 !important;
-  }
-  .navbar-nav li a:hover {
-      color: #fff !important;
-  }
-  .navbar-nav li.active a {
-      color: #fff !important;
-      background-color:#29292c !important;
-  }
-  .navbar-default .navbar-toggle {
-      border-color: transparent;
-  }
-  .open .dropdown-toggle {
-      color: #fff ;
-      background-color: #555 !important;
-  }
-  .dropdown-menu li a {
-      color: #000 !important;
-  }
-  .dropdown-menu li a:hover {
-      background-color: red !important;
-  }
-  .menu{
-  cursor: pointer;
-  font-size: 20px;
-  position: relative;
-  width: 100%;
-  height: 100px;
-  color:rgb(24, 108, 192);
-  line-height: 40px;
-  }
-  li:hover{
-      text-decoration: none;
-      color: #e8e8e8;  
-      text-decoration:underline;
-      color:rgb(74, 151, 228);   
-  }
-  a{
-      cursor: pointer;
-  }
-  .types{
-    padding: 5% 40px;
-  }
-  .tech{
-    float:left;
-}
-  .fin{
-    float:left;
-  }
-  .block{
-    margin-bottom:300px;
-  }
-  </style>
+    </nav>
+    <style>
+      .navbar {
+        margin-bottom: 0;
+        background-color: #2d2d30;
+        border: 0;
+        font-size: 11px !important;
+        letter-spacing: 4px;
+        opacity: 0.9;
+        font-family: sans-serif;
+      }
 
-  <div class="types">
-    <button class="click btn-success">Information Technology/Engineering</button>
-    <button class="click1 btn-success">Finance/Accounting/Audit/Tax/Securities/Investment/Bank</button>
-  </div>  
+      .navbar li a,
+      .navbar .navbar-brand {
+        color: #d5d5d5 !important;
+      }
 
+      .navbar-nav li a:hover {
+        color: #fff !important;
+      }
+
+      .navbar-nav li.active a {
+        color: #fff !important;
+        background-color: #29292c !important;
+      }
+
+      .navbar-default .navbar-toggle {
+        border-color: transparent;
+      }
+
+      .open .dropdown-toggle {
+        color: #fff;
+        background-color: #555 !important;
+      }
+
+      .dropdown-menu li a {
+        color: #000 !important;
+      }
+
+      .dropdown-menu li a:hover {
+        background-color: red !important;
+      }
+
+      .menu {
+        cursor: pointer;
+        font-size: 20px;
+        position: relative;
+        width: 100%;
+        height: 100px;
+        color: rgb(24, 108, 192);
+        line-height: 40px;
+      }
+
+      li:hover {
+        text-decoration: none;
+        color: #e8e8e8;
+        text-decoration: underline;
+        color: rgb(74, 151, 228);
+      }
+
+      a {
+        cursor: pointer;
+      }
+
+      .types {
+        padding: 5% 40px;
+      }
+
+      .tech {
+        float: left;
+      }
+
+      .fin {
+        float: left;
+      }
+
+      .block {
+        margin-bottom: 300px;
+      }
+    </style>
+
+    <div class="types">
+      <button class="click btn-success">Information Technology/Engineering</button>
+      <button class="click1 btn-success">Finance/Accounting/Audit/Tax/Securities/Investment/Bank</button>
+    </div>
     <div class="tech">
       <div class="block">
+        <div class="intelnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in intel_list %}
+          <h3 style="font-size: 22px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div>
         <h class="cname">Intel Corporation</h><br>
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/intel.jpeg" /></div>
+            <div class="front"> <img src="/static/img/intel.jpeg" /></div>
             <div class="back"><img src="{% static "img/intel_bback.jpg" %}" /></div>
           </li>
         </ul>
+
       </div><br>
+     
+
+
 
       <div class="block">
+        <div class="microsoftnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in microsoft_list %}
+          <h3 style="font-size: 22px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div>
         <h class="cname">Microsoft Corporation</h><br>
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/microsoft.jpeg" /></div>
+            <div class="front"> <img src="/static/img/microsoft.jpeg" /></div>
             <div class="back"><img src="{% static "img/microsoft_back.png" %}" /></div>
           </li>
         </ul>
       </div><br>
 
       <div class="block">
+        <div class="googlenews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in google_list %}
+          <h3 style="font-size: 22px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div>
         <h class="cname">Google</h><br>
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/google.jpeg" /></div>
+            <div class="front"> <img src="/static/img/google.jpeg" /></div>
             <div class="back"><img src="{% static "img/google_back.jpg" %}" /></div>
           </li>
         </ul>
       </div><br>
-      
+
       <div class="block">
+        <div class="IBMnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in IBM_list %}
+          <h3 style="font-size: 22px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div>
         <h class="cname">IBM</h><br>
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/ibm.jpeg" /></div>
+            <div class="front"> <img src="/static/img/ibm.jpeg" /></div>
             <div class="back"><img src="{% static "img/ibm_back.jpg" %}" /></div>
           </li>
         </ul>
       </div><br>
 
       <div class="block">
+        <div class="IBMnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in TSMC_list %}
+          <h3 style="font-size: 22px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div>
         <h class="cname">TSMC</h><br>
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/tsmc.jpeg" /></div>
+            <div class="front"> <img src="/static/img/tsmc.jpeg" /></div>
             <div class="back"><img src="{% static "img/tsmc_back.jpg" %}" /></div>
           </li>
         </ul>
@@ -164,22 +222,38 @@
 
     <div class="fin">
       <div class="block">
+        <!-- <div class="Citigroupnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in citigroup_list %}
+          <h3 style="font-size: 22px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div> -->
         <h class="cname">Citigroup Inc.</h><br>
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/citibank.jpeg" /></div>
+            <div class="front"> <img src="/static/img/citibank.jpeg" /></div>
             <div class="back"><img src="{% static "img/citi_back.png" %}" /></div>
           </li>
         </ul>
       </div><br>
-      
+
       <div class="block">
+        <div class="Goldmannews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in Goldman_list %}
+          <h3 style="font-size: 22px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div>
         <h class="cname">Goldman Sachs</h><br>
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/goldman.jpeg" /></div>
+            <div class="front"> <img src="/static/img/goldman.jpeg" /></div>
             <div class="back"><img src="{% static "img/goldman_back.png" %}" /></div>
           </li>
         </ul>
@@ -190,7 +264,7 @@
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/morgan stanley.jpeg" /></div>
+            <div class="front"> <img src="/static/img/morgan stanley.jpeg" /></div>
             <div class="back"><img src="{% static "img/morgan_back.jpg" %}" /></div>
           </li>
         </ul>
@@ -201,12 +275,12 @@
         <ul>
           <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
             <a href="brandLi.html" class="flipper"></a>
-            <div class="front" > <img src="/static/img/hsbc.jpeg" /></div>
+            <div class="front"> <img src="/static/img/hsbc.jpeg" /></div>
             <div class="back"><img src="{% static "img/hsbc_back.jpg" %}" /></div>
           </li>
         </ul>
       </div><br>
-      
+
     </div>
 </body>
 <script>
