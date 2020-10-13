@@ -7,11 +7,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- /Bootstrap CSS -->
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
 
@@ -29,9 +29,15 @@
           <li><a href='/users/interviewSkill/'>Interview Skills</a></li>
           <li><a href='/users/companyProfile/'>Company Profile</a></li>
           <li><a href='/newstech/'>News</a></li>
-          <li><a href='/users/login/'>Sign In</a></li>
-          <li><a href='/users/signUp/'>Sign Up</a></li>
-          <li><a href="/users/logout/">Log Out</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href='/users/signUp/'>Sign Up</a></li>
+              <li><a href="/users/logout/">Log Out</a></li>
+            </ul>
+          </li>
           <li><a href='/users/aboutUs/'>About Us</a></li>`
           <li><a href='/users/aboutUs/'>Personal Profile</a></li>
         </ul>
@@ -41,13 +47,13 @@
   <div id="audio" class="Audio" style="position: relative; margin-top: 10%;">
     <div style="position: relative; text-align: center;">
       <h1>Check the mircophone</h1>
-      <button id="start-record-btn" type="button" title="Start Recording" class="btn btn-outline-success">Start
+      <button style="height: auto;"  id="start-record-btn" type="button" title="Start Recording" class="btn btn-success">Start
         Recognition</button>
-      <button id="pause-record-btn" type="button" title="Pause Recording" class="btn btn-outline-danger">Pause
+      <button style="height: auto;"id="pause-record-btn" type="button" title="Pause Recording" class="btn btn-danger">Pause
         Recognition</button>
-      <button id="save-note-btn" type="button" class="btn btn-outline-secondary" title="Clear record">Clear
+      <button style="height: auto;"id="save-note-btn" type="button" class="btn btn-secondary" title="Clear record">Clear
         Record</button>
-      <button id="next" type="button" class="btn btn-outline-primary">Next Step</button>
+      <button style="height: auto;"id="next" type="button" class="btn btn-primary">Next Step</button>
       <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
     </div>
     <div class="form-group purple-border">
@@ -74,24 +80,23 @@
           <div class="video-container d-flex align-items-center justify-content-center">
             <div class="is-recording"></div>
             <!-- The controls attribute adds video controls, like play, pause, and volume. -->
-            <video style="position: relative; left: 30%" width="450" height="450" id="inputVideo" alt="在這裡錄影"
+            <video style="position: relative; left: 55%; top: 30px;" width="450" height="450" id="inputVideo" alt="在這裡錄影"
               muted>Video stream not available.</video>
-            <video style="position:relative; top: 40px;" width="450" height="340" id="outputVideo" alt="錄好的畫面將會出現在這"
+            <video style="position:relative; top: 80px; left: 280px; display: none;" width="450" height="340" id="outputVideo" alt="錄好的畫面將會出現在這"
               muted>Video stream not available.</video>
           </div>
         </div>
       </div>
-
       <div class="row mb-4 justify-content-center align-items-center">
         <div style="position: relative;top: -80px;display: flex;"
           class="col-4 d-flex justify-content-center align-items-center">
-          <button id="startBtn" class="btn btn-sm btn-outline-primary">Start Recording</button>
-          <button id="stopBtn" class="btn btn-sm btn-outline-danger" style="display:none">Stop Recording</button>
-          <button id="resetBtn" class="btn btn-sm btn-outline-info"
-            style="position: relative;top: 100px;display:none">Restart Recorder</button>
+          <button style="height: auto;" id="startBtn" class="btn btn-success">Start Recording</button>
+          <button style="height: auto;" id="stopBtn" class="btn btn-danger" style="display:none">Stop Recording</button>
+          <button style="height: auto;" id="resetBtn" class="btn btn-primary" style="display:none">Restart
+            Recorder</button>
         </div>
       </div>
-      <a href="/speech_to_text">Start!</a>
+      <a href="/speech_to_text" class="start">Start!</a>
       <!-- <a href="/users/jobselect/">Reselect the job</a> -->
 
 
@@ -106,7 +111,29 @@
   <style>
     @import url("https://fonts.googleapis.com/css?family=Montserrat");
 
-    a {
+    #startBtn {
+      position: relative;
+      display: block;
+      top: 70px;
+      left: 45%;
+    }
+
+    #stopBtn {
+      position: relative;
+      display:  block;
+      top: 70px;
+
+      left: 45%;
+    }
+
+    #resetBtn {
+      position: relative;
+      display: block;
+      top: 530px;
+      left: 45%;
+    }
+
+    .start {
       position: absolute;
       left: 80%;
       top: 70%;
@@ -125,7 +152,7 @@
       transition: 0.02s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
     }
 
-    a::before {
+    .start::before {
       content: "";
       display: inline-block;
       position: absolute;
@@ -141,7 +168,7 @@
 
     }
 
-    a::after {
+    .start::after {
       color: #cecd24;
       content: "";
       display: inline-block;
@@ -160,21 +187,21 @@
 
     }
 
-    a:hover {
+    .start:hover {
       color: #cecd24;
       padding: 0.5em 3.5em 0.5em 0.5em;
       text-decoration: none;
 
     }
 
-    a:hover::before {
+    .start:hover::before {
       left: calc(100% - 3em);
       right: 0;
       -webkit-transition: 0.3s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
       transition: 0.3s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
     }
 
-    a:hover::after {
+    .start:hover::after {
       color: #cecd24;
       right: 0;
       -webkit-transition: right 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
@@ -195,6 +222,35 @@
     .purple-border :focus {
       border: 1px solid #ba68c8;
       box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+    }
+
+
+    .navbar {
+      margin-bottom: 0;
+      background-color: #2d2d30;
+      border: 0;
+      font-size: 11px !important;
+      letter-spacing: 4px;
+      opacity: 0.9;
+      font-family: sans-serif;
+    }
+
+    .navbar li a,
+    .navbar .navbar-brand {
+      color: #d5d5d5 !important;
+    }
+
+    .navbar-nav li a:hover {
+      color: #fff !important;
+    }
+
+    .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #29292c !important;
+    }
+
+    .navbar-default .navbar-toggle {
+      border-color: transparent;
     }
   </style>
   <!-- Vendor -->

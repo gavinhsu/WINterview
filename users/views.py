@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 #from django.views.generic import TemplateViews
 from users.models import Member
@@ -22,8 +21,24 @@ def aboutUs(request):
 def services(request):
     return render(request,'services.html')
 
-def team(request):
-    return render(request,'team.html')
+def personalFile(request):
+    template_name = 'personalFile.html'
+
+    def __init__(self, job_name=None):
+        self.job_name = job_name
+
+    def get(self, request):
+        account_name = request.session['account']
+        self.account_name = account_name
+
+        # get the entire result table 
+        account_instance = Member.objects.get(Account=account_name)
+        print(account_name)
+        user_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+        print(user_id) 
+        res_unit = Result.objects.get(id=res_id)
+        ans_unit = Answer.objects.get(id=res_id)
+    return render(request,'personalFile.html')
 
 def questionBank(request):
     return render(request,'questionBank.html')

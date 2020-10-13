@@ -64,8 +64,10 @@ function onStopRecording (e) {
   e.stopPropagation()
   isRecordingBtn('reset')
   mediaRecorder.stop()
-  inputVideo.style.display="none"
+  inputVideo.style.display="none";
+  outputVideo.style.display = "block";
   console.log('mediaRecorder.stop()')
+
 }
 
 // Reset Recording
