@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -8,37 +9,114 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
-</head>
 
+</head>
+<!-- <link href="{% static "css/interviewSkill.css" %}" rel="stylesheet">
+  -->
 <body>
     <div class="container">
-        <style>
-            a {
-                font-size: 20px;
-            }
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="myNavbar">
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a onclick="location.href='/'" style= cursor: pointer;>Home</a></li>
+                      <li><a onclick="location.href='/users/services/'">Services</a></li>
+                      <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
+                      <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
+                      <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
+                      <li><a onclick="location.href='/newstech/'">News</a></li>
+                      <li><a onclick="location.href='/users/login/'">Sign In</a></li>
+                      <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
+                      <li><a href="/users/logout/">Log Out</a></li>
+                      <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
+                      <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
 
-            .block {
-                font-size: 20px;
-            }
+      <style>
+        .navbar {
+          margin-bottom: 0;
+          background-color: #2d2d30;
+          border: 0;
+          font-size: 11px !important;
+          letter-spacing: 4px;
+          opacity: 0.9;
+          font-family: sans-serif;
+      }
+      .navbar li a, .navbar .navbar-brand {
+          color: #d5d5d5 !important;
+      }
+      .navbar-nav li a:hover {
+          color: #fff !important;
+      }
+      .navbar-nav li.active a {
+          color: #fff !important;
+          background-color:#29292c !important;
+      }
+      .navbar-default .navbar-toggle {
+          border-color: transparent;
+      }
+      .open .dropdown-toggle {
+          color: #fff ;
+          background-color: #555 !important;
+      }
+      .dropdown-menu li a {
+          color: #000 !important;
+      }
+      .dropdown-menu li a:hover {
+          background-color: red !important;
+      }
+      .menu{
+      cursor: pointer;
+      font-size: 20px;
+      position: relative;
+      width: 100%;
+      height: 100px;
+      color:rgb(24, 108, 192);
+      line-height: 40px;
+      }
+      li:hover{
+          text-decoration: none;
+          color: #e8e8e8;  
+          text-decoration:underline;
+          color:rgb(74, 151, 228);   
+      }
+      a{
+          cursor: pointer;
+      }
+      .content{
+        padding: 5% 40px;
+      }
+      .block{
+        font-size: 20px;
+      }
+      .title{
+        font-size: 20px;
+      }
 
-            #home {
+     
+            /* .video-container {
+                position: relative;
+                padding-bottom: 56.25%;
+                padding-top: 30px;
+                height: 0;
+                overflow: hidden;
+
+            .video-container iframe, .video-container object, .video-container embed {
                 position: absolute;
-                z-index: 3000;
+                top: 0;left: 0;
                 width: 100%;
-                height: 60px;
-                background-color: Aqua;
-                visibility: hidden;
-            }
-
-            #topic{
-                visibility: hidden;
-            }
+                height: 100%;
+            } */
         </style>
-        <div id="home" onmouseover="document.getElementById('topic').style.visibility = 'visible';" onmouseout="document.getElementById('topic').style.visibility = 'hidden';">
-            <p id="topic">WINterview</p>
+
+        <div id="home" onmouseover="document.getElementById('topic').style.visibility = 'visible';"
+            onmouseout="document.getElementById('topic').style.visibility = 'hidden';">
+            <!-- <p id="topic">WINterview</p> -->
         </div>
-
-
         <script type="text/javascript">
             var appear = function (elem, visibility) {
                 elem.style.visibility = visibility
@@ -48,7 +126,9 @@
                 elem.style.visibility = visibility;
             };
         </script>
-        <a href="javascript:"
+
+        <div class="content">
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent1.style.display=(document.all.fullContent1.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">1.
             Research the industry and company.</a>
         <div class="block" id="fullContent1" style="display:none;">An interviewer may ask how you perceive his company's
@@ -56,7 +136,7 @@
             should best go forward. For this reason, avoid trying to thoroughly research a dozen different industries.
             Focus your job search on just a few industries instead.</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent2.style.display=(document.all.fullContent2.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">2.
             Clarify your "selling points" and the reasons you want the job.</a>
         <div class="block" id="fullContent2" style="display:none;">Prepare to go into every interview with three to five
@@ -67,7 +147,7 @@
             interviewer doesn't think you're really, really interested in the job, he or she won't give you an offer –
             no matter how good you are!</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent3.style.display=(document.all.fullContent3.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">3.
             Anticipate the interviewer's concerns and reservations.</a>
         <div class="block" id="fullContent3" style="display:none;">There are always more candidates for positions than
@@ -76,7 +156,7 @@
             defense: “I know you may be thinking that I might not be the best fit for this position because [their
             reservation]. But you should know that [reason the interviewer shouldn't be overly concerned]."</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent4.style.display=(document.all.fullContent4.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">4.
             Prepare for common interview questions.</a>
         <div class="block" id="fullContent4" style="display:none;">Every "how to interview" book has a list of a hundred
@@ -85,7 +165,7 @@
             likely to encounter, given your age and status (about to graduate, looking for a summer internship). Then
             prepare your answers so you won't have to fumble for them during the actual interview.</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent5.style.display=(document.all.fullContent5.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">5.
             Line up your questions for the interviewer.</a>
         <div class="block" id="fullContent5" style="display:none;">Come to the interview with some intelligent questions
@@ -99,14 +179,14 @@
             kind of person would you most like to see fill this position?") Then, try to think of one or two others
             during each interview itself.</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent6.style.display=(document.all.fullContent6.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">6.
             Prepare yourself through mock interviews.</a>
         <div class="block" id="fullContent6" style="display:none;">Practice makes perfect, and interviews are no
             exception. Practicing the back and forth that occurs during an interview with family and friends will get
             you more comfortable when the interview occurs and help you tailor your response.</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent7.style.display=(document.all.fullContent7.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">7.
             Score a success in the first five minutes.</a>
         <div class="block" id="fullContent7" style="display:none;">Some studies indicate that interviewers make up their
@@ -120,7 +200,7 @@
             or project], and I'm really excited by the prospect of being able to contribute."
         </div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent8.style.display=(document.all.fullContent8.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">8.
             Get on the same side as the interviewer.</a>
         <div class="block" id="fullContent8" style="display:none;">Many interviewers view job interviews as adversarial:
@@ -131,7 +211,7 @@
             that the worst thing that can happen is to be hired into a job that's wrong for you – then nobody's happy!"
         </div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent9.style.display=(document.all.fullContent9.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">9.
             Be assertive and take responsibility for the interview.</a>
         <div class="block" id="fullContent9" style="display:none;">Perhaps out of the effort to be polite, some usually
@@ -141,7 +221,7 @@
             about that Nobel Prize you won. It's your responsibility to make sure he walks away knowing your key selling
             points.</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent10.style.display=(document.all.fullContent10.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">10.
             Be ready to handle illegal and inappropriate questions.</a>
         <div class="block" id="fullContent10" style="display:none;">Interview questions about your race, age, gender,
@@ -152,7 +232,7 @@
             wondering if I'll be leaving my job for an extended period of time, I can say that I'm very committed to my
             career and frankly can't imagine giving it up."</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent11.style.display=(document.all.fullContent11.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">11.
             Make your selling points clear.</a>
         <div class="block" id="fullContent11" style="display:none;">If a tree falls in the forest and no one is there to
@@ -161,7 +241,7 @@
             your selling points in long-winded stories. Instead, tell the interviewer what your selling point is first,
             then give the example.</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent12.style.display=(document.all.fullContent12.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">12.
             Think positive.</a>
         <div class="block" id="fullContent12" style="display:none;">No one likes a complainer, so don't dwell on
@@ -172,7 +252,7 @@
             liked the fact that [positive point about the class]" or "I liked [a previous job] quite a bit, although now
             I know that I really want to [new job]."</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent13.style.display=(document.all.fullContent13.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">13.
             Close on a positive note.</a>
         <div class="block" id="fullContent13" style="display:none;">If a salesman came to you and demonstrated his
@@ -183,7 +263,7 @@
             candidates at the end of the search – you and someone else – the interviewer will think you're more likely
             to accept the offer, and thus may be more inclined to make an offer to you.</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent14.style.display=(document.all.fullContent14.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">14.
             Bring a copy of your resume to every interview.</a>
         <div class="block" id="fullContent14" style="display:none;">Have a copy of your resume with you when you go to
@@ -191,7 +271,7 @@
             embarrassment on the interviewer's part) if you can just pull your extra copy out and hand it over.</div>
         <br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent15.style.display=(document.all.fullContent15.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">15.
             Don't worry about sounding "canned".</a>
         <div class="block" id="fullContent15" style="display:none;">Some people are concerned that if they rehearse
@@ -199,7 +279,7 @@
             you're well prepared, you'll sound smooth and articulate, not canned. And if you're not so well prepared,
             the anxiety of the situation will eliminate any "canned" quality.</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent16.style.display=(document.all.fullContent16.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">16.
             Make the most of the "Tell me about yourself" question.</a>
         <div class="block" id="fullContent16" style="display:none;">Many interviewers begin interviews with this
@@ -215,7 +295,7 @@
             me about yourself" question is a golden opportunity. Don't miss it!
         </div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent17.style.display=(document.all.fullContent17.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">17.
             Speak the right body language.</a>
         <div class="block" id="fullContent17" style="display:none;">Dress appropriately, make eye contact, give a firm
@@ -225,7 +305,7 @@
             before you was doused with Brut, and the two have mixed to form a poisonous gas that results in you not
             getting an offer!</div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent18.style.display=(document.all.fullContent18.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">18.
             Be ready for "behavior-based" interviews".</a>
         <div class="block" id="fullContent18" style="display:none;">One of the most common interview styles today is to
@@ -240,7 +320,7 @@
             mind; this can help you to remember examples of behaviors you may not have anticipated in advance.
         </div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent19.style.display=(document.all.fullContent19.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">19.
             Send thank-you notes.</a>
         <div class="block" id="fullContent19" style="display:none;">Write a thank-you note after every interview. Type
@@ -255,7 +335,7 @@
             adjustments before you head off for your next interview.
         </div><br>
 
-        <a href="javascript:"
+        <a class="title" href="javascript:"
             onclick="document.all.fullContent20.style.display=(document.all.fullContent20.style.display=='none')?'':'none';document.all.smallContent.style.display=(document.all.smallContent.style.display=='none')?'':'none'">20.
             Don't give up!</a>
         <div class="block" id="fullContent20" style="display:none;">If you've had a bad interview for a job that you
@@ -267,7 +347,20 @@
             seen this approach work on numerous occasions, and we encourage you to give it that last shot.</div><br>
 
 
-    </div>
+    </div><br>
+    <div class ="video-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/5Z3uzFtFNcQ" frameborder="0" allowfullscreen></iframe>
+    </iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/B_LmCruLjis" frameborder="0" allowfullscreen></iframe>
+    </iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dE5a1mmVJD4" frameborder="0" allowfullscreen></iframe>
+    </iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/5v-wyR5emRw" frameborder="0" allowfullscreen></iframe>
+    </iframe></div>
+    
+
+</div>
+</div>
 </body>
 
 </html>

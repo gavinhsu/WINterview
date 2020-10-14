@@ -31,7 +31,6 @@ from statistics import mode
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import plotly.express as px
-import pandas as pd
 from math import pi
 from io import BytesIO
 import base64
@@ -414,6 +413,7 @@ class ResultView(TemplateView):
         angry = getattr(res_unit, 'angry_1')
         fear = getattr(res_unit, 'fear_1')
         surprise = getattr(res_unit, 'surprise_1')
+        print(neutral, happy, angry, fear, surprise)
 
         #emotion radar plot
         emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}

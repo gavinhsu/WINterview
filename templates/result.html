@@ -15,16 +15,17 @@
   <title>Final Results</title>
 
 </head>
-<style src="{% static "css/result.css" %}"></style>
+<link href="{% static "css/result.css" %}" rel="stylesheet">
+
 
 <body>
   <h1>WINterview Performance</h1>
   <h2>username:{{account_name}} selected job:{{job_name}}</h2>
-  
+
   <ul class="quesmenu">
-    <button class="quesnum" class="btn btn-outline-primary" id="btn1">1.</button>
-    <button class="quesnum" class="btn btn-outline-primary" id="btn2">2.</button>
-    <button class="quesnum" class="btn btn-outline-primary" id="btn3">3.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn1" href="#button1">1.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn2" href="#button2">2.</button>
+    <button class="quesnum" class="btn btn-outline-primary" id="btn3" href="#button3">3.</button>
     <button class="quesnum" class="btn btn-outline-primary" id="btn4">4.</button>
     <button class="quesnum" class="btn btn-outline-primary" id="btn5">5.</button>
     <button class="quesnum" class="btn btn-outline-primary" id="btn6">6.</button>
@@ -34,55 +35,60 @@
     <button class="quesnum" class="btn btn-outline-primary" id="btn10">10.</button>
   </ul>
 
-  <div class="result1">
-    <div id="num1">1.</div>
-    <div id="ques1">{{ques1}}</div>
-    <label for="reply1">Your reply</label>
-    <textarea readonly id="reply1" name="reply1" cols="10" rows="10">{{reply1}}</textarea>
-    <label for="ans1">Reference answer</label>
-    <textarea readonly id="ans1" name="reply1" cols="10" rows="10">{{answer1}}</textarea>
-    <div class="nlpchart">
-      <img src="data:image/png;base64,{{final_bar1|safe}}" style="width: 230px;height: 190px;">
+  <div id="main" class="hide" style="display: flex;">
+    <div id="button1" style="position: relative;margin: auto;">
+      <div id="num1">1.</div>
+      <div id="ques1">{{ques1}}</div>
+      <div class="result1" >
+        <label for="reply1">Your reply</label>
+      <textarea readonly id="reply1" name="reply1" cols="10" rows="10">{{reply1}}</textarea>
+      <label for="ans1">Reference answer</label>
+      <textarea readonly id="ans1" name="reply1" cols="10" rows="10">{{answer1}}</textarea>
+      <div class="nlpchart">
+        <img src="data:image/png;base64,{{final_bar1|safe}}" style="width: 230px;height: 190px;">
+      </div>
+      <div class="nlpchart">
+        <img src="data:image/png;base64,{{keywords_bar1|safe}}" style="width: 230px;height: 190px;">
+      </div>
+      <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
+      </div>  
     </div>
-    <div class="nlpchart">
-      <img src="data:image/png;base64,{{keywords_bar1|safe}}" style="width: 230px;height: 190px;">
-    </div>
-    <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
 
-  </div>
-
-  <div class="result2">
-    <div id="num2">2.</div>
-    <div id="ques2">{{ques2}}</div>
-    <label for="reply2">Your reply</label>
-    <textarea readonly id="reply2" name="reply2" cols="10" rows="10">{{reply2}}</textarea>
-    <label for="ans1">Reference answer</label>
-    <textarea readonly id="ans2" name="reply2" cols="10" rows="10">{{answer2}}</textarea>
-    <div class="nlpchart">
-      <img src="data:image/png;base64,{{final_bar2|safe}}" style="width: 230px;height: 190px;">
+    <div id="button2" style="position: relative;margin: auto;">
+      <div id="num2">2.</div>
+      <div id="ques2">{{ques2}}</div>
+      <div class="result2">
+      <label for="reply2">Your reply</label>
+      <textarea readonly id="reply2" name="reply2" cols="10" rows="10">{{reply2}}</textarea>
+      <label for="ans1">Reference answer</label>
+      <textarea readonly id="ans2" name="reply2" cols="10" rows="10">{{answer2}}</textarea>
+      <div class="nlpchart">
+        <img src="data:image/png;base64,{{final_bar2|safe}}" style="width: 230px;height: 190px;">
+      </div>
+      <div class="nlpchart">
+        <img src="data:image/png;base64,{{keywords_bar2|safe}}" style="width: 230px;height: 190px;">
+      </div>
+      <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
     </div>
-    <div class="nlpchart">
-      <img src="data:image/png;base64,{{keywords_bar2|safe}}" style="width: 230px;height: 190px;">
     </div>
-    <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
 
-  </div>
-
-  <div class="result3">
-    <div id="num3">3.</div>
-    <div id="ques3">{{ques3}}</div>
-    <label for="reply3">Your reply</label>
-    <textarea readonly id="reply3" name="reply3" cols="10" rows="10">{{reply3}}</textarea>
-    <label for="ans1">Reference answer</label>
-    <textarea readonly id="ans3" name="reply3" cols="10" rows="10">{{answer3}}</textarea>
-    <div class="nlpchart">
-      <img src="data:image/png;base64,{{final_bar3|safe}}" style="width: 230px;height: 190px;">
+    <div id="button3" style="position: relative;margin: auto;" >
+      <div id="num3">3.</div>
+      <div id="ques3">{{ques3}}</div>
+      <div class="result3">
+      <label for="reply3">Your reply</label>
+      <textarea readonly id="reply3" name="reply3" cols="10" rows="10">{{reply3}}</textarea>
+      <label for="ans1">Reference answer</label>
+      <textarea readonly id="ans3" name="reply3" cols="10" rows="10">{{answer3}}</textarea>
+      <div class="nlpchart">
+        <img src="data:image/png;base64,{{final_bar3|safe}}" style="width: 230px;height: 190px;">
+      </div>
+      <div class="nlpchart">
+        <img src="data:image/png;base64,{{keywords_bar3|safe}}" style="width: 230px;height: 190px;">
+      </div>
+      <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
     </div>
-    <div class="nlpchart">
-      <img src="data:image/png;base64,{{keywords_bar3|safe}}" style="width: 230px;height: 190px;">
     </div>
-    <img id="emochart" src="data:image/png;base64,{{emo_bar|safe}}" style="width: 350px;height: 250px;">
-
   </div>
 
   <p>Average Blinks per Minute: {{avg_blinks}} times</p>
@@ -100,277 +106,23 @@
 
 </body>
 <style>
-  @font-face {
-    font-family: 'Helios Rounded';
-    /* Change to your font's name. */
-    src: url('fonts/Helios Rounded.woff');
-    /* Change to match your font file's location. */
+  .hide{
+    display: none;
   }
 
-  h1 {
-    color: #7c795d;
-    font-family: 'Trocchi', serif;
-    font-size: 45px;
-    font-weight: normal;
-    line-height: 48px;
-    margin: 0;
-    text-align: center;
-  }
-
-  h2 {
-    color: burlywood;
-    font-family: 'Trocchi', serif;
-    position: relative;
-    left: 60px;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 40px;
-    display: flex;
-    /* text-shadow: 0 1px 0 #ccc,
-      0 2px 0 #c9c9c9,
-      0 3px 0 #bbb,
-      0 4px 0 #b9b9b9,
-      0 5px 0 #aaa,
-      0 6px 1px rgba(0, 0, 0, .1),
-      0 0 5px rgba(0, 0, 0, .1),
-      0 1px 3px rgba(0, 0, 0, .3),
-      0 3px 5px rgba(0, 0, 0, .2),
-      0 5px 10px rgba(0, 0, 0, .25),
-      0 10px 10px rgba(0, 0, 0, .2),
-      0 20px 20px rgba(0, 0, 0, .15); */
-  }
-
-  .quesmenu {
-    padding: 20px;
-    display: block;
-    text-align: center;
-  }
-
-  .quesnum {
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    background-color: #008CBA;
-    border-radius: 8px;
-    line-height: 9px;
-  }
-
-  #btn1 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn1:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn2 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn2:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn3 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn3:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn4 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn4:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn5 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn5:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn6 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn6:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn7 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn7:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn8 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn8:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn9 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn9:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  #btn10 {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-  }
-
-  #btn10:hover {
-    background-color: #008CBA;
-    color: white;
-  }
-
-  label {
-    color: #B4886B;
-    font-weight: bold;
-    display: block;
-    width: 150px;
-  }
-
-  .result1 {
-    left: 50px;
-    position: relative;
-    border: 3px solid #B4886B;
-    width: 870px;
-    height: 670px;
-  }
-
-  #num1 {
-    display: inline-block;
-    position: absolute;
-  }
-
-  #ques1 {
-    display: flex;
-    position: relative;
-    left: 40px;
-  }
-
-  #reply1 {
-    height: 160px;
-    width: 500px;
-    border: none;
-    position: relative;
-    top: 5px;
-    left: 10px;
-  }
-
-  #ans1 {
-    height: 160px;
-    width: 500px;
-    border: none;
-  }
-
-  .result2 {
-    left: 50px;
-    position: relative;
-    border: 3px solid #B4886B;
-    width: 870px;
-    height: 670px;
-  }
-
-  #num2 {
-    display: inline-block;
-    position: absolute;
-  }
-
-  #ques2 {
-    display: flex;
-    position: relative;
-    left: 40px;
-  }
-
-  #reply2 {
-    height: 160px;
-    width: 500px;
-    border: none;
-    position: relative;
-    top: 5px;
-    left: 10px;
-  }
-
-  #ans2 {
-    height: 160px;
-    width: 500px;
-    border: none;
-  }
-
-  .nlpchart {
-    display: contents;
-  }
-
-  #emochart {
-    position: relative;
-    left: 40px;
-    top: -400px;
-  }
 </style>
 <script>
   $(function () {
-    $('#btn1').click(function () {
-      $('.result1').toggle("slow");
-    });
-
-    $('#btn2').click(function () {
-      $('.result2').toggle("slow");
-    });
-
-    $('#btn3').click(function () {
-      $('.result3').toggle("slow");
-    });
+    $('#main').hide();
   });
+
+  $('body').on('click','ul button', function(e) {
+    $('#main').show(1000);
+    $('#main').children().hide(1000);
+    $($(this).attr('href')).show(1000);
+    e.preventDefault();
+});
+
 </script>
 
 </html>

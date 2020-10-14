@@ -1,178 +1,177 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-   <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
 </head>
-<body><div class="container">
-   <div class="menu">
-       <ul>
-           <li id="menu01">Mock Interview</li>
-           <li id="menu02">Question Bank</li>
-           <li id="menu03">Interview Skills</li>
-           <li id="menu04">Company Profile</li>
-           <li id="menu05">News</li>            
-       </ul>
-   </div>
-   <div class="section" id="sec01">
-       <h1 class="title1">MockInterview</h1>
-       <h2 class="title2">1. MockInterview Steps</h2>
-       <h3 class="title3">Step1 - Get Introduced</h3>
-           <p class="description">After joining a member,log in and tell us about your personal information and target occupation.</p>
-       <h3 class="title3">Step2 - Conduct an Interview Online</h3>
-           <p>Press the "Get Started" button to start the mock interview. After entering the interview system, you must first check the equipment to test that the microphone and camera of your device are working properly.Then you can start the interview. There will be a total of ten questions in the interview. We will display related questions based on your chosen occupation.
-           The questions will be divided into easy, medium, and difficult. Different level will give different limits on the number of seconds to answer.If you have answered the question within the time limit, you can press the "Next" button to enter the next question.After completing all questions, it will automatically jump to the feedback page.</p>
-       <h3 class="title3">Step3 - Get Immediate Feedback</h3>
-           <p3>We will give you a feedback based on your performance after interview. The report include analysis and suggestions on your emotional interpretation during the interview, suggested answers of the questions, and your competitiveness assessment. It will help you get improved.</p3>
-       <h2 class="title2">2. MockInterview Service</h2>
-       <h3 class="title3">
-           <span style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
-                 <span style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">1</span></span></span>
-           Phonetic question</h3>
-           <p3>Use speech synthesis technology to read out the text of the title, making you seem to be talking to the interviewer.</p3>
-       <h3 class="title3"><span style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
-           <span style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">2</span></span></span>
-           Question Bank</h3>
-           <p3>The question bank includes professional knowledge, skills, motivation and other aspects. Through AI calculations, the corresponding questions are provided for you to reply.</p3>
-       <h3 class="title3"><span style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
-           <span style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">3</span></span></span>
-           Emotion Recognition</h3>
-           <p3>Apply an unique AI expression model to identify any emotional changes during the interview and provide you with reference in the final feedback.</p3>
-       <h3 class="title3"><span style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
-               <span style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">4</span></span></span>
-           Speech to Text</h3>
-           <p3>Use a speech recognition system to convert speech into text, and build models through word segmentation and syntax analysis to analyze the connection between words in sentences.</p3>
-       <h3 class="title3"><span style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
-           <span style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">5</span></span></span>
-           Semantic interaction</h3>
-           <p3>Understand your answer through NLP, and then give you other related questions.</p3>
-       
-       <h3 class="title3"><span style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
-           <span style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">6</span></span></span>
-           Data Analysis</h3>
-           <p3>Perform answer analysis and sentiment analysis based on the interview results, and provide you with a competitiveness report.</p3>
-       <h3 class="title3"><span style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
-           <span style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">7</span></span></span>
-           Video Storage</h3>
-           <p3>Provide interview video and audio storage function, allowing users to review their interview performance and adjust it by playing back the video.</p3>
-   </div>
-   <div class="section" id="sec02">
-       <h1 class="title1">Question Bank</h1>
-           <p class="description">We have collected a large number of interview questions for related positions in the technology and financial industries from very experienced supervisors and human resources, and put them into the database according to different job titles, except for the ten questions that will appear in the mock interview process. You can also read all the questions directly here according to your needs.</p>
-   </div>
-   <div class="section" id="sec03">
-       <h1 class="title1">Interview Skills</h1>
-           <p class="description">We categorize the requirements of job applicants and interview strategies in different occupations from different websites. You can learn how to impress interviewers and get high score in the interview.</p>
-   </div>
-   <div class="section" id="sec04">
-       <h1 class="title1">Company Profile</h1>
-           <p class="description">We present critical information about several large companies from around the globe for you to have better understandings about thecurrent job market.</p>
-   </div>
-   <div class="section" id="sec05">
-       <h1 class="title1">News</h1>
-           <p class="description">Because our interviews are specifically for the technology and financial industries, we will automatically update the technology-related and financial-related news daily, so that you can see all current affairs at a glance and understand the current development of the company and industry while you are preparing for the interview.</p>
-   </div>
-   <style>
-       .menu{
-           cursor: pointer;
-           font-size: 20px;
-           position: relative;
-           width: 100%;
-           height: 300px;
-           color:rgb(24, 108, 192);
-           line-height: 40px;
-         }
-       li:hover{
-           text-decoration: none;
-           color: #e8e8e8;  
-           text-decoration:underline;
-           color:rgb(74, 151, 228);      
-       }
-       #sec01{
-           position: relative;
-           width: 100%;
-           height: 1300px;
-       }
-       #sec02{
-           position: relative;
-           width: 100%;
-           height: 300px;
-       }
-       #sec03{
-           position: relative;
-           width: 100%;
-           height: 200px;
-       }
-       #sec04{
-           position: relative;
-           width: 100%;
-           height: 200px;
-       }
-       #sec05{
-           position: relative;
-           width: 100%;
-           height: 400px;
-       }
-       .title1{
-           font-weight:bold;
-           font-size: 25px;
-           text-decoration:underline;
-       }
-       .title2{
-           font-weight:bold;
-           font-size: 20px;
-       }
-       .title3{
-           font-weight:bold;
-           font-size: 20px;
-       }
-       p{
-           font-size: 20px;
-       }
-       p3{
-           font-size: 20px;
-       }
-       .container {
-       text-align: left;
-       }
-   </style>
-   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-   <script>
-   $(document).ready(function(){
-       $(function(){ $('#menu01').click(function(){
-           $('html,body').animate({scrollTop:$('#sec01').offset().top}, 500);});  
-       });
-   });
-   $(document).ready(function(){
-       $(function(){ $('#menu02').click(function(){
-           $('html,body').animate({scrollTop:$('#sec02').offset().top}, 500);});  
-       });
-   });
-   $(document).ready(function(){
-       $(function(){ $('#menu03').click(function(){
-           $('html,body').animate({scrollTop:$('#sec03').offset().top}, 500);});  
-       });
-   });
-   $(document).ready(function(){
-       $(function(){ $('#menu04').click(function(){
-           $('html,body').animate({scrollTop:$('#sec04').offset().top}, 500);});  
-       });
-       $(document).ready(function(){
-       $(function(){ $('#menu05').click(function(){
-           $('html,body').animate({scrollTop:$('#sec05').offset().top}, 500);});  
-       });
-   });  
-   });
-   $(document).ready(function(){
-       $(function(){ $('click').click(function(){
-           $('html,body').animate({scrollTop:$('roll to this sector').offset().top}, speed);
-           });  
-       });
-   });
-</script></div>
+<link href="{% static "css/service.css" %}" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static "js/service.js" %}"></script>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a onclick="location.href='/'" style= cursor: pointer;>Home</a></li>
+                        <li><a onclick="location.href='/users/services/'">Services</a></li>
+                        <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
+                        <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
+                        <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
+                        <li><a onclick="location.href='/newstech/'">News</a></li>
+                        <li><a onclick="location.href='/users/login/'">Sign In</a></li>
+                        <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
+                        <li><a href="/users/logout/">Log Out</a></li>
+                        <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
+                        <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="menu">
+            <ul class="menulist" style="position: inherit;top: 50%;">
+                <li id="menu01">Mock Interview</li>
+                <li id="menu02">Question Bank</li>
+                <li id="menu03">Interview Skills</li>
+                <li id="menu04">Company Profile</li>
+                <li id="menu05">News</li>
+            </ul>
+        </div>
+        <div class="section" id="sec01">
+            <h1 class="title1">MockInterview</h1>
+            <h2 class="title2">1. MockInterview Steps</h2>
+            <h3 class="title3">Step1 - Get Introduced</h3>
+            <p class="description">After joining a member,log in and tell us about your personal information and target
+                occupation.</p>
+            <h3 class="title3">Step2 - Conduct an Interview Online</h3>
+            <p>Press the "Get Started" button to start the mock interview. After entering the interview system, you must
+                first check the equipment to test that the microphone and camera of your device are working
+                properly.Then you can start the interview. There will be a total of ten questions in the interview. We
+                will display related questions based on your chosen occupation.
+                The questions will be divided into easy, medium, and difficult. Different level will give different
+                limits on the number of seconds to answer.If you have answered the question within the time limit, you
+                can press the "Next" button to enter the next question.After completing all questions, it will
+                automatically jump to the feedback page.</p>
+            <h3 class="title3">Step3 - Get Immediate Feedback</h3>
+            <p3>We will give you a feedback based on your performance after interview. The report include analysis and
+                suggestions on your emotional interpretation during the interview, suggested answers of the questions,
+                and your competitiveness assessment. It will help you get improved.</p3>
+            <h2 class="title2">2. MockInterview Service</h2>
+            <h3 class="title3">
+                <span
+                    style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
+                    <span
+                        style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">1</span></span></span>
+                Phonetic question</h3>
+            <p3>Use speech synthesis technology to read out the text of the title, making you seem to be talking to the
+                interviewer.</p3>
+            <h3 class="title3"><span
+                    style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
+                    <span
+                        style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">2</span></span></span>
+                Question Bank</h3>
+            <p3>The question bank includes professional knowledge, skills, motivation and other aspects. Through AI
+                calculations, the corresponding questions are provided for you to reply.</p3>
+            <h3 class="title3"><span
+                    style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
+                    <span
+                        style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">3</span></span></span>
+                Emotion Recognition</h3>
+            <p3>Apply an unique AI expression model to identify any emotional changes during the interview and provide
+                you with reference in the final feedback.</p3>
+            <h3 class="title3"><span
+                    style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
+                    <span
+                        style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">4</span></span></span>
+                Speech to Text</h3>
+            <p3>Use a speech recognition system to convert speech into text, and build models through word segmentation
+                and syntax analysis to analyze the connection between words in sentences.</p3>
+            <h3 class="title3"><span
+                    style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
+                    <span
+                        style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">5</span></span></span>
+                Semantic interaction</h3>
+            <p3>Understand your answer through NLP, and then give you other related questions.</p3>
+
+            <h3 class="title3"><span
+                    style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
+                    <span
+                        style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">6</span></span></span>
+                Data Analysis</h3>
+            <p3>Perform answer analysis and sentiment analysis based on the interview results, and provide you with a
+                competitiveness report.</p3>
+            <h3 class="title3"><span
+                    style="border-radius: 50%;height: 20px;width: 20px;display: inline-block;background: black;vertical-align: top;">
+                    <span
+                        style="display: block;color: #FFFFFF;height: 20px;line-height: 20px;text-align: center">7</span></span></span>
+                Video Storage</h3>
+            <p3>Provide interview video and audio storage function, allowing users to review their interview performance
+                and adjust it by playing back the video.</p3>
+        </div>
+
+        <div class="section" id="sec02">
+            <br><br><br>
+            <div style="display: flex;">
+                <h1 class="title1">Question Bank</h1>
+                <button class="btn btn-success btn-xs" onclick="topFunction()" id="scrollTop" title="Go to top">Top</button>
+            </div>
+
+            <p class="description">We have collected a large number of interview questions for related positions in the
+                technology and financial industries from very experienced supervisors and human resources, and put them
+                into the database according to different job titles, except for the ten questions that will appear in
+                the mock interview process. You can also read all the questions directly here according to your needs.
+            </p>
+        </div>
+
+        <div class="section" id="sec03">
+            <br><br><br>
+            <div style="display: flex;">
+                <h1 class="title1">Interview Skills</h1>
+                <button class="btn btn-success btn-xs" onclick="topFunction()" id="scrollTop" title="Go to top">Top</button>
+            </div>
+            <p class="description">We categorize the requirements of job applicants and interview strategies in
+                different occupations from different websites. You can learn how to impress interviewers and get high
+                score in the interview.</p>
+        </div>
+
+        <div class="section" id="sec04">
+            <br><br><br>
+            <div style="display: flex;">
+                <h1 class="title1">Company Profile</h1>
+                <button class="btn btn-success btn-xs" onclick="topFunction()" id="scrollTop" title="Go to top">Top</button>
+            </div>
+            <p class="description">We present critical information about several large companies from around the globe
+                for you to have better understandings about thecurrent job market.</p>
+        </div>
+
+        <div class="section" id="sec05">
+            <br><br><br>
+            <div style="display: flex;">
+                <h1 class="title1">News</h1>
+                <button class="btn btn-success btn-xs" onclick="topFunction()" id="scrollTop" title="Go to top">Top</button>
+            </div>
+            <p class="description">Because our interviews are specifically for the technology and financial industries,
+                we will automatically update the technology-related and financial-related news daily, so that you can
+                see all current affairs at a glance and understand the current development of the company and industry
+                while you are preparing for the interview.</p>
+        </div>
+    </div>
+
+    <script>
+        var mybutton = document.getElementById("scrollTop");
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 </body>
+
 </html>
