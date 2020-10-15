@@ -629,7 +629,7 @@ class QuesView6(TemplateView):
         # retreive the user's id
         uid = Answer.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')   
         unit = Answer.objects.get(id=uid)
-        unit.q6 = a6
+        unit.q6 = q6
         unit.a6 = a6
         unit.v6 = v6
         unit.t6 = t6
