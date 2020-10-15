@@ -12,7 +12,7 @@ import cloudpickle
 import torch
 import nltk
 # nltk.download('punkt')
-# nltk.download('stopwords')
+# nltk.download('stopwords') 
 # nltk.download('averaged_perceptron_tagger')
 # nltk.download('wordnet')
 # nltk.download('twitter_samples')
@@ -26,11 +26,9 @@ from nltk.classify.scikitlearn import SklearnClassifier
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.svm import SVC, LinearSVC, NuSVC
-from nltk.classify import ClassifierI
 from statistics import mode
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-import plotly.express as px
 from math import pi
 from io import BytesIO
 import base64
