@@ -27,6 +27,8 @@ DEBUG = True
 #ALLOWED_HOSTS = ['c8af968ee5ba.ngrok.io','localhost','127.0.0.1']
 ALLOWED_HOSTS = ['*']
 
+SITE_ID = 1
+
 
 # Application definition
 

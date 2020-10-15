@@ -192,5 +192,32 @@ def newstech(request):
 
     tech_list = zip(tech_news, tech_desc, tech_img, tech_url, tech_time)
 
+    # FINANCE news
+    fin_news = newsapi.get_everything(domains='wsj.com', language='en')
+    fin_articles = fin_news['articles']
+
+    fin_desc = []
+    fin_news = []
+    fin_img = []
+    fin_url = []
+    fin_time = []
+
+    for i in range(len(fin_articles)):
+        myarticles = fin_articles[i]
+
+        fin_news.append(myarticles['title'])
+        fin_desc.append(myarticles['description'])
+        fin_img.append(myarticles['urlToImage'])
+        fin_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ')
+        p2 = p.replace('Z', ' ')
+        fin_time.append(p2)
+
+    fin_list = zip(fin_news, fin_desc, fin_img, fin_url, fin_time)
+
 
     return render(request, 'newstech.html', context={"tech_list":tech_list, "fin_list":fin_list})
+
+
+    

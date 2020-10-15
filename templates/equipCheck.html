@@ -3,15 +3,15 @@
 <html lang="zh-Hant">
 
 <head>
-  <title>透過 JavaScript 打造一個視訊錄影機吧</title>
+  <title>Check the surrounding equipments</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
   <!-- /Bootstrap CSS -->
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
 
@@ -19,86 +19,253 @@
 </head>
 
 <body>
-  
-  <div class="app"> 
-    <button id="start-record-btn" title="Start Recording">Start Recognition</button>
-    <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
-    <button id="save-note-btn" title="Save Note">Save Note</button>   
-    <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
-  
-    <div class="input-single">
-      <textarea id="note-textarea" name = "note-textarea" placeholder="Your answer will be shown here." style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href='/'>Home</a></li>
+          <li><a href='/users/services/'>Services</a></li>
+          <li><a href='/users/questionBank/'>Question Bank</a></li>
+          <li><a href='/users/interviewSkill/'>Interview Skills</a></li>
+          <li><a href='/users/companyProfile/'>Company Profile</a></li>
+          <li><a href='/newstech/'>News</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href='/users/signUp/'>Sign Up</a></li>
+              <li><a href="/users/logout/">Log Out</a></li>
+            </ul>
+          </li>
+          <li><a href='/users/aboutUs/'>About Us</a></li>`
+          <li><a href='/users/aboutUs/'>Personal Profile</a></li>
+        </ul>
+      </div>
     </div>
-
-    <!--<h3>My Notes</h3>
-    <ul id="notes">
-        <li>
-            <p class="no-notes">You don't have any notes.</p>
-        </li>
-    </ul>-->
-
-</div>
-  <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <div class="row mb-4">
-          <div class="col-12">
-            <h1 class="text-center mb-3">Surrounding Equipment Inspection</h1>
-            <!-- <p>
+  </nav>
+  <div id="audio" class="Audio" style="position: relative; margin-top: 10%;">
+    <div style="position: relative; text-align: center;">
+      <h1>Check the mircophone</h1>
+      <button style="height: auto;"  id="start-record-btn" type="button" title="Start Recording" class="btn btn-success">Start
+        Recognition</button>
+      <button style="height: auto;"id="pause-record-btn" type="button" title="Pause Recording" class="btn btn-danger">Pause
+        Recognition</button>
+      <button style="height: auto;"id="save-note-btn" type="button" class="btn btn-secondary" title="Clear record">Clear
+        Record</button>
+      <button style="height: auto;"id="next" type="button" class="btn btn-primary">Next Step</button>
+      <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+    </div>
+    <div class="form-group purple-border">
+      <textarea name="note-textarea" id="note-textarea" readonly
+        placeholder="Your answer will be shown here."></textarea>
+    </div>
+  </div>
+  <div class="container" id="video" style="display: none;">
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-12">
+          <h1 class="text-center mb-3" style="position:relative; top: 70px;">Check the Web Camera</h1>
+          <!-- <p>
               這個範例示範如何透過瀏覽器內建的 MediaStream API 來打造影音錄影的功能
               <small class="text-muted">
                 （開發環境使用 Chrome 瀏覽器）
               </small>
             </p> -->
+        </div>
+      </div>
+
+      <div class="row mb-5 justify-content-center align-items-center">
+        <div class="col-md-6 text-center">
+          <div class="video-container d-flex align-items-center justify-content-center">
+            <div class="is-recording"></div>
+            <!-- The controls attribute adds video controls, like play, pause, and volume. -->
+            <video style="position: relative; left: 55%; top: 30px;" width="450" height="450" id="inputVideo" alt="在這裡錄影"
+              muted>Video stream not available.</video>
+            <video style="position:relative; top: 80px; left: 280px; display: none;" width="450" height="340" id="outputVideo" alt="錄好的畫面將會出現在這"
+              muted>Video stream not available.</video>
           </div>
         </div>
-
-        <div class="row mb-5 justify-content-center align-items-center">
-          <div class="col-md-6 text-center">
-            <div class="video-container d-flex align-items-center justify-content-center">
-              <div class="is-recording"></div>
-              <!-- The controls attribute adds video controls, like play, pause, and volume. -->
-              <video width="540" height="450" id="inputVideo" alt="在這裡錄影" muted>Video stream not available.</video>
-            </div>
-          </div>
-
-          <div class="col-md-6 text-center">
-            <div class="video-container d-flex align-items-center justify-content-center">
-              <video width="540" height="450" id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
-            </div>
-          </div>
+      </div>
+      <div class="row mb-4 justify-content-center align-items-center">
+        <div style="position: relative;top: -80px;display: flex;"
+          class="col-4 d-flex justify-content-center align-items-center">
+          <button style="height: auto;" id="startBtn" class="btn btn-success">Start Recording</button>
+          <button style="height: auto;" id="stopBtn" class="btn btn-danger" style="display:none">Stop Recording</button>
+          <button style="height: auto;" id="resetBtn" class="btn btn-primary" style="display:none">Restart
+            Recorder</button>
         </div>
+      </div>
+      <a href="/speech_to_text" class="start">Start!</a>
+      <!-- <a href="/users/jobselect/">Reselect the job</a> -->
 
-        <div class="row mb-4 justify-content-center align-items-center">
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <button id="startBtn" class="btn btn-sm btn-outline-primary">Start Recording</button>
-            <button id="stopBtn" class="btn btn-sm btn-outline-danger" style="display:none">Stop Recording</button>
-            <button id="resetBtn" class="btn btn-sm btn-outline-info" style="display:none">Restart Recorder</button>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-12">
-            <div role="alert" id="errorMsg"></div>
-          </div>
+      <div class="row">
+        <div class="col-12">
+          <div role="alert" id="errorMsg" style="position: relative; top: -600%; left:30%; width: 40%"></div>
         </div>
       </div>
     </div>
   </div>
-  <a href="/speech_to_text" class='button' type='button'>Start Interview!</a>
 
-  <!-- Vendor -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-  <!-- Vendor -->
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Montserrat");
 
-  <!-- mian -->
+    #startBtn {
+      position: relative;
+      display: block;
+      top: 70px;
+      left: 45%;
+    }
+
+    #stopBtn {
+      position: relative;
+      display:  block;
+      top: 70px;
+
+      left: 45%;
+    }
+
+    #resetBtn {
+      position: relative;
+      display: block;
+      top: 530px;
+      left: 45%;
+    }
+
+    .start {
+      position: absolute;
+      left: 80%;
+      top: 70%;
+      text-decoration: none;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      color: #cecd24;
+      text-decoration: none;
+      font-size: 2em;
+      display: inline-block;
+      font-family: Montserrat;
+      text-transform: uppercase;
+      padding: 0.5em 2em;
+      border: 2px solid #cecd24;
+      -webkit-transition: 0.02s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+      transition: 0.02s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+    }
+
+    .start::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 100%;
+      bottom: 0;
+      background: #cecd24;
+      -webkit-transition: 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+      transition: 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+      z-index: -1;
+      text-decoration: none;
+
+    }
+
+    .start::after {
+      color: #cecd24;
+      content: "";
+      display: inline-block;
+      background-image: url("https://image.flaticon.com/icons/png/128/109/109617.png");
+      position: absolute;
+      top: 0;
+      left: calc(100% - 3em);
+      right: 3em;
+      bottom: 0;
+      background-size: 1.5em;
+      background-repeat: no-repeat;
+      background-position: center;
+      -webkit-transition: right 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+      transition: right 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+      text-decoration: none;
+
+    }
+
+    .start:hover {
+      color: #cecd24;
+      padding: 0.5em 3.5em 0.5em 0.5em;
+      text-decoration: none;
+
+    }
+
+    .start:hover::before {
+      left: calc(100% - 3em);
+      right: 0;
+      -webkit-transition: 0.3s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+      transition: 0.3s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+    }
+
+    .start:hover::after {
+      color: #cecd24;
+      right: 0;
+      -webkit-transition: right 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+      transition: right 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+      text-decoration: none;
+
+    }
+
+    .purple-border textarea {
+      width: 80%;
+      position: relative;
+      left: 10%;
+      height: 250px;
+      display: block;
+      border: 1px solid #ba68c8;
+    }
+
+    .purple-border :focus {
+      border: 1px solid #ba68c8;
+      box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+    }
+
+
+    .navbar {
+      margin-bottom: 0;
+      background-color: #2d2d30;
+      border: 0;
+      font-size: 11px !important;
+      letter-spacing: 4px;
+      opacity: 0.9;
+      font-family: sans-serif;
+    }
+
+    .navbar li a,
+    .navbar .navbar-brand {
+      color: #d5d5d5 !important;
+    }
+
+    .navbar-nav li a:hover {
+      color: #fff !important;
+    }
+
+    .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #29292c !important;
+    }
+
+    .navbar-default .navbar-toggle {
+      border-color: transparent;
+    }
+  </style>
+  <!-- Vendor -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
   <script src="{% static "js/equipCheck.js" %}"></script>
-  <!-- mian -->
+
 </body>
 
 </html>

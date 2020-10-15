@@ -11,7 +11,34 @@
 </head>
 <link href="{% static "css/jobselection.css" %}" rel="stylesheet">
 <script src="{% static "js/jobselection.js" %}"></script>
+
 <body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href='/' >Home</a></li>
+          <li><a href='/users/services/'>Services</a></li>
+          <li><a href='/users/questionBank/'>Question Bank</a></li>
+          <li><a href='/users/interviewSkill/'>Interview Skills</a></li>
+          <li><a href='/users/companyProfile/'>Company Profile</a></li>
+          <li><a href='/newstech/'>News</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href='/users/signUp/'>Sign Up</a></li>
+              <li><a href="/users/logout/">Log Out</a></li>
+            </ul>
+          </li>
+          <li><a href='/users/aboutUs/'>About Us</a></li>`
+          <li><a href='/users/aboutUs/'>Personal Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container" style="margin: auto;">
   <form name="selectjob">
     <div class="container-fluid">
       <div class="flex">
@@ -47,6 +74,7 @@
         onclick="isSelected()"></button>
     </form>
   </form>
+</div>
 </body>
 
 </html>

@@ -1,114 +1,120 @@
 <!DOCTYPE html>
-    <html lang="en" dir="ltr">
-      <head>
-      <!--{% load static %}-->
-      <meta charset="utf-8">
-      <title>Log In</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      </head>
-      <style type="text/css">
-       body{
-            background-color: rgba(0,0,0,0.5);
-          }
-          .bgimage{
-            background-image:url(https://tse1.mm.bing.net/th?id=OIP.1VkG8vi4zRUXR1E6aXuz-wHaDt&pid=Api&P=0&w=315&h=158);
-            background-size: cover;
-            border-radius: 10px;
-            height: 500px;
-            weight: 400px;
-          }
-          .heading1{
-            font-family: monospace;
-            font-weight: bold;
-            text-align: center;
-            color: white;
-          }
-          label{
-            color: white;
-            font-family: sans-serif;
-            }
-          input[type=text],input[type=password]{
-            background: transparent;
-            color: white;
-            font-family: monospace;
-            }
-          input[type=text]::placeholder,input[type=password]::placeholder{
-            color: white;
-          }
-          .btn-success{
-            background: transparent;
-            transition: 0.5s ease;
-            letter-spacing: 2px;
-            font-family: monospace;
-            font-size: 15px;
-            }
-          a{
-            color: white;
-            transition: 0.5s ease;
-            cursor: pointer;
-          }
-          a:hover{
-            text-decoration: none;
-            color: #e8e8e8;
-          }
-  
+<html lang="en" dir="ltr">
 
-      </style>
-      <body>
+<head>
+  <!--{% load static %}-->
+  <meta charset="utf-8">
+  <title>Log In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+  body {
+    background: url("/static/img/home_bg.jpeg") top center;
+    background-size: cover;
+    border-radius: 10px;
+  }
+
+  .heading1 {
+    font-family: monospace;
+    font-weight: bold;
+    text-align: center;
+    color:black;
+  }
+
+  label {
+    color: black;
+    font-family: sans-serif;
+  }
+
+  input[type=text],
+  input[type=password] {
+    background: transparent;
+    color: black;
+    font-family: monospace;
+  }
+
+  input[type=text]::placeholder,
+  input[type=password]::placeholder {
+    color: black;
+  }
+
+  .btn-success {
+    background: transparent;
+    transition: 0.5s ease;
+    letter-spacing: 2px;
+    font-family: monospace;
+    font-size: 15px;
+  }
+
+  a {
+    color: black;
+    transition: 0.5s ease;
+    cursor: pointer;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: #e8e8e8;
+  }
+</style>
+
+<body>
+  <br><br>
+  <img src="/static/img/home_bg.jpeg" />
+  <div class="container-fluid">
+
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6">
+      <div class="bgimage"></div>
         <br><br>
-        <div class="container-fluid">
+        <h1 class="heading1">Sign In</h1>
+        <br><br><br><br>
 
-          <div class="col-md-3"></div>
-
-          <div class="col-md-6">
-            <div class="bgimage">
-              <br><br>
-              <h1 class="heading1">Sign In</h1>
-              <br><br><br><br>
-
-              <form action="/users/login/" method="post">
-                <div class="row">
-                  <div class="col-md-3">
-                  </div>
-                  <div class="col-md-6">
-                    <label>Account</label>
-                    <input type="text" name ="account" class="form-control" required=""placeholder="account">
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-3"></div>
-                  <div class="col-md-6">
-                    <label>Password</label>
-                    <input type="password" name ="password" class="form-control" required="" placeholder="password">
-                    <br>
-                    <a onclick="location.href='/users/signUp/'">Sign up</a>
-                  </div>
-                  <div class="col-md-3"></div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-5"></div>
-                  <div class="col-md-2">
-                    <button type="submit" class="btn btn-success">Sign In</button>
-                  </div>
-                  <div class="col-md-5"></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <p> {{ error }} </p>
-                  </div>
-                </div>
-
-              </form>
+        <form action="/users/login/" method="post">
+          <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+              <label>Account</label>
+              <input type="text" name="account" class="form-control" required="" placeholder="account">
             </div>
           </div>
 
-          <div class="col-md-3"></div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+              <label>Password</label>
+              <input type="password" name="password" class="form-control" required="" placeholder="password">
+              <br>
+              <a onclick="location.href='/users/signUp/'">Sign up</a>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
 
-        </div>
-      </body>
-    </html>
+          <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-success">Sign In</button>
+            </div>
+            <div class="col-md-5"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p> {{ error }} </p>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-3"></div>
+
+  </div>
+</body>
+
+</html>

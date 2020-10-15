@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Question Bank</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,8 +11,92 @@
 <body>
 
 <div class="container">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="icon"><a href=""><i class="fa fa-microphone"></i></a></div>
+        <a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-briefcase logo"></span><b> Question Bank</a> </b>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a onclick="location.href='/'" style= cursor: pointer;>Home</a></li>
+                <li><a onclick="location.href='/users/services/'">Services</a></li>
+                <!-- <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li> -->
+                <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
+                <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
+                <li><a onclick="location.href='/newstech/'">News</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href='/users/login/'>Sign In</a></li>
+                      <li><a href='/users/signUp/'>Sign Up</a></li>
+                      <li><a href="/users/logout/">Log Out</a></li>
+                    </ul>
+                  </li>
+                <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
+                <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<style>
+  .navbar {
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size: 11px !important;
+    letter-spacing: 4px;
+    opacity: 0.9;
+    font-family: sans-serif;
+}
+.navbar li a, .navbar .navbar-brand {
+    color: #d5d5d5 !important;
+}
+.navbar-nav li a:hover {
+    color: #fff !important;
+}
+.navbar-nav li.active a {
+    color: #fff !important;
+    background-color:#29292c !important;
+}
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
+.open .dropdown-toggle {
+    color: #fff ;
+    background-color: #555 !important;
+}
+.dropdown-menu li a {
+    color: #000 !important;
+}
+.dropdown-menu li a:hover {
+    background-color: red !important;
+}
+.menu{
+cursor: pointer;
+font-size: 20px;
+position: relative;
+width: 100%;
+height: 100px;
+color:rgb(24, 108, 192);
+line-height: 40px;
+}
+li:hover{
+    text-decoration: none;
+    color: #e8e8e8;  
+    text-decoration:underline;
+    color:rgb(74, 151, 228);   
+}
+a{
+    cursor: pointer;
+}
+.pagination{
+  padding: 5% 40px;
+}
 
-  <ul class="pagination pagination-lg">
+</style>
+
+  <ul class="pagination">
     <li><a href="#">1</a></li>
     <li><a href="#">2</a></li>
     <li><a href="#">3</a></li>

@@ -46,12 +46,17 @@ ul{
 .sitemap{
   width: 50px;
 }
+img{
+  height: 90%;
+  width: 100%;
+  position: relative;
+}
 </style>
 
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" style="display: inline-table;">
+  <header id="header" style="display: block;">
     <div class="container">
 
       <div id="logo" class="pull-left">
@@ -62,17 +67,17 @@ ul{
 
       <nav id="nav-menu-container" style="display: contents;justify-content: center;">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="#hero">Home</a></li>
-          <li><a onclick="location.href='/users/services/'">Services</a></li>
+          <li class="menu-active"><a style="color: rgb(11 195 161)" href="#hero">Home</a></li>
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/users/services/'">Services</a></li>
           <!--<li><a href="#">Search Engine</a></li>-->
-          <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
-          <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
-          <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
-          <li><a onclick="location.href='/newstech/'">News</a></li>
-          <li><a onclick="location.href='/users/login/'">Sign In</a></li>
-          <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
-          <li><a href="/users/logout/">Log Out</a></li>
-          <li class="menu-has-children"><a href="">Site Map</a>
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/users/questionBank/'">Question Bank</a></li>
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/newstech/'">News</a></li>
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/users/login/'">Sign In</a></li>
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/users/signUp/'">Sign Up</a></li>
+          <li><a style="color: rgb(11 195 161)" href="/users/logout/">Log Out</a></li>
+          <!-- <li class="menu-has-children"><a href="">Site Map</a>
             <ul class="sitemap">
               <li><a href="#">Edit Member Data</a></li>
               <li><a onclick="location.href='/users/jobselect/'">Mock Interview</a></li>
@@ -81,22 +86,20 @@ ul{
               <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
               <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
               <li><a onclick="location.href='/newstech/'">News</a></li>
-
             </ul>
-          </li>
-          <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>
-          <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+          </li> -->
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/users/aboutUs/'">About Us</a></li>
+          <li><a style="color: rgb(11 195 161)" onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
+    
   </header><!-- End Header -->
-
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <h1>Welcome to WINterview</h1>
-      <h2>Become a winner in interviews!</h2>
-      <a onclick="location.href='/users/jobselect/'" class="btn-get-started">Get Started</a>
+      <img src="{% static "img/home_computer.png" %}" style="top: 20%;position: absolute; width: 50%; height: 80%;">
+      <a style="position: relative;top: 33%;" onclick="location.href='/users/jobselect/'" class="btn-get-started">Get Started</a>
     </div>
   </section><!-- End Hero Section -->
 
@@ -134,7 +137,9 @@ ul{
 
           </div>
 
-          <div class="col-lg-6 background order-lg-2 order-1 wow fadeInRight"></div>
+          <div class="col-lg-6 order-lg-2 order-1 wow fadeInRight">
+            <img src="/static/img/233739.png" />
+          </div>
         </div>
 
       </div>

@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 #from django.views.generic import TemplateViews
 from users.models import Member
@@ -8,6 +7,9 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from . import Form,models
 from django.contrib import auth
+# for news fetching
+from newsapi import NewsApiClient
+import requests
 
 
 def homepage(request):
@@ -22,8 +24,24 @@ def aboutUs(request):
 def services(request):
     return render(request,'services.html')
 
-def team(request):
-    return render(request,'team.html')
+def personalFile(request):
+    template_name = 'personalFile.html'
+
+    def __init__(self, job_name=None):
+        self.job_name = job_name
+
+    def get(self, request):
+        account_name = request.session['account']
+        self.account_name = account_name
+
+        # get the entire result table 
+        account_instance = Member.objects.get(Account=account_name)
+        print(account_name)
+        user_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
+        print(user_id) 
+        res_unit = Result.objects.get(id=res_id)
+        ans_unit = Answer.objects.get(id=res_id)
+    return render(request,'personalFile.html')
 
 def questionBank(request):
     return render(request,'questionBank.html')
@@ -32,7 +50,192 @@ def interviewSkill(request):
     return render(request,'interviewSkill.html')
 
 def companyProfile(request):
-    return render(request,'companyProfile.html')
+
+    # job news for tech---------------------------------------------------------------
+    newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
+
+    # Intel news
+    intel_news = newsapi.get_everything(q='intel',
+                                      sources='bbc-news,the-verge',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      language='en',)
+
+    intel_articles = intel_news['articles']
+
+    intel_desc = []
+    intel_news = []
+    intel_url = []
+    intel_time = []
+
+    for i in range(3):
+        myarticles = intel_articles[i]
+
+        intel_news.append(myarticles['title'])
+        intel_desc.append(myarticles['description'])
+        intel_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ').replace('Z', ' ')
+        intel_time.append(p)
+
+    intel_list = zip(intel_news, intel_desc, intel_url, intel_time)
+
+    # Microsoft news
+    microsoft_news = newsapi.get_everything(q='microsoft',
+                                      sources='bbc-news,the-verge',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      language='en',)
+
+    microsoft_articles = microsoft_news['articles']
+
+    microsoft_desc = []
+    microsoft_news = []
+    microsoft_url = []
+    microsoft_time = []
+
+    for i in range(3):
+        myarticles = microsoft_articles[i]
+
+        microsoft_news.append(myarticles['title'])
+        microsoft_desc.append(myarticles['description'])
+        microsoft_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ').replace('Z', ' ')
+        microsoft_time.append(p)
+
+    microsoft_list = zip(microsoft_news, microsoft_desc, microsoft_url, microsoft_time)
+
+
+    # Google news
+    google_news = newsapi.get_everything(q='google',
+                                      sources='bbc-news,the-verge',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      language='en',)
+
+    google_articles = google_news['articles']
+
+    google_desc = []
+    google_news = []
+    google_url = []
+    google_time = []
+
+    for i in range(3):
+        myarticles = google_articles[i]
+
+        google_news.append(myarticles['title'])
+        google_desc.append(myarticles['description'])
+        google_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ').replace('Z', ' ')
+        google_time.append(p)
+
+    google_list = zip(google_news, google_desc, google_url, google_time)
+
+
+    # IBM news
+    IBM_news = newsapi.get_everything(q='IBM',
+                                      sources='bbc-news,the-verge',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      language='en',)
+
+    IBM_articles = IBM_news['articles']
+
+    IBM_desc = []
+    IBM_news = []
+    IBM_url = []
+    IBM_time = []
+
+    for i in range(3):
+        myarticles = IBM_articles[i]
+
+        IBM_news.append(myarticles['title'])
+        IBM_desc.append(myarticles['description'])
+        IBM_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ').replace('Z', ' ')
+        IBM_time.append(p)
+
+    IBM_list = zip(IBM_news, IBM_desc, IBM_url, IBM_time)
+
+
+    # TSMC news
+    TSMC_news = newsapi.get_everything(q='TSMC',
+                                      sources='bbc-news,the-verge',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      language='en',)
+
+    TSMC_articles = TSMC_news['articles']
+
+    TSMC_desc = []
+    TSMC_news = []
+    TSMC_url = []
+    TSMC_time = []
+
+    for i in range(3):
+        myarticles = TSMC_articles[i]
+
+        TSMC_news.append(myarticles['title'])
+        TSMC_desc.append(myarticles['description'])
+        TSMC_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ').replace('Z', ' ')
+        TSMC_time.append(p)
+
+    TSMC_list = zip(TSMC_news, TSMC_desc, TSMC_url, TSMC_time)
+
+
+    # Citigroup news
+    # citigroup_news = newsapi.get_everything(q='Citi',
+    #                                   sources='bbc-news,the-verge, ',
+    #                                   domains='bbc.co.uk,techcrunch.com',
+    #                                   language='en',)
+
+    # citigroup_articles = citigroup_news['articles']
+
+    # citigroup_desc = []
+    # citigroup_news = []
+    # citigroup_url = []
+    # citigroup_time = []
+
+    # for i in range(3):
+    #     myarticles = citigroup_articles[i]
+
+    #     citigroup_news.append(myarticles['title'])
+    #     citigroup_desc.append(myarticles['description'])
+    #     citigroup_url.append(myarticles['url'])
+    #     published_time = myarticles['publishedAt']
+    #     p = published_time.replace('T', ' ').replace('Z', ' ')
+    #     citigroup_time.append(p)
+
+    #citigroup_list = zip(citigroup_news, citigroup_desc, citigroup_url, citigroup_time)
+
+
+    # Goldman news
+    # Goldman_news = newsapi.get_everything(q='Goldman Sachs',
+    #                                   sources='bbc-news,the-verge',
+    #                                   domains='bbc.co.uk,techcrunch.com',
+    #                                   language='en',)
+
+    # Goldman_articles = Goldman_news['articles']
+
+    # Goldman_desc = []
+    # Goldman_news = []
+    # Goldman_url = []
+    # Goldman_time = []
+
+    # for i in range(3):
+    #     myarticles = Goldman_articles[i]
+
+    #     Goldman_news.append(myarticles['title'])
+    #     Goldman_desc.append(myarticles['description'])
+    #     Goldman_url.append(myarticles['url'])
+    #     published_time = myarticles['publishedAt']
+    #     p = published_time.replace('T', ' ').replace('Z', ' ')
+    #     Goldman_time.append(p)
+
+    # Goldman_list = zip(Goldman_news, Goldman_desc, Goldman_url, Goldman_time)
+
+    return render(request,'companyProfile.html', locals())
+
 
 def News(request):
     return render(request,'newstech.html')
