@@ -26,9 +26,16 @@
             <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
             <!-- <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li> -->
             <li><a onclick="location.href='/newstech/'">News</a></li>
-            <li><a onclick="location.href='/users/login/'">Sign In</a></li>
-            <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
-            <li><a href="/users/logout/">Log Out</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href='/users/login/'>Sign In</a></li>
+                <li><a href='/users/signUp/'>Sign Up</a></li>
+                <li><a href="/users/logout/">Log Out</a></li>
+              </ul>
+            </li>
             <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
             <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
           </ul>
