@@ -20,9 +20,9 @@ from Emotion.views import *
 import sqlite3
 
 
-conn=sqlite3.connect('db.sqlite3')
-conn.execute("VACUUM")
-conn.close()
+# conn=sqlite3.connect('db.sqlite3')
+# conn.execute("VACUUM")
+# conn.close()
 
 class equipCheck(TemplateView): 
   template_name = 'equipCheck.html'
