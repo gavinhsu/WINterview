@@ -14,7 +14,7 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="icon"><a href=""><i class="fa fa-microphone"></i></a></div>
-        <a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-briefcase logo"></span><b>Question Bank</a> </b>
+        <a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-briefcase logo"></span><b> Question Bank</a> </b>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a onclick="location.href='/'" style= cursor: pointer;>Home</a></li>
@@ -23,9 +23,16 @@
                 <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
                 <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
                 <li><a onclick="location.href='/newstech/'">News</a></li>
-                <li><a onclick="location.href='/users/login/'">Sign In</a></li>
-                <li><a onclick="location.href='/users/signUp/'">Sign Up</a></li>
-                <li><a href="/users/logout/">Log Out</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href='/users/login/'>Sign In</a></li>
+                      <li><a href='/users/signUp/'>Sign Up</a></li>
+                      <li><a href="/users/logout/">Log Out</a></li>
+                    </ul>
+                  </li>
                 <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
                 <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
             </ul>
