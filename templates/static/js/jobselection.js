@@ -1,7 +1,7 @@
 let occupation;
 job = new Array();
 job[0] = ["Hardware Engineer", "Software Engineer", "ML Engineer", "Database Administrator", "Data Scientist", "IT Specialist", "System Analyst", "System Engineer", "MIS Engineer", "Software Program Designer", "Software Testing Personnel", "Communications Engineer", "ERP Technical/Application Consultant", "Information Security Engineer", "Software QA Engineer", "Hardware QA Engineer", "Network Engineer", "Webmaster", "Website Programmer", "Computer Gaming Programmer", "	Electronics Engineer", "BIOS Engineer", "CIM Engineer"];
-job[1] = ["Cashier", "Sales Trading", "Audit", "Quantitative", "Research", "Investment Banking", "	Finance Sales Personnel", "Financial Planning Personnel", "	Finance Researcher", "	Financial Analyst", "Treasury Specialist", "Accountant", "Cost Accounting Specialis", "Stock Broker", "Certified Investment Analyst", "Industrial Analyst", "	Loan/Credit Officer", "Actuary", "Account Collection Personnel", "Claim Adjuster", "Stock Affair Specialist", "Underwriting Personnel", "Bond Analyst", "Bond Trader"];
+job[1] = ["Cashier", "Sales Trading", "Audit", "Quantitative", "Research", "Investment Banking", "	Finance Sales Personnel", "Financial Planning Personnel", "	Finance Researcher", "	Financial Analyst", "Treasury Specialist", "Accountant", "Cost Accounting Specialist", "Stock Broker", "Certified Investment Analyst", "Industrial Analyst", "	Loan/Credit Officer", "Actuary", "Account Collection Personnel", "Claim Adjuster", "Stock Affair Specialist", "Underwriting Personnel", "Bond Analyst", "Bond Trader"];
 
 function renew(index) {
     occupation = index
