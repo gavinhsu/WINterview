@@ -66,22 +66,23 @@ function onStopRecording (e) {
   mediaRecorder.stop()
   inputVideo.style.display="none";
   outputVideo.style.display = "block";
-  console.log('mediaRecorder.stop()')
+  console.log('mediaRecorder.stop()');
 
 }
 
 // Reset Recording
 function onReset (e) {
-  e.preventDefault()
-  e.stopPropagation()
-  inputVideo.style.display="block"
+  e.preventDefault();
+  e.stopPropagation();
+  inputVideo.style.display="block";
+  outputVideo.style.display="none";
 
   // 釋放記憶體
-  URL.revokeObjectURL(inputVideoURL)
-  URL.revokeObjectURL(outputVideoURL)
-  outputVideo.src = ''
-  outputVideo.controls = false
-  inputVideo.src = ''
+  URL.revokeObjectURL(inputVideoURL);
+  URL.revokeObjectURL(outputVideoURL);
+  outputVideo.src = '';
+  outputVideo.controls = false;
+  inputVideo.src = '';
 
   // 重新啟動攝影機
   mediaRecorderSetup()
