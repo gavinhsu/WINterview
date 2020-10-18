@@ -472,7 +472,8 @@ for p in  positive_tweets:
 for p in negative_tweets:
     documents.append( (p, "neg") )
 
-f = open('.\\all_words.txt', "r")
+all_words_path = os.path.join(BASE_DIR,'all_words.txt')
+f = open(all_words_path, "r")
 content = f.readlines()
 for word in content:
     tmp = word.replace('\n', '')
