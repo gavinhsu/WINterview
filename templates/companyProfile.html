@@ -17,7 +17,7 @@
   <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-file logo"></span><b> Company Profile</b></a>
+        <a class="navbar-brand" href=""><span class="glyphicon glyphicon-file logo"></span><b> Company Profile</b></a>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
             <li><a onclick="location.href='/'" style=cursor: pointer;>HOME</a></li>
@@ -42,85 +42,7 @@
         </div>
       </div>
     </nav>
-    <style>
-      .navbar {
-        margin-bottom: 0;
-        background-color: #2d2d30;
-        border: 0;
-        font-size: 11px !important;
-        letter-spacing: 4px;
-        opacity: 0.9;
-        font-family: sans-serif;
-      }
 
-      .navbar li a,
-      .navbar .navbar-brand {
-        color: #d5d5d5 !important;
-      }
-
-      .navbar-nav li a:hover {
-        color: #fff !important;
-      }
-
-      .navbar-nav li.active a {
-        color: #fff !important;
-        background-color: #29292c !important;
-      }
-
-      .navbar-default .navbar-toggle {
-        border-color: transparent;
-      }
-
-      .open .dropdown-toggle {
-        color: #fff;
-        background-color: #555 !important;
-      }
-
-      .dropdown-menu li a {
-        color: #000 !important;
-      }
-
-      .dropdown-menu li a:hover {
-        background-color: red !important;
-      }
-
-      .menu {
-        cursor: pointer;
-        font-size: 20px;
-        position: relative;
-        width: 100%;
-        height: 100px;
-        color: rgb(24, 108, 192);
-        line-height: 40px;
-      }
-
-      li:hover {
-        text-decoration: none;
-        color: #e8e8e8;
-        text-decoration: underline;
-        color: rgb(74, 151, 228);
-      }
-
-      a {
-        cursor: pointer;
-      }
-
-      .types {
-        padding: 5% 40px;
-      }
-
-      .tech {
-        float: left;
-      }
-
-      .fin {
-        float: left;
-      }
-
-      .block {
-        margin-bottom: 300px;
-      }
-    </style>
 
     <div class="types">
       <button class="click btn-success">Information Technology/Engineering</button>
@@ -130,7 +52,7 @@
       <div class="block">
         <div class="intelnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
           {% for new, des, ur, tim in intel_list %}
-          <h3 style="font-size: 22px;">{{new}}</h3>
+          <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
           <br>
           <a href={{ur}}>{{ur}}</a>
@@ -145,15 +67,13 @@
           </li>
         </ul>
 
-      </div><br>
+      </div><br><br><br>
      
-
-
 
       <div class="block">
         <div class="microsoftnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
           {% for new, des, ur, tim in microsoft_list %}
-          <h3 style="font-size: 22px;">{{new}}</h3>
+          <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
           <br>
           <a href={{ur}}>{{ur}}</a>
@@ -167,12 +87,12 @@
             <div class="back"><img src="{% static "img/microsoft_back.png" %}" /></div>
           </li>
         </ul>
-      </div><br>
+      </div><br><br><br>
 
       <div class="block">
         <div class="googlenews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
           {% for new, des, ur, tim in google_list %}
-          <h3 style="font-size: 22px;">{{new}}</h3>
+          <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
           <br>
           <a href={{ur}}>{{ur}}</a>
@@ -186,12 +106,12 @@
             <div class="back"><img src="{% static "img/google_back.jpg" %}" /></div>
           </li>
         </ul>
-      </div><br>
+      </div><br><br><br>
 
       <div class="block">
         <div class="IBMnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
           {% for new, des, ur, tim in IBM_list %}
-          <h3 style="font-size: 22px;">{{new}}</h3>
+          <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
           <br>
           <a href={{ur}}>{{ur}}</a>
@@ -205,12 +125,12 @@
             <div class="back"><img src="{% static "img/ibm_back.jpg" %}" /></div>
           </li>
         </ul>
-      </div><br>
+      </div><br><br><br>
 
       <div class="block">
         <div class="IBMnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
           {% for new, des, ur, tim in TSMC_list %}
-          <h3 style="font-size: 22px;">{{new}}</h3>
+          <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
           <br>
           <a href={{ur}}>{{ur}}</a>
@@ -232,7 +152,7 @@
       <div class="block">
         <!-- <div class="Citigroupnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
           {% for new, des, ur, tim in citigroup_list %}
-          <h3 style="font-size: 22px;">{{new}}</h3>
+          <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
           <br>
           <a href={{ur}}>{{ur}}</a>
@@ -246,12 +166,12 @@
             <div class="back"><img src="{% static "img/citi_back.png" %}" /></div>
           </li>
         </ul>
-      </div><br>
+      </div><br><br><br>
 
       <div class="block">
         <div class="Goldmannews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
           {% for new, des, ur, tim in Goldman_list %}
-          <h3 style="font-size: 22px;">{{new}}</h3>
+          <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
           <br>
           <a href={{ur}}>{{ur}}</a>
@@ -265,7 +185,7 @@
             <div class="back"><img src="{% static "img/goldman_back.png" %}" /></div>
           </li>
         </ul>
-      </div><br>
+      </div><br><br><br>
 
       <div class="block">
         <h class="cname">Morgan Stanley</h><br>
@@ -276,7 +196,7 @@
             <div class="back"><img src="{% static "img/morgan_back.jpg" %}" /></div>
           </li>
         </ul>
-      </div><br>
+      </div><br><br><br>
 
       <div class="block">
         <h class="cname">HSBC</h><br>
