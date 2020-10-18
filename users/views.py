@@ -1,6 +1,7 @@
 from django.shortcuts import render
 #from django.views.generic import TemplateViews
 from users.models import Member
+from questions.models import Result, Answer
 from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import redirect
 
@@ -10,6 +11,8 @@ from django.contrib import auth
 # for news fetching
 from newsapi import NewsApiClient
 import requests
+from django.views.generic import TemplateView
+import pandas as pd
 
 
 def homepage(request):
@@ -24,24 +27,34 @@ def aboutUs(request):
 def services(request):
     return render(request,'services.html')
 
-def personalFile(request):
+class personalFile(TemplateView):
     template_name = 'personalFile.html'
 
-    def __init__(self, job_name=None):
-        self.job_name = job_name
-
     def get(self, request):
-        account_name = request.session['account']
+        account_name = request.session['account']       
+        job_name = request.session['job_name']
         self.account_name = account_name
+        self.job_name = job_name
 
         # get the entire result table 
         account_instance = Member.objects.get(Account=account_name)
-        print(account_name)
-        user_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id')
-        print(user_id) 
-        res_unit = Result.objects.get(id=res_id)
-        ans_unit = Answer.objects.get(id=res_id)
-    return render(request,'personalFile.html')
+        res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
+
+        name_list = []
+        job_list = []
+        date_list = []
+        time_list = []
+        for item in Result.objects.all():
+            name_list.append(item.userID)
+            job_list.append(item.selected_job)
+            date_list.append(item.created_date)
+            time_list.append(str(item.created_time)[:5])
+        
+        df = pd.DataFrame({'Name':name_list, 'Selected Job':job_list, 'Date':date_list, 'Time':time_list})
+        print(df)
+        
+        return render(request, self.template_name, {'ResultTable':df.to_html(index=False, justify='left')})
+
 
 def questionBank(request):
     return render(request,'questionBank.html')

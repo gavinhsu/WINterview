@@ -174,13 +174,15 @@ class Answer(models.Model):
     t10 = models.TextField(blank=True)
 
     def __str__(self):
-        result = str(self.id) + ': ' + str(self.a1)
+        result = str(self.id) + ': ' + 'Job: '+str(self.selected_job)
         return result
 
 
 class Result(models.Model):
     userID = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
     selected_job = models.CharField(max_length=500, blank=True)
+    created_date = models.DateField(auto_now_add=True, blank=True)
+    created_time = models.TimeField(auto_now_add=True, blank=True)
     r1 = models.CharField(max_length=500, blank=True)
     b1 = models.IntegerField(null=True)
     time1 = models.IntegerField(null=True)
@@ -264,7 +266,7 @@ class Result(models.Model):
     surprise_10 = models.FloatField(null=True, blank=True, default=None)
 
     def __str__(self):
-        result = str(self.id) + ': ' + str(self.r1)
+        result = str(self.id)+': '+'Job: '+str(self.selected_job)+'/ Date: '+str(self.created_date)+'/ Time: '+str(self.created_time)[:5]
         return result
 
 class Record(models.Model):

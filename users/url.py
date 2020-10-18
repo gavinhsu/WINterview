@@ -23,5 +23,5 @@ urlpatterns = [
   path('News/', users.views.News),
   path('contactUs/', users.views.contactUs),
   path('homepage/', users.views.homepage),
-  path('personalFile/', users.views.personalFile),
+  path('personalFile/', users.views.personalFile.as_view()),
  ]
