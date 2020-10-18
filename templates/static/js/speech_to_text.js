@@ -105,13 +105,17 @@ function speak() {
 
 function readOutLoud(message) {
   var speech = new SpeechSynthesisUtterance();
+  var synth = window.speechSynthesis;
+  var voices = synth.getVoices();
 
   // Set the text and voice attributes.
   speech.text = message;
   speech.volume = 1;
   speech.rate = 1;
   speech.pitch = 1;
-  speech.lang = 'en-US';
+  speech.lang = 'en-GB';
+  speech.voice = voices[1]
+  console.log(voices.values())
 
   window.speechSynthesis.speak(speech);
 

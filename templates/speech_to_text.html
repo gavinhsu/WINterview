@@ -10,26 +10,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
   <title>speech to text recording</title>
 
 </head>
 
 <body>
   <div class="title" style="background-color: white; overflow: hidden;">
-    <div id="hiddenmenu" style="display: flex; background-color: turquoise; position: relative; top: 60px;">
-      <button id="home"><i class="fa fa-home" style="position: absolute;left: 12%;font-size: 30px;top: 0px; "></i></button>
-      <h1 style="position: relative; left: 43%; text-align: center;">
+    <div id="hiddenmenu" style="display: flex; background-color: gray; position: relative; top: 60px;">
+      <button class="btn" style="height: 55px;font-size: 28px;color: white;border: none;"onclick="location.href='/'"><i class="fa fa-home"></i> Home</button>
+        <h1 style="position: relative; left: 30%; text-align: center;">
         <a id="win">WINterview</a>
       </h1>
     </div>
   </div>
 
   <!-- The controls attribute adds video controls, like play, pause, and volume. -->
-  <div class="container" style="background-image: url({% static "img/teacher.jpeg" %}" );>
-    <img src="{% static "img/say.jpg" %}" style="top: 55px;position: absolute;left: 3%; width: 95%; height: 75px;">
-    <p id="question" style="color: yellowgreen;text-decoration: solid;font-size: 25px;">
-      {{ random_question }}
-    </p>
+  <div class="container" >
+    <video name='demo' autoplay muted loop style="  position: fixed;right: 0;bottom: 0;top:15%; min-width: 100%; min-height: 100%;">
+      <source src="{% static "interviewer.mp4" %}" type="video/mp4"></source>      </video>
+      <div>
+        <p style="color: Black;text-decoration: solid;font-size: 25px;">Q1.</p>
+        <p id="question" style="color: Black;text-decoration: solid;font-size: 25px;left: 95px;">
+          {{ random_question }}
+        </p>
+      </div>
+
 
     <input type="button" onclick="speak()" value="What is the question?" id="speak"
       style="display:none;position:absolute; left:27%;">
@@ -51,7 +58,7 @@
 
   <!-- <p id="recording-instructions">Read the question carefully and answer it after countdown.</p> -->
   
-  <form style="display:none" id='ans' method="post" enctype="multipart/form-data">
+  <form style="visibility: hidden;" id='ans' method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="input-single">
       <textarea style="display: none;" id="time" name="time"></textarea>
@@ -60,12 +67,10 @@
         <textarea class="form-control" name="note-textarea" id="note-textarea" placeholder="Your answer will be shown here."></textarea>
       </div>
     </div>
-
+    <button class="btn btn-outline-danger" type="submit" id="submit" style="position:absolute; left: 1090px; top: 520px;visibility: hidden;">Next Question</button>
   </form>
-  <input type="submit" id="submit" style="position:absolute; left: 1120px; top: 520px;visibility: hidden;"
-  value="Next Question">
-  <input  disabled=true; style="position:absolute; top: 520px; left:1110px;"
-  type="button" id="firstBtn" value="Stop Answering">
+
+  <button  class="btn btn-outline-secondary" disabled=true; style="position:absolute; top: 520px; left:1080px;" type="button" id="firstBtn">Stop Answering</button>
 </div>
 
 
@@ -118,7 +123,6 @@ var timer3 = null;
 var timer4 = null;
 
 stopVideo.addEventListener("click", getVideoLength);
-firstBtn.addEventListener("click", pauseTime);
 function getVideoLength() {
     var videoLength = document.getElementById("time")
     var time = {{ ans_time1 }} - count1
@@ -126,9 +130,6 @@ videoLength.value = time
 console.log(time)
     }
 
-function pauseTime() {
-    clearInterval(spn2)
-}
 
 (function countDownStart() {
     // Display counter and start counting down
@@ -168,7 +169,11 @@ function pauseTime() {
     }
 }());
 
-    console.log(spn2)
+firstBtn.addEventListener("click", pauseTime);
+
+function pauseTime() {
+    clearInterval(timer4)
+}
     //fake timer
     (function countDownStart2() {
       // Display counter and start counting down

@@ -6,7 +6,7 @@ h1{
   font-family: 'Lobster', Helvetica, arial;
 }
 #win{
-  color: #666;
+  color: goldenrod;
   text-decoration: none;
   position: absolute;
 }
@@ -59,7 +59,8 @@ button:focus {
 
 .container p {
   position: absolute;
-  top: 10%;
+  top: 8%;
+  text-align: center;
 }
 
 .page-description {
