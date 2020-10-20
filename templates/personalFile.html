@@ -1,45 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Profile</title>
-    <h1>Interview History</h1>
-    {{ ResultTable | safe }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static "css/personalFile.css" %}">
+        <title>Personal Profile</title>
+    <!-- <h1>Interview History</h1>
+    {{ ResultTable | safe }} -->
+
 </head>
-<body>
-    <div style="position: absolute; top: 200px;left: 100px;width: 80%;">
-    <table class="table">
-        <caption>List of users</caption>
-        <thead>
-          <tr class="table-primary">
-            <th scope="col">#</th>
-            <th scope="col">Account</th>
-            <th scope="col">Selected Job</th>
-            <th scope="col">Interview Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-success">
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr class="table-secondary">
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr class="table-info">
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
+
+<body style="background-image: url('{% static "img/citibank.jpeg" %}')"; background-repeat:no-repeat;>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href=""><span class="glyphicon glyphicon-user logo"></span><b>Personal Profile</b></a>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a onclick="location.href='/'" style=cursor: pointer;>HOME</a></li>
+              <li><a onclick="location.href='/users/services/'">Services</a></li>
+              <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
+              <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
+              <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
+              <li><a onclick="location.href='/newstech/'">News</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href='/users/signUp/'>Sign Up</a></li>
+                  <li><a href="/users/logout/">Log Out</a></li>
+                </ul>
+              </li>
+              <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div style="position: absolute; top: 100px;left: 100px;width: 80%;">
+        <table class="table">
+            <caption style="top: 0; bottom: auto;font-weight: bolder;"></caption>Interview History</caption>
+            <thead>
+                <tr class="active">
+                    <th scope="col">Record</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Selected Job</th>
+                    <th scope="col">Interview Date</th>
+                    <th scope="col">Interview Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in df.itertuples %}
+
+                <tr class="info">
+
+                    <th scope="row"> <a href="/result">{{item.ID}}</a></th>
+                    <td><a href="/result">{{ item.Name }}</a></td>
+                    <td>{{ item.SelectedJob }}</td>
+                    <td>{{item.Date}}</td>
+                    <td>{{item.Time}}</td>
+                </tr>
+                <!-- <tr class="table-info">
+                    <th scope="row">3</th>
+                    <td>{{ item.Name }}</td>
+                    <td>{{ item.SelectedJob }}</td>
+                    <td>{{item.Date}}</td>
+                    <td>{{item.Time}}</td>
+                </tr> -->
+
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
+
 </html>
