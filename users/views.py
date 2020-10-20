@@ -13,6 +13,7 @@ from newsapi import NewsApiClient
 import requests
 from django.views.generic import TemplateView
 import pandas as pd
+# import django_tables2 as tables
 
 
 def homepage(request):
@@ -44,16 +45,17 @@ class personalFile(TemplateView):
         job_list = []
         date_list = []
         time_list = []
+        
         for item in Result.objects.all():
             name_list.append(item.userID)
             job_list.append(item.selected_job)
             date_list.append(item.created_date)
             time_list.append(str(item.created_time)[:5])
+        num_list = list(range(1, len(name_list)+1))
         
-        df = pd.DataFrame({'Name':name_list, 'Selected Job':job_list, 'Date':date_list, 'Time':time_list})
-        print(df)
-        
-        return render(request, self.template_name, {'ResultTable':df.to_html(index=False, justify='left')})
+        df = pd.DataFrame({'Name':name_list, 'SelectedJob':job_list, 'Date':date_list, 'Time':time_list, 'ID':num_list})
+
+        return render(request, self.template_name, locals())
 
 
 def questionBank(request):

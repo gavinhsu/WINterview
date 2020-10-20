@@ -1,3 +1,7 @@
+body{
+    background-image: url('static/img/citibank.png');
+    background-repeat:no-repeat;
+}
 .navbar {
   margin-bottom: 0;
   background-color: #2d2d30;

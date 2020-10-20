@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'background_task',
     'corsheaders',
     'Emotion',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [

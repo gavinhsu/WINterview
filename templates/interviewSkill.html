@@ -9,11 +9,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
-
+<style>
+    .bg-image{
+        filter: blur(8px); 
+        background-repeat:no-repeat;
+        background-position: top;
+        background-attachment: fixed;
+    }
+</style>
 </head>
 <!-- <link href="{% static "css/interviewSkill.css" %}" rel="stylesheet">
   -->
-<body>
+  <body >
+    <div class="bg-image" style="background-image: url('{% static "img/233739.png" %}')";></div>
     <div class="container">
         
         <nav class="navbar navbar-default navbar-fixed-top">
