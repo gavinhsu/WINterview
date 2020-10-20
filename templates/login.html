@@ -11,17 +11,23 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style type="text/css">
-  body {
-    background: url("/static/img/home_bg.jpeg") top center;
+  .bg-image {
+    background-image: url('{% static "img/233739.png" %}');
     background-size: cover;
     border-radius: 10px;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   .heading1 {
     font-family: monospace;
     font-weight: bold;
     text-align: center;
-    color:black;
+    color: black;
   }
 
   label {
@@ -63,56 +69,57 @@
 
 <body>
   <br><br>
-  <img src="/static/img/home_bg.jpeg" />
+  <div class="bg-image"></div>
+  <!-- <img src="/static/img/home_bg.jpeg" /> -->
   <div class="container-fluid">
 
     <div class="col-md-3"></div>
 
     <div class="col-md-6">
       <div class="bgimage"></div>
-        <br><br>
-        <h1 class="heading1">Sign In</h1>
-        <br><br><br><br>
+      <br><br>
+      <h1 class="heading1">Sign In</h1>
+      <br><br><br><br>
 
-        <form action="/users/login/" method="post">
-          <div class="row">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-6">
-              <label>Account</label>
-              <input type="text" name="account" class="form-control" required="" placeholder="account">
-            </div>
+      <form action="/users/login/" method="post">
+        <div class="row">
+          <div class="col-md-3">
           </div>
+          <div class="col-md-6">
+            <label>Account</label>
+            <input type="text" name="account" class="form-control" required="" placeholder="account">
+          </div>
+        </div>
 
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-              <label>Password</label>
-              <input type="password" name="password" class="form-control" required="" placeholder="password">
-              <br>
-              <a onclick="location.href='/users/signUp/'">Sign up</a>
-            </div>
-            <div class="col-md-3"></div>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required="" placeholder="password">
+            <br>
+            <a onclick="location.href='/users/signUp/'">Sign up</a>
           </div>
+          <div class="col-md-3"></div>
+        </div>
 
-          <div class="row">
-            <div class="col-md-5"></div>
-            <div class="col-md-2">
-              <button type="submit" class="btn btn-success">Sign In</button>
-            </div>
-            <div class="col-md-5"></div>
+        <div class="row">
+          <div class="col-md-5"></div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-success">Sign In</button>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <p> {{ error }} </p>
-            </div>
+          <div class="col-md-5"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p> {{ error }} </p>
           </div>
+        </div>
 
-        </form>
-      </div>
+      </form>
     </div>
+  </div>
 
-    <div class="col-md-3"></div>
+  <div class="col-md-3"></div>
 
   </div>
 </body>
