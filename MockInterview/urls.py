@@ -35,7 +35,7 @@ urlpatterns = [
     path('ques/', include('questions.url')),
     path('videoUploadTest/',include('Blink.url')),
     path('newsfin/', questions.views.newsfin, name = 'Finance News'),
-    path('newstech/', questions.views.newstech, name = 'Tech News'),
+    path('news/', questions.views.news, name = 'Tech News'),
     # for unauthorized access dynamic translation
     # path('gtts/', include('gTTS.urls')),
     # # for user authorized dynamic translation

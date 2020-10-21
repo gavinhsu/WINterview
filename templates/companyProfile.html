@@ -9,11 +9,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <title>Company Profile</title>
 </head>
 <link rel="stylesheet" href="{% static "css/companyProfile.css" %}">
 
-<body >
+<body>
   <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
@@ -25,7 +27,7 @@
             <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
             <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
             <!-- <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li> -->
-            <li><a onclick="location.href='/newstech/'">News</a></li>
+            <li><a onclick="location.href='/news/'">News</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
                 <span class="caret"></span>
@@ -37,39 +39,20 @@
               </ul>
             </li>
             <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
-            <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+            <li><a onclick="location.href='/users/personalFile/'">Personal Profile</a></li>
           </ul>
         </div>
       </div>
     </nav>
+    <div class="bg-image" style="background-image: url('{% static "img/office_bg.jpg" %}');"></div>
+    <a class="top-link hide" id="scrollTop" title="Go to top"></a>
 
-
+    <a class="top-link hide" id="scrollTop" title="Go to top"></a>
     <div class="types">
       <button class="click btn-success">Information Technology/Engineering</button>
       <button class="click1 btn-success">Finance/Accounting/Audit/Tax/Securities/Investment/Bank</button>
     </div>
     <div class="tech">
-      <div class="block">
-        <div class="intelnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
-          {% for new, des, ur, tim in intel_list %}
-          <h3 style="font-size: 20px;">{{new}}</h3>
-          Published Time: {{tim}}
-          <br>
-          <a href={{ur}}>{{ur}}</a>
-          {% endfor %}
-        </div>
-        <h class="cname">Intel Corporation</h><br>
-        <ul>
-          <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
-            <a href="brandLi.html" class="flipper"></a>
-            <div class="front"> <img src="/static/img/intel.jpeg" /></div>
-            <div class="back"><img src="{% static "img/intel_bback.jpg" %}" /></div>
-          </li>
-        </ul>
-
-      </div><br><br><br>
-     
-
       <div class="block">
         <div class="microsoftnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
           {% for new, des, ur, tim in microsoft_list %}
@@ -85,6 +68,25 @@
             <a href="brandLi.html" class="flipper"></a>
             <div class="front"> <img src="/static/img/microsoft.jpeg" /></div>
             <div class="back"><img src="{% static "img/microsoft_back.png" %}" /></div>
+          </li>
+        </ul>
+      </div><br><br><br>
+
+      <div class="block">
+        <div class="intelnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in intel_list %}
+          <h3 style="font-size: 20px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div>
+        <h class="cname">Intel Corporation</h><br>
+        <ul>
+          <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
+            <a href="brandLi.html" class="flipper"></a>
+            <div class="front"> <img src="/static/img/intel.jpeg" /></div>
+            <div class="back"><img src="{% static "img/intel_bback.jpg" %}" /></div>
           </li>
         </ul>
       </div><br><br><br>
@@ -225,6 +227,29 @@
       $(".tech").hide();
     })
   });
+</script>
+
+<script>
+  var scrollTop = document.getElementById("scrollTop");
+
+  scrollTop.addEventListener('click', () => window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+  }));
+
+  const scrollFunc = () => {
+      // Get the current scroll value
+      let y = window.scrollY;
+
+      // If the scroll value is greater than the window height, let's add a class to the scroll-to-top button to show it!
+      if (y > 0) {
+          scrollTop.className = "top-link show";
+      } else {
+          scrollTop.className = "top-link hide";
+      }
+  };
+
+  window.addEventListener("scroll", scrollFunc);
 </script>
 
 </html>

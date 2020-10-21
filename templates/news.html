@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>Tech News</title>
+    <title>News</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/b21871699d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "css/news.css" %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 </head>
 
 <style>
-    img {
-        border-radius: 15px;
-    }
+
 </style>
 
 <body>
     <div class="container">
+        <div class="bg-image" style="background-image: url('{% static "img/office_bg.jpg" %}');"></div>
+
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="myNavbar">
-                <a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-link logo"></span><b> News</b></a>
+                <a class="navbar-brand"><span class="glyphicon glyphicon-link logo"></span><b> News</b></a>
                 <ul class="nav navbar-nav navbar-right" style="display:inline;">
                     <li><a onclick="location.href='/'" style=cursor: pointer;>Home</a></li>
                     <li><a onclick="location.href='/users/services/'">Services</a></li>
@@ -39,95 +42,20 @@
                           <li><a href="/users/logout/">Log Out</a></li>
                         </ul>
                       </li>
-                    <!-- <li><a onclick="location.href='/users/login/'">Sign In</a></li>
-                    <li><a href='/users/signUp/'>Sign Up</a></li>
-                    <li><a href="/users/logout/">Log Out</a></li> -->
                     <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
-                    <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+                    <li><a onclick="location.href='/users/personalFile/'">Personal Profile</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <style>
-.navbar {
-  margin-bottom: 0;
-  background-color: #2d2d30;
-  border: 0;
-  font-size: 11px !important;
-  letter-spacing: 4px;
-  opacity: 0.9;
-}
-
-/* Add a gray color to all navbar links */
-.navbar li a, .navbar .navbar-brand {
-  color: #d5d5d5 !important;
-}
-
-/* On hover, the links will turn white */
-.navbar-nav li a:hover {
-  color: #fff !important;
-}
-
-/* The active link */
-.navbar-nav li.active a {
-  color: #fff !important;
-  background-color:#29292c !important;
-}
-
-/* Remove border color from the collapsible button */
-.navbar-default .navbar-toggle {
-  border-color: transparent;
-}
-
-/* Dropdown */
-.open .dropdown-toggle {
-  color: #fff ;
-  background-color: #555 !important;
-}
-
-/* Dropdown links */
-.dropdown-menu li a {
-  color: #000 !important;
-}
-
-/* On hover, the dropdown links will turn red */
-.dropdown-menu li a:hover {
-  background-color: red !important;
-}
-
-
-        /* .menu{
-      cursor: pointer;
-      font-size: 20px;
-      position: relative;
-      width: 100%;
-      height: 100px;
-      color:rgb(24, 108, 192);
-      line-height: 40px;
-      } */
-        li:hover {
-            text-decoration: none;
-            color: #e8e8e8;
-            text-decoration: underline;
-            color: rgb(74, 151, 228);
-        }
-
-        a {
-            cursor: pointer;
-        }
-        .newsbtn{
-        padding: 5% 40px;
-      }
-    </style>
-
     <div class="newsbtn">
         <button class="click btn-success">Tech News</button>
         <button class="click1 btn-success">Finance News</button>
     </div>
-
+    <a class="top-link hide" id="scrollTop" title="Go to top"></a>
 
     <div align:center;>
-        <div class="tech" style="display:none;position: absolute;left: 20%; width: 50%;">
+        <div class="tech" style="display:none;position:absolute; left:20%; width:50%;">
             {% for new, des, im , ur, tim in tech_list %}
             <h3>{{new}}</h3>
             {{value | linebreaks}}
@@ -178,12 +106,34 @@
         })
     });
 </script>
+
+<script>
+    var scrollTop = document.getElementById("scrollTop");
+
+    scrollTop.addEventListener('click', () => window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    }));
+
+    const scrollFunc = () => {
+        // Get the current scroll value
+        let y = window.scrollY;
+
+        // If the scroll value is greater than the window height, let's add a class to the scroll-to-top button to show it!
+        if (y > 0) {
+            scrollTop.className = "top-link show";
+        } else {
+            scrollTop.className = "top-link hide";
+        }
+    };
+
+    window.addEventListener("scroll", scrollFunc);
+</script>
 <style>
     .newsbutton {
         display: flex;
         justify-content: center;
     }
-
 
     .btn-success {
         font-family: "Poppins", sans-serif;

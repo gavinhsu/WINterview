@@ -8,45 +8,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Document</title>
-    <style>
-        body {
-            height: 100%;
-            margin: 0;
-        }
+    <link rel="stylesheet" href="{% static "css/interviewSkill.css" %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-        .bg-image {
-            background-image: url('{% static "img/233739.png" %}');
-            position: fixed;
-            left: 0;
-            right: 0;
-            z-index: -1000;
-            display: block;
-            height: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            -webkit-filter: blur(5px);
-            -moz-filter: blur(5px);
-            -o-filter: blur(5px);
-            -ms-filter: blur(5px);
-            filter: blur(5px);
-        }
-
-        .container {
-            z-index: 9999;
-        }
-    </style>
+    <title>Interview Skills</title>
 </head>
-<!-- <link href="{% static "css/interviewSkill.css" %}" rel="stylesheet">
-  -->
 
 <body>
-    <div class="bg-image"></div>
+
     <div class="container">
+        <div class="bg-image"></div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-briefcase logo"></span><b>
+                <a class="navbar-brand"><span class="glyphicon glyphicon-briefcase logo"></span><b>
                         Interview Skills</b></a>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -55,7 +29,7 @@
                         <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
                         <!-- <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li> -->
                         <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
-                        <li><a onclick="location.href='/newstech/'">News</a></li>
+                        <li><a onclick="location.href='/news/'">News</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
                                 <span class="caret"></span>
@@ -67,101 +41,18 @@
                             </ul>
                         </li>
                         <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
-                        <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+                        <li><a onclick="location.href='/users/personalFile/'">Personal Profile</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
-        <style>
-            .navbar {
-                margin-bottom: 0;
-                background-color: #2d2d30;
-                border: 0;
-                font-size: 11px !important;
-                letter-spacing: 4px;
-                opacity: 0.9;
-                font-family: sans-serif;
-            }
-
-            .navbar li a,
-            .navbar .navbar-brand {
-                color: #d5d5d5 !important;
-            }
-
-            .navbar-nav li a:hover {
-                color: #fff !important;
-            }
-
-            .navbar-nav li.active a {
-                color: #fff !important;
-                background-color: #29292c !important;
-            }
-
-            .navbar-default .navbar-toggle {
-                border-color: transparent;
-            }
-
-            .open .dropdown-toggle {
-                color: #fff;
-                background-color: #555 !important;
-            }
-
-            .dropdown-menu li a {
-                color: #000 !important;
-            }
-
-            .dropdown-menu li a:hover {
-                background-color: red !important;
-            }
-
-            .menu {
-                cursor: pointer;
-                font-size: 20px;
-                position: relative;
-                width: 100%;
-                height: 100px;
-                color: rgb(24, 108, 192);
-                line-height: 40px;
-            }
-
-            li:hover {
-                text-decoration: none;
-                color: #e8e8e8;
-                text-decoration: underline;
-                color: rgb(74, 151, 228);
-            }
-
-            a {
-                cursor: pointer;
-            }
-
-            .content {
-                padding: 5% 40px;
-            }
-
-            .block {
-                font-size: 20px;
-            }
-
-            .title {
-                font-size: 20px;
-            }
-        </style>
+        <a class="top-link hide" id="scrollTop" title="Go to top"></a>
 
         <div id="home" onmouseover="document.getElementById('topic').style.visibility = 'visible';"
             onmouseout="document.getElementById('topic').style.visibility = 'hidden';">
             <!-- <p id="topic">WINterview</p> -->
         </div>
-        <script type="text/javascript">
-            var appear = function (elem, visibility) {
-                elem.style.visibility = visibility
-            };
 
-            var disappear = function (elem, visibility) {
-                elem.style.visibility = visibility;
-            };
-        </script>
 
         <div class="content">
             <a class="title" href="javascript:"
@@ -477,6 +368,178 @@
 
     </div>
     </div>
+
+    <style>
+        .bg-image {
+            background-image: url('{% static "img/office_bg.jpg" %}');
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: -1000;
+            display: block;
+            height: 104%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            -webkit-filter: blur(2px);
+            -moz-filter: blur(2px);
+            -o-filter: blur(2px);
+            -ms-filter: blur(2px);
+            filter: blur(2px);
+        }
+
+        .container {
+            z-index: 9999;
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #2d2d30;
+            border: 0;
+            font-size: 12px !important;
+            letter-spacing: 4px;
+            opacity: 0.9;
+            font-family: sans-serif;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: #d5d5d5 !important;
+        }
+
+        .navbar-nav li a:hover {
+            color: #fff !important;
+        }
+
+        .navbar-nav li.active a {
+            color: #fff !important;
+            background-color: #29292c !important;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: transparent;
+        }
+
+        .open .dropdown-toggle {
+            color: #fff;
+            background-color: #555 !important;
+        }
+
+        .dropdown-menu li a {
+            color: #000 !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: red !important;
+        }
+
+        .menu {
+            cursor: pointer;
+            font-size: 20px;
+            position: relative;
+            width: 100%;
+            height: 100px;
+            color: rgb(24, 108, 192);
+            line-height: 40px;
+        }
+
+        li:hover {
+            text-decoration: none;
+            color: #e8e8e8;
+            text-decoration: underline;
+            color: rgb(74, 151, 228);
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 5% 40px;
+        }
+
+        .block {
+            font-size: 20px;
+        }
+
+        .title {
+            font-size: 20px;
+        }
+
+
+        #scrollTop {
+            display: inline-block;
+            background-color: #FF9800;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border-radius: 4px;
+            position: fixed;
+            bottom: 20px;
+            right: 10px;
+            text-decoration: none;
+        }
+
+        #scrollTop::after {
+            content: "\f077";
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            font-size: 2em;
+            line-height: 50px;
+            color: #fff;
+        }
+
+        #scrollTop:hover {
+            cursor: pointer;
+            background-color: #333;
+        }
+
+        #scrollTop:active {
+            background-color: #555;
+        }
+
+        .top-link .hide {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .top-link .show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+    <script>
+        var scrollTop = document.getElementById("scrollTop");
+
+        scrollTop.addEventListener('click', () => window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        }));
+
+        const scrollFunc = () => {
+            // Get the current scroll value
+            let y = window.scrollY;
+
+            // If the scroll value is greater than the window height, let's add a class to the scroll-to-top button to show it!
+            if (y > 0) {
+                scrollTop.className = "top-link show";
+            } else {
+                scrollTop.className = "top-link hide";
+            }
+        };
+
+        window.addEventListener("scroll", scrollFunc);
+    </script>
+    <script type="text/javascript">
+        var appear = function (elem, visibility) {
+            elem.style.visibility = visibility
+        };
+
+        var disappear = function (elem, visibility) {
+            elem.style.visibility = visibility;
+        };
+    </script>
 </body>
 
 </html>

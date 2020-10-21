@@ -140,7 +140,7 @@ def newsfin(request):
 
 
 
-def newstech(request):
+def news(request):
     newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
 
     # FINANCE news
@@ -217,7 +217,7 @@ def newstech(request):
     fin_list = zip(fin_news, fin_desc, fin_img, fin_url, fin_time)
 
 
-    return render(request, 'newstech.html', context={"tech_list":tech_list, "fin_list":fin_list})
+    return render(request, 'news.html', context={"tech_list":tech_list, "fin_list":fin_list})
 
 
     
