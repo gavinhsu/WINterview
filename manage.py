@@ -23,6 +23,7 @@ class EnsembleClassifier(ClassifierI):
             conf = choice_votes / len(votes)
             return conf
             
+            
 def main():
             
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MockInterview.settings')
