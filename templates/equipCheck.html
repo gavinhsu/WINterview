@@ -14,94 +14,100 @@
   <!-- Bootstrap CSS -->
   <!-- /Bootstrap CSS -->
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-
-  <style src="{% static "css/equipCheck.css" %}" media="all"></style>
+  <link rel="stylesheet" href="{% static "css/equipCheck.css" %}">
 </head>
 
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href='/'>Home</a></li>
-          <li><a href='/users/services/'>Services</a></li>
-          <li><a href='/users/questionBank/'>Question Bank</a></li>
-          <li><a href='/users/interviewSkill/'>Interview Skills</a></li>
-          <li><a href='/users/companyProfile/'>Company Profile</a></li>
-          <li><a href='/newstech/'>News</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href='/users/signUp/'>Sign Up</a></li>
-              <li><a href="/users/logout/">Log Out</a></li>
-            </ul>
-          </li>
-          <li><a href='/users/aboutUs/'>About Us</a></li>`
-          <li><a href='/users/aboutUs/'>Personal Profile</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div id="audio" class="Audio" style="position: relative; margin-top: 10%;">
-    <div style="position: relative; text-align: center;">
-      <h1>Check the mircophone</h1>
-      <button style="height: auto;"  id="start-record-btn" type="button" title="Start Recording" class="btn btn-success">Start
-        Recognition</button>
-      <button style="height: auto;"id="pause-record-btn" type="button" title="Pause Recording" class="btn btn-danger">Pause
-        Recognition</button>
-      <button style="height: auto;"id="save-note-btn" type="button" class="btn btn-secondary" title="Clear record">Clear
-        Record</button>
-      <button style="height: auto;"id="next" type="button" class="btn btn-primary">Next Step</button>
-      <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
-    </div>
-    <div class="form-group purple-border">
-      <textarea name="note-textarea" id="note-textarea" readonly
-        placeholder="Your answer will be shown here."></textarea>
-    </div>
-  </div>
-  <div class="container" id="video" style="display: none;">
-    <div class="card-body">
-      <div class="row mb-4">
-        <div class="col-12">
-          <h1 class="text-center mb-3" style="position:relative; top: 70px;">Check the Web Camera</h1>
+  <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href='/'>Home</a></li>
+            <li><a href='/users/services/'>Services</a></li>
+            <li><a href='/users/questionBank/'>Question Bank</a></li>
+            <li><a href='/users/interviewSkill/'>Interview Skills</a></li>
+            <li><a href='/users/companyProfile/'>Company Profile</a></li>
+            <li><a href='/newstech/'>News</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href='/users/signUp/'>Sign Up</a></li>
+                <li><a href="/users/logout/">Log Out</a></li>
+              </ul>
+            </li>
+            <li><a href='/users/aboutUs/'>About Us</a></li>`
+            <li><a href='/users/aboutUs/'>Personal Profile</a></li>
+          </ul>
         </div>
       </div>
+    </nav>
+    <div class="bg-image" style="background-image: url('{% static "img/office_bg.jpg" %}');"></div>
 
-      <div class="row mb-5 justify-content-center align-items-center">
-        <div class="col-md-6 text-center">
-          <div class="video-container d-flex align-items-center justify-content-center">
-            <div class="is-recording"></div>
-            <!-- The controls attribute adds video controls, like play, pause, and volume. -->
-            <video style="position: relative; left: 60%; top: 30px;" width="450" height="450" id="inputVideo" alt="在這裡錄影"
-              muted>Video stream not available.</video>
-            <video style="position:relative; top: 80px; left: 340px; display: none;" width="450" height="340" id="outputVideo" alt="錄好的畫面將會出現在這"
-              muted>Video stream not available.</video>
+    <div id="audio" class="Audio" style="position: relative; margin-top: 10%;">
+      <div style="position: relative; text-align: center;">
+        <h1>Check the mircophone</h1>
+        <button style="height: auto;" id="start-record-btn" type="button" title="Start Recording"
+          class="btn btn-success">Start
+          Recognition</button>
+        <button style="height: auto;" id="pause-record-btn" type="button" title="Pause Recording"
+          class="btn btn-danger">Pause
+          Recognition</button>
+        <button style="height: auto;" id="save-note-btn" type="button" class="btn btn-secondary"
+          title="Clear record">Clear
+          Record</button>
+        <button style="height: auto;" id="next" type="button" class="btn btn-primary">Next Step</button>
+        <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+      </div>
+      <div class="form-group purple-border">
+        <textarea name="note-textarea" id="note-textarea" readonly
+          placeholder="Your answer will be shown here."></textarea>
+      </div>
+    </div>
+    <div class="containerCheck" id="video" style="display: none;">
+      <div class="card-body">
+        <div class="row mb-4">
+          <div class="col-12">
+            <h1 class="text-center mb-3" style="position:relative; top: 70px;">Check the Web Camera</h1>
+          </div>
+        </div>
+
+        <div class="row mb-5 justify-content-center align-items-center">
+          <div class="col-md-6 text-center">
+            <div class="video-container d-flex align-items-center justify-content-center">
+              <div class="is-recording"></div>
+              <!-- The controls attribute adds video controls, like play, pause, and volume. -->
+              <video style="position: relative; left: 60%; top: 30px;" width="450" height="450" id="inputVideo"
+                alt="在這裡錄影" muted>Video stream not available.</video>
+              <video style="position:relative; top: 80px; left: 340px; display: none;" width="450" height="340"
+                id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not available.</video>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4 justify-content-center align-items-center">
+          <div style="position: relative;top: -80px;display: flex;"
+            class="col-4 d-flex justify-content-center align-items-center">
+            <button style="height: auto;" id="startBtn" class="btn btn-success">Start Recording</button>
+            <button style="height: auto;" id="stopBtn" class="btn btn-danger" style="display:none">Stop
+              Recording</button>
+            <button style="height: auto;" id="resetBtn" class="btn btn-primary" style="display:none">Restart
+              Recorder</button>
+          </div>
+        </div>
+        <a href="/speech_to_text" class="start">Start!</a>
+        <!-- <a href="/users/jobselect/">Reselect the job</a> -->
+
+
+        <div class="row">
+          <div class="col-12">
+            <div role="alert" id="errorMsg" style="position: relative; top: -600%; left:30%; width: 40%"></div>
           </div>
         </div>
       </div>
-      <div class="row mb-4 justify-content-center align-items-center">
-        <div style="position: relative;top: -80px;display: flex;"
-          class="col-4 d-flex justify-content-center align-items-center">
-          <button style="height: auto;" id="startBtn" class="btn btn-success">Start Recording</button>
-          <button style="height: auto;" id="stopBtn" class="btn btn-danger" style="display:none">Stop Recording</button>
-          <button style="height: auto;" id="resetBtn" class="btn btn-primary" style="display:none">Restart
-            Recorder</button>
-        </div>
-      </div>
-      <a href="/speech_to_text" class="start">Start!</a>
-      <!-- <a href="/users/jobselect/">Reselect the job</a> -->
-
-
-      <div class="row">
-        <div class="col-12">
-          <div role="alert" id="errorMsg" style="position: relative; top: -600%; left:30%; width: 40%"></div>
-        </div>
-      </div>
     </div>
   </div>
-
   <style>
     @import url("https://fonts.googleapis.com/css?family=Montserrat");
 
@@ -114,7 +120,7 @@
 
     #stopBtn {
       position: relative;
-      display:  block;
+      display: block;
       top: 80px;
       left: 45%;
     }
@@ -122,7 +128,7 @@
     #resetBtn {
       position: relative;
       display: block;
-      top:200px;
+      top: 200px;
       left: 45%;
     }
 
@@ -210,6 +216,7 @@
       height: 250px;
       display: block;
       border: 1px solid #ba68c8;
+      font-size: 15px
     }
 
     .purple-border :focus {
@@ -217,33 +224,25 @@
       box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
     }
 
-
-    .navbar {
-      margin-bottom: 0;
-      background-color: #2d2d30;
-      border: 0;
-      font-size: 11px !important;
-      letter-spacing: 4px;
-      opacity: 0.9;
-      font-family: sans-serif;
+    .bg-image {
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: -1000;
+      display: block;
+      height: 105%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      -webkit-filter: blur(2px);
+      -moz-filter: blur(2px);
+      -o-filter: blur(2px);
+      -ms-filter: blur(2px);
+      filter: blur(2px);
     }
 
-    .navbar li a,
-    .navbar .navbar-brand {
-      color: #d5d5d5 !important;
-    }
-
-    .navbar-nav li a:hover {
-      color: #fff !important;
-    }
-
-    .navbar-nav li.active a {
-      color: #fff !important;
-      background-color: #29292c !important;
-    }
-
-    .navbar-default .navbar-toggle {
-      border-color: transparent;
+    .container {
+      z-index: 9999;
     }
   </style>
   <!-- Vendor -->

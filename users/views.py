@@ -185,9 +185,9 @@ def companyProfile(request):
     TSMC_url = []
     TSMC_time = []
 
-    for i in range(3):
+    #temporarily no news
+    for i in range(1):
         myarticles = TSMC_articles[i]
-
         TSMC_news.append(myarticles['title'])
         TSMC_desc.append(myarticles['description'])
         TSMC_url.append(myarticles['url'])
@@ -258,36 +258,6 @@ def News(request):
 def contactUs(request):
     return render(request,'contactUs.html')
 
-
-# Create your views here.
-'''class JoinMemberView(TemplateView):
-    template_name = 'signUp.html'
-def get(self, request):
-        global join_member_form
-        join_member_form = joinMemberForm()
-        return render(request, self.template_name, {'form': join_member_form })
-
-def image_view(request):
-
-    if request.method == 'POST':
-        form = HotelForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = HotelForm()
-    return render(request, 'image_form.html', {'form' : form})
-
-
-    def success(request):
-        return HttpResponse('successfully uploaded')
-
-
-   def post(self, request):
-        global join_member_form
-        join_member_form = joinMemberForm(request.POST)
-        if join_member_form.is_valid():'''
 def regist(request):
     #if request.method == 'GET':
     #    return render(request, 'signUp.html')

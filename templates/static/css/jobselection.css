@@ -80,8 +80,29 @@ input[type=submit] {
   border-radius: 5px;
   font-weight: bold;
   line-height: 25px;
-  position: absolute;
-  left: 600px;
+  position: relative;
   top: 500px;
+  left: 45%;
 }
 
+.bg-image {
+  background-image: url('{% static "img/office_bg.jpg" %}');
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1000;
+  display: block;
+  height: 104%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+.container {
+  z-index: 9999;
+}

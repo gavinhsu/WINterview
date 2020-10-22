@@ -282,15 +282,20 @@ recognition.onresult = function(event) {
 
 recognition.onstart = function() { 
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
+  instructions.css('color', 'green');
 }
 
 recognition.onspeechend = function() {
   instructions.text('You were quiet for a while so voice recognition turned itself off.');
+  instructions.css('color', 'red');
+
 }
 
 recognition.onerror = function(event) {
   if(event.error == 'no-speech') {
-    instructions.text('No speech was detected. Try again.');  
+    instructions.text('No speech was detected. Try again.'); 
+    instructions.css('color', 'orange');
+ 
   };
 }
 
@@ -309,6 +314,7 @@ $('#start-record-btn').on('click', function(e) {
 $('#pause-record-btn').on('click', function(e) {
   recognition.stop();
   instructions.text('Voice recognition paused.');
+  instructions.css('color', 'red');
 });
 
 // Sync the text inside the text area with the noteContent variable.
@@ -335,6 +341,7 @@ $('#save-note-btn').on('click', function(e) {
 
   if(!noteContent.length) {
     instructions.text('Could not clear empty message. Please say something to your microphone.');
+    instructions.css('color', 'orange');
   }
   else {
     // Save note to localStorage.
@@ -345,7 +352,7 @@ $('#save-note-btn').on('click', function(e) {
     noteContent = '';
     renderNotes(getAllNotes());
     noteTextarea.val('');
-    instructions.text('Speech cleared successfully.');
+    instructions.text('Speech cleared successfully!');
   }
       
 })

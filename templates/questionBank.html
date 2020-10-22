@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+  {% load static %}
+
 <head>
-  <title>Document</title>
+  <title>Question Bank</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{% static "css/questionBank.css" %}">
+  <script src="{% static "js/questionBank.js" %}"></script>
+
 </head>
 <body>
 
@@ -14,7 +19,7 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="icon"><a href=""><i class="fa fa-microphone"></i></a></div>
-        <a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-briefcase logo"></span><b> Question Bank</a> </b>
+        <a class="navbar-brand" ><span class="glyphicon glyphicon-briefcase logo"></span><b> Question Bank</a> </b>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a onclick="location.href='/'" style= cursor: pointer;>Home</a></li>
@@ -22,7 +27,7 @@
                 <!-- <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li> -->
                 <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
                 <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
-                <li><a onclick="location.href='/newstech/'">News</a></li>
+                <li><a onclick="location.href='/news/'">News</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
                       <span class="caret"></span>
@@ -34,98 +39,15 @@
                     </ul>
                   </li>
                 <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
-                <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+                <li><a onclick="location.href='/users/personalFile/'">Personal Profile</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<style>
-  .navbar {
-    margin-bottom: 0;
-    background-color: #2d2d30;
-    border: 0;
-    font-size: 11px !important;
-    letter-spacing: 4px;
-    opacity: 0.9;
-    font-family: sans-serif;
-}
-.navbar li a, .navbar .navbar-brand {
-    color: #d5d5d5 !important;
-}
-.navbar-nav li a:hover {
-    color: #fff !important;
-}
-.navbar-nav li.active a {
-    color: #fff !important;
-    background-color:#29292c !important;
-}
-.navbar-default .navbar-toggle {
-    border-color: transparent;
-}
-.open .dropdown-toggle {
-    color: #fff ;
-    background-color: #555 !important;
-}
-.dropdown-menu li a {
-    color: #000 !important;
-}
-.dropdown-menu li a:hover {
-    background-color: red !important;
-}
-.menu{
-cursor: pointer;
-font-size: 20px;
-position: relative;
-width: 100%;
-height: 100px;
-color:rgb(24, 108, 192);
-line-height: 40px;
-}
-li:hover{
-    text-decoration: none;
-    color: #e8e8e8;  
-    text-decoration:underline;
-    color:rgb(74, 151, 228);   
-}
-a{
-    cursor: pointer;
-}
-.pagination{
-  padding: 10% 40px;
-}
-.has_children{ 
-  cursor:pointer; 
-  width:3`00px;
-  padding: 5% 0px;
-  }
-.highlight{
-  backgroung:#F60;
-  }
-.type{ 
-  display:none; 
-  width:300px; 
-  float:left;
-  }
-
-
-</style>
-<script>
-  $(document).ready(function(){
-  
-  $(".has_children").click(function(){
-    $(this).addClass("highlight")
-    .children("a").show().end()
-    
-    .siblings().removeClass("highlight")
-    .children("a").hide(); 
-    
-  });
-  
-  });
-</script>
+<div class="bg-image" style="background-image: url('{% static "img/office_bg.jpg" %}');"></div>
+<div style="display: inline-block; position: relative;">
 <div class="has_children col-md-2 control-label">
   <li>Tech</li>
-    
       <a href="#" class="type">Hardware Engineer</a>
       <a href="#" class="type">Software Engineer</a>
       <a href="#" class="type">ML Engineer</a>
@@ -149,12 +71,10 @@ a{
       <a href="#" class="type">Electronics Engineer</a>
       <a href="#" class="type">BIOS Engineer</a>
       <a href="#" class="type">CIM Engineer</a>
-
 </div>
-<div class="has_children col-md-2 control-label">
-  <li>Finanace</li>
-    
-      <a href="#accordion1" class="type">Sales Trading</a>
+<div class="has_children col-md-2 control-label" style="position: fixed; left: 120px; top: 13px;">
+  <li>Finance</li>
+      <a href="#accordion1" class="type" onclick="showQues()">Sales Trading</a>
       <a href="#" class="type">Cashier</a>
       <a href="#" class="type">Audit</a>
       <a href="#" class="type">Quantitative</a>
@@ -177,10 +97,11 @@ a{
       <a href="#" class="type">Stock Affair Specialist</a>
       <a href="#" class="type">Underwriting Personnel</a>
       <a href="#" class="type">Bond Analyst</a>
-      <a href="#" class="type">Bond Trader</a>
+      <!-- <a href="#" class="type">Bond Trader</a> -->
 </div>
-
-      <div class="panel-group col-md-9" id="accordion1">
+</div>
+      <div class="panel-group col-md-9" id="accordion1" style="position: absolute;top: 18%;left: 23%;">
+        <div id="page1" style="display:none;">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -190,7 +111,7 @@ a{
                     </a>
                 </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
+            <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
                     Dividends are periodic cash payments distributed to shareholders. Both common and preferred shareholders can receive dividends, but a firm must pay preferred shareholders first before common shareholders can be paid.
                 </div>
@@ -344,6 +265,8 @@ The main thing that the interviewer is looking for is the quality of your though
         </div>
     </div>
 </div>
+</div>
+<div id="page2" style="display:none;">
 <div class="panel panel-default">
   <div class="panel-heading">
       <h4 class="panel-title">
@@ -422,6 +345,7 @@ The main thing that the interviewer is looking for is the quality of your though
       <div class="panel-body">
         Non-farm is one of the most important days in the economic calendar and refers to all jobs excluding farm workers, sole proprietorships, private household workers, and military and intelligence employees. The above items are stripped out to give a gauge of the economy’s health.
   </div>
+</div>
 </div>
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -502,6 +426,8 @@ This implies double taxation, but there are rules in Canada and elsewhere relate
       </div>
   </div>
 </div>
+</div>
+<div id="page3" style="display:none;">
 <div class="panel panel-default">
   <div class="panel-heading">
       <h4 class="panel-title">
@@ -652,6 +578,8 @@ This implies double taxation, but there are rules in Canada and elsewhere relate
       </div>
   </div>
 </div>
+</div>
+<div id="page4" style="display:none;">
 <div class="panel panel-default">
   <div class="panel-heading">
       <h4 class="panel-title">
@@ -805,6 +733,8 @@ An interesting development going forward will be the City of Chicago – a far m
       </div>
   </div>
 </div>
+</div>
+<div id="page5" style="display:none;">
 <div class="panel panel-default">
   <div class="panel-heading">
       <h4 class="panel-title">
@@ -962,6 +892,8 @@ As a follow up question, an interviewee may be asked about yield to call or how 
       </div>
   </div>
 </div>
+</div>
+<div id="page6" style="display:none;">
 <div class="panel panel-default">
   <div class="panel-heading">
       <h4 class="panel-title">
@@ -1113,6 +1045,8 @@ The interviewer can subsequently ask about reverse collars or zero cost collars.
       </div>
   </div>
 </div>
+</div>
+<div id="page7" style="display:none;">
 <div class="panel panel-default">
   <div class="panel-heading">
       <h4 class="panel-title">
@@ -1197,12 +1131,12 @@ The interviewer can subsequently ask about reverse collars or zero cost collars.
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse65">
+             href="#collapse66">
              What causes swap spreads to widen or narrow?
           </a>
       </h4>
   </div>
-  <div id="collapse65" class="panel-collapse collapse">
+  <div id="collapse66" class="panel-collapse collapse">
       <div class="panel-body">
         The swap spread is the difference between the negotiated and the fixed rate in an interest rate swap. When interest rates are expected to rise, paying fixed and receiving floating becomes more desirable, and the difference between the two widens. The opposite is true for when interest rates are expected to fall.
       </div>
@@ -1212,12 +1146,12 @@ The interviewer can subsequently ask about reverse collars or zero cost collars.
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse66">
+             href="#collapse67">
              Describe the convexity of a Mortgage Backed Security
           </a>
       </h4>
   </div>
-  <div id="collapse66" class="panel-collapse collapse">
+  <div id="collapse67" class="panel-collapse collapse">
       <div class="panel-body">
         Convexity is negative – once interest rates fall, homeowners will prepay their mortgages, reducing the principal of the investment.
       </div>
@@ -1227,12 +1161,12 @@ The interviewer can subsequently ask about reverse collars or zero cost collars.
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse67">
+             href="#collapse68">
              What is a simple option strategy if you expect a swing in price but are not sure on direction?
           </a>
       </h4>
   </div>
-  <div id="collapse67" class="panel-collapse collapse">
+  <div id="collapse68" class="panel-collapse collapse">
       <div class="panel-body">
         A straddle (buying a put and call with the same strike or exercise price and expiration date) is best in this situation. This question is somewhat misleading as an investor would only enter into this straddle if they felt that the implied change in price would be much larger than the premiums paid, so if the swing was not large enough this may not be a good strategy.
       </div>
@@ -1242,12 +1176,12 @@ The interviewer can subsequently ask about reverse collars or zero cost collars.
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse68">
+             href="#collapse69">
              When would you write a call option on a stock?
           </a>
       </h4>
   </div>
-  <div id="collapse68" class="panel-collapse collapse">
+  <div id="collapse69" class="panel-collapse collapse">
       <div class="panel-body">
         When you expect the price of the stock to fall. A call option is a bet on the price of a stock to rise, writing the option is taking the other side of that bet, where the profit is the option premium.
       </div>
@@ -1257,27 +1191,29 @@ The interviewer can subsequently ask about reverse collars or zero cost collars.
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse69">
+             href="#collapse70">
              When would you buy a put option on a stock?
           </a>
       </h4>
   </div>
-  <div id="collapse69" class="panel-collapse collapse">
+  <div id="collapse70" class="panel-collapse collapse">
       <div class="panel-body">
         Similar to writing a call option, when you expect the price of the stock to fall.
       </div>
   </div>
 </div>
+</div>
+<div id="page8" style="display:none;">
 <div class="panel panel-default">
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse70">
+             href="#collapse71">
              How does a swap work?
           </a>
       </h4>
   </div>
-  <div id="collapse70" class="panel-collapse collapse">
+  <div id="collapse71" class="panel-collapse collapse">
       <div class="panel-body">
         A swap exchanges future cash flows (and risk) between the participating parties. Common forms of swaps include interest rate swaps, currency swaps, and credit default swaps.
       </div>
@@ -1287,12 +1223,12 @@ The interviewer can subsequently ask about reverse collars or zero cost collars.
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse71">
+             href="#collapse72">
              What is at the money? In the money? Out of the money?
           </a>
       </h4>
   </div>
-  <div id="collapse71" class="panel-collapse collapse">
+  <div id="collapse72" class="panel-collapse collapse">
       <div class="panel-body">
         They are terms used to describe the state of the option, namely whether or not the option is worth exercising at the current price of the underlying asset. For call options, when the asset price is above the strike price of the option, the option is in the money. When the asset price is below the strike price, the option is out of the money. For put options, this relationship is simply flipped. For both call options and put options, when the asset price equals the strike price, the option is at the money.
 If you are holding a call option on CIBC stock with a strike price of $120 (expiring today), and the stock is currently trading at $100, how much is your option worth? Is it in the money or out of the money?
@@ -1304,12 +1240,12 @@ The option is worth $0, as exercising the option would allow you to buy CIBC sto
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse72">
+             href="#collapse73">
              Which would be more valuable: a call option on Facebook or a call option on Walmart? (Assuming all else is equal)
           </a>
       </h4>
   </div>
-  <div id="collapse72" class="panel-collapse collapse">
+  <div id="collapse73" class="panel-collapse collapse">
       <div class="panel-body">
         A call option on Facebook is more valuable. You need to recognize that an option’s value is partially driven by the price volatility of the underlying asset, as high volatility increases the chance of the option being in the money at some point before expiration.
       </div>
@@ -1319,12 +1255,12 @@ The option is worth $0, as exercising the option would allow you to buy CIBC sto
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse73">
+             href="#collapse74">
              Which would be more valuable: a January put option on Suncor or a February put option on Suncor? (Assuming all else is equal)
           </a>
       </h4>
   </div>
-  <div id="collapse73" class="panel-collapse collapse">
+  <div id="collapse74" class="panel-collapse collapse">
       <div class="panel-body">
         The February put option. An option’s value is also driven by the expiration date of the option, as options with longer expiries have more chances for the option to be in the money.
       </div>
@@ -1334,12 +1270,12 @@ The option is worth $0, as exercising the option would allow you to buy CIBC sto
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse74">
+             href="#collapse75">
              When would a trader seek to profit from shorting futures?
           </a>
       </h4>
   </div>
-  <div id="collapse74" class="panel-collapse collapse">
+  <div id="collapse75" class="panel-collapse collapse">
       <div class="panel-body">
         The trader in the short position believes that the asset price will decrease (below market expectations).
       </div>
@@ -1349,38 +1285,30 @@ The option is worth $0, as exercising the option would allow you to buy CIBC sto
   <div class="panel-heading">
       <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion1" 
-             href="#collapse75">
+             href="#collapse76">
              What is the difference between futures and forwards?
           </a>
       </h4>
   </div>
-  <div id="collapse75" class="panel-collapse collapse">
+  <div id="collapse76" class="panel-collapse collapse">
       <div class="panel-body">
         Futures are standardized and traded on exchanges, while forwards are more flexible and traded over-the-counter (OTC).
       </div>
   </div>
 </div>
-
-
-
-
-        
-        
-    </div>
-
-
-      
-
 </div>
-  
-  <ul class="pagination">
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-  </ul>
-
+    </div>
+    <ul class="pagination">
+      <li><a href="#" onclick="showPages('1')">1</a></li>
+      <li><a href="#" onclick="showPages('2')">2</a></li>
+      <li><a href="#" onclick="showPages('3')">3</a></li>
+      <li><a href="#" onclick="showPages('4')">4</a></li>
+      <li><a href="#" onclick="showPages('5')">5</a></li>
+      <li><a href="#" onclick="showPages('6')">6</a></li>
+      <li><a href="#" onclick="showPages('7')">7</a></li>
+      <li><a href="#" onclick="showPages('8')">8</a></li>
+    </ul>
+</div>
 
 </body>
 </html>

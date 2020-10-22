@@ -1,0 +1,147 @@
+.navbar {
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size: 13px !important;
+    letter-spacing: 4px;
+    opacity: 0.9;
+}
+
+/* Add a gray color to all navbar links */
+.navbar li a, .navbar .navbar-brand {
+    color: #d5d5d5 !important;
+}
+
+/* On hover, the links will turn white */
+.navbar-nav li a:hover {
+    color: #fff !important;
+}
+
+/* The active link */
+.navbar-nav li.active a {
+    color: #fff !important;
+    background-color:#29292c !important;
+}
+
+/* Remove border color from the collapsible button */
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
+
+/* Dropdown */
+.open .dropdown-toggle {
+    color: #fff ;
+    background-color: #555 !important;
+}
+
+/* Dropdown links */
+.dropdown-menu li a {
+    color: #000 !important;
+}
+
+/* On hover, the dropdown links will turn red */
+.dropdown-menu li a:hover {
+    background-color: red !important;
+}
+  
+
+li:hover {
+    text-decoration: none;
+    color: #e8e8e8;
+    text-decoration: underline;
+    color: rgb(74, 151, 228);
+}
+
+a {
+    cursor: pointer;
+}
+
+.newsbtn{
+    padding: 5% 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.tech{
+    position: absolute;
+    left: 15%;
+    width: 80%;
+    justify-content: center;
+    top: 20%;
+}
+
+.fin{
+    position: absolute;
+    left: 15%;
+    width: 80%;
+    justify-content: center;
+    top: 20%;
+}
+
+.bg-image {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1000;
+    display: block;
+    height: 104%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.container {
+    z-index: 9999;
+}
+
+
+#scrollTop{
+    display: inline-block;
+    background-color: #FF9800;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    text-decoration: none;
+  }
+  
+  #scrollTop::after {
+    content: "\f077";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 50px;
+    color: #fff;
+  }
+  
+  #scrollTop:hover {
+    cursor: pointer;
+    background-color: #333;
+  }
+  
+  #scrollTop:active {
+    background-color: #555;
+  }
+  
+  .top-link .hide {
+    visibility: hidden;
+    opacity: 0;
+  }
+  
+  .top-link .show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+img {
+    border-radius: 15px;
+}

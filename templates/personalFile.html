@@ -5,20 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static "css/personalFile.css" %}">
         <title>Personal Profile</title>
     <!-- <h1>Interview History</h1>
     {{ ResultTable | safe }} -->
 
 </head>
+<style>
+    .bg-image {
+    background-image: url('{% static "img/office_bg.jpg" %}');
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1000;
+    display: block;
+    height: 105%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
 
-<body style="background-image: url('{% static "img/citibank.jpeg" %}')"; background-repeat:no-repeat;>
+  .container {
+    z-index: 9999;
+  }
+</style>
+<body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href=""><span class="glyphicon glyphicon-user logo"></span><b>Personal Profile</b></a>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-              <li><a onclick="location.href=''" style=cursor: pointer;>HOME</a></li>
+              <li><a onclick="location.href='/'" style=cursor: pointer;>HOME</a></li>
               <li><a onclick="location.href='/users/services/'">Services</a></li>
               <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
               <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
@@ -38,11 +65,15 @@
           </div>
         </div>
       </nav>
-    <div style="position: absolute; top: 100px;left: 100px;width: 80%;">
-        <table class="table">
+      <div class="container">
+        <div id="container" style="position: absolute; top:300px;min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+      <div class="bg-image"></div>
+    <div style="position: absolute; top: 150px;left: 100px;width: 80%;">
+        <table class="table table-hover">
             <caption style="top: 0; bottom: auto;font-weight: bolder;"></caption>Interview History</caption>
             <thead>
-                <tr class="active">
+                <tr class="danger">
                     <th scope="col">Record</th>
                     <th scope="col">Account</th>
                     <th scope="col">Selected Job</th>
@@ -53,8 +84,7 @@
             <tbody>
                 {% for item in df.itertuples %}
 
-                <tr class="info">
-
+                <tr class="success">
                     <th scope="row"> <a href="/result">{{item.ID}}</a></th>
                     <td><a href="/result">{{ item.Name }}</a></td>
                     <td>{{ item.SelectedJob }}</td>
@@ -66,34 +96,35 @@
             </tbody>
         </table>
     </div>
-    <script>
-      $(function () {
-        $('#container').highcharts({
+</div>
+<script>
+    $(function () {
+        var chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'container',
                 plotBackgroundColor: null,
                 plotBackgroundImage: null,
                 plotBorderWidth: 0,
-                plotShadow: false
+                plotShadow: false,
             },
             title: {
-                text: 'Browser<br>shares<br>2015',
+                text: 'Performance',
                 align: 'center',
                 verticalAlign: 'top',
-                y: 40
+                y: 120
             },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
+            // tooltip: {
+            //     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            // },
             pane: {
                 center: ['50%', '75%'],
-                size: '50%',
+                size: '40%',
                 startAngle: -90,
                 endAngle: 90,
                 background: {
                   borderWidth: 0,
                     backgroundColor: 'none',
-                    innerRadius: '60%',
+                    innerRadius: '30%',
                     outerRadius: '100%',
                     shape: 'arc'
                 }
@@ -109,23 +140,10 @@
                 enabled: false
               },
                 title: {
-                    text: '', //'<div class="gaugeFooter">46% Rate</div>',
+                    text: 'haha', //'<div class="gaugeFooter">46% Rate</div>',
                     useHTML: true,
                     y: 80
                 },
-              /*plotBands: [{
-                from: 0,
-                to: 46,
-                color: 'pink',
-                innerRadius: '100%',
-                outerRadius: '0%'
-              },{
-                from: 46,
-                to: 90,
-                color: 'tan',
-                innerRadius: '100%',
-                outerRadius: '0%'
-              }],*/
               pane: 0,
               
           }],
@@ -156,24 +174,24 @@
          
             series: [{
                 type: 'pie',
-                name: 'Browser share',
-                innerSize: '50%',
+                name: 'Your performance',
+                innerSize: '20%',
                 data: [
-                    ['POOR',   25],
-                    ['FAIR',       25],
-                    ['GOOD', 25],
-                    ['EXCELLENT',     25]
+                    ['POOR',25],
+                    ['FAIR',25],
+                    ['GOOD',25],
+                    ['EXCELLENT',25]
                 ]
             },{
                 type: 'gauge',
-                data: [40],
+                data: [80],
                 dial: {
                     rearLength: 0
                 }
             }],
         });    
     });
-    </script>
+  </script>
 </body>
 
 </html>

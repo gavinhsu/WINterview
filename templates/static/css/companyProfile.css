@@ -1,12 +1,9 @@
-body{
-    background-image: url('static/img/citibank.png');
-    background-repeat:no-repeat;
-}
+
 .navbar {
   margin-bottom: 0;
   background-color: #2d2d30;
   border: 0;
-  font-size: 11px !important;
+  font-size: 12px !important;
   letter-spacing: 4px;
   opacity: 0.9;
   font-family: sans-serif;
@@ -66,6 +63,8 @@ a {
 
 .types {
   padding: 5% 40px;
+  display: flex;
+  justify-content: center;
 }
 
 .tech {
@@ -122,6 +121,70 @@ img {
     border: 2px solid #2dc997;
 }
 
+#scrollTop{
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 20px;
+  left: 10px;
+  text-decoration: none;
+}
+
+#scrollTop::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+
+#scrollTop:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+
+#scrollTop:active {
+  background-color: #555;
+}
+
+.top-link .hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.top-link .show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.bg-image {
+  background-image: url('{% static "img/office_bg.jpg" %}');
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1000;
+  display: block;
+  height: 105%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+.container {
+  z-index: 9999;
+  text-align: left;
+}
 
 .flip-cards{
     margin: 0px auto;
@@ -294,3 +357,44 @@ li {
 
 }
 
+#scrollTop {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 20px;
+  left: 10px;
+  text-decoration: none;
+}
+
+#scrollTop::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+
+#scrollTop:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+
+#scrollTop:active {
+  background-color: #555;
+}
+
+.top-link .hide {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.top-link .show {
+  visibility: visible;
+  opacity: 1;
+}

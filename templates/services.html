@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+    <title>Services</title>
 </head>
 <link href="{% static "css/service.css" %}" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -16,42 +18,45 @@
 
 <body>
     <div class="container">
+        <div class="bg-image" style="background-image: url('{% static "img/office_bg.jpg" %}');"></div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-tasks logo"></span><b> Services</b></a>
+                <a class="navbar-brand" ><span class="glyphicon glyphicon-tasks logo"></span><b>
+                        Services</b></a>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a onclick="location.href='/'" style= cursor: pointer;>Home</a></li>
+                        <li><a onclick="location.href='/'" style=cursor: pointer;>Home</a></li>
                         <!-- <li><a onclick="location.href='/users/services/'">Services</a></li> -->
                         <li><a onclick="location.href='/users/questionBank/'">Question Bank</a></li>
                         <li><a onclick="location.href='/users/interviewSkill/'">Interview Skills</a></li>
                         <li><a onclick="location.href='/users/companyProfile/'">Company Profile</a></li>
-                        <li><a onclick="location.href='/newstech/'">News</a></li>
+                        <li><a onclick="location.href='/news/'">News</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
-                              <span class="caret"></span>
+                                <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                              <li><a href='/users/login/'>Sign In</a></li>
-                              <li><a href='/users/signUp/'>Sign Up</a></li>
-                              <li><a href="/users/logout/">Log Out</a></li>
+                                <li><a href='/users/login/'>Sign In</a></li>
+                                <li><a href='/users/signUp/'>Sign Up</a></li>
+                                <li><a href="/users/logout/">Log Out</a></li>
                             </ul>
-                          </li>
+                        </li>
                         <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
-                        <li><a onclick="location.href='/users/aboutUs/'">Personal Profile</a></li>
+                        <li><a onclick="location.href='/users/personalFile/'">Personal Profile</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="menu">
-            <ul class="menulist" style="position: inherit;top: 50%;">
-                <li id="menu01">WINterview</li>
+            <ul class="menulist" style="position: inherit;top: 70%;">
+                <!-- <li id="menu01">WINterview</li> -->
                 <li id="menu02">Question Bank</li>
                 <li id="menu03">Interview Skills</li>
                 <li id="menu04">Company Profile</li>
                 <li id="menu05">News</li>
             </ul>
         </div>
+        <a class="top-link hide" id="scrollTop" title="Go to top"></a>
         <div class="section" id="sec01">
             <h1 class="title1">WINterview</h1>
             <h2 class="title2">1. WINterview Steps</h2>
@@ -70,7 +75,7 @@
             <h3 class="title3">Step3 - Get Immediate Feedback</h3>
             <p3>We will give you a feedback based on your performance after interview. The report include analysis and
                 suggestions on your emotional interpretation during the interview, suggested answers of the questions,
-                and your competitiveness assessment. It will help you get improved.</p3>
+                and your competitiveness assessment. It will help you get improved.</p3><br><br>
             <h2 class="title2">2. WINterview Service</h2>
             <h3 class="title3">
                 <span
@@ -128,7 +133,6 @@
             <br><br><br>
             <div style="display: flex;">
                 <h1 class="title1">Question Bank</h1>
-                <button class="btn btn-success btn-xs" onclick="topFunction()" id="scrollTop" title="Go to top">Top</button>
             </div>
 
             <p class="description">We have collected a large number of interview questions for related positions in the
@@ -142,7 +146,6 @@
             <br><br><br>
             <div style="display: flex;">
                 <h1 class="title1">Interview Skills</h1>
-                <button class="btn btn-success btn-xs" onclick="topFunction()" id="scrollTop" title="Go to top">Top</button>
             </div>
             <p class="description">We categorize the requirements of job applicants and interview strategies in
                 different occupations from different websites. You can learn how to impress interviewers and get high
@@ -153,17 +156,15 @@
             <br>
             <div style="display: flex;">
                 <h1 class="title1">Company Profile</h1>
-                <button class="btn btn-success btn-xs" onclick="topFunction()" id="scrollTop" title="Go to top">Top</button>
             </div>
             <p class="description">We present critical information about several large companies from around the globe
                 for you to have better understandings about thecurrent job market.</p>
         </div>
 
         <div class="section" id="sec05">
-    
+
             <div style="display: flex;">
                 <h1 class="title1">News</h1>
-                <button class="btn btn-success btn-xs" onclick="topFunction()" id="scrollTop" title="Go to top">Top</button>
             </div>
             <p class="description">Because our interviews are specifically for the technology and financial industries,
                 we will automatically update the technology-related and financial-related news daily, so that you can
@@ -171,14 +172,27 @@
                 while you are preparing for the interview.</p>
         </div>
     </div>
-
     <script>
-        var mybutton = document.getElementById("scrollTop");
+        var scrollTop = document.getElementById("scrollTop");
 
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
+        scrollTop.addEventListener('click', () => window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        }));
+
+        const scrollFunc = () => {
+            // Get the current scroll value
+            let y = window.scrollY;
+
+            // If the scroll value is greater than the window height, let's add a class to the scroll-to-top button to show it!
+            if (y > 0) {
+                scrollTop.className = "top-link show";
+            } else {
+                scrollTop.className = "top-link hide";
+            }
+        };
+
+        window.addEventListener("scroll", scrollFunc);
     </script>
 </body>
 
