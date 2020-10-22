@@ -122,7 +122,8 @@ class ResultView(TemplateView):
         # get the entire result table 
         job_selection = getattr(questions.models, new_job)
         account_instance = Member.objects.get(Account=account_name)
-        res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
+        #res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
+        res_id = 333
         res_unit = Result.objects.get(id=res_id)
         ans_unit = Answer.objects.get(id=res_id)
         
