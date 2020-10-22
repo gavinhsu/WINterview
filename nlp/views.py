@@ -5,17 +5,11 @@ import os, re, string
 from MockInterview.settings import BASE_DIR
 from questions.models import *
 from users.models import *
-import random
-import pickle
+import GTTS.views
+import questions
+from django.views.generic import TemplateView
+import random, pickle, cloudpickle, torch, nltk, base64, warnings
 import pandas as pd
-import cloudpickle
-import torch
-import nltk
-# nltk.download('punkt')
-# nltk.download('stopwords') 
-# nltk.download('averaged_perceptron_tagger')
-# nltk.download('wordnet')
-# nltk.download('twitter_samples')
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import twitter_samples, stopwords
 from nltk.tag import pos_tag
@@ -31,14 +25,10 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from math import pi
 from io import BytesIO
-import base64
 # from django.views.decorators.csrf import csrf_protect
 # from django.core.context_processors import csrf
-from django.views.generic import TemplateView
-import GTTS.views
-import warnings
-import questions
-
+from math import pi
+import numpy as np
 
 # Create your views here.
 def remove_noise(tweet_tokens, stop_words = ()):
@@ -209,8 +199,6 @@ class ResultView(TemplateView):
                 reply_list.append(key)
 
             print('---------', NUM+1, '----------------------------------------')
-            # print('REPLY ==> ', reply_list)
-            # print('ANSWER ==> ', ans_list)
 
 
             # run similarity between REPLY & ANSWER similar keywords
@@ -285,8 +273,8 @@ class ResultView(TemplateView):
             print('FINAL_SCORE ===> ', final_score)
             
 
-        print('KEYWORD LIST--------', keyscore_list)
-        print('FINAL LIST--------', final_list)
+        # print('KEYWORD LIST--------', keyscore_list)
+        # print('FINAL LIST--------', final_list)
         
 
 
@@ -356,22 +344,15 @@ class ResultView(TemplateView):
             final_buffer = BytesIO()
             plt.savefig(final_buffer, format='png')
             final_buffer.seek(0)
-            final_inage = final_buffer.getvalue()
+            final_image = final_buffer.getvalue()
             final_buffer.close()
 
-            final_bar = base64.b64encode(final_inage)
+            final_bar = base64.b64encode(final_image)
             exec(f"final_bar{i+1} = final_bar.decode('utf-8')")
 
 
 
         # BLINK PROCESSING #####################################################
-        # total_blinks = 0
-        # for x in range(10):
-        #     blink = "b{0}".format(x+1)
-        #     num = getattr(res_unit, blink)
-        #     total_blinks += num
-
-        # mean_blinks = total_blinks/10
 
         blink_dict = {}
         total_blinks = 0
@@ -382,10 +363,24 @@ class ResultView(TemplateView):
             seconds = getattr(res_unit, t)
             minutes = int(seconds)/60
             blink_dict["bpm{0}".format(x+1)] = num/minutes
+            print(blink_dict["bpm{0}".format(x+1)])
             total_blinks += blink_dict["bpm{0}".format(x+1)]
-            exec(f'BPM_{x+1} = num/minutes')
 
-        avg_blinks = round(total_blinks/10, 2)
+            # set comments according to how nervous u r
+            normal_comment = "You were not nervous at all! Great job and keep it up!"
+            little_nervous_comment = "You seemed a little bit nervous. Try to relax a bit!"
+            very_nervous_comment = "You were too nervous! Please try to relax before construct your answer."
+
+            if blink_dict["bpm{0}".format(x+1)] <= 40:
+                exec(f'BlinkComment_{x+1} = normal_comment')
+            elif 40 < blink_dict["bpm{0}".format(x+1)] <= 60:
+                exec(f'BlinkComment_{x+1} = little_nervous_comment')
+            else:
+                exec(f'BlinkComment_{x+1} = very_nervous_comment')
+
+            exec(f'BPM_{x+1} = num/minutes')
+            
+        #avg_blinks = round(total_blinks/10, 2)
       
 
         ##EMOTION PROCESSING #####################################################
@@ -406,46 +401,50 @@ class ResultView(TemplateView):
             s = "surprise_{0}".format(x+1)
             surprise = getattr(res_unit, s)
             emotion_dict['s{0}'.format(x+1)] = surprise
-        
-        neutral = emotion_dict['n1']
-        happy = getattr(res_unit, 'happy_1')
-        angry = getattr(res_unit, 'angry_1')
-        fear = getattr(res_unit, 'fear_1')
-        surprise = getattr(res_unit, 'surprise_1')
-        print(neutral, happy, angry, fear, surprise)
+  
+            neutral = emotion_dict["n{0}".format(x+1)]
+            happy = emotion_dict["h{0}".format(x+1)]
+            angry = emotion_dict["a{0}".format(x+1)]
+            fear = emotion_dict["f{0}".format(x+1)]
+            surprise = emotion_dict["s{0}".format(x+1)]
 
-        #emotion radar plot
-        emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
-        df = pd.DataFrame([emo],index=["emo"])
-        Attributes =list(df)
-        AttNo = len(Attributes)
-        values = df.iloc[0].tolist()
-        values += values [:1]
-        angles = [n / float(AttNo) * 2 * pi for n in range(AttNo)]
-        angles += angles [:1]
-        ax = plt.subplot(111, polar=True)
+            print('---------EMOTION', x+1, '----------------------------------------')
+            print(neutral, happy, angry, fear, surprise)
 
-        #Add the attribute labels to our axes
-        plt.xticks(angles[:-1],Attributes)
+            #emotion radar plot
+            emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
+            df = pd.DataFrame([emo],index=["emo"])
+            Attributes = list(df)
+            AttNo = len(Attributes)
+            values = df.iloc[0].tolist()
+            values += values [:1]
+            angles = [n / float(AttNo) * 2 * pi for n in range(AttNo)]
+            angles += angles [:1]
+            ax = plt.subplot(111, polar=True)
 
-        #Plot the line around the outside of the filled area, using the angles and values calculated before
-        ax.plot(angles,values)
+            #Add the attribute labels to our axes
+            plt.xticks(angles[:-1], Attributes)
 
-        #Fill in the area plotted in the last line
-        ax.fill(angles, values, 'teal', alpha=0.1)
+            #Plot the line around the outside of the filled area, using the angles and values calculated before
+            ax.plot(angles, values)
 
-        #Give the plot a title and show it
-        ax.set_title("Emotion Radar Plot")
+            #Fill in the area plotted in the last line
+            ax.fill(angles, values, 'teal', alpha=0.1)
 
-        #save plot
-        emo_buffer = BytesIO()
-        plt.savefig(emo_buffer, format='png')
-        emo_buffer.seek(0)
-        image_png = emo_buffer.getvalue()
-        emo_buffer.close()
+            #Give the plot a title and show it
+            ax.set_title("Emotion Radar Plot")
 
-        emo_bar = base64.b64encode(image_png)
-        emo_bar = emo_bar.decode('utf-8')
+            plt.tight_layout()
+            #save plot
+            emo_buffer = BytesIO()
+            plt.savefig(emo_buffer, format='png')
+            emo_buffer.seek(0)
+            image_png = emo_buffer.getvalue()
+            emo_buffer.close()
+
+            emo_bar = base64.b64encode(image_png)
+            #emo_bar = emo_bar.decode('utf-8')
+            exec(f"emo_bar{x+1} = emo_bar.decode('utf-8')")
 
         return render(request, self.template_name, locals())
 
