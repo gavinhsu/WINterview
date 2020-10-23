@@ -125,7 +125,7 @@ class ResultView(TemplateView):
         full_key = []
         full_pn = []
 
-        for x in range(10):
+        for x in range(1):
             reply = "a{0}".format(x+1)
             ques = "q{0}".format(x+1)
             pn = "r{0}".format(x+1)
@@ -149,7 +149,7 @@ class ResultView(TemplateView):
         final_list = []
 
         # NLP PROCESSING #####################################################   
-        for NUM in range(10):    
+        for NUM in range(1):    
             key_split = word_tokenize(full_key[NUM])
 
             # solve answer keyword not in dictionary 
@@ -279,7 +279,7 @@ class ResultView(TemplateView):
 
 
         # Plot keyword accuracy
-        for i in range(10):           
+        for i in range(1):           
             key_fig, key_ax = plt.subplots()
             key_fig.set_figheight(3)
             key_fig.set_figwidth(4)
@@ -317,7 +317,7 @@ class ResultView(TemplateView):
 
 
         # plot final similarity score
-        for i in range(10):
+        for i in range(1):
             final_fig, final_ax = plt.subplots()
             final_fig.set_figheight(3)
             final_fig.set_figwidth(4)
@@ -332,7 +332,7 @@ class ResultView(TemplateView):
             final_ax.set_xticks([0, 25, 50, 75, 100])
             final_ax.set_yticks([])
             final_ax.set_axisbelow(True)
-            final_ax.set_title('Answer Correctness',fontsize=14) 
+            final_ax.set_title('Answer Fitness',fontsize=14) 
             final_ax.grid(axis='x')
             final_ax.text(final+1, 2, str(final_list[i])+'%', fontsize=14)
             #fig.suptitle('This is title of the chart', fontsize=16)
@@ -356,7 +356,7 @@ class ResultView(TemplateView):
 
         blink_dict = {}
         total_blinks = 0
-        for x in range(10):
+        for x in range(1):
             blink = "b{0}".format(x+1)
             num = getattr(res_unit, blink)
             t = "time{0}".format(x+1)
@@ -385,7 +385,7 @@ class ResultView(TemplateView):
 
         ##EMOTION PROCESSING #####################################################
         emotion_dict = {}
-        for x in range(10):
+        for x in range(1):
             n = "neutral_{0}".format(x+1)
             neutral = getattr(res_unit, n)
             emotion_dict['n{0}'.format(x+1)] = neutral
