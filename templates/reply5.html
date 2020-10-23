@@ -7,51 +7,53 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
-  <title>speech to text recording</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <title>Interview Start!</title>
 
 </head>
 
 <body>
+  <div class="title" style="background-color: white; overflow: hidden;">
+    <div id="hiddenmenu" style="display: flex; background-color: gray; position: relative; top: 60px;  height: 60px;">
+      <button class="btn" style="height: 55px;font-size: 28px;color: white;border: none;" onclick="location.href='/'"><i
+          class="fa fa-home"></i> Home</button>
+      <!-- <h1 style="position: relative; left: 30%; text-align: center;">
+        <a id="win">WINterview</a>
+      </h1> -->
+      <img id="logo" src="{% static "img/logo.png" %}" >
+      <img id="winterview" src="{% static "img/winterview.png" %}" >
+
+    </div>
+  </div>
 
   <!-- The controls attribute adds video controls, like play, pause, and volume. -->
   <div class="container">
-    <p id="question" style="color: #444;text-align: left;text-decoration: solid;font-size: 25px;">
-      {{ random_question }}
-    </p>
+    <video name='demo' autoplay muted loop
+      style="  position: fixed;right: 0;bottom: 0;top:15%; min-width: 100%; min-height: 100%;">
+      <source src="{% static "interviewer.mp4" %}" type="video/mp4">
+      </source> </video>
+    <div>
+      <p style="color: Black;text-decoration: solid;font-size: 25px;">Q5.</p>
+      <p id="question" style="color: Black;text-decoration: solid;font-size: 25px;left: 95px;">
+        {{ random_question }}
+      </p>
+    </div>
+
 
     <input type="button" onclick="speak()" value="What is the question?" id="speak"
       style="display:none;position:absolute; left:27%;">
 
+   
     <div class="app">
-      <span id="countStart" style="font-size:50px; color:red; "> </span>
-
-      <img
-        src="https://s.yimg.com/ny/api/res/1.2/0cS8e63meZSs2JdbW2tqOA--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9NDgwO2g9MzYwO2lsPXBsYW5l/http://media.zenfs.com/zh_hant_tw/News/NOWnews/i2132714.jpg"
-        style="display:block; margin:auto;" />
-
+      <div id="app"></div>
+      <span id="countStart"style="font-size:50px; color:red; left: 1150px; position: absolute;top: 120px; visibility: hidden;"> </span>
+      <span id="countStart2" style="font-size:50px; color:violet; left: 90%; position: absolute;top: 120px;"> </span>
       <button id="start-record-btn" title="Start Recording" style="display:none;">Start Recognition</button>
       <button id="pause-record-btn" title="Pause Recording" style="display:none;">Pause Recognition</button>
-
-      <p id="recording-instructions">Read the question carefully and answer it after countdown.</p>
-
-      <form id='ans' method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="note-textarea" style="text-align:center;">Your Answer</label>
-        <div class="input-single">
-          <textarea style="display: none;" id="time" name="time"></textarea>
-          <textarea style="display: none;" id="video" name="video"></textarea>
-          <textarea id="note-textarea" name="note-textarea" placeholder="Your answer will be shown here."
-            style="width:1000px;height:150px;display:block;margin-left:auto; margin-right: auto;"></textarea>
-        </div>
-
-        <input style="display:none;" type="submit" id="submit"
-          style="margin-left:1000px;margin-bottom:10px;" value="NextQuestion">
-        <input disabled=true style="margin-left:1000px;margin-bottom:10px;" type="button" id="firstBtn" value="Stop Answering">
-      </form>
-
-
       <video style="display:none;" width="200" height="200" id="inputVideo" alt="在這裡錄影" muted>Video stream not
         available.</video>
       <video style="display:none;" width="200" height="200" id="outputVideo" alt="錄好的畫面將會出現在這" muted>Video stream not
@@ -60,182 +62,166 @@
       <button style="visibility: hidden" id="stopBtn" class="btn btn-sm btn-outline-danger" style='display:none'>Stop
         Recording</button>
       <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
-
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
+    <!-- <p id="recording-instructions">Read the question carefully and answer it after countdown.</p> -->
 
-      var count = {{ prep_time5 }};
-      var count1 = {{ ans_time5 }};
-      /*-----------------------------
-      countdown function 
-      ------------------------------*/
-      var spn = document.getElementById("countStart");
-      var startRecord = document.getElementById("start-record-btn");
-      var pauseRecord = document.getElementById("pause-record-btn");
-      var startVideo = document.getElementById("startBtn");
-      var stopVideo = document.getElementById("stopBtn");
-      var firstBtn = document.getElementById("firstBtn")
+    <form style="visibility: hidden;" id='ans' method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="input-single">
+        <textarea style="display: none;" id="time" name="time"></textarea>
+        <textarea style="display: none;" id="video" name="video"></textarea>
+        <div class="form-group purple-border">
+          <textarea class="form-control" name="note-textarea" id="note-textarea"
+            placeholder="Your answer will be shown here."></textarea>
+        </div>
+      </div>
+      <button class="btn btn-danger" type="submit" id="submit"
+        style="position:absolute; left: 1090px; top: 520px;visibility: hidden;">Next Question</button>
+    </form>
 
-      // Set count
-      var timer = null;  // For referencing the timer
-      var timer2 = null;
+    <button class="btn btn-danger" disabled=true; style="position:absolute; top: 520px; left:1080px;" type="button"
+      id="firstBtn">Stop Answering</button>
+  </div>
 
-      stopVideo.addEventListener("click", getVideoLength);
-      function getVideoLength() {
-        var videoLength = document.getElementById("time")
-        var time = {{ ans_time5 }} - count1
-      videoLength.value = time
-      console.log(time)
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    var title = $('.title')
+    var menu = $('#hiddenmenu')
+    title.on('mousemove', function (event) {
+      if (80 - event.clientY < 0) {
+        menu.css({ top: 80 - event.clientY })
+      } else {
+        menu.css({ top: 0 })
       }
+    }).on('mouseout', function () {
+      menu.css({ top: -80 })
+    })
+  </script>
+  <script>
+    var submit = document.getElementById("submit")
+    var firstBtn = document.getElementById("firstBtn");
+    firstBtn.addEventListener('click', simulateClick);
+
+    function simulateClick() {
+      stopBtn.click()
+      firstBtn.style.visibility = "hidden"
+      submit.style.visibility = "visible"
+    }
+
+  </script>
+  <script>
+    var count = {{ prep_time5 }};
+    var count1 = {{ ans_time5 }};
+    var count2 = {{ prep_time5 }};
+    var count3 = {{ ans_time5 }};
+    /*-----------------------------
+    countdown function 
+    ------------------------------*/
+    var spn = document.getElementById("countStart");
+    var spn2 = document.getElementById("countStart2");
+    var startRecord = document.getElementById("start-record-btn");
+    var pauseRecord = document.getElementById("pause-record-btn");
+    var startVideo = document.getElementById("startBtn");
+    var stopVideo = document.getElementById("stopBtn");
+    var firstBtn = document.getElementById("firstBtn")
+
+    // Set count
+    var timer = null;  // For referencing the timer
+    var timer2 = null;
+    var timer3 = null;
+    var timer4 = null;
+
+    stopVideo.addEventListener("click", getVideoLength);
+    function getVideoLength() {
+      var videoLength = document.getElementById("time")
+      var time = {{ ans_time1 }} - count1
+    videoLength.value = time
+    console.log(time)
+    }
 
 
+    (function countDownStart() {
+      // Display counter and start counting down
+      spn.textContent = count;
+      // Run the function again every second if the count is not zero
+      if (count !== 0) {
+        timer = setTimeout(countDownStart, 1000);
+        count -= 1;
+        // decrease the timer
+      } else {
+        // Enable the button
+        startRecord.click();
+        startVideo.click();
+        spn.style.display = "none"
 
-      (function countDownStart() {
-        // Display counter and start counting down
-        spn.textContent = count;
+        if (spn.style.display = "none") {
+          spn.textContent = count1;
+          spn.style.display = "block";
+          firstBtn.disabled = false
 
-        // Run the function again every second if the count is not zero
-        if (count !== 0) {
-          timer = setTimeout(countDownStart, 1000);
-          count -= 1;
-          // decrease the timer
-        } else {
-          // Enable the button
-          startRecord.click();
-          startVideo.click();
-          spn.style.display = "none"
-
-          if (spn.style.display = "none") {
-            spn.textContent = count1;
-            spn.style.display = "block";
-            firstBtn.disabled = false
-
-            // Run the function again every second if the count is not zero
-            if (count1 !== 0) {
-              timer2 = setTimeout(countDownStart, 1000);
-              count1 -= 1;
-              // decrease the timer
-            }
-            else {
-              // Enable the button
-              pauseRecord.click();
-              submit.click()
-              spn.style.display = "none"
-            }
-            if (count1 == 1) {
-              stopVideo.click();
-            }
+          // Run the function again every second if the count is not zero
+          if (count1 !== 0) {
+            timer2 = setTimeout(countDownStart, 1000);
+            count1 -= 1;
+            // decrease the timer
+          }
+          else {
+            // Enable the button
+            pauseRecord.click();
+            submit.click()
+            spn.style.display = "none"
+          }
+          if (count1 == 1) {
+            stopVideo.click();
           }
         }
-      }());
-    </script>
-
-    <script src="{% static "js/speech_to_text.js" %}"></script>
-    <script src="{% static "js/s2t_media.js" %}"></script>
-
-    <style src="{% static "css/speech_to_text.css" %}">
-      ul {
-        list-style: none;
-        padding: 0;
       }
+    }());
 
-      p {
-        color: #444;
-      }
+    firstBtn.addEventListener("click", pauseTime);
 
-      button:focus {
-        outline: 0;
-      }
+    function pauseTime() {
+      clearInterval(timer4)
+    }
+    //fake timer
+    (function countDownStart2() {
+      // Display counter and start counting down
+      spn2.textContent = count2;
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 100px 50px;
-        text-align: center;
-      }
+      // Run the function again every second if the count is not zero
+      if (count2 !== 0) {
+        timer3 = setTimeout(countDownStart2, 1000);
+        count2 -= 1;
+        // decrease the timer
+      } else {
+        // Enable the button
+        spn2.style.display = "none"
 
-      .container h1 {
-        margin-bottom: 20px;
-      }
+        if (spn2.style.display = "none") {
+          spn2.textContent = count3;
+          spn2.style.display = "block";
 
-      .page-description {
-        font-size: 1.1rem;
-        margin: 0 auto;
-      }
-
-      .tz-link {
-        font-size: 1em;
-        color: #1da7da;
-        text-decoration: none;
-      }
-
-      .no-browser-support {
-        display: none;
-        font-size: 1.2rem;
-        color: #e64427;
-        margin-top: 35px;
-      }
-
-      .app {
-        margin: 40px auto;
-      }
-
-      #note-textarea {
-        margin: 20px 0;
-        border: none;
-      }
-
-      #recording-instructions {
-        margin: 15px auto 60px;
-      }
-
-      #notes {
-        padding-top: 20px;
-      }
-
-      .note .header {
-        font-size: 0.9em;
-        color: #888;
-        margin-bottom: 10px;
-      }
-
-      .note .delete-note,
-      .note .listen-note {
-        text-decoration: none;
-        margin-left: 15px;
-      }
-
-      .note .content {
-        margin-bottom: 40px;
-      }
-
-      .answerNote {
-        width: 1000px;
-        height: 150px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          padding: 50px 25px;
-        }
-
-        button {
-          margin-bottom: 10px;
-        }
-
-        @media (max-width: 1200px) {
-          #bsaHolder {
-            display: none;
+          // Run the function again every second if the count is not zero
+          if (count3 !== 0) {
+            timer4 = setTimeout(countDownStart2, 1000);
+            count3 -= 1;
+            // decrease the timer
+          }
+          else {
+            // Enable the button
+            spn2.style.display = "none"
           }
         }
-    </style>
+      }
+    }())
 
+  </script>
 
+  <script src="{% static "js/speech_to_text.js" %}"></script>
+  <script src="{% static "js/s2t_media.js " %}"></script>
+  <link rel="stylesheet" href="{% static "css/speech_to_text.css" %}">
 
 </body>
 

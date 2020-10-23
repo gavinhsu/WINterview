@@ -16,6 +16,20 @@ h1:after{
   color: #d6d6d6;
 }
 
+#logo{
+  width: 10%;
+  height: 50px;
+  top: 10px;
+  position: relative;
+  left: 20%;
+}
+
+#winterview{
+  position: relative;
+  left: 17%;
+  top: 10px;
+}
+
 #home{
   background-color: darkseagreen;
   border: none;
@@ -59,7 +73,7 @@ button:focus {
 
 .container p {
   position: absolute;
-  top: 8%;
+  top: 9%;
   text-align: center;
 }
 
