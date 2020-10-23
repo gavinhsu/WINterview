@@ -198,6 +198,56 @@ def companyProfile(request):
     TSMC_list = zip(TSMC_news, TSMC_desc, TSMC_url, TSMC_time)
 
 
+    # morgan news
+    morgan_news = newsapi.get_everything(q='morgan',
+                                      sources='bbc-news,the-verge',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      language='en',)
+
+    morgan_articles = morgan_news['articles']
+
+    morgan_desc = []
+    morgan_news = []
+    morgan_url = []
+    morgan_time = []
+
+    for i in range(3):
+        myarticles = morgan_articles[i]
+
+        morgan_news.append(myarticles['title'])
+        morgan_desc.append(myarticles['description'])
+        morgan_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ').replace('Z', ' ')
+        morgan_time.append(p)
+
+    morgan_list = zip(morgan_news, morgan_desc, morgan_url, morgan_time)
+
+    # hsbc news
+    hsbc_news = newsapi.get_everything(q='hsbc',
+                                      sources='bbc-news,the-verge',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      language='en',)
+
+    hsbc_articles = hsbc_news['articles']
+
+    hsbc_desc = []
+    hsbc_news = []
+    hsbc_url = []
+    hsbc_time = []
+
+    for i in range(3):
+        myarticles = hsbc_articles[i]
+
+        hsbc_news.append(myarticles['title'])
+        hsbc_desc.append(myarticles['description'])
+        hsbc_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ').replace('Z', ' ')
+        hsbc_time.append(p)
+
+    hsbc_list = zip(hsbc_news, hsbc_desc, hsbc_url, hsbc_time)
+
     # Citigroup news
     # citigroup_news = newsapi.get_everything(q='Citi',
     #                                   sources='bbc-news,the-verge, ',
@@ -225,29 +275,29 @@ def companyProfile(request):
 
 
     # Goldman news
-    # Goldman_news = newsapi.get_everything(q='Goldman Sachs',
-    #                                   sources='bbc-news,the-verge',
-    #                                   domains='bbc.co.uk,techcrunch.com',
-    #                                   language='en',)
+    Goldman_news = newsapi.get_everything(q='Goldman',
+                                      sources='bbc-news,the-verge',
+                                      domains='bbc.co.uk,techcrunch.com',
+                                      language='en',)
 
-    # Goldman_articles = Goldman_news['articles']
+    Goldman_articles = Goldman_news['articles']
 
-    # Goldman_desc = []
-    # Goldman_news = []
-    # Goldman_url = []
-    # Goldman_time = []
+    Goldman_desc = []
+    Goldman_news = []
+    Goldman_url = []
+    Goldman_time = []
 
-    # for i in range(3):
-    #     myarticles = Goldman_articles[i]
+    for i in range(3):
+        myarticles = Goldman_articles[i]
 
-    #     Goldman_news.append(myarticles['title'])
-    #     Goldman_desc.append(myarticles['description'])
-    #     Goldman_url.append(myarticles['url'])
-    #     published_time = myarticles['publishedAt']
-    #     p = published_time.replace('T', ' ').replace('Z', ' ')
-    #     Goldman_time.append(p)
+        Goldman_news.append(myarticles['title'])
+        Goldman_desc.append(myarticles['description'])
+        Goldman_url.append(myarticles['url'])
+        published_time = myarticles['publishedAt']
+        p = published_time.replace('T', ' ').replace('Z', ' ')
+        Goldman_time.append(p)
 
-    # Goldman_list = zip(Goldman_news, Goldman_desc, Goldman_url, Goldman_time)
+    Goldman_list = zip(Goldman_news, Goldman_desc, Goldman_url, Goldman_time)
 
     return render(request,'companyProfile.html', locals())
 

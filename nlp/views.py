@@ -22,6 +22,8 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.svm import SVC, LinearSVC, NuSVC
 from statistics import mode
 import matplotlib.pyplot as plt
+# fix main thread problem
+plt.switch_backend('agg')
 import matplotlib.patches as mpatches
 from math import pi
 from io import BytesIO
@@ -191,9 +193,9 @@ class ResultView(TemplateView):
                     r_list.append(w)
 
             reply_list = []
-            for i in range(len(r_list)): 
-                for j in range(len(r_list[i])):
-                    reply_list.append(r_list[i][j][0])
+            for r in range(len(r_list)): 
+                for j in range(len(r_list[r])):
+                    reply_list.append(r_list[r][j][0])
             # add the original words
             for key in c_reply:
                 reply_list.append(key)
@@ -356,7 +358,7 @@ class ResultView(TemplateView):
 
         blink_dict = {}
         total_blinks = 0
-        for x in range(1):
+        for x in range(3):
             blink = "b{0}".format(x+1)
             num = getattr(res_unit, blink)
             t = "time{0}".format(x+1)
