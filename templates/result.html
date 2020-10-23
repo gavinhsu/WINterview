@@ -7,31 +7,56 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/data.js"></script>
-  <script src="https://code.highcharts.com/highcharts-more.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <title>Final Results</title>
 
 </head>
 <link href="{% static "css/result.css" %}" rel="stylesheet">
 <script src="{% static "js/result.js" %}"></script>
-
-
+<script type="text/javascript" language="javascript">
+  function hideall() {
+      $('.panel-collapse').each(function () {
+          $(this).collapse('hide');
+      });
+  }
+</script>
 <body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href='/' >Home</a></li>
+          <li><a href='/users/services/'>Services</a></li>
+          <li><a href='/users/questionBank/'>Question Bank</a></li>
+          <li><a href='/users/interviewSkill/'>Interview Skills</a></li>
+          <li><a href='/users/companyProfile/'>Company Profile</a></li>
+          <li><a href='/newstech/'>News</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Entry
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href='/users/signUp/'>Sign Up</a></li>
+              <li><a href="/users/logout/">Log Out</a></li>
+            </ul>
+          </li>
+          <li><a href='/users/aboutUs/'>About Us</a></li>`
+          <li><a href='/users/personalFile/'>Personal Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <h1>WINterview Performance</h1>
   <h2>username:{{account_name}} selected job:{{job_name}}</h2>
   <div id="container" style="min-width: 210px; height: 300px; max-width: 500px; margin: 0 auto"></div>
   <ul class="quesmenu">
-    <button class="quesnum" class="btn btn-outline-primary" id="btn1" href="#button1">1.</button>
-    <button class="quesnum" class="btn btn-outline-primary" id="btn2" href="#button2">2.</button>
-    <button class="quesnum" class="btn btn-outline-primary" id="btn3" href="#button3">3.</button>
+    <button class="quesnum" class="btn btn-primary" id="btn1" onclick="hideall()" data-toggle="collapse" href="#result1" data-target="#result1">1.</button>
+    <button class="quesnum" class="btn btn-primary" id="btn2" onclick="hideall()" data-toggle="collapse" href="#result2" data-target="#result2">2.</button>
+    <button class="quesnum" class="btn btn-primary" id="btn3" onclick="hideall()" data-toggle="collapse" href="#result3" data-target="#result3">3.</button>
     <button class="quesnum" class="btn btn-outline-primary" id="btn4">4.</button>
     <button class="quesnum" class="btn btn-outline-primary" id="btn5">5.</button>
     <button class="quesnum" class="btn btn-outline-primary" id="btn6">6.</button>
@@ -40,9 +65,8 @@
     <button class="quesnum" class="btn btn-outline-primary" id="btn9">9.</button>
     <button class="quesnum" class="btn btn-outline-primary" id="btn10">10.</button>
   </ul>
-
-  <div id="main" class="hide" style="display: flex;">
-    <div id="button1" style="position: relative;margin: auto;">
+  
+    <div id="result1" class="panel-collapse collapse" style="position: relative;margin: auto;">
       <div id="num1">1.
       </div>
       <div id="ques1">{{ques1}}</div>
@@ -62,7 +86,7 @@
       </div>
     </div>
 
-    <div id="button2" style="position: relative;margin: auto;">
+    <div id="result2" style="position: relative;margin: auto;">
       <div id="num2">2.</div>
       <div id="ques2">{{ques2}}</div>
       <div class="result2">
@@ -81,7 +105,7 @@
       </div>
     </div>
 
-    <div id="button3" style="position: relative;margin: auto;">
+    <div id="button3" id="result3" class="panel-collapse collapse" style="position: relative;margin: auto;">
       <div id="num3">3.</div>
       <div id="ques3">{{ques3}}</div>
       <div class="result3">
@@ -99,7 +123,7 @@
         <div>BLINK ==== {{BlinkComment_3}}</div>
       </div>
     </div>
-  </div>
+
 
   <p>You blinked {{BPM_1}} times/minute during question1.</p>
   <p>You blinked {{BPM_2}} times/minute during question2.</p>
@@ -125,9 +149,9 @@
   });
 
   $('body').on('click', 'ul button', function (e) {
-    $('#main').show(1000);
-    $('#main').children().hide(1000);
-    $($(this).attr('href')).show(1000);
+    $('#main').show(100);
+    $('#main').children().hide(100);
+    $($(this).attr('href')).show(100);
     e.preventDefault();
   });
 
@@ -229,4 +253,5 @@
     });
 </script>
 
+</body>
 </html>

@@ -156,23 +156,26 @@
 
     <div class="fin">
       <div class="block">
-        <!-- <div class="Citigroupnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
-          {% for new, des, ur, tim in citigroup_list %}
+        <div class="Morgannews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in morgan_list %}
           <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
           <br>
           <a href={{ur}}>{{ur}}</a>
           {% endfor %}
-        </div> -->
-        <h class="cname">Citigroup Inc.</h><br>
-        <ul>
-          <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
-            <a href="brandLi.html" class="flipper"></a>
-            <div class="front"> <img src="/static/img/citibank.jpeg" /></div>
-            <div class="back"><img src="{% static "img/citi_back.png" %}" /></div>
-          </li>
-        </ul>
-      </div><br><br><br>
+        </div>
+
+        <div class="block">
+          <h class="cname">Morgan Stanley</h><br>
+          <ul>
+            <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
+              <a href="brandLi.html" class="flipper"></a>
+              <div class="front"> <img src="/static/img/morgan stanley.jpeg" /></div>
+              <div class="back"><img src="{% static "img/morgan_back.jpg" %}" /></div>
+            </li>
+          </ul>
+        </div><br><br><br>
+
 
       <div class="block">
         <div class="Goldmannews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%; font-family:monospace;">
@@ -194,15 +197,14 @@
       </div><br><br><br>
 
       <div class="block">
-        <h class="cname">Morgan Stanley</h><br>
-        <ul>
-          <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
-            <a href="brandLi.html" class="flipper"></a>
-            <div class="front"> <img src="/static/img/morgan stanley.jpeg" /></div>
-            <div class="back"><img src="{% static "img/morgan_back.jpg" %}" /></div>
-          </li>
-        </ul>
-      </div><br><br><br>
+        <div class="HSBCnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+          {% for new, des, ur, tim in hsbc_list %}
+          <h3 style="font-size: 20px;">{{new}}</h3>
+          Published Time: {{tim}}
+          <br>
+          <a href={{ur}}>{{ur}}</a>
+          {% endfor %}
+        </div>
 
       <div class="block">
         <h class="cname">HSBC</h><br>
@@ -214,6 +216,16 @@
           </li>
         </ul>
       </div><br>
+
+      <h class="cname">Citigroup Inc.</h><br>
+        <ul>
+          <li class="flip-container " ontouchstart="this.classList.toggle('hover');">
+            <a href="brandLi.html" class="flipper"></a>
+            <div class="front"> <img src="/static/img/citibank.jpeg" /></div>
+            <div class="back"><img src="{% static "img/citi_back.png" %}" /></div>
+          </li>
+        </ul>
+      </div><br><br><br>
 
     </div>
 </body>
