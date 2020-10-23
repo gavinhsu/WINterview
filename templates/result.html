@@ -24,7 +24,7 @@
 <script src="{% static "js/result.js" %}"></script>
 
 
-<body>
+<body style="color:darkgray;">
   <h1>WINterview Performance</h1>
   <h2>username:{{account_name}} selected job:{{job_name}}</h2>
   <div id="container" style="min-width: 210px; height: 300px; max-width: 500px; margin: 0 auto"></div>
@@ -42,7 +42,7 @@
   </ul>
 
   <div id="main" class="hide" style="display: flex;">
-    <div id="button1" style="position: relative;margin: auto;">
+    <div id="button1" style="position: relative; margin: auto;">
       <div id="num1">1.
       </div>
       <div id="ques1">{{ques1}}</div>
@@ -125,9 +125,9 @@
   });
 
   $('body').on('click', 'ul button', function (e) {
-    $('#main').show(1000);
-    $('#main').children().hide(1000);
-    $($(this).attr('href')).show(1000);
+    $('#main').show(100);
+    $('#main').children().hide(100);
+    $($(this).attr('href')).show(100);
     e.preventDefault();
   });
 

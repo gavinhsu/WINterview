@@ -22,6 +22,8 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.svm import SVC, LinearSVC, NuSVC
 from statistics import mode
 import matplotlib.pyplot as plt
+# fix main thread problem
+plt.switch_backend('agg')
 import matplotlib.patches as mpatches
 from math import pi
 from io import BytesIO
@@ -125,7 +127,7 @@ class ResultView(TemplateView):
         full_key = []
         full_pn = []
 
-        for x in range(10):
+        for x in range(3):
             reply = "a{0}".format(x+1)
             ques = "q{0}".format(x+1)
             pn = "r{0}".format(x+1)
@@ -149,7 +151,7 @@ class ResultView(TemplateView):
         final_list = []
 
         # NLP PROCESSING #####################################################   
-        for NUM in range(10):    
+        for NUM in range(3):    
             key_split = word_tokenize(full_key[NUM])
 
             # solve answer keyword not in dictionary 
@@ -191,9 +193,9 @@ class ResultView(TemplateView):
                     r_list.append(w)
 
             reply_list = []
-            for i in range(len(r_list)): 
-                for j in range(len(r_list[i])):
-                    reply_list.append(r_list[i][j][0])
+            for r in range(len(r_list)): 
+                for j in range(len(r_list[r])):
+                    reply_list.append(r_list[r][j][0])
             # add the original words
             for key in c_reply:
                 reply_list.append(key)
@@ -279,7 +281,7 @@ class ResultView(TemplateView):
 
 
         # Plot keyword accuracy
-        for i in range(10):           
+        for i in range(3):           
             key_fig, key_ax = plt.subplots()
             key_fig.set_figheight(3)
             key_fig.set_figwidth(4)
@@ -317,7 +319,7 @@ class ResultView(TemplateView):
 
 
         # plot final similarity score
-        for i in range(10):
+        for i in range(3):
             final_fig, final_ax = plt.subplots()
             final_fig.set_figheight(3)
             final_fig.set_figwidth(4)
@@ -356,7 +358,7 @@ class ResultView(TemplateView):
 
         blink_dict = {}
         total_blinks = 0
-        for x in range(10):
+        for x in range(3):
             blink = "b{0}".format(x+1)
             num = getattr(res_unit, blink)
             t = "time{0}".format(x+1)
@@ -385,7 +387,7 @@ class ResultView(TemplateView):
 
         ##EMOTION PROCESSING #####################################################
         emotion_dict = {}
-        for x in range(10):
+        for x in range(3):
             n = "neutral_{0}".format(x+1)
             neutral = getattr(res_unit, n)
             emotion_dict['n{0}'.format(x+1)] = neutral
