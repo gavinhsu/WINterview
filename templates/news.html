@@ -59,30 +59,30 @@
             {% for new, des, im , ur, tim in tech_list %}
             <h3>{{new}}</h3>
             {{value | linebreaks}}
-            Published Time: {{tim}}
-            {{value | linebreaks}}
+            <p style="font-size: 16px;">Published Time: {{tim}}
+            {{value | linebreaks}}</p>
             <img src="{{im}}" alt="" style="width:650px;height:400px;">
             <h6></h6>{{des}}
             {{value | linebreaks}}
-            <h6>View the link below for further information: </h6>
-            <a href={{ur}}>{{ur}}</a>
+            <h6 style="font-size: 16px;">View the link below for further information: </h6>
+            <a href={{ur}} style="font-size: 16px;">{{ur}}</a>
             {{value | linebreaks}}
             <br>
             {% endfor %}
         </div>
     </div>
 
-    <div class='fin' style="display:none;position: absolute;left: 20%; width: 50%;">
+    <div class='fin' style="display:none;position: absolute;left: 20%; width: 50%; font-family: monospace;">
         {% for new, des, im , ur, tim in fin_list %}
         <h3>{{new}}</h3>
         {{value | linebreaks}}
-        Published Time: {{tim}}
-        {{value | linebreaks}}
+        <p style="font-size: 16px;">Published Time: {{tim}}
+        {{value | linebreaks}}</p>
         <img src="{{im}}" alt="" style="width:650px;height:400px;">
         <h6></h6>{{des}}
         {{value | linebreaks}}
-        <h6>View the link below for further information: </h6>
-        <a href={{ur}}>{{ur}}</a>
+        <h6 style="font-size: 16px;">View the link below for further information: </h6>
+        <a href={{ur}} style="font-size: 16px;">{{ur}}</a>
         {{value | linebreaks}}
         <br>
         {% endfor %}

@@ -16,10 +16,10 @@
 </head>
 
 <body>
-  <!-- <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top">
 
-      <a class="navbar-brand" href=""><span class="glyphicon glyphicon-file logo"></span><b>Sign Up</b></a>
-      <div class="collapse navbar-collapse" id="myNavbar">
+      <a class="navbar-brand" href=""><span class="glyphicon glyphicon-file logo"></span><b> Sign Up</b></a>
+      <div class="collapse navbar-collapse" id="myNavbar" style="cursor: pointer;">
         <ul class="nav navbar-nav navbar-right">
           <li><a onclick="location.href='/'">HOME</a></li>
           <li><a onclick="location.href='/users/services/'">Services</a></li>
@@ -37,17 +37,19 @@
             </ul>
           </li>
           <li><a onclick="location.href='/users/aboutUs/'">Team</a></li>`
+          <li><a onclick="location.href='/users/personalFile/'">Personal Profile</a></li>
         </ul>
       </div>
 
-  </nav> -->
+  </nav>
   <div class="container">
   <form class="form-horizontal" action="/users/regist/" data-toggle='validator' method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <div class="container-fluid text-nowrap">
-      <div class="header">
-        <h1 class="text-center text-nowrap"><span class="glyphicon glyphicon-user logo"></span><b> Sign Up </b></h1>
+    <div class="container-fluid text-nowrap" style="font-family: monospace;">
+      <div class="header" style="padding: 10% 40px;">
+        <h1 class="text-center text-nowrap"><span class="glyphicon glyphicon-user logo" style="color: rgb(121, 147, 242);
+          font-size: 30px;"></span><b> Sign Up </b></h1>
       </div>
       <div class="sub_div text-nowrap">
         <div class="row">

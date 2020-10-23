@@ -19,6 +19,8 @@ function showQues(){
     page1Ques.style.display='block'
 }
 
+
+
 $(document).ready(function(){
   
     $(".has_children").click(function(){
