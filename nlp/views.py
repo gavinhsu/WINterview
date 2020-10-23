@@ -287,13 +287,13 @@ class ResultView(TemplateView):
             key_fig.set_figwidth(4)
             key_start = 0
             key = keyscore_list[i]
-            key_ax.broken_barh([(key_start, key)], [1,2], facecolors=((0.3,0.1,0.4,0.6)))
+            key_ax.broken_barh([(key_start, key)], [1,2], facecolors='#53bda5')
             key_ax.set_ylim(0, 4)
             key_ax.set_xlim(0, 100)
             key_ax.spines['left'].set_visible(False)
             key_ax.spines['bottom'].set_visible(False)
             key_ax.spines['top'].set_visible(False)
-            key_ax.set_xticks([0, 25, 50, 75, 100])
+            key_ax.set_xticks([0, 100])
             key_ax.set_axisbelow(True) 
             key_ax.set_yticks([])
             key_ax.set_title('Keyword Accuracy', fontsize=14) 
@@ -325,13 +325,13 @@ class ResultView(TemplateView):
             final_fig.set_figwidth(4)
             final_start = 0
             final = final_list[i]
-            final_ax.broken_barh([(final_start, final)], [1, 2], facecolors=((0.3,0.1,0.4,0.6)))
+            final_ax.broken_barh([(final_start, final)], [1, 2], facecolors='#53bda5')
             final_ax.set_xlim(0, 100)
             final_ax.set_ylim(0, 4)
             final_ax.spines['left'].set_visible(False)
             final_ax.spines['bottom'].set_visible(False)
             final_ax.spines['top'].set_visible(False)
-            final_ax.set_xticks([0, 25, 50, 75, 100])
+            final_ax.set_xticks([0, 100])
             final_ax.set_yticks([])
             final_ax.set_axisbelow(True)
             final_ax.set_title('Answer Fitness',fontsize=14) 

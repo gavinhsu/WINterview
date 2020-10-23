@@ -230,7 +230,7 @@ h2 {
   color: white;
 }
 
-#btn10 {6
+#btn10 {
   background-color: white;
   color: black;
   border: 2px solid #008CBA;
@@ -243,9 +243,9 @@ h2 {
 
 .comment{
   position: relative;
-  top: -50%;
+  top: -42%;
   left: 60%;
-  width: 360px;
+  width: 320px;
 }
 label {
   color: #B4886B;

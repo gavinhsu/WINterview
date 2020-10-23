@@ -148,10 +148,10 @@ class equipCheck(TemplateView):
         answer_time.append(20)
       elif diff_list[i] == 'medium':
         prepare_time.append(10)
-        answer_time.append(45)
+        answer_time.append(30)
       else:
-        prepare_time.append(15)
-        answer_time.append(60)
+        prepare_time.append(5)
+        answer_time.append(20)
 
     print(diff_list)
     print(prepare_time)

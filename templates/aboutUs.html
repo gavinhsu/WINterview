@@ -40,7 +40,7 @@ body{
 }
 
 .our_team .team_member{
-  width: 250px;
+  width: 200px;
   margin: 5px;
   background: #fff;
   padding: 20px 10px;
@@ -110,11 +110,22 @@ body{
   transform: scale(1);
 }
 
+
+#logo{
+  width: 20%;
+    position: relative;
+    left: 50%;
+    height: 150px;
+}
 </style>
 <body>
   
 <div class="wrapper">
-    <h1>Our Team</h1>
+  <div style="display: flex;">
+    <h1 style="position: relative;left: 40%;top: 60px;">Our Team</h1>
+    <img id="logo" src="{% static "img/mocklogo.png" %}" />
+  </div>
+
     <div class="our_team">
         <div class="team_member">
           <div class="member_img">

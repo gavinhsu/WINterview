@@ -51,7 +51,8 @@
     <div class="app">
       <div id="app"></div>
       <span id="countStart"style="font-size:50px; color:red; left: 1150px; position: absolute;top: 120px; visibility: hidden;"> </span>
-      <span id="countStart2" style="font-size:50px; color:violet; left: 90%; position: absolute;top: 120px;"> </span>
+      <img  id="logo" style="border-radius: 50%; width: 10%;height: 10%;left: 532px;top: -97px;"src="{% static "img/circle.gif" %}" >
+      <span id="countStart2" style="font-size:50px; color:green; left: 90%; position: absolute;top: 120px;"> </span>
       <button id="start-record-btn" title="Start Recording" style="display:none;">Start Recognition</button>
       <button id="pause-record-btn" title="Pause Recording" style="display:none;">Pause Recognition</button>
       <video style="display:none;" width="200" height="200" id="inputVideo" alt="在這裡錄影" muted>Video stream not
@@ -202,6 +203,7 @@
         if (spn2.style.display = "none") {
           spn2.textContent = count3;
           spn2.style.display = "block";
+          spn2.style.color = "red";
 
           // Run the function again every second if the count is not zero
           if (count3 !== 0) {
