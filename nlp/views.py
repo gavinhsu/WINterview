@@ -125,7 +125,7 @@ class ResultView(TemplateView):
         full_key = []
         full_pn = []
 
-        for x in range(1):
+        for x in range(3):
             reply = "a{0}".format(x+1)
             ques = "q{0}".format(x+1)
             pn = "r{0}".format(x+1)
@@ -149,7 +149,7 @@ class ResultView(TemplateView):
         final_list = []
 
         # NLP PROCESSING #####################################################   
-        for NUM in range(1):    
+        for NUM in range(3):    
             key_split = word_tokenize(full_key[NUM])
 
             # solve answer keyword not in dictionary 
@@ -279,7 +279,7 @@ class ResultView(TemplateView):
 
 
         # Plot keyword accuracy
-        for i in range(1):           
+        for i in range(3):           
             key_fig, key_ax = plt.subplots()
             key_fig.set_figheight(3)
             key_fig.set_figwidth(4)
@@ -317,7 +317,7 @@ class ResultView(TemplateView):
 
 
         # plot final similarity score
-        for i in range(1):
+        for i in range(3):
             final_fig, final_ax = plt.subplots()
             final_fig.set_figheight(3)
             final_fig.set_figwidth(4)
@@ -385,7 +385,7 @@ class ResultView(TemplateView):
 
         ##EMOTION PROCESSING #####################################################
         emotion_dict = {}
-        for x in range(1):
+        for x in range(3):
             n = "neutral_{0}".format(x+1)
             neutral = getattr(res_unit, n)
             emotion_dict['n{0}'.format(x+1)] = neutral

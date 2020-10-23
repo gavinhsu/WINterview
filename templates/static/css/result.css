@@ -62,14 +62,16 @@ h1 {
 }
 
 h2 {
-  color: burlywood;
-  font-family: 'Trocchi', serif;
   position: relative;
   left: 60px;
   vertical-align: middle;
   text-align: center;
   font-size: 40px;
   display: flex;
+  top: 80px;
+  font-family: calibri;
+  font-weight: 500;
+  color: #53bda5;
   /* text-shadow: 0 1px 0 #ccc,
     0 2px 0 #c9c9c9,
     0 3px 0 #bbb,
@@ -88,11 +90,21 @@ h2 {
   display: none;
 } */
 
+#logo{
+  height: 180px;
+  width: 250px;
+  position: relative;
+  top: 60px;
+  left: 50px;
+}
+
 .quesmenu {
   padding: 20px;
   display: block;
   text-align: center;
   margin: auto;
+  position: relative;
+  top: -10px
 }
 
 .quesnum {
