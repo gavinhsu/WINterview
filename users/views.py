@@ -67,7 +67,7 @@ def interviewSkill(request):
 def companyProfile(request):
 
     # job news for tech---------------------------------------------------------------
-    newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
+    newsapi = NewsApiClient(api_key="16c7fedbd9e44985909000cfc198020a")
 
     # Intel news
     intel_news = newsapi.get_everything(q='intel',

@@ -8,38 +8,45 @@
 }
 
 /* Add a gray color to all navbar links */
+
 .navbar li a, .navbar .navbar-brand {
   color: #d5d5d5 !important;
 }
 
 /* On hover, the links will turn white */
+
 .navbar-nav li a:hover {
   color: #fff !important;
 }
 
 /* The active link */
+
 .navbar-nav li.active a {
   color: #fff !important;
-  background-color:#29292c !important;
+  background-color: #29292c !important;
 }
 
 /* Remove border color from the collapsible button */
+
 .navbar-default .navbar-toggle {
   border-color: transparent;
 }
 
 /* Dropdown */
+
 .open .dropdown-toggle {
-  color: #fff ;
+  color: #fff;
   background-color: #555 !important;
 }
 
 /* Dropdown links */
+
 .dropdown-menu li a {
   color: #000 !important;
 }
 
 /* On hover, the dropdown links will turn red */
+
 .dropdown-menu li a:hover {
   background-color: red !important;
 }
@@ -90,11 +97,11 @@ h2 {
   display: none;
 } */
 
-#logo{
+#logo {
   height: 180px;
   width: 250px;
   position: relative;
-  top: 60px;
+  top: 80px;
   left: 50px;
 }
 
@@ -104,7 +111,8 @@ h2 {
   text-align: center;
   margin: auto;
   position: relative;
-  top: -10px
+  top: -5px;
+  background: white;
 }
 
 .quesnum {
@@ -222,7 +230,7 @@ h2 {
   color: white;
 }
 
-#btn10 {
+#btn10 {6
   background-color: white;
   color: black;
   border: 2px solid #008CBA;
@@ -233,6 +241,12 @@ h2 {
   color: white;
 }
 
+.comment{
+  position: relative;
+  top: -50%;
+  left: 60%;
+  width: 360px;
+}
 label {
   color: #B4886B;
   font-weight: bold;
@@ -242,101 +256,150 @@ label {
 
 .result1 {
   position: relative;
-  border: 3px solid #B4886B;
+  border: 3px solid white;
   width: 870px;
-  height: 670px;
+  height: 530px;
+  left: 16%;
+  font-size: medium;
+  background: white;
+  border-radius: 11px;
+  top: -30px;
 }
 
 #num1 {
   display: inline-block;
-  position: absolute;
+  left: 16%;
+  position: relative;
+  font-size: x-large;
+  font-weight: 700;
 }
 
 #ques1 {
   display: flex;
   position: relative;
-  left: 40px;
+  left: 20%;
+  font-size: x-large;
+  font-weight: 700;
+  top: -35px;
 }
 
 #reply1 {
-  height: 160px;
+  height: 120px;
   width: 500px;
   border: none;
   position: relative;
   top: 5px;
   left: 10px;
+  font-size: medium;
 }
 
 #ans1 {
-  height: 160px;
+  height: 120px;
   width: 500px;
   border: none;
+  position: relative;
+  top: 5px;
+  left: 10px;
+  font-size: medium;
 }
 
 .result2 {
   position: relative;
-  border: 3px solid #B4886B;
+  border: 3px solid white;
   width: 870px;
-  height: 670px;
+  height: 530px;
+  left: 16%;
+  font-size: medium;
+  background: white;
+  border-radius: 11px;
+  top: -30px;
 }
 
 #num2 {
   display: inline-block;
-  position: absolute;
+  left: 16%;
+  position: relative;
+  font-size: x-large;
+  font-weight: 700;
 }
 
 #ques2 {
   display: flex;
   position: relative;
-  left: 40px;
+  left: 20%;
+  font-size: x-large;
+  font-weight: 700;
+  top: -35px;
 }
 
 #reply2 {
-  height: 160px;
+  height: 120px;
   width: 500px;
   border: none;
   position: relative;
   top: 5px;
   left: 10px;
+  font-size: medium;
 }
 
 #ans2 {
-  height: 160px;
+  height: 120px;
   width: 500px;
   border: none;
+  position: relative;
+  top: 5px;
+  left: 10px;
+  font-size: medium;
 }
 
 .result3 {
   position: relative;
-  border: 3px solid #B4886B;
+  border: 3px solid white;
   width: 870px;
-  height: 670px;
+  height: 530px;
+  left: 16%;
+  font-size: medium;
+  background: white;
+  border-radius: 11px;
+  top: -30px;
 }
 
 #num3 {
   display: inline-block;
-  position: absolute;
+  left: 16%;
+  position: relative;
+  font-size: x-large;
+  font-weight: 700;
 }
 
 #ques3 {
   display: flex;
   position: relative;
-  left: 40px;
+  left: 20%;
+  font-size: x-large;
+  font-weight: 700;
+  top: -35px;
+
 }
 
 #reply3 {
-  height: 160px;
+  height: 120px;
   width: 500px;
   border: none;
   position: relative;
   top: 5px;
   left: 10px;
+  font-size: medium;
 }
 
 #ans3 {
-  height: 160px;
+  height: 120px;
   width: 500px;
   border: none;
+  position: relative;
+  top: 5px;
+  left: 10px;
+  font-size: medium;
 }
 
 .nlpchart {
@@ -346,5 +409,5 @@ label {
 #emochart {
   position: relative;
   left: 40px;
-  top: -400px;
+  top: -290px;
 }

@@ -105,7 +105,7 @@ def showvideo(request):
 
 
 def newsfin(request):
-    newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
+    newsapi = NewsApiClient(api_key="16c7fedbd9e44985909000cfc198020a")
 
     all_articles = newsapi.get_everything(domains='wsj.com', language='en')
     #top_headlines = newsapi.get_top_headlines(category='business',language='en',country='us')
@@ -141,7 +141,7 @@ def newsfin(request):
 
 
 def news(request):
-    newsapi = NewsApiClient(api_key="a0f27104ee2a4586950818f8164ddce9")
+    newsapi = NewsApiClient(api_key="16c7fedbd9e44985909000cfc198020a")
 
     # FINANCE news
     fin_news = newsapi.get_everything(domains='wsj.com', language='en')
