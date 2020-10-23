@@ -14,7 +14,11 @@
   <title>Company Profile</title>
 </head>
 <link rel="stylesheet" href="{% static "css/companyProfile.css" %}">
-
+<style>
+  .cname{
+    font-family:monospace;
+  }
+</style>
 <body>
   <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -38,7 +42,7 @@
                 <li><a href="/users/logout/">Log Out</a></li>
               </ul>
             </li>
-            <li><a onclick="location.href='/users/aboutUs/'">About Us</a></li>`
+            <li><a onclick="location.href='/users/aboutUs/'">Team</a></li>`
             <li><a onclick="location.href='/users/personalFile/'">Personal Profile</a></li>
           </ul>
         </div>
@@ -54,7 +58,7 @@
     </div>
     <div class="tech">
       <div class="block">
-        <div class="microsoftnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+        <div class="microsoftnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%; font-family:monospace;">
           {% for new, des, ur, tim in microsoft_list %}
           <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
@@ -73,7 +77,7 @@
       </div><br><br><br>
 
       <div class="block">
-        <div class="intelnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+        <div class="intelnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%; font-family:monospace;">
           {% for new, des, ur, tim in intel_list %}
           <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
@@ -92,7 +96,7 @@
       </div><br><br><br>
 
       <div class="block">
-        <div class="googlenews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+        <div class="googlenews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%; font-family:monospace;">
           {% for new, des, ur, tim in google_list %}
           <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
@@ -111,7 +115,7 @@
       </div><br><br><br>
 
       <div class="block">
-        <div class="IBMnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+        <div class="IBMnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%; font-family:monospace;">
           {% for new, des, ur, tim in IBM_list %}
           <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
@@ -130,7 +134,7 @@
       </div><br><br><br>
 
       <div class="block">
-        <div class="IBMnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+        <div class="IBMnews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%; font-family:monospace;">
           {% for new, des, ur, tim in TSMC_list %}
           <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
@@ -171,7 +175,7 @@
       </div><br><br><br>
 
       <div class="block">
-        <div class="Goldmannews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%;">
+        <div class="Goldmannews" style="display:block; position: absolute; left: 49%; width: 50%;height: 40%; font-family:monospace;">
           {% for new, des, ur, tim in Goldman_list %}
           <h3 style="font-size: 20px;">{{new}}</h3>
           Published Time: {{tim}}
