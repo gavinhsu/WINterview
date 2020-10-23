@@ -334,7 +334,7 @@ class ResultView(TemplateView):
             final_ax.set_xticks([0, 25, 50, 75, 100])
             final_ax.set_yticks([])
             final_ax.set_axisbelow(True)
-            final_ax.set_title('Answer Correctness',fontsize=14) 
+            final_ax.set_title('Answer Fitness',fontsize=14) 
             final_ax.grid(axis='x')
             final_ax.text(final+1, 2, str(final_list[i])+'%', fontsize=14)
             #fig.suptitle('This is title of the chart', fontsize=16)
