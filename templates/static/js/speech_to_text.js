@@ -114,7 +114,9 @@ function readOutLoud(message) {
   speech.rate = 1;
   speech.pitch = 1;
   speech.lang = 'en-GB';
-  speech.voice = voices[1]
+  speech.voice = speechSynthesis.getVoices().filter(function(voice) {
+    return voice.name == "Google US English Male"
+  })[1];
   console.log(voices.values())
 
   window.speechSynthesis.speak(speech);
