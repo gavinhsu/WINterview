@@ -129,7 +129,7 @@ class ResultView(TemplateView):
         full_time = []
         full_diff = []
 
-        for x in range(3):
+        for x in range(4):
             reply = "a{0}".format(x+1)
             ques = "q{0}".format(x+1)
             pn = "r{0}".format(x+1)
@@ -159,7 +159,7 @@ class ResultView(TemplateView):
         final_list = []
 
         # NLP PROCESSING #####################################################   
-        for NUM in range(3):    
+        for NUM in range(4):    
             key_split = word_tokenize(full_key[NUM])
 
             # solve answer keyword not in dictionary 
@@ -287,9 +287,33 @@ class ResultView(TemplateView):
         avg_key = sum(keyscore_list)/len(keyscore_list) 
         avg_final = sum(final_list)/len(final_list)
 
+        #keyscore_list
+        key1 = keyscore_list[0]
+        key2 = keyscore_list[1]
+        key3 = keyscore_list[2]
+        key4 = keyscore_list[3]
+        # key5 = keyscore_list[4]
+        # key6 = keyscore_list[5]
+        # key7 = keyscore_list[6]
+        # key8 = keyscore_list[7]
+        # key9 = keyscore_list[8]
+        # key10 = keyscore_list[9]
 
+        #semantic_list
+        sem1 = final_list[0]
+        sem2 = final_list[1]
+        sem3 = final_list[2]
+        sem4 = final_list[3]
+        # sem5 = final_list[4]
+        # sem6 = final_list[5]
+        # sem7 = final_list[6]
+        # sem8 = final_list[7]
+        # sem9 = final_list[8]
+        # sem10 = final_list[9]
+
+        
         # Plot keyword accuracy
-        for i in range(3):           
+        for i in range(4):           
             key_fig, key_ax = plt.subplots()
             key_fig.set_figheight(3)
             key_fig.set_figwidth(4)
@@ -327,7 +351,7 @@ class ResultView(TemplateView):
 
 
         # plot final similarity score
-        for i in range(3):
+        for i in range(4):
             final_fig, final_ax = plt.subplots()
             final_fig.set_figheight(3)
             final_fig.set_figwidth(4)
@@ -367,6 +391,7 @@ class ResultView(TemplateView):
         blink_dict = {}
         total_blinks = 0
         blink_score_list = []
+        
         for x in range(10):
             blink = "b{0}".format(x+1)
             num = getattr(res_unit, blink)
@@ -506,6 +531,31 @@ class ResultView(TemplateView):
         else:
             fuel_degree = 12.5
         
+        
+        n1 = round(emotion_dict['n1'],2)
+        h1 = round(emotion_dict['h1'],2)
+        a1 = round(emotion_dict['a1'],2)
+        f1 = round(emotion_dict['f1'],2)
+        s1 = round(emotion_dict['s1'],2)
+        n2 = round(emotion_dict['n2'],2)
+        h2 = round(emotion_dict['h2'],2)
+        a2 = round(emotion_dict['a2'],2)
+        f2 = round(emotion_dict['f2'],2)
+        s2 = round(emotion_dict['s2'],2)
+        n3 = round(emotion_dict['n3'],2)
+        h3 = round(emotion_dict['h3'],2)
+        a3 = round(emotion_dict['a3'],2)
+        f3 = round(emotion_dict['f3'],2)
+        s3 = round(emotion_dict['s3'],2)
+        n4 = round(emotion_dict['n4'],2)
+        h4 = round(emotion_dict['h4'],2)
+        a4 = round(emotion_dict['a4'],2)
+        f4 = round(emotion_dict['f4'],2)
+        s4 = round(emotion_dict['s4'],2)
+        print(n4,h4,a4,s4,f4)
+
+
+
 
         return render(request, self.template_name, locals())
 

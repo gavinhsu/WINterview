@@ -131,122 +131,25 @@ h2 {
   line-height: 9px;
 }
 
-#btn1 {
+#btn {
   background-color: white;
   color: black;
   border: 2px solid #008CBA;
 }
 
-#btn1:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn2 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn2:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn3 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn3:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn4 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn4:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn5 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn5:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn6 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn6:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn7 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn7:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn8 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn8:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn9 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn9:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-#btn10 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-#btn10:hover {
+#btn :hover {
   background-color: #008CBA;
   color: white;
 }
 
 .comment{
   position: relative;
-  top: -42%;
+  top: -145%;
   left: 60%;
-  width: 320px;
+  width: 40%;
+  background-color: white;
 }
+
 label {
   color: #B4886B;
   font-weight: bold;
@@ -254,11 +157,11 @@ label {
   width: 150px;
 }
 
-.result1 {
+.result {
   position: relative;
   border: 3px solid white;
   width: 870px;
-  height: 530px;
+  height: 500px;
   left: 16%;
   font-size: medium;
   background: white;
@@ -266,7 +169,7 @@ label {
   top: -30px;
 }
 
-#num1 {
+.num {
   display: inline-block;
   left: 16%;
   position: relative;
@@ -274,7 +177,7 @@ label {
   font-weight: 700;
 }
 
-#ques1 {
+.ques {
   display: flex;
   position: relative;
   left: 20%;
@@ -283,7 +186,7 @@ label {
   top: -35px;
 }
 
-#reply1 {
+.reply {
   height: 120px;
   width: 500px;
   border: none;
@@ -293,7 +196,7 @@ label {
   font-size: medium;
 }
 
-#ans1 {
+.ans {
   height: 120px;
   width: 500px;
   border: none;
@@ -303,111 +206,22 @@ label {
   font-size: medium;
 }
 
-.result2 {
-  position: relative;
-  border: 3px solid white;
-  width: 870px;
-  height: 530px;
-  left: 16%;
-  font-size: medium;
-  background: white;
-  border-radius: 11px;
-  top: -30px;
-}
-
-#num2 {
-  display: inline-block;
-  left: 16%;
-  position: relative;
-  font-size: x-large;
-  font-weight: 700;
-}
-
-#ques2 {
-  display: flex;
-  position: relative;
-  left: 20%;
-  font-size: x-large;
-  font-weight: 700;
-  top: -35px;
-}
-
-#reply2 {
-  height: 120px;
-  width: 500px;
-  border: none;
-  position: relative;
-  top: 5px;
-  left: 10px;
-  font-size: medium;
-}
-
-#ans2 {
-  height: 120px;
-  width: 500px;
-  border: none;
-  position: relative;
-  top: 5px;
-  left: 10px;
-  font-size: medium;
-}
-
-.result3 {
-  position: relative;
-  border: 3px solid white;
-  width: 870px;
-  height: 530px;
-  left: 16%;
-  font-size: medium;
-  background: white;
-  border-radius: 11px;
-  top: -30px;
-}
-
-#num3 {
-  display: inline-block;
-  left: 16%;
-  position: relative;
-  font-size: x-large;
-  font-weight: 700;
-}
-
-#ques3 {
-  display: flex;
-  position: relative;
-  left: 20%;
-  font-size: x-large;
-  font-weight: 700;
-  top: -35px;
-
-}
-
-#reply3 {
-  height: 120px;
-  width: 500px;
-  border: none;
-  position: relative;
-  top: 5px;
-  left: 10px;
-  font-size: medium;
-}
-
-#ans3 {
-  height: 120px;
-  width: 500px;
-  border: none;
-  position: relative;
-  top: 5px;
-  left: 10px;
-  font-size: medium;
-}
-
-.nlpchart {
+/* .nlpchart {
   display: contents;
+} */
+
+
+.emochart{
+  width: 40%;
+  height: 57%;
+  position: relative;
+  top: -140%;
+  left: 60%;
 }
 
-#emochart {
+/* .chart-container{
+  display: flex;
   position: relative;
-  left: 40px;
-  top: -290px;
-}
+  height: 0px;
+  width: 250px;
+} */
