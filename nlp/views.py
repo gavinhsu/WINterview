@@ -120,32 +120,40 @@ class ResultView(TemplateView):
         ans_unit = Answer.objects.get(id=res_id)
         
 
-        # retreive reply, questions, keywords, and answers
+        # retreive reply, questions, keywords, difficulty, time & answers
         full_reply = []
         full_ques = []
         full_ans = []
         full_key = []
         full_pn = []
+        full_time = []
+        full_diff = []
 
         for x in range(3):
             reply = "a{0}".format(x+1)
             ques = "q{0}".format(x+1)
             pn = "r{0}".format(x+1)
+            time = "t{0}".format(x+1)
             get_reply = getattr(ans_unit, reply)
             get_ques = getattr(ans_unit, ques)
+            get_time = getattr(ans_unit, time)
             get_pn = getattr(res_unit, pn)
             get_ans = str(job_selection.objects.get(Ques=get_ques).Ans)
             get_key = job_selection.objects.get(Ques=get_ques).Keywords
+            get_diff = job_selection.objects.get(Ques=get_ques).Difficulties
             full_reply.append(get_reply)
             full_ques.append(get_ques)
             full_ans.append(get_ans)
             full_key.append(get_key)
             full_pn.append(get_pn)
+            full_time.append(get_time)
+            full_diff.append(get_diff)
             exec(f'reply{x+1} = full_reply[x]')
             exec(f'ques{x+1} = full_ques[x]')
             exec(f'answer{x+1} = full_ans[x]')
             exec(f'keyword{x+1} = full_key[x]')
-        
+            exec(f'time{x+1} = full_time[x]')
+            exec(f'diff{x+1} = full_diff[x]')
 
         keyscore_list = []
         final_list = []
@@ -275,9 +283,9 @@ class ResultView(TemplateView):
             print('FINAL_SCORE ===> ', final_score)
             
 
-        # print('KEYWORD LIST--------', keyscore_list)
-        # print('FINAL LIST--------', final_list)
-        
+        # calulate the average score of keywordscore & finalscore (out of 100)
+        avg_key = sum(keyscore_list)/len(keyscore_list) 
+        avg_final = sum(final_list)/len(final_list)
 
 
         # Plot keyword accuracy
@@ -358,14 +366,15 @@ class ResultView(TemplateView):
 
         blink_dict = {}
         total_blinks = 0
-        for x in range(3):
+        blink_score_list = []
+        for x in range(10):
             blink = "b{0}".format(x+1)
             num = getattr(res_unit, blink)
             t = "time{0}".format(x+1)
             seconds = getattr(res_unit, t)
             minutes = int(seconds)/60
             blink_dict["bpm{0}".format(x+1)] = num/minutes
-            print(blink_dict["bpm{0}".format(x+1)])
+            #print(blink_dict["bpm{0}".format(x+1)])
             total_blinks += blink_dict["bpm{0}".format(x+1)]
 
             # set comments according to how nervous u r
@@ -374,19 +383,28 @@ class ResultView(TemplateView):
             very_nervous_comment = "You were too nervous! Please try to relax before construct your answer."
 
             if blink_dict["bpm{0}".format(x+1)] <= 40:
+                blink_score_list.append(10)
                 exec(f'BlinkComment_{x+1} = normal_comment')
             elif 40 < blink_dict["bpm{0}".format(x+1)] <= 60:
+                blink_score_list.append(8)
                 exec(f'BlinkComment_{x+1} = little_nervous_comment')
             else:
+                blink_score_list.append(6)
                 exec(f'BlinkComment_{x+1} = very_nervous_comment')
 
             exec(f'BPM_{x+1} = num/minutes')
-            
-        #avg_blinks = round(total_blinks/10, 2)
+
+        final_blink_score = sum(blink_score_list)
+
       
 
         ##EMOTION PROCESSING #####################################################
         emotion_dict = {}
+        n_sum = 0
+        h_sum = 0
+        a_sum = 0
+        f_sum = 0
+        s_sum = 0
         for x in range(3):
             n = "neutral_{0}".format(x+1)
             neutral = getattr(res_unit, n)
@@ -409,6 +427,12 @@ class ResultView(TemplateView):
             angry = emotion_dict["a{0}".format(x+1)]
             fear = emotion_dict["f{0}".format(x+1)]
             surprise = emotion_dict["s{0}".format(x+1)]
+            # sum up each emotion's percentage
+            n_sum += neutral
+            h_sum += happy
+            a_sum += angry
+            f_sum += fear
+            s_sum += surprise
 
             print('---------EMOTION', x+1, '----------------------------------------')
             print(neutral, happy, angry, fear, surprise)
@@ -447,9 +471,43 @@ class ResultView(TemplateView):
             emo_bar = base64.b64encode(image_png)
             #emo_bar = emo_bar.decode('utf-8')
             exec(f"emo_bar{x+1} = emo_bar.decode('utf-8')")
+        
+        # calculate average emotion score
+        avg_neutral = n_sum/3
+        avg_happy = h_sum/3
+        avg_angry = a_sum/3
+        avg_fear = f_sum/3
+        avg_surprise = s_sum/3
+        emo_score = avg_neutral + avg_happy - 0.2*avg_angry - 0.1*avg_fear - 0.1*avg_surprise
+
+        if emo_score >= 80:
+            final_emo_score = 100
+        elif 80 > emo_score >= 60:
+            final_emo_score = 80
+        elif 60 > emo_score >= 40:
+            final_emo_score = 60
+        else:
+            final_emo_score = 50
+
+        # GET ENTIRE OVERALL SCORE!!!
+        overall_score = 0.35*keyword_score + 0.35*final_score + 0.18*final_blink_score + 0.12*final_emo_score
+        print('KEYWORD SCORE ====> ', keyword_score)
+        print('CORRECTNESS SCORE ====> ', final_score)
+        print('BLINK SCORE ====> ', final_blink_score)
+        print('EMOTION SCORE ====> ', final_emo_score)
+        print('OVERALL SCORE ====> ', overall_score)
+        
+        if overall_score >= 80:
+            fuel_degree = 87.5
+        elif 80 > overall_score >= 60:
+            fuel_degree = 62.5
+        elif 60 > overall_score >= 40:
+            fuel_degree = 37.5
+        else:
+            fuel_degree = 12.5
+        
 
         return render(request, self.template_name, locals())
-
 
 
 
