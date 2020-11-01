@@ -1,5 +1,3 @@
-
-
 //Speech Recognition
 try {
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -91,33 +89,51 @@ noteTextarea.on('input', function () {
 })
 
 
-/*-----------------------------
-      Speech Synthesis 
-------------------------------*/
+// /*-----------------------------
+//       Speech Synthesis 
+// ------------------------------*/
 $(document).ready(function () {
   $("#speak").click()
-})
+});
 
 function speak() {
   var question = document.getElementById("question").innerHTML;
   readOutLoud(question);
 }
 
+var maleVoices = [
+  { voiceURI: "Google UK English Male", name: "Google UK English Male", lang: "en-GB", localService: false, default: false }
+]
+
+
 function readOutLoud(message) {
   var speech = new SpeechSynthesisUtterance();
   var synth = window.speechSynthesis;
   var voices = synth.getVoices();
-
   // Set the text and voice attributes.
   speech.text = message;
   speech.volume = 1;
   speech.rate = 1;
   speech.pitch = 1;
   speech.lang = 'en-GB';
-  speech.voice = speechSynthesis.getVoices().filter(function(voice) {
-    return voice.name == "Google US English Male"
-  })[1];
-  console.log(voices.values())
+  // speech.voice = voices[5];
+  console.log("real voice", voices.length)
+  // speech.voice = voices[5];
+  if (voices.length == 0) {
+    // use hard-coded list because speechSynthesis.getVoices() didn't work
+    speech.voice = voices[5];
+    voices.length = 2
+    console.log("change voice:", speech.voice, voices.length)
+  }
+
+ 
+  // speechSynthesis.getVoices().filter(function(voice) {
+  //   return voice.name == "Google US English Male";
+  // })[1];
+  // speech.voice = voices[5]
+  // speechSynthesis.getVoices().filter(function(voice) {
+  //   return voice.name == "Google US English Male";
+  // })[1];
 
   window.speechSynthesis.speak(speech);
 
@@ -125,8 +141,10 @@ function readOutLoud(message) {
 
 
 
+
+
 /*-----------------------------
-      Helper Functions 
+      Helper Functions
 ------------------------------*/
 
 function renderNotes(notes) {

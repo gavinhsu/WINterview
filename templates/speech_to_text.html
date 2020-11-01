@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <title>Interview Start!</title>
 
@@ -24,8 +25,8 @@
       <!-- <h1 style="position: relative; left: 30%; text-align: center;">
         <a id="win">WINterview</a>
       </h1> -->
-      <img id="logo" src="{% static "img/logo.png" %}" >
-      <img id="winterview" src="{% static "img/winterview.png" %}" >
+      <img id="logo" src="{% static "img/logo.png" %}">
+      <img id="winterview" src="{% static "img/winterview.png" %}">
 
     </div>
   </div>
@@ -42,17 +43,23 @@
         {{ random_question }}
       </p>
     </div>
+    <!-- <script>
+      $(document).ready(function () {
+        $("#speak").click()
+      //   (function () {
+      //     $('#speak').dblclick();
+      //   })
+    });
+    </script> -->
 
+    <input type="button" onclick="speak()" value="What is the question?" id="speak"style="position:absolute; left:27%;">
 
-    <input type="button" onclick="speak()" value="What is the question?" id="speak"
-      style="display:none;position:absolute; left:27%;">
-
-   
     <div class="app">
       <div id="app"></div>
-      <span id="countStart"style="font-size:50px; color:red; left: 1150px; position: absolute;top: 120px; visibility: hidden;"> </span>
-      <img  id="logo" style="border-radius: 50%; width: 10%;height: 10%;left: 532px;top: -97px;"src="{% static "img/circle.gif" %}" >
-      <span id="countStart2" style="font-size:50px; color:green; left: 90%; position: absolute;top: 120px;"> </span>
+      <!-- <span id="countStart"style="font-size:50px; color:red; left: 1150px; position: absolute;top: 120px; visibility: hidden;"> </span> -->
+      <img id="logo" style="border-radius: 50%; width: 10%;height: 10%;left: 532px;top: -97px;"
+        src="{% static "img/circle.gif" %}">
+      <!-- <span id="countStart2" style="font-size:50px; color:green; left: 90%; position: absolute;top: 120px;"> </span> -->
       <button id="start-record-btn" title="Start Recording" style="display:none;">Start Recognition</button>
       <button id="pause-record-btn" title="Pause Recording" style="display:none;">Pause Recognition</button>
       <video style="display:none;" width="200" height="200" id="inputVideo" alt="在這裡錄影" muted>Video stream not
@@ -86,7 +93,6 @@
   </div>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
     var title = $('.title')
     var menu = $('#hiddenmenu')
