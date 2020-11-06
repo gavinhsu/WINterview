@@ -33,6 +33,7 @@ from math import pi
 import numpy as np
 
 # Create your views here.
+
 def remove_noise(tweet_tokens, stop_words = ()):
         cleaned_tokens = []
         # REMOVING NOISE (IRRELEVANT LETTERS, HYPERLINKS, OR PUNCTUATION MARKS)
@@ -99,6 +100,8 @@ class ResultView(TemplateView):
     def get(self, request):
         account_name = request.session['account']
         job_name = request.session['job_name']
+        table = request.GET['table']
+        print(table)
         self.account_name = account_name
         self.job_name = job_name
         
@@ -266,6 +269,7 @@ class ResultView(TemplateView):
             keyword_score = round((counter/len(key_split))*100, 2)
             keyscore_list.append(keyword_score)
             print('KEYSCORE ===> ', keyword_score, '%')
+            print('KEYSCORE_LIST ---> ', keyscore_list)
         
 
             # BERT prediction
@@ -563,8 +567,6 @@ class ResultView(TemplateView):
         # f4 = round(emotion_dict['f4'],2)
         # s4 = round(emotion_dict['s4'],2)
         # print(n4,h4,a4,s4,f4)
-
-
 
 
         return render(request, self.template_name, locals())
