@@ -115,12 +115,21 @@ class ResultView(TemplateView):
         job_selection = getattr(questions.models, new_job)
         account_instance = Member.objects.get(Account=account_name)
         #res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
-        res_id = 333
+        res_id = 411
         res_unit = Result.objects.get(id=res_id)
         ans_unit = Answer.objects.get(id=res_id)
-        
 
-        # retreive reply, questions, keywords, and answers
+        # find how many questions the user answered
+        ans_count = 0
+        for quesnum in range(10):
+            user_ans = "a{0}".format(quesnum+1)
+            unit = getattr(ans_unit, user_ans)
+            if unit:
+                ans_count += 1
+            else:
+                break
+
+        # retreive reply, questions, keywords, difficulty, time & answers
         full_reply = []
         full_ques = []
         full_ans = []
@@ -129,31 +138,43 @@ class ResultView(TemplateView):
         full_time = []
         full_diff = []
 
-        for x in range(4):
+        for x in range(ans_count):
             reply = "a{0}".format(x+1)
             ques = "q{0}".format(x+1)
             pn = "r{0}".format(x+1)
+            time = "t{0}".format(x+1)
             get_reply = getattr(ans_unit, reply)
             get_ques = getattr(ans_unit, ques)
+            get_time = getattr(ans_unit, time)
             get_pn = getattr(res_unit, pn)
             get_ans = str(job_selection.objects.get(Ques=get_ques).Ans)
             get_key = job_selection.objects.get(Ques=get_ques).Keywords
+            get_diff = job_selection.objects.get(Ques=get_ques).Difficulties
             full_reply.append(get_reply)
             full_ques.append(get_ques)
             full_ans.append(get_ans)
             full_key.append(get_key)
             full_pn.append(get_pn)
+            full_time.append(get_time)
+            full_diff.append(get_diff)
             exec(f'reply{x+1} = full_reply[x]')
             exec(f'ques{x+1} = full_ques[x]')
             exec(f'answer{x+1} = full_ans[x]')
             exec(f'keyword{x+1} = full_key[x]')
+<<<<<<< HEAD
         
         print(full_reply, full_ans, full_pn)
+=======
+            exec(f'time{x+1} = full_time[x]')
+            exec(f'diff{x+1} = full_diff[x]')
+
+
+>>>>>>> 652423713ff767b677e075cb2a94d533dca1c2e7
         keyscore_list = []
         final_list = []
 
         # NLP PROCESSING #####################################################   
-        for NUM in range(4):    
+        for NUM in range(ans_count):    
             key_split = word_tokenize(full_key[NUM])
 
             # solve answer keyword not in dictionary 
@@ -277,14 +298,15 @@ class ResultView(TemplateView):
             print('FINAL_SCORE ===> ', final_score)
             
 
-        # print('KEYWORD LIST--------', keyscore_list)
-        # print('FINAL LIST--------', final_list)
+        # calulate the average score of keywordscore & finalscore (out of 100)
+        avg_key = sum(keyscore_list)/len(keyscore_list) 
+        avg_final = sum(final_list)/len(final_list)
 
         #keyscore_list
-        key1 = keyscore_list[0]
-        key2 = keyscore_list[1]
-        key3 = keyscore_list[2]
-        key4 = keyscore_list[3]
+        # key1 = keyscore_list[0]
+        # key2 = keyscore_list[1]
+        # key3 = keyscore_list[2]
+        # key4 = keyscore_list[3]
         # key5 = keyscore_list[4]
         # key6 = keyscore_list[5]
         # key7 = keyscore_list[6]
@@ -293,10 +315,10 @@ class ResultView(TemplateView):
         # key10 = keyscore_list[9]
 
         #semantic_list
-        sem1 = final_list[0]
-        sem2 = final_list[1]
-        sem3 = final_list[2]
-        sem4 = final_list[3]
+        # sem1 = final_list[0]
+        # sem2 = final_list[1]
+        # sem3 = final_list[2]
+        # sem4 = final_list[3]
         # sem5 = final_list[4]
         # sem6 = final_list[5]
         # sem7 = final_list[6]
@@ -306,7 +328,7 @@ class ResultView(TemplateView):
 
         
         # Plot keyword accuracy
-        for i in range(4):           
+        for i in range(ans_count):           
             key_fig, key_ax = plt.subplots()
             key_fig.set_figheight(3)
             key_fig.set_figwidth(4)
@@ -344,7 +366,7 @@ class ResultView(TemplateView):
 
 
         # plot final similarity score
-        for i in range(4):
+        for i in range(ans_count):
             final_fig, final_ax = plt.subplots()
             final_fig.set_figheight(3)
             final_fig.set_figwidth(4)
@@ -383,14 +405,16 @@ class ResultView(TemplateView):
 
         blink_dict = {}
         total_blinks = 0
-        for x in range(4):
+        blink_score_list = []
+        
+        for x in range(ans_count):
             blink = "b{0}".format(x+1)
             num = getattr(res_unit, blink)
             t = "time{0}".format(x+1)
             seconds = getattr(res_unit, t)
             minutes = int(seconds)/60
             blink_dict["bpm{0}".format(x+1)] = num/minutes
-            print(blink_dict["bpm{0}".format(x+1)])
+            #print(blink_dict["bpm{0}".format(x+1)])
             total_blinks += blink_dict["bpm{0}".format(x+1)]
 
             # set comments according to how nervous u r
@@ -399,20 +423,29 @@ class ResultView(TemplateView):
             very_nervous_comment = "You were too nervous! Please try to relax before construct your answer."
 
             if blink_dict["bpm{0}".format(x+1)] <= 40:
+                blink_score_list.append(10)
                 exec(f'BlinkComment_{x+1} = normal_comment')
             elif 40 < blink_dict["bpm{0}".format(x+1)] <= 60:
+                blink_score_list.append(8)
                 exec(f'BlinkComment_{x+1} = little_nervous_comment')
             else:
+                blink_score_list.append(6)
                 exec(f'BlinkComment_{x+1} = very_nervous_comment')
 
             exec(f'BPM_{x+1} = num/minutes')
-            
-        #avg_blinks = round(total_blinks/10, 2)
+
+        final_blink_score = sum(blink_score_list)
+
       
 
         ##EMOTION PROCESSING #####################################################
         emotion_dict = {}
-        for x in range(4):
+        n_sum = 0
+        h_sum = 0
+        a_sum = 0
+        f_sum = 0
+        s_sum = 0
+        for x in range(ans_count):
             n = "neutral_{0}".format(x+1)
             neutral = getattr(res_unit, n)
             emotion_dict['n{0}'.format(x+1)] = neutral
@@ -434,6 +467,12 @@ class ResultView(TemplateView):
             angry = emotion_dict["a{0}".format(x+1)]
             fear = emotion_dict["f{0}".format(x+1)]
             surprise = emotion_dict["s{0}".format(x+1)]
+            # sum up each emotion's percentage
+            n_sum += neutral
+            h_sum += happy
+            a_sum += angry
+            f_sum += fear
+            s_sum += surprise
 
             print('---------EMOTION', x+1, '----------------------------------------')
             print(neutral, happy, angry, fear, surprise)
@@ -472,33 +511,68 @@ class ResultView(TemplateView):
             emo_bar = base64.b64encode(image_png)
             #emo_bar = emo_bar.decode('utf-8')
             exec(f"emo_bar{x+1} = emo_bar.decode('utf-8')")
-        n1 = round(emotion_dict['n1'],2)
-        h1 = round(emotion_dict['h1'],2)
-        a1 = round(emotion_dict['a1'],2)
-        f1 = round(emotion_dict['f1'],2)
-        s1 = round(emotion_dict['s1'],2)
-        n2 = round(emotion_dict['n2'],2)
-        h2 = round(emotion_dict['h2'],2)
-        a2 = round(emotion_dict['a2'],2)
-        f2 = round(emotion_dict['f2'],2)
-        s2 = round(emotion_dict['s2'],2)
-        n3 = round(emotion_dict['n3'],2)
-        h3 = round(emotion_dict['h3'],2)
-        a3 = round(emotion_dict['a3'],2)
-        f3 = round(emotion_dict['f3'],2)
-        s3 = round(emotion_dict['s3'],2)
-        n4 = round(emotion_dict['n4'],2)
-        h4 = round(emotion_dict['h4'],2)
-        a4 = round(emotion_dict['a4'],2)
-        f4 = round(emotion_dict['f4'],2)
-        s4 = round(emotion_dict['s4'],2)
-        print(n4,h4,a4,s4,f4)
+        
+        # calculate average emotion score
+        avg_neutral = n_sum/3
+        avg_happy = h_sum/3
+        avg_angry = a_sum/3
+        avg_fear = f_sum/3
+        avg_surprise = s_sum/3
+        emo_score = avg_neutral + avg_happy - 0.2*avg_angry - 0.1*avg_fear - 0.1*avg_surprise
+
+        if emo_score >= 80:
+            final_emo_score = 100
+        elif 80 > emo_score >= 60:
+            final_emo_score = 80
+        elif 60 > emo_score >= 40:
+            final_emo_score = 60
+        else:
+            final_emo_score = 50
+
+        # GET ENTIRE OVERALL SCORE!!!
+        overall_score = 0.35*keyword_score + 0.35*final_score + 0.18*final_blink_score + 0.12*final_emo_score
+        print('KEYWORD SCORE ====> ', keyword_score)
+        print('CORRECTNESS SCORE ====> ', final_score)
+        print('BLINK SCORE ====> ', final_blink_score)
+        print('EMOTION SCORE ====> ', final_emo_score)
+        print('OVERALL SCORE ====> ', overall_score)
+        
+        if overall_score >= 80:
+            fuel_degree = 87.5
+        elif 80 > overall_score >= 60:
+            fuel_degree = 62.5
+        elif 60 > overall_score >= 40:
+            fuel_degree = 37.5
+        else:
+            fuel_degree = 12.5
+        
+
+        # n1 = round(emotion_dict['n1'],2)
+        # h1 = round(emotion_dict['h1'],2)
+        # a1 = round(emotion_dict['a1'],2)
+        # f1 = round(emotion_dict['f1'],2)
+        # s1 = round(emotion_dict['s1'],2)
+        # n2 = round(emotion_dict['n2'],2)
+        # h2 = round(emotion_dict['h2'],2)
+        # a2 = round(emotion_dict['a2'],2)
+        # f2 = round(emotion_dict['f2'],2)
+        # s2 = round(emotion_dict['s2'],2)
+        # n3 = round(emotion_dict['n3'],2)
+        # h3 = round(emotion_dict['h3'],2)
+        # a3 = round(emotion_dict['a3'],2)
+        # f3 = round(emotion_dict['f3'],2)
+        # s3 = round(emotion_dict['s3'],2)
+        # n4 = round(emotion_dict['n4'],2)
+        # h4 = round(emotion_dict['h4'],2)
+        # a4 = round(emotion_dict['a4'],2)
+        # f4 = round(emotion_dict['f4'],2)
+        # s4 = round(emotion_dict['s4'],2)
+        # print(n4,h4,a4,s4,f4)
 
 
 
 
         return render(request, self.template_name, locals())
-
 
 
 
