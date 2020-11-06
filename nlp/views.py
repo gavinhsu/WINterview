@@ -98,16 +98,16 @@ class ResultView(TemplateView):
         self.job_name = job_name
 
     def post(self, request):
+        # get time of personal profile
         interview_time = request.POST['time']
-        print(interview_time)
+        
+        
 
-    # def get(self, request):
+    #def get(self, request):
         account_name = request.session['account']
         job_name = request.session['job_name']
-        table = request.GET['table']
-        print(table)
         self.account_name = account_name
-        self.job_name = job_name    
+        self.job_name = job_name
         
         if job_name == "Hardware Engineer"or"Software Engineer"or"ML Engineer"or"DBA"or"Data Scientist":
             model = tech_model
@@ -121,10 +121,11 @@ class ResultView(TemplateView):
         # get the entire result table 
         job_selection = getattr(questions.models, new_job)
         account_instance = Member.objects.get(Account=account_name)
-        #res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
-        res_id = 333
+        res_id = Result.objects.filter(userID=account_instance, created_time=interview_time).order_by('-id')[:1].values('id') 
+        print('RESID ---> ', res_id)
         res_unit = Result.objects.get(id=res_id)
         ans_unit = Answer.objects.get(id=res_id)
+        create_time = str(res_unit.created_time)[:5]
 
         # find how many questions the user answered
         ans_count = 0
@@ -528,36 +529,7 @@ class ResultView(TemplateView):
         else:
             fuel_degree = 15
         
-<<<<<<< HEAD
-
-        # n1 = round(emotion_dict['n1'],2)
-        # h1 = round(emotion_dict['h1'],2)
-        # a1 = round(emotion_dict['a1'],2)
-        # f1 = round(emotion_dict['f1'],2)
-        # s1 = round(emotion_dict['s1'],2)
-        # n2 = round(emotion_dict['n2'],2)
-        # h2 = round(emotion_dict['h2'],2)
-        # a2 = round(emotion_dict['a2'],2)
-        # f2 = round(emotion_dict['f2'],2)
-        # s2 = round(emotion_dict['s2'],2)
-        # n3 = round(emotion_dict['n3'],2)
-        # h3 = round(emotion_dict['h3'],2)
-        # a3 = round(emotion_dict['a3'],2)
-        # f3 = round(emotion_dict['f3'],2)
-        # s3 = round(emotion_dict['s3'],2)
-        # n4 = round(emotion_dict['n4'],2)
-        # h4 = round(emotion_dict['h4'],2)
-        # a4 = round(emotion_dict['a4'],2)
-        # f4 = round(emotion_dict['f4'],2)
-        # s4 = round(emotion_dict['s4'],2)
-        # print(n4,h4,a4,s4,f4)
-
-
-=======
->>>>>>> ff20e90a0939bb36b592cee5ece33db5f9923a63
         return render(request, self.template_name, locals())
-
-
 
 
 
