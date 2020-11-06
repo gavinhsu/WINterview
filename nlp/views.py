@@ -100,12 +100,10 @@ class ResultView(TemplateView):
     def post(self, request):
         # get time of personal profile
         interview_time = request.POST['time']
+        job_name = request.POST['selectJob']
         
-        
-
     #def get(self, request):
         account_name = request.session['account']
-        job_name = request.session['job_name']
         self.account_name = account_name
         self.job_name = job_name
         
