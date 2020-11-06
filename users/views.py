@@ -55,6 +55,8 @@ class personalFile(TemplateView):
         
         df = pd.DataFrame({'Name':name_list, 'SelectedJob':job_list, 'Date':date_list, 'Time':time_list, 'ID':num_list})
 
+
+
         return render(request, self.template_name, locals())
 
 

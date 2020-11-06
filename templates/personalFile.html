@@ -77,18 +77,22 @@
                     <th scope="col">Selected Job</th>
                     <th scope="col">Interview Date</th>
                     <th scope="col">Interview Time</th>
+                    <th scope="col">Analysis</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in df.itertuples %}
-
-                <tr class="success">
-                    <th scope="row"> <a href="/result">{{item.ID}}</a></th>
-                    <td><a href="/result">{{ item.Name }}</a></td>
-                    <td>{{ item.SelectedJob }}</td>
-                    <td>{{item.Date}}</td>
-                    <td>{{item.Time}}</td>
+                <form action="/result/" method="POST">
+                  {% csrf_token %}
+                  <tr class="success">
+                    <th scope="row">{{item.ID}}</th><input type="hidden" value="{{item.ID}}">
+                    <td> {{ item.Name }}</td><input type="hidden" value="{{item.Name}}">
+                    <td> {{ item.SelectedJob }}</td><input type="hidden" value="{{item.SelectedJob}}">
+                    <td> {{item.Date}}</td><input type="hidden" value="{{item.Date}}">
+                    <td> {{item.Time}}</td><input type="hidden" name="time" value="{{item.Time}}">
+                    <td><input type="submit" value="Start!"></td>
                 </tr>
+                </form>
 
                 {% endfor %}
             </tbody>

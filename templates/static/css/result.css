@@ -144,7 +144,7 @@ h2 {
 
 .comment{
   position: relative;
-  top: -145%;
+  top: -105%;
   left: 60%;
   width: 40%;
   background-color: white;
@@ -209,13 +209,19 @@ label {
 /* .nlpchart {
   display: contents;
 } */
-
+.chart-container{
+  display:flex; 
+  position: relative; 
+  height:150px; 
+  width:250px;
+  top: 5%;
+}
 
 .emochart{
   width: 40%;
   height: 57%;
   position: relative;
-  top: -140%;
+  top: -100%;
   left: 60%;
 }
 
