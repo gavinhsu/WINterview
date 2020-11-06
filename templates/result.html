@@ -3,6 +3,9 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-radar.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-exports.min.js"></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
@@ -10,8 +13,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js">     </script>
-  <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/data.js"></script>
   <script src="https://code.highcharts.com/highcharts-more.js"></script>
@@ -93,7 +94,7 @@
       data-target="#result10">10.</button>
   </ul>
 
-  <div id="result1" class="panel-collapse collapse" style="position: relative;margin: auto;">
+  <div id="result1" class="panel-collapse collapse" style="position: relative;margin: auto; width: 70%;left: -10%;">
     <div class="num">1.
     </div>
     <div class="ques">{{ques1}}</div>
@@ -102,7 +103,7 @@
       <textarea readonly class="reply" name="reply1" cols="10" rows="10">{{reply1}}</textarea>
       <label for="ans1">Reference answer</label>
       <textarea readonly class="ans" name="reply1" cols="10" rows="10">{{answer1}}</textarea>
-      <div class="chart-container" style=" display:flex; position: relative; height:400px; width:250px">
+      <div class="chart-container" style=" display:flex; position: relative; height:150px; width:250px">
         <canvas id="key1"></canvas>
         <canvas id="semantic1"></canvas>
       </div>
@@ -124,25 +125,29 @@
   </div>
 
   <script>
-    var SemanticContext1 = document.getElementById("semantic1").getContext("2d");
-    var SemanticData1 = {
+    var semContext1 = document.getElementById("semantic1").getContext("2d");
+    var semData1 = {
       //  labels:[
       //    'Percentage'
       //  ],
       datasets: [{
         label: "Answer Fitness",
-        data: [{{sem1}}],
+        data: [{{bert_list.0}}],
         backgroundColor: ["#53bda5"],
         hoverBackgroundColor: ["#388271"]
       }]
      };
 
-    var SemanticChart1 = new Chart(SemanticContext1, {
+    var semConfig1 = {
       type: 'horizontalBar',
-      data: SemanticData1,
+      data: semData1,
       options: {
         maintainAspecrRatio: false,
         responsive: true,
+        animation: {
+					duration: 5000,
+					easing: 'linear'
+				},
         scales: {
           xAxes: [{
             ticks: {
@@ -154,9 +159,17 @@
             stacked: true
           }]
         }
-
       }
+    }
+    var semChart1 = new Chart(semContext1,semConfig1);
+
+    (function(){ // self calling function replaces document.ready()
+    //adding event listenr to button
+    document.querySelector('#btn').addEventListener('click',function(){
+      semChart1.destroy();
+      semChart1 = new Chart(semContext1, semConfig1);
     });
+    })();
 
     var keyContext1 = document.getElementById("key1").getContext("2d");
     var keyData1 = {
@@ -165,8 +178,8 @@
       //  ],
       datasets: [{
         label: "Keyword Accuracy",
-        data: [{{key1}}],
-        backgroundColor: ["#53bda5"],
+        data: [{{keyscore_list.0}}],
+        backgroundColor: ["#36754f"],
         hoverBackgroundColor: ["#388271"]
       }]
      };
@@ -175,6 +188,10 @@
       type: 'horizontalBar',
       data: keyData1,
       options: {
+        animation: {
+					duration: 5000,
+					easing: 'linear'
+				},
         maintainAspecrRatio: false,
         responsive: true,
         scales: {
@@ -192,18 +209,20 @@
       }
     });
 
-    var max1 = Math.ceil10(Math.max({{n1}}, {{h1}}, {{a1}}, {{f1}}, {{s1}}) +10, 1)
+    var max1 = Math.ceil10(Math.max({{emotion_dict.n1}}, {{emotion_dict.h1}}, {{emotion_dict.a1}}, {{emotion_dict.f1}}, {{emotion_dict.s1}}) +10, 1)
     anychart.onDocumentReady(function () {
       var emoData1 = [
-        { x: "neutral", value: {{n1}}},
-        { x: "Happy", value: {{h1}}},
-        { x: "Angry", value: {{a1}}},
-        { x: "Fear", value: {{f1}}},
-        { x: "Sad", value: {{s1}}}
+        { x: "neutral", value: {{emotion_dict.n1}}},
+        { x: "Happy", value: {{emotion_dict.h1}}},
+        { x: "Angry", value: {{emotion_dict.a1}}},
+        { x: "Fear", value: {{emotion_dict.f1}}},
+        { x: "Sad", value: {{emotion_dict.s1}}}
       ];
 
       var chart = anychart.radar();
-
+      var animationSettings = chart.animation();
+      animationSettings.duration(3000);
+      animationSettings.enabled(true);
       chart.yScale()
         .minimum(0)
         .maximum(max1)
@@ -229,7 +248,7 @@
       <textarea readonly class="reply" name="reply2" cols="10" rows="10">{{reply2}}</textarea>
       <label for="ans2">Reference answer</label>
       <textarea readonly class="ans" name="reply2" cols="10" rows="10">{{answer2}}</textarea>
-      <div class="chart-container" style=" display:flex; position: relative; height:400px; width:250px">
+      <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
         <canvas id="key2"></canvas>
         <canvas id="semantic2"></canvas>
       </div>
@@ -251,7 +270,7 @@
       // ],
       datasets: [{
         label: "Answer Fitness",
-        data: [{{sem2}}],
+        data: [{{bert_list.1}}],
         backgroundColor: ["#53bda5"],
         hoverBackgroundColor: ["#388271"]
       }]
@@ -285,7 +304,7 @@
       // ],
       datasets: [{
         label: "Keyword Accuracy",
-        data: [{{key1}}],
+        data: [{{keyscore_list.1}}],
         backgroundColor: ["#53bda5"],
         hoverBackgroundColor: ["#388271"]
       }]
@@ -312,14 +331,14 @@
       }
     });
 
-    var max2 = Math.ceil10(Math.max({{n2}}, {{h2}}, {{a2}}, {{f2}}, {{s2}}) +10, 1)
+    var max2 = Math.ceil10(Math.max({{emotion_dict.n2}}, {{emotion_dict.h2}}, {{emotion_dict.a2}}, {{emotion_dict.f2}}, {{emotion_dict.s2}}) +10, 1)
     anychart.onDocumentReady(function () {
       var emoData2 = [
-        { x: "neutral", value: {{n2}}},
-        { x: "Happy", value: {{h2}}},
-        { x: "Angry", value: {{a2}}},
-        { x: "Fear", value: {{f2}}},
-        { x: "Sad", value: {{s2}}}
+        { x: "neutral", value: {{emotion_dict.n2}}},
+        { x: "Happy", value: {{emotion_dict.h2}}},
+        { x: "Angry", value: {{emotion_dict.a2}}},
+        { x: "Fear", value: {{emotion_dict.f2}}},
+        { x: "Sad", value: {{emotion_dict.s2}}}
       ];
 
       var chart = anychart.radar();
@@ -349,7 +368,7 @@
       <textarea readonly class="reply" name="reply3" cols="10" rows="10">{{reply3}}</textarea>
       <label for="ans3">Reference answer</label>
       <textarea readonly class="ans" name="reply3" cols="10" rows="10">{{answer3}}</textarea>
-      <div class="chart-container" style=" display:flex; position: relative; height:400px; width:250px">
+      <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
         <canvas id="key3"></canvas>
         <canvas id="semantic3"></canvas>
       </div>
@@ -370,7 +389,7 @@
       //  ],
       datasets: [{
         label: "Answer Fitness",
-        data: [{{sem3}}],
+        data: [{{bert_list.2}}],
         backgroundColor: ["#53bda5"],
         hoverBackgroundColor: ["#388271"]
       }]
@@ -404,7 +423,7 @@
       //  ],
       datasets: [{
         label: "Keyword Accuracy",
-        data: [{{key3}}],
+        data: [{{keyscore_list.2}}],
         backgroundColor: ["#53bda5"],
         hoverBackgroundColor: ["#388271"]
       }]
@@ -431,14 +450,14 @@
       }
     });
 
-    var max3 = Math.ceil10(Math.max({{n3}}, {{h3}}, {{a3}}, {{f3}}, {{s3}}) +10, 1)
+    var max3 = Math.ceil10(Math.max({{emotion_dict.n3}}, {{emotion_dict.h3}}, {{emotion_dict.a3}}, {{emotion_dict.f3}}, {{emotion_dict.s3}}) +10, 1)
     anychart.onDocumentReady(function () {
       var emoData3 = [
-        { x: "neutral", value: {{n3}}},
-        { x: "Happy", value: {{h3}}},
-        { x: "Angry", value: {{a3}}},
-        { x: "Fear", value: {{f3}}},
-        { x: "Sad", value: {{s3}}}
+        { x: "neutral", value: {{emotion_dict.n3}}},
+        { x: "Happy", value: {{emotion_dict.h3}}},
+        { x: "Angry", value: {{emotion_dict.a3}}},
+        { x: "Fear", value: {{emotion_dict.f3}}},
+        { x: "Sad", value: {{emotion_dict.s3}}}
       ];
 
       var chart = anychart.radar();
@@ -469,7 +488,7 @@
     <textarea readonly class="reply" name="reply4" cols="10" rows="10">{{reply1}}</textarea>
     <label for="ans4">Reference answer</label>
     <textarea readonly class="ans" name="reply4" cols="10" rows="10">{{answer1}}</textarea>
-    <div class="chart-container" style=" display:flex; position: relative; height:400px; width:250px">
+    <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
       <canvas id="key4"></canvas>
       <canvas id="semantic4"></canvas>
     </div>
@@ -490,7 +509,7 @@
     //  ],
     datasets: [{
       label: "Answer Fitness",
-      data: [{{sem4}}],
+      data: [{{bert_list.0}}],
       backgroundColor: ["#53bda5"],
       hoverBackgroundColor: ["#388271"]
     }]
@@ -524,7 +543,7 @@
     //  ],
     datasets: [{
       label: "Keyword Accuracy",
-      data: [{{key4}}],
+      data: [{{keyscore_list.3}}],
       backgroundColor: ["#53bda5"],
       hoverBackgroundColor: ["#388271"]
     }]
@@ -551,14 +570,14 @@
     }
   });
 
-  var max4 = Math.ceil10(Math.max({{n4}}, {{h4}}, {{a4}}, {{f4}}, {{s4}}) +10, 1)
+  var max4 = Math.ceil10(Math.max({{emotion_dict.n4}}, {{emotion_dict.h4}}, {{emotion_dict.a4}}, {{emotion_dict.f4}}, {{emotion_dict.s4}}) +10, 1)
   anychart.onDocumentReady(function () {
     var emoData4 = [
-      { x: "neutral", value: {{n4}}},
-      { x: "Happy", value: {{h4}}},
-      { x: "Angry", value: {{a4}}},
-      { x: "Fear", value: {{f4}}},
-      { x: "Sad", value: {{s4}}}
+      { x: "neutral", value: {{emotion_dict.n4}}},
+      { x: "Happy", value: {{emotion_dict.h4}}},
+      { x: "Angry", value: {{emotion_dict.a4}}},
+      { x: "Fear", value: {{emotion_dict.f4}}},
+      { x: "Sad", value: {{emotion_dict.s4}}}
     ];
 
     var chart = anychart.radar();
@@ -668,7 +687,7 @@
         ]
       }, {
         type: 'gauge',
-        data: [80],
+        data: [{{fuel_degree}}],
         dial: {
           rearLength: 0
         }

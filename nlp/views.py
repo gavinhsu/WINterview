@@ -96,11 +96,15 @@ class ResultView(TemplateView):
     def __init__(self, job_name=None):
         self.job_name = job_name
 
-    def get(self, request):
+    def post(self, request):
+        interview_time = request.POST['time']
+        print(interview_time)
+
+    # def get(self, request):
         account_name = request.session['account']
         job_name = request.session['job_name']
         self.account_name = account_name
-        self.job_name = job_name
+        self.job_name = job_name    
         
         if job_name == "Hardware Engineer"or"Software Engineer"or"ML Engineer"or"DBA"or"Data Scientist":
             model = tech_model
@@ -115,7 +119,7 @@ class ResultView(TemplateView):
         job_selection = getattr(questions.models, new_job)
         account_instance = Member.objects.get(Account=account_name)
         #res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
-        res_id = 411
+        res_id = 333
         res_unit = Result.objects.get(id=res_id)
         ans_unit = Answer.objects.get(id=res_id)
 
@@ -166,6 +170,7 @@ class ResultView(TemplateView):
 
 
         keyscore_list = []
+        bert_list = []
         final_list = []
 
         # NLP PROCESSING #####################################################   
@@ -289,37 +294,15 @@ class ResultView(TemplateView):
             else:
                 final_score -= pn_percent*2
 
+            bert_list.append(bert_score)
             final_list.append(final_score)
+            print('BERT_SCORE ===> ', bert_score)
             print('FINAL_SCORE ===> ', final_score)
             
 
         # calulate the average score of keywordscore & finalscore (out of 100)
         avg_key = sum(keyscore_list)/len(keyscore_list) 
         avg_final = sum(final_list)/len(final_list)
-
-        #keyscore_list
-        # key1 = keyscore_list[0]
-        # key2 = keyscore_list[1]
-        # key3 = keyscore_list[2]
-        # key4 = keyscore_list[3]
-        # key5 = keyscore_list[4]
-        # key6 = keyscore_list[5]
-        # key7 = keyscore_list[6]
-        # key8 = keyscore_list[7]
-        # key9 = keyscore_list[8]
-        # key10 = keyscore_list[9]
-
-        #semantic_list
-        # sem1 = final_list[0]
-        # sem2 = final_list[1]
-        # sem3 = final_list[2]
-        # sem4 = final_list[3]
-        # sem5 = final_list[4]
-        # sem6 = final_list[5]
-        # sem7 = final_list[6]
-        # sem8 = final_list[7]
-        # sem9 = final_list[8]
-        # sem10 = final_list[9]
 
         
         # Plot keyword accuracy
@@ -472,40 +455,40 @@ class ResultView(TemplateView):
             print('---------EMOTION', x+1, '----------------------------------------')
             print(neutral, happy, angry, fear, surprise)
 
-            #emotion radar plot
-            emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
-            df = pd.DataFrame([emo],index=["emo"])
-            Attributes = list(df)
-            AttNo = len(Attributes)
-            values = df.iloc[0].tolist()
-            values += values [:1]
-            angles = [n / float(AttNo) * 2 * pi for n in range(AttNo)]
-            angles += angles [:1]
-            ax = plt.subplot(111, polar=True)
+            # #emotion radar plot
+            # emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
+            # df = pd.DataFrame([emo],index=["emo"])
+            # Attributes = list(df)
+            # AttNo = len(Attributes)
+            # values = df.iloc[0].tolist()
+            # values += values [:1]
+            # angles = [n / float(AttNo) * 2 * pi for n in range(AttNo)]
+            # angles += angles [:1]
+            # ax = plt.subplot(111, polar=True)
 
-            #Add the attribute labels to our axes
-            plt.xticks(angles[:-1], Attributes)
+            # #Add the attribute labels to our axes
+            # plt.xticks(angles[:-1], Attributes)
 
-            #Plot the line around the outside of the filled area, using the angles and values calculated before
-            ax.plot(angles, values)
+            # #Plot the line around the outside of the filled area, using the angles and values calculated before
+            # ax.plot(angles, values)
 
-            #Fill in the area plotted in the last line
-            ax.fill(angles, values, 'teal', alpha=0.1)
+            # #Fill in the area plotted in the last line
+            # ax.fill(angles, values, 'teal', alpha=0.1)
 
-            #Give the plot a title and show it
-            ax.set_title("Emotion Radar Plot")
+            # #Give the plot a title and show it
+            # ax.set_title("Emotion Radar Plot")
 
-            plt.tight_layout()
-            #save plot
-            emo_buffer = BytesIO()
-            plt.savefig(emo_buffer, format='png')
-            emo_buffer.seek(0)
-            image_png = emo_buffer.getvalue()
-            emo_buffer.close()
+            # plt.tight_layout()
+            # #save plot
+            # emo_buffer = BytesIO()
+            # plt.savefig(emo_buffer, format='png')
+            # emo_buffer.seek(0)
+            # image_png = emo_buffer.getvalue()
+            # emo_buffer.close()
 
-            emo_bar = base64.b64encode(image_png)
-            #emo_bar = emo_bar.decode('utf-8')
-            exec(f"emo_bar{x+1} = emo_bar.decode('utf-8')")
+            # emo_bar = base64.b64encode(image_png)
+            # #emo_bar = emo_bar.decode('utf-8')
+            # exec(f"emo_bar{x+1} = emo_bar.decode('utf-8')")
         
         # calculate average emotion score
         avg_neutral = n_sum/3
@@ -533,40 +516,14 @@ class ResultView(TemplateView):
         print('OVERALL SCORE ====> ', overall_score)
         
         if overall_score >= 80:
-            fuel_degree = 87.5
+            fuel_degree = 75
         elif 80 > overall_score >= 60:
-            fuel_degree = 62.5
+            fuel_degree = 55
         elif 60 > overall_score >= 40:
-            fuel_degree = 37.5
+            fuel_degree = 35
         else:
-            fuel_degree = 12.5
+            fuel_degree = 15
         
-
-        # n1 = round(emotion_dict['n1'],2)
-        # h1 = round(emotion_dict['h1'],2)
-        # a1 = round(emotion_dict['a1'],2)
-        # f1 = round(emotion_dict['f1'],2)
-        # s1 = round(emotion_dict['s1'],2)
-        # n2 = round(emotion_dict['n2'],2)
-        # h2 = round(emotion_dict['h2'],2)
-        # a2 = round(emotion_dict['a2'],2)
-        # f2 = round(emotion_dict['f2'],2)
-        # s2 = round(emotion_dict['s2'],2)
-        # n3 = round(emotion_dict['n3'],2)
-        # h3 = round(emotion_dict['h3'],2)
-        # a3 = round(emotion_dict['a3'],2)
-        # f3 = round(emotion_dict['f3'],2)
-        # s3 = round(emotion_dict['s3'],2)
-        # n4 = round(emotion_dict['n4'],2)
-        # h4 = round(emotion_dict['h4'],2)
-        # a4 = round(emotion_dict['a4'],2)
-        # f4 = round(emotion_dict['f4'],2)
-        # s4 = round(emotion_dict['s4'],2)
-        # print(n4,h4,a4,s4,f4)
-
-
-
-
         return render(request, self.template_name, locals())
 
 
