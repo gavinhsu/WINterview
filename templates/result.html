@@ -103,19 +103,11 @@
       <textarea readonly class="reply" name="reply1" cols="10" rows="10">{{reply1}}</textarea>
       <label for="ans1">Reference answer</label>
       <textarea readonly class="ans" name="reply1" cols="10" rows="10">{{answer1}}</textarea>
-      <div class="chart-container" style=" display:flex; position: relative; height:150px; width:250px">
+      <div class="chart-container">
         <canvas id="key1"></canvas>
         <canvas id="semantic1"></canvas>
       </div>
       <div class="emochart" id="emo1"></div>
-      <!-- <div class="nlpchart">
-        <img src="data:image/png;base64,{{final_bar1|safe}}" style="width: 230px;height: 190px;">
-      </div>
-      <div class="nlpchart">
-        <img src="data:image/png;base64,{{keywords_bar1|safe}}" style="width: 230px;height: 190px;">
-      </div>
-      <img id="emochart" src="data:image/png;base64,{{emo_bar1|safe}}" style="width: 350px;height: 250px;"> -->
-
       <div class="comment">
         <h3 style="font-weight: bold;">Comments & Suggestions:</h3><br>
         {{BlinkComment_1}} You've answered the question spendidly and keyword use is on point! Well done!
@@ -128,17 +120,17 @@
     var semContext1 = document.getElementById("semantic1").getContext("2d");
     var semData1 = {
       //  labels:[
-      //    'Percentage'
+      //    display: false
       //  ],
       datasets: [{
         label: "Answer Fitness",
         data: [{{bert_list.0}}],
-        backgroundColor: ["#53bda5"],
+        backgroundColor: ["#a1d20b"],
         hoverBackgroundColor: ["#388271"]
       }]
      };
 
-    var semConfig1 = {
+    var semChart1 = new Chart(semContext1,{
       type: 'horizontalBar',
       data: semData1,
       options: {
@@ -160,26 +152,17 @@
           }]
         }
       }
-    }
-    var semChart1 = new Chart(semContext1,semConfig1);
-
-    (function(){ // self calling function replaces document.ready()
-    //adding event listenr to button
-    document.querySelector('#btn').addEventListener('click',function(){
-      semChart1.destroy();
-      semChart1 = new Chart(semContext1, semConfig1);
     });
-    })();
 
     var keyContext1 = document.getElementById("key1").getContext("2d");
     var keyData1 = {
-      //  labels:[
-      //    'Percentage'
+      //   legend:[
+      //     display: false
       //  ],
       datasets: [{
         label: "Keyword Accuracy",
         data: [{{keyscore_list.0}}],
-        backgroundColor: ["#36754f"],
+        backgroundColor: ["#53bda5"],
         hoverBackgroundColor: ["#388271"]
       }]
      };
@@ -584,7 +567,7 @@
 
     chart.yScale()
       .minimum(0)
-      .maximum(max1)
+      .maximum(max4)
       .ticks({ 'interval': 10 });
 
     chart.yGrid().palette(["gray 0.1", "gray 0.2"]);
