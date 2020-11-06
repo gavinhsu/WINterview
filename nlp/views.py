@@ -148,7 +148,7 @@ class ResultView(TemplateView):
             exec(f'answer{x+1} = full_ans[x]')
             exec(f'keyword{x+1} = full_key[x]')
         
-
+        print(full_reply, full_ans, full_pn)
         keyscore_list = []
         final_list = []
 
