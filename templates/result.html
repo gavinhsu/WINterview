@@ -94,52 +94,48 @@
       data-target="#result10">10.</button>
   </ul>
 
-  <div id="result1" class="panel-collapse collapse" style="position: relative;margin: auto; width: 70%;left: -10%;">
-    <div class="num">1.
-    </div>
+  <div id="result1" class="panel-collapse collapse" style="position: relative;margin: auto;">
+    <div class="num">1.</div>
     <div class="ques">{{ques1}}</div>
     <div class="result">
       <label for="reply1">Your reply</label>
       <textarea readonly class="reply" name="reply1" cols="10" rows="10">{{reply1}}</textarea>
       <label for="ans1">Reference answer</label>
       <textarea readonly class="ans" name="reply1" cols="10" rows="10">{{answer1}}</textarea>
-      <div class="chart-container">
+      <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
         <canvas id="key1"></canvas>
         <canvas id="semantic1"></canvas>
       </div>
       <div class="emochart" id="emo1"></div>
       <div class="comment">
         <h3 style="font-weight: bold;">Comments & Suggestions:</h3><br>
-        {{BlinkComment_1}} You've answered the question spendidly and keyword use is on point! Well done!
-        However, you seem a little bit nervous. Try to relax and smile more :)))
+        {{BlinkComment_1}}It seems that you missed the point of this question. Please try to construct your questions
+        before you answer.
+        Great job on your overall attitude though! Keep it up!
       </div>
     </div>
   </div>
 
   <script>
-    var semContext1 = document.getElementById("semantic1").getContext("2d");
-    var semData1 = {
-      //  labels:[
-      //    display: false
-      //  ],
+    var SemanticContext1 = document.getElementById("semantic1").getContext("2d");
+    var SemanticData1 = {
+      // labels:[
+      //   'Percentage'
+      // ],
       datasets: [{
         label: "Answer Fitness",
         data: [{{bert_list.0}}],
         backgroundColor: ["#a1d20b"],
         hoverBackgroundColor: ["#388271"]
       }]
-     };
+    };
 
-    var semChart1 = new Chart(semContext1,{
+    var SemanticChart1 = new Chart(SemanticContext1, {
       type: 'horizontalBar',
-      data: semData1,
+      data: SemanticData1,
       options: {
         maintainAspecrRatio: false,
         responsive: true,
-        animation: {
-					duration: 5000,
-					easing: 'linear'
-				},
         scales: {
           xAxes: [{
             ticks: {
@@ -151,30 +147,40 @@
             stacked: true
           }]
         }
+
       }
     });
 
     var keyContext1 = document.getElementById("key1").getContext("2d");
     var keyData1 = {
-      //   legend:[
-      //     display: false
-      //  ],
+      // labels:[
+      //   'Percentage'
+      // ],
       datasets: [{
         label: "Keyword Accuracy",
         data: [{{keyscore_list.0}}],
         backgroundColor: ["#53bda5"],
         hoverBackgroundColor: ["#388271"]
       }]
-     };
+    };
+
+    var keyContext1 = document.getElementById("key1").getContext("2d");
+    var keyData1 = {
+      // labels:[
+      //   'Percentage'
+      // ],
+      datasets: [{
+        label: "Keyword Accuracy",
+        data: [{{keyscore_list.0}}],
+        backgroundColor: ["#53bda5"],
+        hoverBackgroundColor: ["#388271"]
+      }]
+    };
 
     var KeyChart1 = new Chart(keyContext1, {
       type: 'horizontalBar',
       data: keyData1,
       options: {
-        animation: {
-					duration: 5000,
-					easing: 'linear'
-				},
         maintainAspecrRatio: false,
         responsive: true,
         scales: {
@@ -204,7 +210,7 @@
 
       var chart = anychart.radar();
       var animationSettings = chart.animation();
-      animationSettings.duration(3000);
+      animationSettings.duration(1000);
       animationSettings.enabled(true);
       chart.yScale()
         .minimum(0)
@@ -220,7 +226,7 @@
 
       chart.container('emo1');
       chart.draw();
-     });
+    })
   </script>
 
   <div id="result2" class="panel-collapse collapse" style="position: relative;margin: auto;">
@@ -254,7 +260,7 @@
       datasets: [{
         label: "Answer Fitness",
         data: [{{bert_list.1}}],
-        backgroundColor: ["#53bda5"],
+        backgroundColor: ["#a1d20b"],
         hoverBackgroundColor: ["#388271"]
       }]
     };
@@ -325,7 +331,9 @@
       ];
 
       var chart = anychart.radar();
-
+      var animationSettings = chart.animation();
+      animationSettings.duration(1000);
+      animationSettings.enabled(true);
       chart.yScale()
         .minimum(0)
         .maximum(max2)
@@ -373,7 +381,7 @@
       datasets: [{
         label: "Answer Fitness",
         data: [{{bert_list.2}}],
-        backgroundColor: ["#53bda5"],
+        backgroundColor: ["#a1d20b"],
         hoverBackgroundColor: ["#388271"]
       }]
      };
@@ -433,7 +441,7 @@
       }
     });
 
-    var max3 = Math.ceil10(Math.max({{emotion_dict.n3}}, {{emotion_dict.h3}}, {{emotion_dict.a3}}, {{emotion_dict.f3}}, {{emotion_dict.s3}}) +10, 1)
+    var max3 = Math.ceil10(Math.max({{emotion_dict.n3}}, {{emotion_dict.h3}}, {{emotion_dict.a3}}, {{emotion_dict.f3}}, {{emotion_dict.s3}})+10, 1)
     anychart.onDocumentReady(function () {
       var emoData3 = [
         { x: "neutral", value: {{emotion_dict.n3}}},
@@ -444,7 +452,9 @@
       ];
 
       var chart = anychart.radar();
-
+      var animationSettings = chart.animation();
+      animationSettings.duration(1000);
+      animationSettings.enabled(true);
       chart.yScale()
         .minimum(0)
         .maximum(max3)
@@ -468,9 +478,9 @@
   <div class="ques">{{ques4}}</div>
   <div class="result">
     <label for="reply4">Your reply</label>
-    <textarea readonly class="reply" name="reply4" cols="10" rows="10">{{reply1}}</textarea>
+    <textarea readonly class="reply" name="reply4" cols="10" rows="10">{{reply4}}</textarea>
     <label for="ans4">Reference answer</label>
-    <textarea readonly class="ans" name="reply4" cols="10" rows="10">{{answer1}}</textarea>
+    <textarea readonly class="ans" name="reply4" cols="10" rows="10">{{answer4}}</textarea>
     <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
       <canvas id="key4"></canvas>
       <canvas id="semantic4"></canvas>
@@ -492,8 +502,8 @@
     //  ],
     datasets: [{
       label: "Answer Fitness",
-      data: [{{bert_list.0}}],
-      backgroundColor: ["#53bda5"],
+      data: [{{bert_list.3}}],
+      backgroundColor: ["#a1d20b"],
       hoverBackgroundColor: ["#388271"]
     }]
    };
@@ -564,7 +574,9 @@
     ];
 
     var chart = anychart.radar();
-
+    var animationSettings = chart.animation();
+    animationSettings.duration(1000);
+    animationSettings.enabled(true);
     chart.yScale()
       .minimum(0)
       .maximum(max4)
@@ -578,6 +590,739 @@
     // .legend(true);
 
     chart.container('emo4');
+    chart.draw();
+ })
+</script>
+
+
+<div id="result5" class="panel-collapse collapse" style="position: relative;margin: auto;">
+  <div class="num">5.
+  </div>
+  <div class="ques">{{ques5}}</div>
+  <div class="result">
+    <label for="reply5">Your reply</label>
+    <textarea readonly class="reply" name="reply5" cols="10" rows="10">{{reply5}}</textarea>
+    <label for="ans5">Reference answer</label>
+    <textarea readonly class="ans" name="reply5" cols="10" rows="10">{{answer5}}</textarea>
+    <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
+      <canvas id="key5"></canvas>
+      <canvas id="semantic5"></canvas>
+    </div>
+    <div class="emochart" id="emo5"></div>
+    <div class="comment">
+      <h3 style="font-weight: bold;">Comments & Suggestions:</h3><br>
+      {{BlinkComment_5}} You've answered the question spendidly and keyword use is on point! Well done!
+      However, you seem a little bit nervous. Try to relax and smile more :)))
+    </div>
+  </div>
+</div>
+
+<script>
+  var SemanticContext5 = document.getElementById("semantic5").getContext("2d");
+  var SemanticData5 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Answer Fitness",
+      data: [{{bert_list.4}}],
+      backgroundColor: ["#a1d20b"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var SemanticChart5 = new Chart(SemanticContext5, {
+    type: 'horizontalBar',
+    data: SemanticData5,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: 0,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var keyContext5 = document.getElementById("key5").getContext("2d");
+  var keyData5 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Keyword Accuracy",
+      data: [{{keyscore_list.4}}],
+      backgroundColor: ["#53bda5"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var KeyChart5 = new Chart(keyContext5, {
+    type: 'horizontalBar',
+    data: keyData5,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var max5 = Math.ceil10(Math.max({{emotion_dict.n5}}, {{emotion_dict.h5}}, {{emotion_dict.a5}}, {{emotion_dict.f5}}, {{emotion_dict.s5}}) +10, 1)
+  anychart.onDocumentReady(function () {
+    var emoData5 = [
+      { x: "neutral", value: {{emotion_dict.n5}}},
+      { x: "Happy", value: {{emotion_dict.h5}}},
+      { x: "Angry", value: {{emotion_dict.a5}}},
+      { x: "Fear", value: {{emotion_dict.f5}}},
+      { x: "Sad", value: {{emotion_dict.s5}}}
+    ];
+
+    var chart = anychart.radar();
+    var animationSettings = chart.animation();
+    animationSettings.duration(1000);
+    animationSettings.enabled(true);
+    chart.yScale()
+      .minimum(0)
+      .maximum(max5)
+      .ticks({ 'interval': 10 });
+
+    chart.yGrid().palette(["gray 0.1", "gray 0.2"]);
+
+    chart.line(emoData5)
+    chart.area(emoData5).name('Percantage').markers(true).fill("rgb(100, 181, 246)", 0.3).stroke("rgb(100, 181, 246)")
+    chart.title("Emotion Radar Plot")
+    // .legend(true);
+
+    chart.container('emo5');
+    chart.draw();
+ })
+</script>
+
+<div id="result6" class="panel-collapse collapse" style="position: relative;margin: auto;">
+  <div class="num">6.
+  </div>
+  <div class="ques">{{ques6}}</div>
+  <div class="result">
+    <label for="reply6">Your reply</label>
+    <textarea readonly class="reply" name="reply6" cols="10" rows="10">{{reply6}}</textarea>
+    <label for="ans6">Reference answer</label>
+    <textarea readonly class="ans" name="reply6" cols="10" rows="10">{{answer6}}</textarea>
+    <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
+      <canvas id="key6"></canvas>
+      <canvas id="semantic6"></canvas>
+    </div>
+    <div class="emochart" id="emo6"></div>
+    <div class="comment">
+      <h3 style="font-weight: bold;">Comments & Suggestions:</h3><br>
+      {{BlinkComment_6}} You've answered the question spendidly and keyword use is on point! Well done!
+      However, you seem a little bit nervous. Try to relax and smile more :)))
+    </div>
+  </div>
+</div>
+
+<script>
+  var SemanticContext6 = document.getElementById("semantic6").getContext("2d");
+  var SemanticData6 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Answer Fitness",
+      data: [{{bert_list.5}}],
+      backgroundColor: ["#a1d20b"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var SemanticChart6 = new Chart(SemanticContext6, {
+    type: 'horizontalBar',
+    data: SemanticData6,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: 0,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var keyContext6 = document.getElementById("key6").getContext("2d");
+  var keyData6 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Keyword Accuracy",
+      data: [{{keyscore_list.5}}],
+      backgroundColor: ["#53bda5"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var KeyChart6 = new Chart(keyContext6, {
+    type: 'horizontalBar',
+    data: keyData6,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var max6 = Math.ceil10(Math.max({{emotion_dict.n6}}, {{emotion_dict.h6}}, {{emotion_dict.a6}}, {{emotion_dict.f6}}, {{emotion_dict.s6}}) +10, 1)
+  anychart.onDocumentReady(function () {
+    var emoData6 = [
+      { x: "neutral", value: {{emotion_dict.n6}}},
+      { x: "Happy", value: {{emotion_dict.h6}}},
+      { x: "Angry", value: {{emotion_dict.a6}}},
+      { x: "Fear", value: {{emotion_dict.f6}}},
+      { x: "Sad", value: {{emotion_dict.s6}}}
+    ];
+
+    var chart = anychart.radar();
+    var animationSettings = chart.animation();
+    animationSettings.duration(1000);
+    animationSettings.enabled(true);
+    chart.yScale()
+      .minimum(0)
+      .maximum(max6)
+      .ticks({ 'interval': 10 });
+
+    chart.yGrid().palette(["gray 0.1", "gray 0.2"]);
+
+    chart.line(emoData6)
+    chart.area(emoData6).name('Percantage').markers(true).fill("rgb(100, 181, 246)", 0.3).stroke("rgb(100, 181, 246)")
+    chart.title("Emotion Radar Plot")
+    // .legend(true);
+
+    chart.container('emo6');
+    chart.draw();
+ })
+</script>
+
+<div id="result7" class="panel-collapse collapse" style="position: relative;margin: auto;">
+  <div class="num">7.
+  </div>
+  <div class="ques">{{ques7}}</div>
+  <div class="result">
+    <label for="reply7">Your reply</label>
+    <textarea readonly class="reply" name="reply7" cols="10" rows="10">{{reply7}}</textarea>
+    <label for="ans7">Reference answer</label>
+    <textarea readonly class="ans" name="reply7" cols="10" rows="10">{{answer7}}</textarea>
+    <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
+      <canvas id="key7"></canvas>
+      <canvas id="semantic7"></canvas>
+    </div>
+    <div class="emochart" id="emo7"></div>
+    <div class="comment">
+      <h3 style="font-weight: bold;">Comments & Suggestions:</h3><br>
+      {{BlinkComment_7}} You've answered the question spendidly and keyword use is on point! Well done!
+      However, you seem a little bit nervous. Try to relax and smile more :)))
+    </div>
+  </div>
+</div>
+
+<script>
+  var SemanticContext7 = document.getElementById("semantic7").getContext("2d");
+  var SemanticData7 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Answer Fitness",
+      data: [{{bert_list.6}}],
+      backgroundColor: ["#a1d20b"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var SemanticChart7 = new Chart(SemanticContext7, {
+    type: 'horizontalBar',
+    data: SemanticData7,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: 0,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var keyContext7 = document.getElementById("key7").getContext("2d");
+  var keyData7 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Keyword Accuracy",
+      data: [{{keyscore_list.6}}],
+      backgroundColor: ["#53bda5"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var KeyChart7 = new Chart(keyContext7, {
+    type: 'horizontalBar',
+    data: keyData7,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var max7 = Math.ceil10(Math.max({{emotion_dict.n7}}, {{emotion_dict.h7}}, {{emotion_dict.a7}}, {{emotion_dict.f7}}, {{emotion_dict.s7}}) +10, 1)
+  anychart.onDocumentReady(function () {
+    var emoData7 = [
+      { x: "neutral", value: {{emotion_dict.n7}}},
+      { x: "Happy", value: {{emotion_dict.h7}}},
+      { x: "Angry", value: {{emotion_dict.a7}}},
+      { x: "Fear", value: {{emotion_dict.f7}}},
+      { x: "Sad", value: {{emotion_dict.s7}}}
+    ];
+
+    var chart = anychart.radar();
+    var animationSettings = chart.animation();
+    animationSettings.duration(1000);
+    animationSettings.enabled(true);
+    chart.yScale()
+      .minimum(0)
+      .maximum(max7)
+      .ticks({ 'interval': 10 });
+
+    chart.yGrid().palette(["gray 0.1", "gray 0.2"]);
+
+    chart.line(emoData7)
+    chart.area(emoData7).name('Percantage').markers(true).fill("rgb(100, 181, 246)", 0.3).stroke("rgb(100, 181, 246)")
+    chart.title("Emotion Radar Plot")
+    // .legend(true);
+
+    chart.container('emo7');
+    chart.draw();
+ })
+</script>
+
+<div id="result8" class="panel-collapse collapse" style="position: relative;margin: auto;">
+  <div class="num">8.
+  </div>
+  <div class="ques">{{ques8}}</div>
+  <div class="result">
+    <label for="reply8">Your reply</label>
+    <textarea readonly class="reply" name="reply8" cols="10" rows="10">{{reply8}}</textarea>
+    <label for="ans8">Reference answer</label>
+    <textarea readonly class="ans" name="reply8" cols="10" rows="10">{{answer8}}</textarea>
+    <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
+      <canvas id="key8"></canvas>
+      <canvas id="semantic8"></canvas>
+    </div>
+    <div class="emochart" id="emo8"></div>
+    <div class="comment">
+      <h3 style="font-weight: bold;">Comments & Suggestions:</h3><br>
+      {{BlinkComment_8}} You've answered the question spendidly and keyword use is on point! Well done!
+      However, you seem a little bit nervous. Try to relax and smile more :)))
+    </div>
+  </div>
+</div>
+
+<script>
+  var SemanticContext8 = document.getElementById("semantic8").getContext("2d");
+  var SemanticData8 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Answer Fitness",
+      data: [{{bert_list.7}}],
+      backgroundColor: ["#a1d20b"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var SemanticChart8 = new Chart(SemanticContext8, {
+    type: 'horizontalBar',
+    data: SemanticData8,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: 0,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var keyContext8 = document.getElementById("key8").getContext("2d");
+  var keyData8 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Keyword Accuracy",
+      data: [{{keyscore_list.7}}],
+      backgroundColor: ["#53bda5"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var KeyChart8 = new Chart(keyContext8, {
+    type: 'horizontalBar',
+    data: keyData8,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var max8 = Math.ceil10(Math.max({{emotion_dict.n8}}, {{emotion_dict.h8}}, {{emotion_dict.a8}}, {{emotion_dict.f8}}, {{emotion_dict.s8}}) +10, 1)
+  anychart.onDocumentReady(function () {
+    var emoData8 = [
+      { x: "neutral", value: {{emotion_dict.n8}}},
+      { x: "Happy", value: {{emotion_dict.h8}}},
+      { x: "Angry", value: {{emotion_dict.a8}}},
+      { x: "Fear", value: {{emotion_dict.f8}}},
+      { x: "Sad", value: {{emotion_dict.s8}}}
+    ];
+
+    var chart = anychart.radar();
+    var animationSettings = chart.animation();
+    animationSettings.duration(1000);
+    animationSettings.enabled(true);
+    chart.yScale()
+      .minimum(0)
+      .maximum(max8)
+      .ticks({ 'interval': 10 });
+
+    chart.yGrid().palette(["gray 0.1", "gray 0.2"]);
+
+    chart.line(emoData8)
+    chart.area(emoData8).name('Percantage').markers(true).fill("rgb(100, 181, 246)", 0.3).stroke("rgb(100, 181, 246)")
+    chart.title("Emotion Radar Plot")
+    // .legend(true);
+
+    chart.container('emo8');
+    chart.draw();
+ })
+</script>
+
+<div id="result9" class="panel-collapse collapse" style="position: relative;margin: auto;">
+  <div class="num">9.
+  </div>
+  <div class="ques">{{ques9}}</div>
+  <div class="result">
+    <label for="reply9">Your reply</label>
+    <textarea readonly class="reply" name="reply9" cols="10" rows="10">{{reply9}}</textarea>
+    <label for="ans9">Reference answer</label>
+    <textarea readonly class="ans" name="reply9" cols="10" rows="10">{{answer9}}</textarea>
+    <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
+      <canvas id="key9"></canvas>
+      <canvas id="semantic9"></canvas>
+    </div>
+    <div class="emochart" id="emo9"></div>
+    <div class="comment">
+      <h3 style="font-weight: bold;">Comments & Suggestions:</h3><br>
+      {{BlinkComment_9}} You've answered the question spendidly and keyword use is on point! Well done!
+      However, you seem a little bit nervous. Try to relax and smile more :)))
+    </div>
+  </div>
+</div>
+
+<script>
+  var SemanticContext9 = document.getElementById("semantic9").getContext("2d");
+  var SemanticData9 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Answer Fitness",
+      data: [{{bert_list.8}}],
+      backgroundColor: ["#a1d20b"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var SemanticChart9 = new Chart(SemanticContext9, {
+    type: 'horizontalBar',
+    data: SemanticData9,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: 0,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var keyContext9 = document.getElementById("key9").getContext("2d");
+  var keyData9 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Keyword Accuracy",
+      data: [{{keyscore_list.7}}],
+      backgroundColor: ["#53bda5"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var KeyChart9 = new Chart(keyContext9, {
+    type: 'horizontalBar',
+    data: keyData9,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var max9 = Math.ceil10(Math.max({{emotion_dict.n9}}, {{emotion_dict.h9}}, {{emotion_dict.a9}}, {{emotion_dict.f9}}, {{emotion_dict.s9}}) +10, 1)
+  anychart.onDocumentReady(function () {
+    var emoData9 = [
+      { x: "neutral", value: {{emotion_dict.n9}}},
+      { x: "Happy", value: {{emotion_dict.h9}}},
+      { x: "Angry", value: {{emotion_dict.a9}}},
+      { x: "Fear", value: {{emotion_dict.f9}}},
+      { x: "Sad", value: {{emotion_dict.s9}}}
+    ];
+
+    var chart = anychart.radar();
+    var animationSettings = chart.animation();
+    animationSettings.duration(1000);
+    animationSettings.enabled(true);
+    chart.yScale()
+      .minimum(0)
+      .maximum(max9)
+      .ticks({ 'interval': 10 });
+
+    chart.yGrid().palette(["gray 0.1", "gray 0.2"]);
+
+    chart.line(emoData9)
+    chart.area(emoData9).name('Percantage').markers(true).fill("rgb(100, 181, 246)", 0.3).stroke("rgb(100, 181, 246)")
+    chart.title("Emotion Radar Plot")
+    // .legend(true);
+
+    chart.container('emo9');
+    chart.draw();
+ })
+</script>
+
+<div id="result10" class="panel-collapse collapse" style="position: relative;margin: auto;">
+  <div class="num">10.
+  </div>
+  <div class="ques">{{ques10}}</div>
+  <div class="result">
+    <label for="reply10">Your reply</label>
+    <textarea readonly class="reply" name="reply10" cols="10" rows="10">{{reply10}}</textarea>
+    <label for="ans10">Reference answer</label>
+    <textarea readonly class="ans" name="reply10" cols="10" rows="10">{{answer10}}</textarea>
+    <div class="chart-container" style=" display:flex; position: relative; height:200px; width:250px">
+      <canvas id="key10"></canvas>
+      <canvas id="semantic10"></canvas>
+    </div>
+    <div class="emochart" id="emo10"></div>
+    <div class="comment">
+      <h3 style="font-weight: bold;">Comments & Suggestions:</h3><br>
+      {{BlinkComment_10}} You've answered the question spendidly and keyword use is on point! Well done!
+      However, you seem a little bit nervous. Try to relax and smile more :)))
+    </div>
+  </div>
+</div>
+
+<script>
+  var SemanticContext10 = document.getElementById("semantic10").getContext("2d");
+  var SemanticData10 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Answer Fitness",
+      data: [{{bert_list.7}}],
+      backgroundColor: ["#a1d20b"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var SemanticChart10 = new Chart(SemanticContext10, {
+    type: 'horizontalBar',
+    data: SemanticData10,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            min: 0,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var keyContext10 = document.getElementById("key10").getContext("2d");
+  var keyData10 = {
+    //  labels:[
+    //    'Percentage'
+    //  ],
+    datasets: [{
+      label: "Keyword Accuracy",
+      data: [{{keyscore_list.7}}],
+      backgroundColor: ["#53bda5"],
+      hoverBackgroundColor: ["#388271"]
+    }]
+   };
+
+  var KeyChart10 = new Chart(keyContext10, {
+    type: 'horizontalBar',
+    data: keyData10,
+    options: {
+      maintainAspecrRatio: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            max: 100
+          }
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+
+    }
+  });
+
+  var max10 = Math.ceil10(Math.max({{emotion_dict.n10}}, {{emotion_dict.h10}}, {{emotion_dict.a10}}, {{emotion_dict.f10}}, {{emotion_dict.s10}}) +10, 1)
+  anychart.onDocumentReady(function () {
+    var emoData10 = [
+      { x: "neutral", value: {{emotion_dict.n10}}},
+      { x: "Happy", value: {{emotion_dict.h10}}},
+      { x: "Angry", value: {{emotion_dict.a10}}},
+      { x: "Fear", value: {{emotion_dict.f10}}},
+      { x: "Sad", value: {{emotion_dict.s10}}}
+    ];
+
+    var chart = anychart.radar();
+    var animationSettings = chart.animation();
+    animationSettings.duration(1000);
+    animationSettings.enabled(true);
+    chart.yScale()
+      .minimum(0)
+      .maximum(max10)
+      .ticks({ 'interval': 10 });
+
+    chart.yGrid().palette(["gray 0.1", "gray 0.2"]);
+
+    chart.line(emoData10)
+    chart.area(emoData10).name('Percantage').markers(true).fill("rgb(100, 181, 246)", 0.3).stroke("rgb(100, 181, 246)")
+    chart.title("Emotion Radar Plot")
+    // .legend(true);
+
+    chart.container('emo10');
     chart.draw();
  })
 </script>
@@ -666,7 +1411,7 @@
           ['POOR', 25],
           ['FAIR', 25],
           ['GOOD', 25],
-          ['EXCELLENT', 25]
+          ['EXCELLENT',25]
         ]
       }, {
         type: 'gauge',

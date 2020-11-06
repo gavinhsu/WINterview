@@ -418,6 +418,7 @@ class ResultView(TemplateView):
             exec(f'BPM_{x+1} = num/minutes')
 
         final_blink_score = sum(blink_score_list)
+        print('blink_dict=====>',blink_dict)
 
       
 

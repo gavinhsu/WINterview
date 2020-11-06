@@ -77,7 +77,7 @@
                     <th scope="col">Selected Job</th>
                     <th scope="col">Interview Date</th>
                     <th scope="col">Interview Time</th>
-                    <th scope="col">Analysis</th>
+                    <th scope="col">Analysis Report</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,12 +85,12 @@
                 <form action="/result/" method="POST">
                   {% csrf_token %}
                   <tr class="success">
-                    <th scope="row">{{item.ID}}</th><input type="hidden" value="{{item.ID}}">
+                    <th scope="row"><p style="left: 15%;position: relative;"> {{item.ID}}</p></th><input type="hidden" value="{{item.ID}}">
                     <td> {{ item.Name }}</td><input type="hidden" value="{{item.Name}}">
                     <td> {{ item.SelectedJob }}</td><input type="hidden" value="{{item.SelectedJob}}">
                     <td> {{item.Date}}</td><input type="hidden" value="{{item.Date}}">
-                    <td> {{item.Time|slice:5}}</td><input type="hidden" name="time" value="{{item.Time}}">
-                    <td><input type="submit" value="Start!"></td>
+                    <td> <p style="left: 15%;position: relative;">{{item.Time|slice:5}}</p></td><input type="hidden" name="time" value="{{item.Time}}">
+                    <td style="width: 20%;"><input class="btn btn-primary" type="submit" value="Go!" style="left: 15%;position: relative;"></td>
                 </tr>
                 </form>
 
