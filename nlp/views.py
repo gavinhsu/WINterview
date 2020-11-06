@@ -161,15 +161,10 @@ class ResultView(TemplateView):
             exec(f'ques{x+1} = full_ques[x]')
             exec(f'answer{x+1} = full_ans[x]')
             exec(f'keyword{x+1} = full_key[x]')
-<<<<<<< HEAD
-        
-        print(full_reply, full_ans, full_pn)
-=======
             exec(f'time{x+1} = full_time[x]')
             exec(f'diff{x+1} = full_diff[x]')
 
 
->>>>>>> 652423713ff767b677e075cb2a94d533dca1c2e7
         keyscore_list = []
         final_list = []
 
