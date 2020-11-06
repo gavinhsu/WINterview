@@ -33,6 +33,7 @@ from math import pi
 import numpy as np
 
 # Create your views here.
+
 def remove_noise(tweet_tokens, stop_words = ()):
         cleaned_tokens = []
         # REMOVING NOISE (IRRELEVANT LETTERS, HYPERLINKS, OR PUNCTUATION MARKS)
@@ -97,14 +98,16 @@ class ResultView(TemplateView):
         self.job_name = job_name
 
     def post(self, request):
+        # get time of personal profile
         interview_time = request.POST['time']
-        print(interview_time)
+        
+        
 
-    # def get(self, request):
+    #def get(self, request):
         account_name = request.session['account']
         job_name = request.session['job_name']
         self.account_name = account_name
-        self.job_name = job_name    
+        self.job_name = job_name
         
         if job_name == "Hardware Engineer"or"Software Engineer"or"ML Engineer"or"DBA"or"Data Scientist":
             model = tech_model
@@ -118,10 +121,11 @@ class ResultView(TemplateView):
         # get the entire result table 
         job_selection = getattr(questions.models, new_job)
         account_instance = Member.objects.get(Account=account_name)
-        #res_id = Result.objects.filter(userID=account_instance).order_by('-id')[:1].values('id') 
-        res_id = 333
+        res_id = Result.objects.filter(userID=account_instance, created_time=interview_time).order_by('-id')[:1].values('id') 
+        print('RESID ---> ', res_id)
         res_unit = Result.objects.get(id=res_id)
         ans_unit = Answer.objects.get(id=res_id)
+        create_time = str(res_unit.created_time)[:5]
 
         # find how many questions the user answered
         ans_count = 0
@@ -271,6 +275,7 @@ class ResultView(TemplateView):
             keyword_score = round((counter/len(key_split))*100, 2)
             keyscore_list.append(keyword_score)
             print('KEYSCORE ===> ', keyword_score, '%')
+            print('KEYSCORE_LIST ---> ', keyscore_list)
         
 
             # BERT prediction
@@ -525,8 +530,6 @@ class ResultView(TemplateView):
             fuel_degree = 15
         
         return render(request, self.template_name, locals())
-
-
 
 
 

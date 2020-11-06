@@ -50,11 +50,10 @@ class personalFile(TemplateView):
             name_list.append(item.userID)
             job_list.append(item.selected_job)
             date_list.append(item.created_date)
-            time_list.append(str(item.created_time)[:5])
+            time_list.append(str(item.created_time))
         num_list = list(range(1, len(name_list)+1))
         
         df = pd.DataFrame({'Name':name_list, 'SelectedJob':job_list, 'Date':date_list, 'Time':time_list, 'ID':num_list})
-
 
 
         return render(request, self.template_name, locals())

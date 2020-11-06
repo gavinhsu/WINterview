@@ -89,7 +89,7 @@
                     <td> {{ item.Name }}</td><input type="hidden" value="{{item.Name}}">
                     <td> {{ item.SelectedJob }}</td><input type="hidden" value="{{item.SelectedJob}}">
                     <td> {{item.Date}}</td><input type="hidden" value="{{item.Date}}">
-                    <td> {{item.Time}}</td><input type="hidden" name="time" value="{{item.Time}}">
+                    <td> {{item.Time|slice:5}}</td><input type="hidden" name="time" value="{{item.Time}}">
                     <td><input type="submit" value="Start!"></td>
                 </tr>
                 </form>
