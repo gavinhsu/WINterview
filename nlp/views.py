@@ -174,6 +174,9 @@ class ResultView(TemplateView):
         keyscore_list = []
         bert_list = []
         final_list = []
+        pn_list = []
+        key_comment = []
+        bert_comment = []
 
         # NLP PROCESSING #####################################################   
         for NUM in range(ans_count):    
@@ -285,10 +288,19 @@ class ResultView(TemplateView):
 
             # P/N confidence prediction
             clean_pn = full_pn[NUM][1:-1].split()
-            print(clean_pn)
+            print('1:',clean_pn)
             pn_result = clean_pn[0][1:-2]
-            print(pn_result)
+            print('2:',pn_result)
             pn_percent = float(clean_pn[-1])
+            print('3:',pn_percent)
+
+
+            # P/N comment
+            if pn_result == 'positive' and pn_percent >= 0.8:
+                pn_comment="Your answer is perfect and you are very confident! "
+            if pn_result == 'positive' and pn_percent < 0.8:
+                pn_comment="You can be more confident... "
+            pn_list.append(pn_comment)
 
             # FINAL SCORE
             final_score = int(round(((0.7)*bert_score + (0.3)*gensim_score), 0))
@@ -301,6 +313,15 @@ class ResultView(TemplateView):
             final_list.append(final_score)
             print('BERT_SCORE ===> ', bert_score)
             print('FINAL_SCORE ===> ', final_score)
+
+            #keyword comment
+            if final_score >= 80:
+                keyword_comment = 'You master the critical concept perfectly. '
+            elif final_score < 80 and final_score >= 40:
+                keyword_comment = 'You partly grasp the key points. '
+            else :
+                keyword_comment = 'What the fuck are you answering??? '
+            key_comment.append(keyword_comment)
             
 
         # calulate the average score of keywordscore & finalscore (out of 100)
@@ -399,9 +420,9 @@ class ResultView(TemplateView):
             total_blinks += blink_dict["bpm{0}".format(x+1)]
 
             # set comments according to how nervous u r
-            normal_comment = "You were not nervous at all! Great job and keep it up!"
-            little_nervous_comment = "You seemed a little bit nervous. Try to relax a bit!"
-            very_nervous_comment = "You were too nervous! Please try to relax before construct your answer."
+            normal_comment = "You were not nervous at all! Great job and keep it up! "
+            little_nervous_comment = "But you seemed a little bit nervous. Try to relax a bit! "
+            very_nervous_comment = "However, you were too nervous! Please try to relax before construct your answer. "
 
             if blink_dict["bpm{0}".format(x+1)] <= 40:
                 blink_score_list.append(10)
@@ -427,7 +448,9 @@ class ResultView(TemplateView):
         a_sum = 0
         f_sum = 0
         s_sum = 0
+        emotion_comment = []
         for x in range(ans_count):
+            temp=[]
             n = "neutral_{0}".format(x+1)
             neutral = getattr(res_unit, n)
             emotion_dict['n{0}'.format(x+1)] = neutral
@@ -455,9 +478,24 @@ class ResultView(TemplateView):
             a_sum += angry
             f_sum += fear
             s_sum += surprise
-
+            temp=[neutral, happy, angry, fear, surprise]
             print('---------EMOTION', x+1, '----------------------------------------')
             print(neutral, happy, angry, fear, surprise)
+
+            if max(temp) == temp[0]:
+                emo_comment = "You are too serious. It's ok to be lively. "
+            elif max(temp) == temp[1]:
+                emo_comment = "You're facial expression is quite positive. Keep Going! '"
+            elif max(temp) == temp[2]:
+                emo_comment = "What is your problem man? Be happier:)"
+            elif max(temp) == temp[3]:
+                emo_comment = "Don't afraid to demonstrate your capability. "
+            else:
+                emo_comment = "You can speak more steadfastly. "
+            
+            emotion_comment.append(emo_comment)
+
+            
 
             # #emotion radar plot
             # emo = {'Neutral':neutral, 'Happy':happy, 'Angry':angry, 'Fear':fear, 'Surprise':surprise}
