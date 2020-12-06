@@ -296,6 +296,7 @@ class ResultView(TemplateView):
 
 
             # P/N comment
+            pn_comment= ''
             if pn_result == 'positive' and pn_percent >= 0.8:
                 pn_comment="Your answer is perfect and you are very confident! "
             if pn_result == 'positive' and pn_percent < 0.8:
@@ -485,7 +486,7 @@ class ResultView(TemplateView):
             if max(temp) == temp[0]:
                 emo_comment = "You are too serious. It's ok to be lively. "
             elif max(temp) == temp[1]:
-                emo_comment = "You're facial expression is quite positive. Keep Going! '"
+                emo_comment = "You're facial expression is quite positive. Keep Going! "
             elif max(temp) == temp[2]:
                 emo_comment = "What is your problem man? Be happier:)"
             elif max(temp) == temp[3]:

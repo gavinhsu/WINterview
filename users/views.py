@@ -31,6 +31,12 @@ def services(request):
 class personalFile(TemplateView):
     template_name = 'personalFile.html'
 
+    # if 'is_login' in request.session and request.session['is_login']==True:
+    #     user=request.session['account']
+    #     return render(request,'jobselection.html', {'current_user':user})
+    # else:
+    #     return render(request,'login.html')
+
     def get(self, request):
         account_name = request.session['account'] 
         self.account_name = account_name
